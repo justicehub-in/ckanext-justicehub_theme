@@ -1,6 +1,73 @@
 .account-masthead {
     background-color: rgb(40, 40, 40);
+    display: none;
 }
+.account-masthead .account .notifications a span {
+  background-color: black;
+}
+.account-masthead .account ul li a {
+  color: rgba(255, 255, 255, 0.6);
+}
+.account-masthead .account ul li a:hover {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: black;
+}
+
+
 .container {
-    width: 90%
+    width: 90%;
+}
+.masthead {
+  background-color: #403644;
+}
+.masthead .navigation .nav-pills li a:hover {
+  background-color: #f65940;
+  color: white;
+}
+.masthead .navigation .nav-pills li.active a {
+  background-color: #403644;
+}
+
+.masthead .navigation .nav-pills li.active {
+  border-bottom-width: 10px;
+  border-color: #f65940;
+}
+
+.box {
+  box-shadow: none;
+}
+.hero .box {
+  border: none;
+}
+.homepage .module-search .module-content {
+  color: rgb(68, 68, 68);
+  background-color: white;
+}
+.homepage .module-search .tags {
+  background-color: rgb(61, 61, 61);
+}
+.module-content:last-child {
+  padding-bottom: 0px;
+}
+.homepage .module-search {
+  padding: 0px;
+}
+.homepage [role="main"] {
+  border-top: 1px solid rgb(204, 204, 204);
+}
+
+
+.site-footer,
+body {
+  background-color: #403644;
+}
+/* The text in the footer. */
+.site-footer,
+.site-footer label,
+.site-footer small {
+  color: rgba(255, 255, 255, 0.6);
+}
+/* The link texts in the footer. */
+.site-footer a {
+  color: rgba(255, 255, 255, 0.6);
 }
