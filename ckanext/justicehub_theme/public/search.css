@@ -1,0 +1,82 @@
+hr {
+    margin-top: 20px;
+    border-top: 1.5px solid #403644;
+}
+.wrapper::before {
+    border-right: none;
+}
+.primary {
+    padding-left: 0;
+}
+.module-content {
+    padding-left: 0;
+}
+.search-form {
+    border-bottom: none;
+}
+.square-border {
+    border-radius: 0px;
+}
+.form-control, .input-group-addon {
+    /* border-color: #f87c69; */
+    font-size: 1.2em;
+}
+.input-group .form-control:first-child{
+    padding-left: 3em;
+}
+.bg-clear {
+    background-color: transparent;
+}
+.sort-box, .btn.square-border {
+    border-left: none;
+    /* border-color: #f87c69; */
+}
+.module-heading {
+    /* color: #ffffff; */
+    font-weight: bold;
+    font-size: 1.5em;
+    /* background-color: #403644;
+    border-color: #f87c69; */
+    margin-bottom: 0 !important;
+    border-top: none;
+}
+/* .nav-item.active > a{
+    background-color: #f87c69;
+    color: #ffffff;
+}
+.nav-item.active > a:hover {
+    background-color: #eeeeee;
+    color: #403644;
+}
+.nav-item > a{
+    color: #ffffff;
+}
+.nav-item > a:hover {
+    color: #403644;
+}
+.nav,.module-footer, .empty {
+    background-color: #403644;
+    color: #ffffff;
+}*/
+.module-footer {
+    border: none;
+}
+
+
+/* ---------- package-item ------- */
+
+.dataset-heading {
+    margin-bottom: 0;
+}
+.dataset-org, .downloads, .dataset-heading, .dataset-meta{
+    font-size: 1.3em;
+
+}
+.heading {
+    padding-bottom: 20px;
+}
+.package-item-row {
+    padding-left:50px;
+}
+
+/* ---------- package-item ------- */
