@@ -1,46 +1,52 @@
-hr {
-    margin-top: 20px;
-    border-top: 1.5px solid #403644;
-}
-.wrapper::before {
-    border-right: none;
-}
-.primary {
-    padding-left: 0;
-}
-.module-content {
-    padding-left: 0;
-}
 .search-form {
     border-bottom: none;
+    margin-bottom: 50px;
 }
 .square-border {
     border-radius: 0px;
 }
+.input-group > *:focus {
+    border-color: #f87c69;
+}
 .form-control, .input-group-addon {
-    /* border-color: #f87c69; */
+    border-color: #f87c69;
     font-size: 1.2em;
 }
-.input-group .form-control:first-child{
+.input-group .form-control:first-child {
     padding-left: 3em;
+}
+.dataset-count-box {
+    padding-top: 1.3em;
+    font-weight: bold;
+    color: #202020;
+}
+.dataset-count {
+    color: #f87c69;
+}
+.input-group .btn {
+    padding-top: 1.2em;
+    padding-bottom: 1.1em;
+}
+.input-group > *, .input-group > select {
+    height: 4em;
 }
 .bg-clear {
     background-color: transparent;
 }
 .sort-box, .btn.square-border {
     border-left: none;
-    /* border-color: #f87c69; */
+    border-color: #f87c69;
 }
 .module-heading {
-    /* color: #ffffff; */
+    color: #ffffff;
     font-weight: bold;
     font-size: 1.5em;
-    /* background-color: #403644;
-    border-color: #f87c69; */
+    background-color: #403644;
+    border-color: #f87c69;
     margin-bottom: 0 !important;
     border-top: none;
 }
-/* .nav-item.active > a{
+.nav-item.active > a{
     background-color: #f87c69;
     color: #ffffff;
 }
@@ -57,7 +63,7 @@ hr {
 .nav,.module-footer, .empty {
     background-color: #403644;
     color: #ffffff;
-}*/
+}
 .module-footer {
     border: none;
 }
@@ -65,12 +71,23 @@ hr {
 
 /* ---------- package-item ------- */
 
+.label {
+    padding: 0.6em 2.1em 0.6em 2.1em;
+    border-radius: 15px;
+    font-weight: bold;
+}
 .dataset-heading {
     margin-bottom: 0;
 }
-.dataset-org, .downloads, .dataset-heading, .dataset-meta{
+.dataset-org, .downloads, .dataset-heading, .dataset-meta {
     font-size: 1.3em;
-
+    font-weight: bold;
+}
+.dataset-org > a{
+    color: #f87c69;
+}
+.downloads, .dataset-meta {
+    color: #bcb4bf;
 }
 .heading {
     padding-bottom: 20px;
@@ -79,4 +96,4 @@ hr {
     padding-left:50px;
 }
 
-/* ---------- package-item ------- */
+/* ------------------------------- */

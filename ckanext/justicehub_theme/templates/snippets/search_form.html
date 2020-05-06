@@ -10,9 +10,10 @@
 
   {% set stats=h.get_site_statistics() %}
     <div class="col col-md-2 pull-left input-group">
-        <span class="form-control input-lg square-border">
-            {{_('DATA[')}}{{stats.dataset_count}}{{_(']')}}
-        </span>
+        <div class="form-control input-lg square-border dataset-count-box">
+            <span>{{_('DATA')}}</span>
+            <span class="dataset-count">{{ _('[') }}{{ stats.dataset_count }}{{ _(']') }}</span>
+        </div>
     </div>
 
   {% block search_input %}
