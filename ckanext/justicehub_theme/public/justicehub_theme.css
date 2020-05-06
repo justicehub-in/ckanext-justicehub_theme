@@ -221,3 +221,23 @@ body {
       color: #ffffff;
     }
 }
+.wrapper {
+    margin-top: 50px;
+}
+
+.wrapper::before {
+    border-right: none;
+}
+
+.module-content {
+    padding-left: 0;
+}
+
+.primary {
+    padding-left: 0;
+}
+
+hr {
+    margin-top: 20px;
+    border-top: 1.5px solid #403644;
+}
