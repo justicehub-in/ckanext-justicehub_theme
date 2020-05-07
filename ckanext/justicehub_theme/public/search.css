@@ -1,20 +1,3 @@
-.search-form {
-    border-bottom: none;
-    margin-bottom: 50px;
-}
-.square-border {
-    border-radius: 0px;
-}
-.input-group > *:focus {
-    border-color: #f87c69;
-}
-.form-control, .input-group-addon {
-    border-color: #f87c69;
-    font-size: 1.2em;
-}
-.input-group .form-control:first-child {
-    padding-left: 3em;
-}
 .dataset-count-box {
     padding-top: 1.3em;
     font-weight: bold;
@@ -22,20 +5,6 @@
 }
 .dataset-count {
     color: #f87c69;
-}
-.input-group .btn {
-    padding-top: 1.2em;
-    padding-bottom: 1.1em;
-}
-.input-group > *, .input-group > select {
-    height: 4em;
-}
-.bg-clear {
-    background-color: transparent;
-}
-.sort-box, .btn.square-border {
-    border-left: none;
-    border-color: #f87c69;
 }
 .module-heading {
     color: #ffffff;
@@ -67,33 +36,3 @@
 .module-footer {
     border: none;
 }
-
-
-/* ---------- package-item ------- */
-
-.label {
-    padding: 0.6em 2.1em 0.6em 2.1em;
-    border-radius: 15px;
-    font-weight: bold;
-}
-.dataset-heading {
-    margin-bottom: 0;
-}
-.dataset-org, .downloads, .dataset-heading, .dataset-meta {
-    font-size: 1.3em;
-    font-weight: bold;
-}
-.dataset-org > a{
-    color: #f87c69;
-}
-.downloads, .dataset-meta {
-    color: #bcb4bf;
-}
-.heading {
-    padding-bottom: 20px;
-}
-.package-item-row {
-    padding-left:50px;
-}
-
-/* ------------------------------- */

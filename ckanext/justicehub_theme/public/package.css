@@ -1,0 +1,28 @@
+/* ---------- package-item ------- */
+
+.label {
+    padding: 0.6em 2.1em 0.6em 2.1em;
+    border-radius: 15px;
+    font-weight: bold;
+}
+.dataset-heading {
+    margin-bottom: 0;
+}
+.dataset-org, .downloads, .dataset-heading, .dataset-meta {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+.dataset-org > a{
+    color: #f87c69;
+}
+.downloads, .dataset-meta {
+    color: #bcb4bf;
+}
+.heading {
+    padding-bottom: 20px;
+}
+.package-item-row {
+    padding-left:50px;
+}
+
+/* ------------------------------- */
