@@ -82,15 +82,14 @@ Example:
 
         {% block downloads %}
         <div class="downloads">
-          <i>{{ _('X+ Downloads') }}</i>
         </div>
         {% endblock %}
 
         {% block package_meta %}
         <div class="dataset-meta">
-          <span>{{ _('Updated:') }} {{ package.update_frequency }}</span>
+          <span>{{ package.update_frequency }}</span>
           <span>{{ _('|') }}</span>
-          <span>{{ _('Date Collected:') }} {{ package.collected_month }}</span>
+          <span>{{ _('Data Timeline:') }} {{ package.start_year }}-{{ package.end_year }}</span>
         </div>
         {% endblock %}
 
