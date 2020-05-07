@@ -1,16 +1,30 @@
-.search-form {
+.search-form, .dataset-form {
     border-bottom: none;
     margin-bottom: 50px;
+    padding-right: 2em;
 }
 .square-border {
     border-radius: 0px;
 }
-.input-group + *:focus {
-    border-color: #f87c69;
-}
-.form-control, .input-group-addon {
+.form-control,
+input.form-control,
+.input-group-addon,
+.editor textarea,
+.editor .editor-info-block {
     border-color: #f87c69;
     font-size: 1.2em;
+    border-radius: 0px;
+}
+input.form-control,
+select.form-control,
+.controls .select2-container .select2-choice,
+.controls .select2-container .select2-choices {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 100%;
+}
+.controls .select2-container {
+    height: 50px;
 }
 .input-group .form-control:first-child {
     padding-left: 3em;
@@ -28,4 +42,39 @@
 .sort-box, .btn.square-border {
     border-left: none;
     border-color: #f87c69;
+}
+.form-control:focus, .select2-drop, .form-actions > button {
+    border-color: #f87c69;
+    border-radius: 0px;
+}
+.select2-container {
+    padding: 0;
+}
+.select2-container .select2-choice,
+.select2-container-multi .select2-choices {
+    padding: 0 0 0 10px;
+    height: 100%;
+    background-color: inherit;
+    border-color: #f87c69;
+    border-radius: 0px;
+}
+.select2-container-active .select2-choices {
+    border-color: #f87c69 !important; /* important because it gets overridden by dynamic class change */
+}
+.controls > a.btn, .form-actions > button {
+    background-color: #403644;
+    color: white !important;
+    padding: 0.6em 1.4em;
+    border-radius: 30px;
+    font-size: 1.2em;
+    border-color: #f87c69;
+}
+.form-actions > button:hover {
+    background-color: white;
+    color: #403644 !important;  /* important because it gets overridden by dynamic class change */
+    border-color: #f87c69;
+}
+label {
+    color: #707070;
+    font-size: 1.4em;
 }

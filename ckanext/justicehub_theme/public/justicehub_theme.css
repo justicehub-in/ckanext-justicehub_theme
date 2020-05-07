@@ -231,6 +231,7 @@ body {
 
 .module-content {
     padding-left: 0;
+    padding: 0;
 }
 .module-footer {
     border: none;
