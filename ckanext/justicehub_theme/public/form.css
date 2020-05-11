@@ -1,30 +1,114 @@
+/*----------------- form style ----------------------*/
 .search-form, .dataset-form {
     border-bottom: none;
     margin-bottom: 50px;
     padding-right: 2em;
 }
-.square-border {
-    border-radius: 0px;
+.select2-container-multi .select2-search-choice-close {
+    left: auto;
+    margin: 5px 10px 5px 5px;
+    /* background: url('https://image.flaticon.com/icons/svg/2919/2919559.svg') right top no-repeat;*/
+    background: url('https://image.flaticon.com/icons/svg/458/458595.svg');
 }
+
+/*------------------ form control borders, backgrounds fonts colors ----------------*/
+.controls > *:first-child,
+.input-group > *:first-child,
+.editor .editor-info-block,
+[class^="input-group"] > *:first-child,
 .form-control,
-input.form-control,
-.input-group-addon,
-.editor textarea,
-.editor .editor-info-block {
+.form-control:focus,
+.select2-drop,
+.form-actions > button,
+.controls > a.btn,
+.select2-container .select2-choice,
+.select2-container-multi .select2-choices {
     border-color: #f87c69;
-    font-size: 1.2em;
     border-radius: 0px;
 }
-input.form-control,
-select.form-control,
+.controls > *:first-child,
+.input-group > *:first-child,
+.editor .editor-info-block {
+    font-size: 1.2em;
+}
+.bg-clear {
+    background-color: transparent;
+}
+.sort-box, .btn {
+    border-left: none;
+}
+.select2-container-active .select2-choices {
+    border-color: #f87c69 !important; /* important because it gets overridden by dynamic class change */
+}
+.controls > a.btn,
+.form-actions > button,
+.select2-container-multi .select2-choices > li.select2-search-choice {
+    background-color: #403644;
+    color: white !important;
+    padding: 0.5em 1.0em;
+    border-radius: 30px;
+    font-size: 1.2em;
+    color: white;
+}
+.select2-container-multi .select2-choices > li.select2-search-choice:nth-child(2n) {
+    background-color: #f65940 !important;
+    background: none;
+    font-weight: bold;
+}
+.select2-container-multi .select2-choices > li.select2-search-choice:nth-child(2n+1) {
+    background: none;
+    background-color: #403644 !important;
+    font-weight: bold;
+}
+.form-actions > button:hover {
+    background-color: white;
+    color: #403644 !important;  /* important because it gets overridden by dynamic class change */
+    border-color: #f87c69;
+}
+label {
+    color: #403644;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+fieldset.radios label {
+    font-weight: normal;
+    font-size: 1.3em;
+}
+
+/*------------------ form control layout ----------------*/
+.controls .form-control,
+.controls .select2-container,
+.controls .select2-container-multi,
 .controls .select2-container .select2-choice,
-.controls .select2-container .select2-choices {
-    padding-top: 10px;
-    padding-bottom: 10px;
+.select2-container-multi .select2-choices {
     height: 100%;
 }
 .controls .select2-container {
     height: 50px;
+}
+.input-group > * {
+    height: 4em;
+}
+.input-group > select {
+    height: 3.75em;
+}
+fieldset.checkboxes label {
+    display: inline-block !important;
+}
+.checkbox-other {
+    width: 200px !important;
+}
+
+/* ----------------- form control spacing ------------- */
+.controls input.form-control,
+.controls select.form-control,
+.controls .select2-container .select2-choice,
+.controls .select2-container .select2-choices {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.controls .select2-container .select2-choices {
+    padding-left: 0;
 }
 .input-group .form-control:first-child {
     padding-left: 3em;
@@ -33,48 +117,29 @@ select.form-control,
     padding-top: 1.2em;
     padding-bottom: 1.1em;
 }
-.input-group > *, .input-group > select {
-    height: 4em;
-}
-.bg-clear {
-    background-color: transparent;
-}
-.sort-box, .btn.square-border {
-    border-left: none;
-    border-color: #f87c69;
-}
-.form-control:focus, .select2-drop, .form-actions > button {
-    border-color: #f87c69;
-    border-radius: 0px;
-}
 .select2-container {
     padding: 0;
 }
 .select2-container .select2-choice,
 .select2-container-multi .select2-choices {
     padding: 0 0 0 10px;
-    height: 100%;
-    background-color: inherit;
-    border-color: #f87c69;
-    border-radius: 0px;
 }
-.select2-container-active .select2-choices {
-    border-color: #f87c69 !important; /* important because it gets overridden by dynamic class change */
+fieldset.radios label > input {
+    margin-right: 5px;
+    background: white;
+
 }
-.controls > a.btn, .form-actions > button {
-    background-color: #403644;
-    color: white !important;
-    padding: 0.6em 1.4em;
-    border-radius: 30px;
-    font-size: 1.2em;
-    border-color: #f87c69;
+fieldset.radios label,
+fieldset.checkboxes label {
+    padding-right: 40px;
 }
-.form-actions > button:hover {
-    background-color: white;
-    color: #403644 !important;  /* important because it gets overridden by dynamic class change */
-    border-color: #f87c69;
+.checkbox-other > *:first-child {
+    margin-left: 10px;
 }
-label {
-    color: #707070;
-    font-size: 1.4em;
+.select2-search-choice > div {
+    margin-right: 15px;
+    padding-left: 5px;
+}
+.controls .checkbox-other .select2-choices {
+    padding-top :0;
 }
