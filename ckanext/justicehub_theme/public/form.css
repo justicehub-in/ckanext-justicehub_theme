@@ -2,7 +2,9 @@
 .search-form, .dataset-form {
     border-bottom: none;
     margin-bottom: 50px;
-    padding-right: 2em;
+}
+.dataset-form {
+    padding-right: 50px;
 }
 .select2-container-multi .select2-search-choice-close {
     left: auto;
@@ -26,29 +28,44 @@
     border-color: #f87c69;
     border-radius: 0px;
 }
-.controls > *:first-child,
-.input-group > *:first-child,
-.editor .editor-info-block {
-    font-size: 1.2em;
-}
 .bg-clear {
     background-color: transparent;
 }
-.sort-box, .btn {
+.controls > *:first-child,
+.controls > a.btn,
+.form-actions > button,
+.input-group > *:first-child,
+.editor .editor-info-block,
+fieldset.radios label,
+fieldset.checkboxes label,
+fieldset.checkboxes + label,
+.select2-container-multi .select2-choices > li.select2-search-choice {
+    font-size: 18px;
+}
+fieldset.radios label,
+fieldset.checkboxes label,
+fieldset.checkboxes + label {
+    font-weight: normal;
+}
+.controls > a.btn,
+.controls .btn,
+.form-actions > button,
+.select2-container-multi .select2-choices > li.select2-search-choice {
+    background-color: #403644;
+}
+.sort-box, .search-form .btn {
     border-left: none;
 }
 .select2-container-active .select2-choices {
     border-color: #f87c69 !important; /* important because it gets overridden by dynamic class change */
 }
 .controls > a.btn,
+.controls .btn,
 .form-actions > button,
 .select2-container-multi .select2-choices > li.select2-search-choice {
-    background-color: #403644;
     color: white !important;
-    padding: 0.5em 1.0em;
+    padding: 7px 25px;
     border-radius: 30px;
-    font-size: 1.2em;
-    color: white;
 }
 .select2-container-multi .select2-choices > li.select2-search-choice:nth-child(2n) {
     background-color: #f65940 !important;
@@ -67,12 +84,20 @@
 }
 label {
     color: #403644;
-    font-size: 1.4em;
+    font-size: 20px;
     font-weight: bold;
 }
-fieldset.radios label {
-    font-weight: normal;
-    font-size: 1.3em;
+.checkbox-other > *:first-child {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: transparent;
+    box-shadow: none;
+}
+fieldset.checkboxes > label > input {
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0px;
 }
 
 /*------------------ form control layout ----------------*/
@@ -86,11 +111,9 @@ fieldset.radios label {
 .controls .select2-container {
     height: 50px;
 }
-.input-group > * {
-    height: 4em;
-}
-.input-group > select {
-    height: 3.75em;
+.search-form .input-group > *,
+.search-form .input-group > select {
+    height: 75px;
 }
 fieldset.checkboxes label {
     display: inline-block !important;
@@ -107,15 +130,23 @@ fieldset.checkboxes label {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+.controls > .select2-container .select2-choices {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.controls > .select2-container.form-control .select2-choice,
+.controls > .select2-container .select2-choices {
+    border: none;
+}
 .controls .select2-container .select2-choices {
     padding-left: 0;
 }
 .input-group .form-control:first-child {
-    padding-left: 3em;
+    padding-left: 30px;
 }
 .input-group .btn {
-    padding-top: 1.2em;
-    padding-bottom: 1.1em;
+    padding-top: 26px;
+    padding-bottom: 23px;
 }
 .select2-container {
     padding: 0;
@@ -127,7 +158,6 @@ fieldset.checkboxes label {
 fieldset.radios label > input {
     margin-right: 5px;
     background: white;
-
 }
 fieldset.radios label,
 fieldset.checkboxes label {
