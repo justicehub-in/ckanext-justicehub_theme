@@ -14,22 +14,22 @@
 }
 
 /*------------------ form control borders, backgrounds fonts colors ----------------*/
-.controls > *:first-child,
+.controls > input:first-child,
 .input-group > *:first-child,
 .editor .editor-info-block,
 [class^="input-group"] > *:first-child,
 .form-control,
 .form-control:focus,
 .select2-drop,
-.form-actions > button,
-.controls > a.btn,
 .select2-container .select2-choice,
 .select2-container-multi .select2-choices {
-    border-color: #f87c69;
+    border-color: #f65940;
     border-radius: 0px;
 }
-.bg-clear {
-    background-color: transparent;
+.bg-clear,
+.controls .select2-container .select2-choice .select2-arrow,
+.controls .select2-container > a.select2-choice {
+    background: transparent;
 }
 .controls > *:first-child,
 .controls > a.btn,
@@ -50,14 +50,16 @@ fieldset.checkboxes + label {
 .controls > a.btn,
 .controls .btn,
 .form-actions > button,
+.form-actions > button:focus,
 .select2-container-multi .select2-choices > li.select2-search-choice {
     background-color: #403644;
 }
-.sort-box, .search-form .btn {
+.sort-box, .search-form .btn,
+.controls .select2-container .select2-choice .select2-arrow {
     border-left: none;
 }
 .select2-container-active .select2-choices {
-    border-color: #f87c69 !important; /* important because it gets overridden by dynamic class change */
+    border-color: #f65940 !important; /* important because it gets overridden by dynamic class change */
 }
 .controls > a.btn,
 .controls .btn,
@@ -80,13 +82,14 @@ fieldset.checkboxes + label {
 .form-actions > button:hover {
     background-color: white;
     color: #403644 !important;  /* important because it gets overridden by dynamic class change */
-    border-color: #f87c69;
+    border-color: #f65940;
 }
-label {
+.control-label {
     color: #403644;
-    font-size: 20px;
+    font-size: 21px;
     font-weight: bold;
 }
+.select2-dropdown-open.select2-container > .select2-choices,
 .checkbox-other > *:first-child {
     border-top: none;
     border-left: none;
@@ -123,6 +126,9 @@ fieldset.checkboxes label {
 }
 
 /* ----------------- form control spacing ------------- */
+.form-actions {
+    margin-top: 50px;
+}
 .controls input.form-control,
 .controls select.form-control,
 .controls .select2-container .select2-choice,
@@ -141,8 +147,12 @@ fieldset.checkboxes label {
 .controls .select2-container .select2-choices {
     padding-left: 0;
 }
+.form-group,
+#resource-schema-buttons > .control-label,
 .input-group .form-control:first-child {
+    padding-top: 30px;
     padding-left: 30px;
+    margin-bottom: 0;
 }
 .input-group .btn {
     padding-top: 26px;
@@ -172,4 +182,8 @@ fieldset.checkboxes label {
 }
 .controls .checkbox-other .select2-choices {
     padding-top :0;
+}
+input[type="date"].form-control,
+input[type="month"].form-control {
+    line-height: 28px;
 }

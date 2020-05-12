@@ -1,0 +1,222 @@
+{% extends 'package/new_package_form.html' %}
+
+{% block errors %}
+  {%- if errors -%}
+    {%- set schema = h.scheming_get_dataset_schema(dataset_type) -%}
+    {%- snippet 'scheming/snippets/errors.html',
+      errors=errors, fields=schema.dataset_fields,
+      entity_type='dataset', object_type=dataset_type -%}
+  {%- endif -%}
+{% endblock %}
+
+{% block basic_fields %}
+  {%- if not dataset_type -%}
+    <p>
+    dataset_type not passed to template. your version of CKAN
+    might not be compatible with ckanext-scheming
+    </p>
+  {%- endif -%}
+  {%- set schema = h.scheming_get_dataset_schema(dataset_type) -%}
+
+  {% set org_fields = [] %}
+  {% set geo_fields = [] %}
+  {% set data_timeline_fields = [] %}
+  {% set collection_fields = [] %}
+  {% set date_fields = [] %}
+  {% set author_details = [] %}
+  {% set maintainer_details = [] %}
+  {% set check_fields = [] %}
+  {% set meta_fields = [] %}
+  {% set extras = [] %}
+
+  {%- for field in schema.dataset_fields[4:] -%}
+      {%- if field.field_name in ['owner_org', 'license_id'] -%}
+          {% do org_fields.append(field) %}
+
+      {%- elif field.field_name in ['states', 'district', 'village'] -%}
+          {% do geo_fields.append(field) %}
+
+      {%- elif field.field_name in ['start_year', 'end_year'] -%}
+          {% do data_timeline_fields.append(field) %}
+
+      {%- elif field.field_name in ['collected_month', 'level'] -%}
+          {% do collection_fields.append(field) %}
+
+      {%- elif field.field_name in ['upload_date', 'last_updated'] -%}
+          {% do date_fields.append(field) %}
+
+      {%- elif field.field_name in ['author', 'author_email'] -%}
+          {% do author_details.append(field) %}
+
+      {%- elif field.field_name in ['maintainer', 'maintainer_email'] -%}
+          {% do maintainer_details.append(field) %}
+
+      {%- elif field.preset in ['multiple_checkbox', 'select'] -%}
+          {% do check_fields.append(field) %}
+
+      {%- elif field.field_name in ['version', 'language', 'update_frequency'] -%}
+          {% do meta_fields.append(field) %}
+
+      {%- else -%}
+          {% do extras.append(field) %}
+
+      {%- endif -%}
+
+  {%- endfor -%}
+
+  <div class="row">
+  {%- for field in schema.dataset_fields[:3] -%}
+    <div class="col col-md-12">
+    {%- if field.form_snippet is not none -%}
+      {%- snippet 'scheming/snippets/form_field.html',
+        field=field, data=data, errors=errors, licenses=c.licenses,
+        entity_type='dataset', object_type=dataset_type -%}
+    {%- endif -%}
+    </div>
+  {%- endfor -%}
+  </div>
+
+  <div class="form-group">
+      <span class="metadata-heading">{{ _('METADATA') }}</span>
+  </div>
+
+  <div class="row">
+  {%- for field in schema.dataset_fields[3:4] -%}
+    <div class="col col-md-12">
+    {%- if field.form_snippet is not none -%}
+      {%- snippet 'scheming/snippets/form_field.html',
+        field=field, data=data, errors=errors, licenses=c.licenses,
+        entity_type='dataset', object_type=dataset_type -%}
+    {%- endif -%}
+    </div>
+  {%- endfor -%}
+  </div>
+
+  <div class="row">
+      {%- for field in org_fields[::-1] -%}
+      <div class="col col-md-6">
+        {%- if field.form_snippet is not none -%}
+          {%- snippet 'scheming/snippets/form_field.html',
+            field=field, data=data, errors=errors, licenses=c.licenses,
+            entity_type='dataset', object_type=dataset_type -%}
+        {%- endif -%}
+      </div>
+      {%- endfor -%}
+  </div>
+
+  <div class="row">
+      {%- for field in geo_fields -%}
+      <div class="col col-md-4">
+        {%- if field.form_snippet is not none -%}
+          {%- snippet 'scheming/snippets/form_field.html',
+            field=field, data=data, errors=errors, licenses=c.licenses,
+            entity_type='dataset', object_type=dataset_type -%}
+        {%- endif -%}
+      </div>
+      {%- endfor -%}
+  </div>
+
+  <div class="row">
+      {%- for field in data_timeline_fields -%}
+      <div class="col col-md-4">
+        {%- if field.form_snippet is not none -%}
+          {%- snippet 'scheming/snippets/form_field.html',
+            field=field, data=data, errors=errors, licenses=c.licenses,
+            entity_type='dataset', object_type=dataset_type -%}
+        {%- endif -%}
+      </div>
+      {%- endfor -%}
+  </div>
+
+  <div class="row">
+      {%- for field in collection_fields -%}
+      <div class="col col-md-4">
+        {%- if field.form_snippet is not none -%}
+          {%- snippet 'scheming/snippets/form_field.html',
+            field=field, data=data, errors=errors, licenses=c.licenses,
+            entity_type='dataset', object_type=dataset_type -%}
+        {%- endif -%}
+      </div>
+      {%- endfor -%}
+  </div>
+
+  <div class="row">
+      {%- for field in date_fields -%}
+      <div class="col col-md-4">
+        {%- if field.form_snippet is not none -%}
+          {%- snippet 'scheming/snippets/form_field.html',
+            field=field, data=data, errors=errors, licenses=c.licenses,
+            entity_type='dataset', object_type=dataset_type -%}
+        {%- endif -%}
+      </div>
+      {%- endfor -%}
+  </div>
+
+  <div class="row">
+  {%- for field in check_fields -%}
+    <div class="col col-md-12">
+    {%- if field.form_snippet is not none -%}
+      {%- snippet 'scheming/snippets/form_field.html',
+        field=field, data=data, errors=errors, licenses=c.licenses,
+        entity_type='dataset', object_type=dataset_type -%}
+    {%- endif -%}
+    </div>
+  {%- endfor -%}
+  </div>
+
+  <div class="row">
+      {%- for field in meta_fields -%}
+      <div class="col col-md-4">
+        {%- if field.form_snippet is not none -%}
+          {%- snippet 'scheming/snippets/form_field.html',
+            field=field, data=data, errors=errors, licenses=c.licenses,
+            entity_type='dataset', object_type=dataset_type -%}
+        {%- endif -%}
+      </div>
+      {%- endfor -%}
+  </div>
+
+  <div class="row">
+      {%- for field in author_details -%}
+      <div class="col col-md-6">
+        {%- if field.form_snippet is not none -%}
+          {%- snippet 'scheming/snippets/form_field.html',
+            field=field, data=data, errors=errors, licenses=c.licenses,
+            entity_type='dataset', object_type=dataset_type -%}
+        {%- endif -%}
+      </div>
+      {%- endfor -%}
+  </div>
+
+  <div class="row">
+      {%- for field in maintainer_details -%}
+      <div class="col col-md-6">
+        {%- if field.form_snippet is not none -%}
+          {%- snippet 'scheming/snippets/form_field.html',
+            field=field, data=data, errors=errors, licenses=c.licenses,
+            entity_type='dataset', object_type=dataset_type -%}
+        {%- endif -%}
+      </div>
+      {%- endfor -%}
+  </div>
+
+  <div class="row">
+  {%- for field in extras -%}
+    <div class="col col-md-12">
+    {%- if field.form_snippet is not none -%}
+      {%- snippet 'scheming/snippets/form_field.html',
+        field=field, data=data, errors=errors, licenses=c.licenses,
+        entity_type='dataset', object_type=dataset_type -%}
+    {%- endif -%}
+    </div>
+  {%- endfor -%}
+  </div>
+
+  {%- if 'resource_fields' not in schema -%}
+    <!-- force controller to skip resource-editing step for this type -->
+    <input type="hidden" name="_ckan_phase" value="" />
+  {%- endif -%}
+{% endblock %}
+
+{% block metadata_fields %}
+{% endblock %}
