@@ -16,6 +16,9 @@
     margin-bottom: 0 !important;
     border-top: none;
 }
+.filters .module-content {
+    height: 100%;
+}
 .nav-item.active > a{
     background-color: #f65940;
     color: #ffffff;

@@ -37,7 +37,6 @@
 aside .module-content {
     background-color: #403644;
 }
-
 .stages,
 .stages li.active .highlight,
 .module-heading,
@@ -66,8 +65,9 @@ aside .module-content {
     position: static;
     text-align: center;
 }
-.stages li.complete .highlight {
-    background-color: inherit;
+.stages li.complete .highlight,
+.stages li.uncomplete .highlight {
+    background-color: #ffffff;
     color: #403644;
 }
 .stages li:before {
@@ -95,6 +95,6 @@ aside .module-content {
     border-bottom: none;
 }
 aside .module-content {
-    height: calc(100vh - 110px);
+    height: calc(100vh - 110px);  /* https://stackoverflow.com/a/37370197/3860168 */
     border: none;
 }
