@@ -87,9 +87,9 @@ Example:
 
         {% block package_meta %}
         <div class="dataset-meta">
-          <span>{{ package.update_frequency }}</span>
+          <span>{{ package.update_frequency or _('Not updated') }}</span>
           <span>{{ _('|') }}</span>
-          <span>{{ _('Data Timeline:') }} {{ package.start_year }}-{{ package.end_year }}</span>
+          <span>{{ _('Data Timeline:') }} {% if package.start_year %}{{ package.start_year }}-{{ package.end_year }} {% else %}{{ _('Not Available')}} {% endif %}</span>
         </div>
         {% endblock %}
 

@@ -8,6 +8,9 @@
 .dataset-heading {
     margin-bottom: 0;
 }
+.dataset-item {
+    border-bottom: none;
+}
 .dataset-org, .downloads, .dataset-heading, .dataset-meta {
     font-size: 1.3em;
     font-weight: bold;
