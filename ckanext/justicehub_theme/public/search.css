@@ -29,7 +29,7 @@
 .nav-item > a:hover {
     color: #403644;
 }
-.nav,.module-footer, .empty {
+.nav,.module-footer, .filters .module-content.empty {
     background-color: #403644;
     color: #ffffff;
 }
