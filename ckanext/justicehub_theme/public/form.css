@@ -44,12 +44,28 @@
 .input-group > *:first-child,
 .editor .editor-info-block,
 [class^="input-group"] > *:first-child,
-.form-control,
-.form-control:focus,
+[class^="form-control"],
+[class^="form-control"]:focus,
+fieldset.checkboxes > label > input,
 .select2-drop,
 .select2-container .select2-choice,
 .select2-container-multi .select2-choices {
     border-radius: 0px;
+}
+.controls > input:first-child,
+.input-group > *:first-child,
+.editor .editor-info-block,
+[class^="input-group"] > *:first-child,
+[class^="form-control"],
+[class^="form-control"]:focus,
+.form-actions .btn-finish:hover,
+.form-actions .btn-finish:focus,
+.form-actions .btn-finish:active,
+fieldset.checkboxes > label > input,
+.select2-drop,
+.select2-container .select2-choice,
+.select2-container-multi .select2-choices {
+    border: 1px solid #f65940;
 }
 .bg-clear,
 .form-actions .btn-primary,
@@ -123,7 +139,7 @@ fieldset.checkboxes + label {
 }
 
 /*------------------ form control layout ----------------*/
-.controls .form-control,
+.controls [class^="form-control"],
 .controls .select2-container,
 .controls .select2-container-multi,
 .controls .select2-container .select2-choice,
@@ -148,7 +164,7 @@ fieldset.checkboxes label {
 .form-actions {
     margin-top: 50px;
 }
-.controls input.form-control,
+.controls input[class^="form-control"],
 .controls select.form-control,
 .controls .select2-container .select2-choice,
 .controls .select2-container .select2-choices {
