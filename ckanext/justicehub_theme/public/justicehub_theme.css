@@ -232,6 +232,20 @@ body {
 .module-content {
     padding-left: 0;
 }
+.module-footer {
+    border: none;
+    background-color: #403644;
+    color: #ffffff;
+}
+.module-heading {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.5em;
+    background-color: #403644;
+    border-color: #f87c69;
+    margin-bottom: 0 !important;
+    border-top: none;
+}
 
 .primary {
     padding-left: 0;
