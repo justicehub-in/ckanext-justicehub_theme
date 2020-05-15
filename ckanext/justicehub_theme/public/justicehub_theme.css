@@ -241,3 +241,14 @@ hr {
     margin-top: 20px;
     border-top: 1.5px solid #403644;
 }
+
+.page_primary_action {
+    padding-right: 40px;
+}
+.page_primary_action .btn-primary {
+    background-color: #403644;
+    color: #ffffff;
+    border-radius: 30px;
+    padding: 5px 25px;
+    font-size: 20px;
+}
