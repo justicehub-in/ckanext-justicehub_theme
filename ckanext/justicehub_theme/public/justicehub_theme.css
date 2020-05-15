@@ -108,6 +108,63 @@ body {
   color: rgba(255, 255, 255, 0.6);
 }
 
-.site-footer .lang-container {
-    width: 350px !important;
+.footer-disclaimer,
+.footer-links {
+    color: white;
+}
+.footer-legal {
+    float: right;
+    width: 60%;
+}
+.footer-links {
+    padding: 10px 15px;
+}
+.footer-links .social-links {
+    padding: 40px 25px;
+}
+.footer-disclaimer {
+    font-size: 17px;
+    margin: 10px 0;
+}
+.footer-disclaimer div:last-child {
+    color: #f65940;
+    font-size: 20px;
+    font-style: italic;
+}
+.footer-links .nav-item {
+    display: inline;
+}
+/* Ref: https://stackoverflow.com/a/28986266/3860168 */
+.site-footer .social-links .nav-item a{
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    border: 2px solid #f65940;
+    border-radius: 50px;
+    margin-right: 50px;
+    padding: 5px 5px;
+    background-color: #f65940;
+    font-size: 25px;
+    color: white;
+    text-align: center;
+}
+.footer-links i.fa-circle.fa-sm {
+    font-size: 9px;
+    color: #f65940;
+    padding: 10px;
+}
+.footer-links .input-group-btn .btn,
+.footer-links input {
+    border-radius: 30px;
+}
+.footer-links input {
+    font-size: 20px;
+    font-style: italic;
+    color: #b9b4b4;
+}
+.footer-links .input-group-btn .btn {
+    margin-left: -20px;
+    background-color: #f65940;
+    font-size: 18px;
+    border-color: #f65940;
 }
