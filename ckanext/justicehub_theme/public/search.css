@@ -20,6 +20,9 @@
 .nav-item > a:hover {
     color: #403644;
 }
+.nav-simple > li {
+    border-bottom: none;
+}
 .nav, .filters .module-content.empty {
     background-color: #403644;
     color: #ffffff;
