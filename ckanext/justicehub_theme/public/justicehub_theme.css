@@ -40,6 +40,17 @@
   border-color: #f65940;
 }
 
+.masthead .navigation .nav-pills li:last-child {
+  background-color: #f65940;
+  color: white;
+  border-radius: 4px;
+}
+.masthead .navigation .nav-pills li:last-child a:hover {
+  background-color: #403644;
+  color: #f65940;
+  border-color: #f65940;
+}
+
 .masthead .logo {
     margin-left: -45px;
     width: 300px;
