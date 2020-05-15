@@ -94,3 +94,7 @@ body {
 .site-footer a {
   color: rgba(255, 255, 255, 0.6);
 }
+
+.site-footer .lang-container {
+    width: 350px !important;
+}
