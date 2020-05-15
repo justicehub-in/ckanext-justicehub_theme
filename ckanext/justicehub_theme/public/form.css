@@ -131,6 +131,9 @@ fieldset.checkboxes + label {
 .control-label {
     font-size: 21px;
 }
+.input-group .input-group-addon {
+    border-right: none;
+}
 .select2-dropdown-open.select2-container > .select2-choices,
 .checkbox-other > *:first-child {
     border-top: none;
