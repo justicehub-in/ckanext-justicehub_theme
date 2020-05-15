@@ -75,9 +75,13 @@
   border-top: 1px solid rgb(204, 204, 204);
 }
 
-
-.site-footer,
+.wrapper {
+    min-height: 600px;
+}
 body {
+  background-color: white;
+}
+.site-footer {
   background-color: #403644;
 }
 /* The text in the footer. */
