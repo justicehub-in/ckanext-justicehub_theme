@@ -1,0 +1,40 @@
+{% extends "page.html" %}
+
+{% block subtitle %}{{ _('Register') }}{% endblock %}
+
+{% block breadcrumb_content %}
+  <li class="active">{{ h.nav_link(_('Registration'), named_route='user.register') }}</li>
+{% endblock %}
+
+{% block pre_primary %}
+  <div class="row">
+      <div class="col col-md-3">
+      </div>
+      <div class="col col-md-9 login-heading">
+          <h1>{% block page_heading %}{{ _('REGISTER') }}{% endblock %}</h1>
+      </div>
+  </div>
+{% endblock %}
+
+{% block primary_content %}
+  <article class="module">
+    <div class="module-content">
+      {% block primary_content_inner %}
+      {{ form | safe }}
+      {% endblock %}
+    </div>
+  </article>
+{% endblock %}
+
+{% block secondary_content %}
+  {% block help %}
+  <section class="login-sidebar">
+    {% block help_inner %}
+    <h2 class="login-sidebar-heading">{{ _('Why Sign Up?') }}</h2>
+    <div class="module-content">
+      <p>{% trans %}Create datasets, groups and other exciting things{% endtrans %}</p>
+    </div>
+    {% endblock %}
+  </section>
+  {% endblock %}
+{% endblock %}
