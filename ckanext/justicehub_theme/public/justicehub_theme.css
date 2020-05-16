@@ -108,45 +108,55 @@ body {
   color: rgba(255, 255, 255, 0.6);
 }
 
-.footer-disclaimer,
-.footer-links {
+.site-footer {
     color: white;
 }
-.footer-legal {
-    float: right;
-    width: 60%;
-}
+
 .footer-links {
-    padding: 10px 15px;
+    padding: 20px 10px;
 }
-.footer-links .social-links {
-    padding: 40px 25px;
+.footer-links .col-md-1 {
+    padding: 20px 0;
 }
+
+
+/* https://www.w3schools.com/howto/howto_css_social_media_buttons.asp */
+.social-links .fa {
+  padding: 12px 5px;
+  font-size: 30px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
+  background-color: #f65940;
+  color: white;
+}
+
+.social-links li {
+    margin-right: 18px;
+}
+.social-links li:first-of-type {
+    padding-left: 0;
+}
+.social-links .fa:hover {
+  background-color: #403644;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+}
+
+.footer-links .nav-item > a {
+    margin: 0;
+    padding: 0;
+}
+
 .footer-disclaimer {
     font-size: 17px;
-    margin: 10px 0;
 }
 .footer-disclaimer div:last-child {
     color: #f65940;
     font-size: 20px;
     font-style: italic;
-}
-.footer-links .nav-item {
-    display: inline;
-}
-/* Ref: https://stackoverflow.com/a/28986266/3860168 */
-.site-footer .social-links .nav-item a{
-    display: inline-block;
-    height: 50px;
-    width: 50px;
-    border: 2px solid #f65940;
-    border-radius: 50px;
-    margin-right: 50px;
-    padding: 5px 5px;
-    background-color: #f65940;
-    font-size: 25px;
-    color: white;
-    text-align: center;
 }
 .footer-links i.fa-circle.fa-sm {
     font-size: 9px;
@@ -156,6 +166,9 @@ body {
 .footer-links .input-group-btn .btn,
 .footer-links input {
     border-radius: 30px;
+}
+.footer-links input:focus {
+    border-color: #f65940;
 }
 .footer-links input {
     font-size: 20px;
@@ -167,4 +180,11 @@ body {
     background-color: #f65940;
     font-size: 18px;
     border-color: #f65940;
+}
+
+/* -------------------------------------- Footer Mobile adjustments ----------------------------- */
+@media (max-device-width: 480px) and (orientation: portrait) {
+    .footer-links:last-of-type div:last-of-type ul {
+        float: left !important;
+    }
 }

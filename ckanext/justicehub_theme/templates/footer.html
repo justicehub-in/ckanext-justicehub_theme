@@ -3,31 +3,31 @@
     <div class="container">
         
         {% block footer_content %}
-        <div class="row">
-            <div class="col-md-3 footer-links">
+        <div class="row footer-links">
+            <div class="col col-md-3">
                 <div style="font-size: 20px; font-weight: bold;">{{ _('GET IN TOUCH') }}</div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-8 footer-links">
-                <ul class="social-links">
-                    <li class="nav-item">
+        <div class="row footer-links">
+            <div class="col col-md-6 social-links">
+                <ul class="list-unstyled list-inline">
+                    <li>
                         <a href="mailto:info@justicehub.in" aria-hidden="true" alt="Justice Hub's Email Address" role="link" title="Email Address" aria-label="Justice Hub's Email Address" target="_blank">
                         <i class="fa fa-envelope fa-lg"></i>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li>
                         <a href="https://twitter.com/JusticeHubIndia" aria-hidden="true" alt="Justice Hub India's Official Twitter Handle" role="link" title="Official Twitter Handle" aria-label="Justice Hub India's Official Twitter Handle" target="_blank">
                             <i class="fa fa-twitter fa-lg"></i>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li>
                         <a href="https://www.facebook.com/JusticeHubIndia" aria-hidden="true" role="link" alt="Justice Hub India's Official Facebook Page" title="Official Facebook Page" aria-label="Justice Hub India's Official Facebook Page" target="_blank">
                             <i class="fa fa-facebook fa-lg"></i>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li>
                         <a href="https://github.com/justicehub-in" alt="Justice Hub India's Official Github handle" aria-label="Justice Hub India's Official Github handle" title="Official Github Handle" aria-hidden="true" role="link" target="_blank">
                             <i class="fa fa-github fa-lg"></i>
                         </a>
@@ -35,8 +35,11 @@
                 </ul>
             </div>
 
-            <div class="col-md-4 footer-links">
-                <div class="input-group social-links">
+            <div class="col col-md-1 social-links">
+            </div>
+
+            <div class="col col-md-5 social-links">
+                <div class="input-group">
                     <input type="url" class="form-control input-lg" placeholder="Enter you email id">
                     <span class="input-group-btn">
                         <button class="btn btn-default btn-lg" type="button">Subscribe</button>
@@ -45,8 +48,8 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-3 footer-disclaimer">
+        <div class="row footer-links">
+            <div class="col col-md-3 footer-disclaimer">
                 <div>
                     This is an Alpha release, we will be working to add more datasets in the coming days to the Justice Hub.
                 </div>
@@ -56,9 +59,9 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-8 footer-links">
-                <ul class="list-unstyled">
+        <div class="row footer-links">
+            <div class="col col-md-8 pull-left">
+                <ul class="list-unstyled list-inline">
                     {% block footer_links %}
                     <li class="nav-item">
                         <a href="{{ h.url_for(controller='home', action='about') }}">{{ _('About {0}').format(g.site_title) }}</a></li>
@@ -77,8 +80,8 @@
                     {% endblock %}
                 </ul>
             </div>
-            <div class="col-md-4 footer-links">
-                <ul class="list-unstyled">
+            <div class="col col-md-4">
+                <ul class="list-unstyled list-inline pull-right">
                     {% block footer_links_legal %}
                     <li class="nav-item">
                         <a href="https://justicehub.in/terms">{{ _('Terms & Conditions') }}</a>
