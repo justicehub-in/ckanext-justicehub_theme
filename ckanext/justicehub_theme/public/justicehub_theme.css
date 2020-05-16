@@ -83,9 +83,6 @@
 .homepage .module-search .tags {
   background-color: rgb(61, 61, 61);
 }
-.module-content:last-child {
-  padding-bottom: 0px;
-}
 .homepage .module-search {
   padding: 0px;
 }
@@ -94,9 +91,17 @@
 }
 
 .wrapper {
+    box-shadow: none;
     min-height: 600px;
+    margin-top: 50px;
+    border: none;
 }
-body {
+.wrapper::before {
+    border-right: none;
+}
+
+[role="main"], body {
+  background: none;
   background-color: white;
 }
 .site-footer {
@@ -150,7 +155,6 @@ body {
   border: 1px solid #ffffff;
   color: #ffffff;
 }
-
 .footer-links .nav-item > a {
     margin: 0;
     padding: 0;
@@ -170,7 +174,7 @@ body {
     padding: 10px;
 }
 .footer-links .input-group-btn .btn,
-.footer-links input {
+.footer-links .input-group input {
     border-radius: 30px;
 }
 .footer-links input:focus {
@@ -188,50 +192,14 @@ body {
     border-color: #f65940;
 }
 
-/* -------------------------------------- Footer Mobile adjustments ----------------------------- */
-@media (max-device-width: 480px) and (orientation: portrait) {
-    .footer-links:last-of-type div:last-of-type ul {
-        float: left !important;
-    }
-
-    .masthead {
-        margin-bottom: initial;
-        padding: 10px 0;
-    }
-    .masthead .navbar-collapse {
-        padding: 10px 0;
-    }
-    .masthead .navigation .nav-pills li {
-        font-size: 18px;
-        font-weight: bold;
-        padding-top: 5px;
-        padding-bottom: 5px;
-    }
-    .masthead .navigation .nav-pills li.active {
-      border-bottom: 5px solid #f65940;
-    }
-    .masthead .navigation .nav-pills li:last-child {
-      background-color: #f65940;
-      color: white;
-      padding-top: 5px;
-      font-size: 18px;
-      border-bottom: none;
-    }
-    .masthead .navigation .nav-pills li:last-child a:hover {
-      color: #ffffff;
-    }
-}
-.wrapper {
-    margin-top: 50px;
-}
-
-.wrapper::before {
-    border-right: none;
-}
-
-.module-content {
-    padding-left: 0;
-    padding: 0;
+/* ------------- sidebar --------- */
+.module-narrow h2.module-heading {
+    font-size: 22px;
+    background-color: #f65940;
+    height: 100px;
+    padding-left: 25px;
+    padding-top: 30px;
+    border-bottom: none;
 }
 .module-footer {
     border: none;
@@ -269,4 +237,77 @@ hr {
 }
 [role="main"] .secondary {
     padding-right: 0;
+}
+
+/* ------------------------------- Login ------------------------- */
+.login-sidebar {
+    background-color: #403644;
+    margin-top: -20px;
+    height: 700px;
+}
+.login-sidebar-heading {
+    color: white;
+    font-size: 28px;
+    padding: 50px 60px;
+    padding-bottom: 10px;
+}
+.login-sidebar p {
+    padding: 15px 5px;
+    font-size: 16px;
+}
+.login-sidebar p.action {
+    background-color: #f65940;
+}
+.login-heading {
+    border-bottom: 1px solid #f65940;
+    padding: 0 50px;
+    margin-bottom: -1.5px;
+}
+
+/* -------------------------------------- Footer Mobile adjustments ----------------------------- */
+@media (max-device-width: 480px) and (orientation: portrait) {
+    .footer-links:last-of-type div:last-of-type ul {
+        float: left !important;
+    }
+
+    .masthead {
+        margin-bottom: initial;
+        padding: 10px 0;
+    }
+    .masthead .navbar-collapse {
+        padding: 10px 0;
+    }
+    .masthead .navigation .nav-pills li {
+        font-size: 18px;
+        font-weight: bold;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .masthead .navigation .nav-pills li.active {
+      border-bottom: 5px solid #f65940;
+    }
+    .masthead .navigation .nav-pills li:last-child {
+      background-color: #f65940;
+      color: white;
+      padding-top: 5px;
+      font-size: 18px;
+      border-bottom: none;
+    }
+    .masthead .navigation .nav-pills li:last-child a:hover {
+      color: #ffffff;
+    }
+    .footer-links {
+        padding: 5px 10px;
+    }
+    .footer-links {
+        padding-bottom: 20px;
+    }
+    .login-heading {
+        padding-left: 20px;
+        margin-bottom: 20px;
+        margin-left: -10px;
+    }
+    .login-sidebar {
+        height: 100%;
+    }
 }

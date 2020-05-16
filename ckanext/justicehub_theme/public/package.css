@@ -84,17 +84,3 @@ aside .module-content {
     padding: 10px 270px;
     margin-left: -30px;
 }
-
-/* ------------- sidebar --------- */
-.module-narrow h2.module-heading {
-    font-size: 22px;
-    background-color: #f65940;
-    height: 100px;
-    padding-left: 25px;
-    padding-top: 30px;
-    border-bottom: none;
-}
-aside .module-content {
-    height: calc(100vh - 110px);  /* https://stackoverflow.com/a/37370197/3860168 */
-    border: none;
-}
