@@ -4,8 +4,24 @@ from sqlalchemy.sql import select
 import ckan.model as model
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
+import ckan.logic as logic
+import ckan.model as model
+from ckan.common import c
 
 cached_tables = {}
+
+
+def package_activity_stream(id):
+
+   context = {'model': model, 'session': model.Session,
+		   'user': c.user, 'for_view': True,
+		   'auth_user_obj': c.userobj}
+   data_dict = {'id': id, 'include_tracking': True}
+   pkg_dict = logic.get_action('package_show')(context, data_dict)
+   package_activity_stream = logic.get_action('package_activity_list_html')(
+   context, {'id': pkg_dict['id']})
+
+   return package_activity_stream
 
 def get_table(name):
     if name not in cached_tables:
@@ -65,7 +81,10 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         # Template helper function names should begin with the name of the
         # extension they belong to, to avoid clashing with functions from
         # other extensions.
-        return {'justicehub_theme_get_package_avg_downloads': get_package_avg_downloads}
+        return {
+                'justicehub_theme_get_package_avg_downloads': get_package_avg_downloads,
+                'justicehub_theme_package_activity_stream': package_activity_stream
+                }
 
     def before_search(self, search_params):
         u'''Extensions will receive a dictionary with the query parameters,

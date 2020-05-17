@@ -1,0 +1,56 @@
+.activity .item::after{
+  margin-bottom:40px;
+}
+
+
+.activity .item p{
+  font-size:16px;
+  margin-left:50px;
+}
+
+.activity .item .fa{
+  margin-top:10px;
+}
+
+.activity .item{
+  margin-left:15px;
+}
+
+.activity .item a{
+  color:white;
+  font-size:16px;
+}
+
+.activity {
+  background:none
+}
+
+
+.activity .item .date{
+  color:#f65940;
+  display:block
+}
+
+.actor .gravatar {
+  display:none
+}
+
+.pckg_rsrc_actvty{
+   margin:0;
+   padding:0;
+   margin-top:150px;
+   display:flex
+}
+
+@media only screen and (max-width: 768px){
+  .pckg_rsrc_actvty{
+   
+    display:block
+   
+   }
+
+}
+
+.pkg_tags:nth-child(even) {background-color:#00abb7;}
+.pkg_tags:nth-child(odd) {background-color:#f65940;}
+
