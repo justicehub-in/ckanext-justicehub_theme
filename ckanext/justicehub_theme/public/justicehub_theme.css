@@ -1,0 +1,223 @@
+.account-masthead {
+    background-color: rgb(40, 40, 40);
+    display: none;
+}
+.account-masthead .account .notifications a span {
+  background-color: black;
+}
+.account-masthead .account ul li a {
+  color: rgba(255, 255, 255, 0.6);
+}
+.account-masthead .account ul li a:hover {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: black;
+}
+
+
+.container {
+    width: 90%;
+}
+.masthead {
+  background: none;
+  background-color: #403644;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.masthead .navbar-collapse {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.masthead .navigation .nav-pills li {
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.masthead .navigation .nav-pills li a:hover {
+  background-color: #f65940;
+  color: white;
+}
+.masthead .navigation .nav-pills li.active a {
+  background-color: #403644;
+}
+
+.masthead .navigation .nav-pills li.active {
+  border-bottom: 15px solid #f65940;
+}
+
+.masthead .navigation .nav-pills li:last-child {
+  background-color: #f65940;
+  color: white;
+  padding-top: 20px;
+  font-size: 20px;
+  border-bottom: 12px solid #f65940;
+}
+.masthead .navigation .nav-pills li:last-child a:hover {
+  color: #ffffff;
+}
+
+.masthead .logo {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: -45px;
+    width: 300px;
+    height: 80px;
+}
+.logo img {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+}
+
+.box {
+  box-shadow: none;
+}
+.hero .box {
+  border: none;
+}
+.homepage .module-search .module-content {
+  color: rgb(68, 68, 68);
+  background-color: white;
+}
+.homepage .module-search .tags {
+  background-color: rgb(61, 61, 61);
+}
+.module-content:last-child {
+  padding-bottom: 0px;
+}
+.homepage .module-search {
+  padding: 0px;
+}
+.homepage [role="main"] {
+  border-top: 1px solid rgb(204, 204, 204);
+}
+
+.wrapper {
+    min-height: 600px;
+}
+body {
+  background-color: white;
+}
+.site-footer {
+  background: none;
+  background-color: #403644;
+}
+/* The text in the footer. */
+.site-footer,
+.site-footer label,
+.site-footer small {
+  color: rgba(255, 255, 255, 0.6);
+}
+/* The link texts in the footer. */
+.site-footer a {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.site-footer {
+    color: white;
+}
+
+.footer-links {
+    padding: 20px 10px;
+}
+.footer-links .col-md-1 {
+    padding: 20px 0;
+}
+
+
+/* https://www.w3schools.com/howto/howto_css_social_media_buttons.asp */
+.social-links .fa {
+  padding: 12px 5px;
+  font-size: 30px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
+  background-color: #f65940;
+  color: white;
+}
+
+.social-links li {
+    margin-right: 18px;
+}
+.social-links li:first-of-type {
+    padding-left: 0;
+}
+.social-links .fa:hover {
+  background-color: #403644;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+}
+
+.footer-links .nav-item > a {
+    margin: 0;
+    padding: 0;
+}
+
+.footer-disclaimer {
+    font-size: 17px;
+}
+.footer-disclaimer div:last-child {
+    color: #f65940;
+    font-size: 20px;
+    font-style: italic;
+}
+.footer-links i.fa-circle.fa-sm {
+    font-size: 9px;
+    color: #f65940;
+    padding: 10px;
+}
+.footer-links .input-group-btn .btn,
+.footer-links input {
+    border-radius: 30px;
+}
+.footer-links input:focus {
+    border-color: #f65940;
+}
+.footer-links input {
+    font-size: 20px;
+    font-style: italic;
+    color: #b9b4b4;
+}
+.footer-links .input-group-btn .btn {
+    margin-left: -20px;
+    background-color: #f65940;
+    font-size: 18px;
+    border-color: #f65940;
+}
+
+/* -------------------------------------- Footer Mobile adjustments ----------------------------- */
+@media (max-device-width: 480px) and (orientation: portrait) {
+    .footer-links:last-of-type div:last-of-type ul {
+        float: left !important;
+    }
+
+    .masthead {
+        margin-bottom: initial;
+        padding: 10px 0;
+    }
+    .masthead .navbar-collapse {
+        padding: 10px 0;
+    }
+    .masthead .navigation .nav-pills li {
+        font-size: 18px;
+        font-weight: bold;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .masthead .navigation .nav-pills li.active {
+      border-bottom: 5px solid #f65940;
+    }
+    .masthead .navigation .nav-pills li:last-child {
+      background-color: #f65940;
+      color: white;
+      padding-top: 5px;
+      font-size: 18px;
+      border-bottom: none;
+    }
+    .masthead .navigation .nav-pills li:last-child a:hover {
+      color: #ffffff;
+    }
+}
