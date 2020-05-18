@@ -27,5 +27,13 @@
 .package-item-row {
     padding-left:50px;
 }
+.private-icon
+{
+    padding: 0;
+    background: none;
+}
+.private-icon i {
+    color: #403644;
+}
 
 /* ------------------------------- */
