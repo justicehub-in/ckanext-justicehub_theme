@@ -1,10 +1,4 @@
-{% extends "page.html" %}
-
-{% block subtitle %}{{ _('Login') }}{% endblock %}
-
-{% block breadcrumb_content %}
-  <li class="active">{{ h.nav_link(_('Login'), named_route='user.login') }}</li>
-{% endblock %}
+{% ckan_extends %}
 
 {% block pre_primary %}
   <div class="row">
