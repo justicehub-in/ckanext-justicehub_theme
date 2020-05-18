@@ -1,0 +1,29 @@
+.dataset-count-box {
+    padding-top: 1.3em;
+    font-weight: bold;
+    color: #202020;
+}
+.dataset-count {
+    color: #f87c69;
+}
+.nav-item.active > a{
+    background-color: #f87c69;
+    color: #ffffff;
+}
+.nav-item.active > a:hover {
+    background-color: #eeeeee;
+    color: #403644;
+}
+.nav-item > a{
+    color: #ffffff;
+}
+.nav-item > a:hover {
+    color: #403644;
+}
+.nav-simple > li {
+    border-bottom: none;
+}
+.nav, .filters .module-content.empty {
+    background-color: #403644;
+    color: #ffffff;
+}
