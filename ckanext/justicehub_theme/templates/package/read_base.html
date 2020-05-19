@@ -1,165 +1,114 @@
-{% extends "package/base.html" %}
+{% ckan_extends %}
 
 {% set organization=c.group_dict %}
-
-{% block subtitle %}{{ h.dataset_display_name(pkg) }} - {{ super() }}{% endblock %}
-
-{% block head_extras -%}
-  {{ super() }}
-  {% set description = h.markdown_extract(pkg.notes, extract_length=200)|forceescape %}
-  <meta property="og:title" content="{{ h.dataset_display_name(pkg) }} - {{ g.site_title }}">
-  <meta property="og:description" content="{{ description|forceescape|trim }}">
-{% endblock -%}
 
 {% block wrapper_class %}
 	no-nav
 {% endblock %}
 
-{% block page_header %}
-       <header class="module-content" style="padding-top:10px; padding-bottom:10px; border:2px solid #f65940; border-right:0px; border-left:0px;">
-
-       <h2 style="margin-top:0px; display:inline; padding-left:15px;"> {{ _('Data and Resources') }} </h2>
-	{% if self.content_action() | trim %}
-	  <div class="content_action pull-right" style="display:inline;">
-		{% block content_action %}
-		  {% if h.check_access('package_update', {'id':pkg.id }) %}
-		    {% link_for _('Manage'), controller='package', action='edit', id=pkg.name, class_='btn btn-default', icon='wrench' %}
-		  {% endif %}
-		{% endblock %}
-	  </div>
-	{% endif %}
-	</header>
-{% endblock %}
-
-
-{% block primary_content_inner %}
-    {% block package_revision_info %}
-      {% if c.revision_date %}
-        <div class="module info alert alert-info">
-          <p class="module-content">
-            {% set timestamp = h.render_datetime(c.revision_date, with_hours=True) %}
-            {% set url = h.url_for(controller='package', action='read', id=pkg.name) %}
-
-            {% trans timestamp=timestamp, url=url %}This is an old revision of this dataset, as edited at {{ timestamp }}. It may differ significantly from the <a href="{{ url }}">current revision</a>.{% endtrans %}
-          </p>
-        </div>
-      {% endif %}
-    {% endblock %}
-{% endblock %}
-
-
-
-{% block main_primary %}
-
 {% block pre_primary %}
-<div class="col-xs-12 row" style="margin:20px; display:block;">
-<div class="col-sm-6 col-xs-12" style="height:100%">
-	<div> 
-	  <h1>{{h.dataset_display_name(pkg)}}</h1>
-          <p style="width:75%; margin-bottom:50px; font-weight:bold;"> {{h.get_translated(pkg, 'notes')}}</p>
+<div class="col-xs-12 row top-section">
+    <div class="col-sm-6 col-xs-12">
+        <div class="row">
+            <h1>{{h.dataset_display_name(pkg)}}</h1>
+            <p class="package-desc"> {{h.get_translated(pkg, 'notes')}}</p>
         </div>
-	<div>
-	{% for tag in pkg.tags %}
-	<div class="pkg_tags" style="height:40px; width:80px; border-radius:10%;  margin-right:15px; align-items:center; display:inline-flex; justify-content:center;" ><a href="{% url_for controller='package', action='search', tags=tag.name %}" style = "color:white; font-weight:bold;">{{ h.truncate(tag.display_name, 22) }}</a></div>
-	{% endfor %}
+
+        <div class="row">
+            <a href="{{ pkg.license_url }}">{{ pkg.license_title }}</a>
+            <a href="http://www.opendefinition.org/okd/"><img src="{{ h.url_for_static('/base/images/od_80x15_blue.png') }}" alt="Open Data"></a>
         </div>
-        <div class="col-xs-12 col-sm-6" style="margin-top:50px; padding:0px;"> 
-         <div class="col-xs-6 col-sm-6" style="display:inline; padding:0px;"> <div style="color:#f65940;font-size:50px; font-weight:bolder;">200 </div> <div style="color:#403644;font-size:20px;font-weight:bold;"> DOWNLOADS</div> </div>
-         <div class="col-xs-6 col-sm-6" style="display:inline; padding:0px;"> <div style="color:#f65940;font-size:50px; font-weight:bolder;">342 </div> <div style="color:#403644;font-size:20px;font-weight:bold;">VIEWS</div> </div> 
-       </div>
-</div>
-<div class="col-sm-6 col-xs-12" style="height:100%; align-items:center; display:inline-flex; justify-content:center;">
-       <div style="margin-top:20px;">
-	{# {{h.get_translated(pkg.organization, 'title') or pkg.organization.name}} #}
-        <img src="{{ pkg.organization.image_url or h.url_for_static('/base/images/placeholder-organization.png') }}" alt="{{ pkg.organization.name }}" class="img-responsive media-image" >
+        <div class="row">
+            {% for tag in pkg.tags %}
+            <div class="pkg_tags">
+                <a href="{% url_for controller='package', action='search', tags=tag.name %}">{{ h.truncate(tag.display_name, 22) }}</a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row stats-box">
+            <div class="col-xs-6 col-sm-4">
+                <span class="stats">{{ h.justicehub_theme_get_package_avg_downloads(pkg) }}{{ _('+') }}</span>
+                <span class="stats-text">{{ _('DOWNLOADS') }}</span>
+            </div>
+            <div class="col-xs-6 col-sm-4">
+                <span class="stats">{{ pkg.tracking_summary.total }}{{ _('+') }}</span>
+                <span class="stats-text">{{ _('VIEWS') }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-1 org_box">
+    </div>
+    <div class="col-sm-5 col-xs-12 org-box">
+        {% set image_path = h.url_for_static('uploads/group/' + pkg.organization.image_url, qualified=True) %}
+        <img src="{{ image_path or h.url_for_static('/base/images/placeholder-organization.png') }}" alt="{{ pkg.organization.name }}" class="img-responsive media-image" >
         {{ c.group_dict.display_name }}
-       </div>
+    </div>
 </div>
-</div>
 {% endblock %}
 
-
-
-<div class="col-xs-12 row pckg_rsrc_actvty">
-{% block secondary %}
-      <aside class="secondary col-sm-3 col-xs-12" style="background:#403644;">
-	  
-	  <h2 style="color:white; font-size:20px; font-weight:bolder; width:100%; Text-align:center; margin-bottom:20px; padding-top:10px; padding-bottom:10px; margin-top:0px; border:2px solid #f65940; border-right:0px; ">Activity</h2>
-	  {% block activity_stream %}
-	    {#<div style="color:white; font-weight:bold;">{{ c.package_activity_stream | safe }}</div>#}
-	    <div style="color:white; font-weight:bold;">{{ h.justicehub_theme_package_activity_stream(pkg.id) }}</div>
-	  {% endblock %}
-
-      </aside>
-{% endblock %}
-
-
-
-{% block primary %}
-  <div class="primary col-sm-9 col-xs-12" style="padding:0px;">
-  {% block primary_content %}
-        {{ super() }}
-  {% endblock %}
-  </div>
-{% endblock %}
-</div>
-
-
-<div class="col-xs-12 row" style="margin-top:100px;  margin-left:0px; margin-right:0px; padding:0px;"> 
-   <div class= "col-xs-12" style="font-size:25px; font-weight:bolder; border-bottom:2px solid #f65940; margin:0px; padding-left:27%; margin-bottom:25px;">External Links</div> 	  
-   <ul style="padding-left:27%;font-size:16px; font-weight:bold;">
-  	<li style="margin:10px;">https://justicehub.in/data-curation/haq/all-pocso-cases-registered-in-delhi-district-courts-between-2012-and-2019/</li>
-  	<li style="margin:10px;">https://justicehub.in/data-curation/haq/all-pocso-cases-registered-in-delhi-district-courts-between-2012-and-2019/</li>
-  	<li style="margin:10px;">https://justicehub.in/data-curation/haq/all-pocso-cases-registered-in-delhi-district-courts-between-2012-and-2019/</li>
-  </ul> 
-   
-
-</div>
-
-<div class="col-xs-7 row" style="margin-left:27%; margin-right:50px; margin-bottom:50px; margin-top:30px; padding:0px;">
-{% block package_additional_info %}
-	    {% snippet "package/snippets/additional_info.html", pkg_dict=pkg %}
-{% endblock %}
-</div>
-
-{% endblock %}
-
-
-
-
-
-
-{#
-{% block content_primary_nav %}
-  {{ h.build_nav_icon('dataset_read', _('Dataset'), id=pkg.name) }}
-  {{ h.build_nav_icon('dataset_groups', _('Groups'), id=pkg.name) }}
-  {{ h.build_nav_icon('dataset_activity', _('Activity Stream'), id=pkg.name) }}
-{% endblock %}
-#}
-
-{#
-{% block secondary_content %}
-
-  {% block secondary_help_content %}{% endblock %}
-
-  {% block package_info %}
-    {% snippet 'package/snippets/info.html', pkg=pkg %}
-  {% endblock %}
-
-  {% block package_organization %}
-    {% if pkg.organization %}
-      {% set org = h.get_organization(pkg.organization.name) %}
-      {% snippet "snippets/organization.html", organization=org, has_context_title=true %}
+{% block page_header %}
+<header class="package-header">
+<div class="row">
+    {% if pkg.private %}
+      <span class="col col-sm-1 col-xs-1 dataset-private label label-inverse private-icon">
+        <i class="fa fa-lock fa-lg"></i>
+      </span>
     {% endif %}
-  {% endblock %}
 
-  {% block package_social %}
-    {% snippet "snippets/social.html" %}
-  {% endblock %}
+    <div class="col col-sm-9 col-xs-9">
+    <h2> {{ _('DATA AND RESOURCES') }} </h2>
+    </div>
 
-  {% block package_license %}
-    {% snippet "snippets/license.html", pkg_dict=pkg %}
-  {% endblock %}
-
+    {% if self.content_action() | trim %}
+    <div class="col col-sm-2 content_action">
+        {% block content_action %}
+        {% if h.check_access('package_update', {'id':pkg.id }) %}
+        {% link_for _('EDIT'), controller='package', action='edit', id=pkg.name, class_='btn btn-default' %}
+        {% endif %}
+        {% endblock %}
+    </div>
+    {% endif %}
+</div>
+</header>
 {% endblock %}
-#}
+
+<div class="col-xs-12 row">
+    {% block secondary %}
+    <aside class="secondary col-sm-3 col-xs-12 pckg_rsrc_actvty">
+        <h2>ACTIVITY</h2>
+        {% block activity_stream %}
+        <div class="activity-item">{{ h.justicehub_theme_package_activity_stream(pkg.id) }}</div>
+        {% endblock %}
+    </aside>
+    {% endblock %}
+
+    {% block primary %}
+    <div class="primary col-sm-9 col-xs-12">
+        {% block primary_content %}
+        {{ super() }}
+        {% endblock %}
+    </div>
+
+    <div class="col-xs-12 row page-section">
+       <span>{{ _('External Links') }}</span>
+       <ul class="list-unstyled links-list">
+        {% for link in pkg.links %}
+          <li>
+              <a href="{{ link }}">{{ link }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class= "col-xs-12 page-section">
+        <div class="col-xs-12">
+            {% block package_additional_info %}
+            {% snippet "package/snippets/additional_info.html", pkg_dict=pkg %}
+            {% endblock %}
+        </div>
+
+    {% endblock %}
+</div>
+
+{% block content_primary_nav %}
+{% endblock %}
