@@ -12,16 +12,11 @@ cached_tables = {}
 
 
 def package_activity_stream(id):
-
-   context = {'model': model, 'session': model.Session,
-		   'user': c.user, 'for_view': True,
-		   'auth_user_obj': c.userobj}
-   data_dict = {'id': id, 'include_tracking': True}
-   pkg_dict = logic.get_action('package_show')(context, data_dict)
-   package_activity_stream = logic.get_action('package_activity_list_html')(
-   context, {'id': pkg_dict['id']})
-
-   return package_activity_stream
+    context = {'model': model, 'session': model.Session,
+               'user': c.user, 'for_view': True,
+               'auth_user_obj': c.userobj}
+    package_activity_stream = logic.get_action('package_activity_list_html')(context, {'id': id})
+    return package_activity_stream
 
 def get_table(name):
     if name not in cached_tables:
@@ -90,7 +85,6 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         u'''Extensions will receive a dictionary with the query parameters,
         and should return a modified (or not) version of it.
         '''
-        # search_params['fq'] = search_params['fq'] + '+state:(active OR draft)'
         search_params['include_drafts'] = True
         return search_params
 
@@ -104,3 +98,30 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
 
     def after_search(self, search_results, search_params):
         return search_results
+
+    def read(self, entity):
+        pass
+
+    def create(self, entity):
+        pass
+
+    def edit(self, entity):
+        pass
+
+    def delete(self, entity):
+        pass
+
+    def after_create(self, context, pkg_dict):
+        pass
+
+    def after_update(self, context, pkg_dict):
+        pass
+
+    def after_delete(self, context, pkg_dict):
+        pass
+
+    def after_show(self, context, pkg_dict):
+        pass
+
+    def before_index(self, pkg_dict):
+        return pkg_dict
