@@ -53,6 +53,8 @@
         <div class="col col-md-5">
             {% block downloads %}
             <div class="downloads">
+                <span>{{ h.justicehub_theme_get_package_avg_downloads(package) }}{{ _('+') }}</span>
+                <span>{{ _('Downloads') }}</span>
             </div>
             {% endblock %}
             
