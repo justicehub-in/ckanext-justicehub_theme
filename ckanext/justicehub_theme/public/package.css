@@ -27,12 +27,12 @@
 .package-item-row {
     padding-left:50px;
 }
-.private-icon
+.package-item-row .private-icon
 {
     padding: 0;
     background: none;
 }
-.private-icon i {
+.package-item-row .private-icon i {
     color: #403644;
 }
 
