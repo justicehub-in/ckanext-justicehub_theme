@@ -1,13 +1,26 @@
 .dataset-count-box {
-    padding-top: 1.3em;
     font-weight: bold;
     color: #202020;
+    padding: 25px 0 !important;
+    text-align: center;
 }
 .dataset-count {
-    color: #f87c69;
+    color: #f65940;
+}
+.filters .module-heading {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 21px;
+    background-color: #403644;
+    border-color: #f65940;
+    margin-bottom: 0 !important;
+    border-top: none;
+}
+.filters .module-content {
+    height: 100%;
 }
 .nav-item.active > a{
-    background-color: #f87c69;
+    background-color: #f65940;
     color: #ffffff;
 }
 .nav-item.active > a:hover {
