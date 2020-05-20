@@ -216,3 +216,51 @@
         font-size: 16px;
     }
 }
+
+
+
+/*----------------- data set editing page css ----------------------*/
+.edit-pkg-header{
+	border-bottom:1px solid #403644;
+}
+
+.nav-tabs > li >  a {
+        color:black;
+        border: None;
+        font-size: 20px;
+        font-weight: bolder;
+}
+
+.nav-tabs > li >  a > i {
+        display:None;
+}
+
+.nav-tabs > li {
+        margin-right:30px;
+}
+
+.nav-tabs > li.active >  a {
+	background:black;
+        color:white;
+        border: None;
+}
+
+.page_primary_action .btn-flat {
+	border-radius:0px;
+        margin-right :40px;
+}
+
+@media only screen and (max-width: 768px){
+	.nav-tabs > li {
+        	margin-right:0px;
+	}
+	.nav-tabs > li >  a {
+        	font-size: 15px;
+	}
+	.page_primary_action .btn-flat {
+		border-radius:0px;
+        	margin-right :0px;
+	}
+}
+
+

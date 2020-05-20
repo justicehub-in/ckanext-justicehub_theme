@@ -20,12 +20,13 @@
 .dataset-form .form-actions .btn-primary:focus {
     color: #f65940;
 }
+.page_primary_action .btn.btn-default,
 .controls > a.btn,
 .js  .image-upload .btn.hover,
 .controls .btn,
 .dataset-form .form-actions .btn-finish,
 .select2-container-multi .select2-choices > li.select2-search-choice {
-    color: white;
+    color: #ffffff;
 }
 .dataset-form .form-actions .btn-finish:active,
 .dataset-form .form-actions .btn-finish:hover,
@@ -40,6 +41,7 @@
 .select2-container-multi .select2-choices > li.select2-search-choice:nth-child(2n+1) {
     font-weight: bold;
 }
+.page_primary_action .btn.btn-default,
 .controls > input:first-child,
 .input-group > *:first-child,
 .editor .editor-info-block,
@@ -80,6 +82,7 @@ fieldset.checkboxes > label > input,
     background: transparent;
     box-shadow: none;
 }
+.page_primary_action .btn.btn-default,
 .controls > *:first-child,
 .controls > a.btn,
 .dataset-form .form-actions .btn-danger,
@@ -98,6 +101,7 @@ fieldset.checkboxes label,
 fieldset.checkboxes + label {
     font-weight: normal;
 }
+.page_primary_action .btn.btn-default,
 .controls > a.btn,
 .controls .btn,
 .dataset-form .form-actions .btn-finish,
@@ -266,4 +270,16 @@ input[type="month"].form-control {
 }
 .checkbox-inline {
     padding: 10px 30px;
+}
+
+@media (max-device-width: 600px) and (orientation: portrait) {
+    .form-group {
+        padding-left: 10px;
+    }
+    .dataset-form {
+        padding-right: 0;
+    }
+    .page-header.module-content {
+        padding: 0 10px;
+    }
 }

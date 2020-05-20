@@ -1,11 +1,12 @@
+import json
+
 from sqlalchemy import MetaData
 from sqlalchemy.sql import select
 
+import ckan.logic as logic
 import ckan.model as model
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
-import ckan.logic as logic
-import ckan.model as model
 from ckan.common import c
 
 cached_tables = {}
@@ -51,6 +52,9 @@ def get_package_avg_downloads(pkg):
         return avg_downloads
 
     for resource in pkg['resources']:
+        if isinstance(resource['downloads'], unicode):
+            resource['downloads'] = json.loads(resource['downloads'].replace("'", '"'))
+
         total_downloads += resource['downloads']['total']
 
     avg_downloads = total_downloads / float(len(pkg['resources']))

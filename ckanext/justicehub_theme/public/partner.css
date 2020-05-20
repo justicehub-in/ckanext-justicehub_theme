@@ -6,7 +6,7 @@
 .count {
     color:#f65940;
 }
-.media-image {
+.media-item .media-image {
     height: 130px;
     width: 150px;
 }

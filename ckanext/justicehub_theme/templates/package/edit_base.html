@@ -1,0 +1,6 @@
+{% ckan_extends %}
+
+{% block content_primary_nav %}
+  {{ h.build_nav_icon('dataset_edit', _('ABOUT DATASET'), id=pkg.name) }}
+  {{ h.build_nav_icon('dataset_resources', _('DATA & RESOURCES'), id=pkg.name) }}
+{% endblock %}
