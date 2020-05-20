@@ -1,7 +1,7 @@
 /* ---------- package-item ------- */
 
 .label {
-    padding: 0.6em 2.1em 0.6em 2.1em;
+    padding: 6px 21px;
     border-radius: 15px;
     font-weight: bold;
 }
@@ -12,11 +12,11 @@
     border-bottom: none;
 }
 .dataset-org, .downloads, .dataset-heading, .dataset-meta {
-    font-size: 1.3em;
+    font-size: 18px;
     font-weight: bold;
 }
 .dataset-org > a{
-    color: #f87c69;
+    color: #f65940;
 }
 .downloads, .dataset-meta {
     color: #bcb4bf;
@@ -36,4 +36,73 @@
     color: #403644;
 }
 
-/* ------------------------------- */
+/* ----------- stages ----------- */
+
+/* ------------ background borders fonts ------ */
+.stages li,
+.stages li.active .highlight,
+.metadata-heading,
+aside .module-content {
+    background-color: #403644;
+}
+.stages,
+.stages li.active .highlight,
+.module-heading,
+.metadata-heading,
+aside .module-content {
+    color: #ffffff;
+}
+
+.module-heading,
+.metadata-heading,
+.stages li .highlight {
+    font-weight: bold;
+}
+.metadata-heading,
+.stages li .highlight {
+    font-size: 19px;
+}
+.stages {
+    margin: 50px -65px 0 0;
+    border-bottom: 1px solid #403644;
+}
+.stages li {
+    padding: 0;
+}
+.stages li .highlight {
+    position: static;
+    text-align: center;
+}
+.stages li.complete .highlight,
+.stages li.uncomplete .highlight {
+    background-color: #ffffff;
+    color: #403644;
+}
+.stages li:before {
+    content: none;
+}
+.stages li:after {
+    top: 0;
+    border:none;
+    margin: 0;
+}
+
+/* --------------- layout sizing ------------- */
+.metadata-heading {
+    padding: 10px 270px;
+    margin-left: -30px;
+}
+
+/* ------------- sidebar --------- */
+.module-narrow h2.module-heading {
+    font-size: 22px;
+    background-color: #f65940;
+    height: 100px;
+    padding-left: 25px;
+    padding-top: 30px;
+    border-bottom: none;
+}
+aside .module-content {
+    height: calc(100vh - 110px);  /* https://stackoverflow.com/a/37370197/3860168 */
+    border: none;
+}
