@@ -15,7 +15,7 @@
 
 
 .container {
-    width: 90%;
+    width: 80%;
 }
 .masthead {
   background: none;
@@ -72,22 +72,14 @@
 
 .box {
   box-shadow: none;
-}
-.hero .box {
   border: none;
 }
-.homepage .module-search .module-content {
-  color: rgb(68, 68, 68);
-  background-color: white;
-}
-.homepage .module-search .tags {
-  background-color: rgb(61, 61, 61);
-}
-.homepage .module-search {
-  padding: 0px;
+.module-content:last-child {
+  padding-bottom: 0px;
 }
 .homepage [role="main"] {
-  border-top: 1px solid rgb(204, 204, 204);
+  background: none;
+  background-color: #ffffff;
 }
 
 .wrapper {
@@ -264,8 +256,103 @@ hr {
     margin-bottom: -1.5px;
 }
 
-/* -------------------------------------- Footer Mobile adjustments ----------------------------- */
-@media (max-device-width: 480px) and (orientation: portrait) {
+/* ----------------------------- homepage --------------------------- */
+[role="main"] .container .row .col1 {
+    padding: 10% 4%;
+}
+[role="main"] .container .row .col2 {
+    padding: 13% 10%;
+    font-size: 24px;
+    font-style: italic;
+    color: #707070;
+}
+[role="main"] .container .row .col3 {
+    background-color: #403644;
+    color: #ffffff;
+    padding: 40px 60px;
+}
+[role="main"] .container .row .col3 h2{
+    font-size: 35px;
+    border-bottom: 2px solid #f65940;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+[role="main"] .container .row .col3 p {
+    padding: 10px 0;
+    font-size: 24px;
+}
+.col-circle {
+    position: relative;
+}
+.col-circle i.fa {
+    font-size: 350px;
+    color: #f65940;
+}
+.homepage .module-search {
+    min-height: 700px;
+    background: url('/uploads/admin/JH Logomark.png') no-repeat;
+    background-clip: border-box;
+    background-position: -310px -230px;
+    background-size: 80%;
+    padding-top: 320px;
+    padding-left: 200px;
+    margin-bottom: 100px;
+}
+.search-form .search-input.search-giant .form-control {
+    border-radius: 40px;
+    line-height: 2;
+    font-size: 24px;
+    font-style: italic;
+    border: 3px solid #f65940;
+    padding-left: 30px;
+}
+.homepage .module-search .form-group {
+    padding: 10px 0;
+}
+.homepage .module-search .module-content,
+.homepage .search-form .search-giant,
+.homepage .module-search .stats-box {
+    background: transparent;
+    color: #403644;
+}
+.search-form .search-input.search-giant .fa {
+    color: #403644;
+}
+.homepage .module-search .stats-box .tag {
+    background-color: #f65940;
+    color: #ffffff;
+    border: 1px solid #f65940;
+    box-shadow: none;
+}
+.homepage .module-search .stats-box .tag:hover {
+    background-color: inherit;
+    color: #f65940;
+}
+.search-form .search-input.search-giant {
+    width: 90%;
+}
+.module-search .search-form {
+    padding: 0;
+}
+.search-meta {
+    width: 95%;
+}
+.search-meta .stats {
+    color:#f65940;
+    font-size:70px;
+    font-weight:bolder;
+    display: block;
+}
+.stats-text {
+    margin-top: -20px;
+    color:#403644;
+    font-size:20px;
+    font-weight:bold;
+    display: block;
+}
+
+/* -------------------------------------- Mobile adjustments ----------------------------- */
+@media (max-device-width: 600px) and (orientation: portrait) {
     .footer-links:last-of-type div:last-of-type ul {
         float: left !important;
     }
@@ -309,5 +396,41 @@ hr {
     }
     .login-sidebar {
         height: 100%;
+    .search-form .search-input.search-giant .form-control {
+        line-height: 1;
+    }
+    .homepage .module-search {
+        background-clip: border-box;
+        background-position: -130px -80px;
+        background-size: 120%;
+        padding-top: 160px;
+        padding-left: 70px;
+        min-height: 500px;
+        border-bottom: 2px solid #f65940;
+        margin-bottom: 50px;
+    }
+    .search-form .search-input.search-giant {
+        width: 100%;
+        margin-bottom: 80px;
+    }
+    .search-meta {
+        width: 120%;
+        margin-left: -80px;
+    }
+    .search-meta .stats {
+        font-size:50px;
+    }
+    .search-meta .stats-text {
+        margin-top: 0;
+        font-size: 16px;
+    }
+    .col-circle i.fa {
+        font-size: 100px;
+        color: #f65940;
+        text-align: center;
+    }
+    [role="main"] .container .row .col2 {
+        padding: 2% 0;
+        margin-bottom: 30px;
     }
 }
