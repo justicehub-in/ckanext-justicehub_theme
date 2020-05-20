@@ -1,0 +1,114 @@
+{% ckan_extends %}
+
+{% set organization=c.group_dict %}
+
+{% block wrapper_class %}
+	no-nav
+{% endblock %}
+
+{% block pre_primary %}
+<div class="col-xs-12 row top-section">
+    <div class="col-sm-6 col-xs-12">
+        <div class="row">
+            <h1>{{h.dataset_display_name(pkg)}}</h1>
+            <p class="package-desc"> {{h.get_translated(pkg, 'notes')}}</p>
+        </div>
+
+        <div class="row">
+            <a href="{{ pkg.license_url }}">{{ pkg.license_title }}</a>
+            <a href="http://www.opendefinition.org/okd/"><img src="{{ h.url_for_static('/base/images/od_80x15_blue.png') }}" alt="Open Data"></a>
+        </div>
+        <div class="row">
+            {% for tag in pkg.tags %}
+            <div class="pkg_tags">
+                <a href="{% url_for controller='package', action='search', tags=tag.name %}">{{ h.truncate(tag.display_name, 22) }}</a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row stats-box">
+            <div class="col-xs-6 col-sm-4">
+                <span class="stats">{{ h.justicehub_theme_get_package_avg_downloads(pkg) }}{{ _('+') }}</span>
+                <span class="stats-text">{{ _('DOWNLOADS') }}</span>
+            </div>
+            <div class="col-xs-6 col-sm-4">
+                <span class="stats">{{ pkg.tracking_summary.total }}{{ _('+') }}</span>
+                <span class="stats-text">{{ _('VIEWS') }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-1 org_box">
+    </div>
+    <div class="col-sm-5 col-xs-12 org-box">
+        {% set image_path = h.url_for_static('uploads/group/' + pkg.organization.image_url, qualified=True) %}
+        <img src="{{ image_path or h.url_for_static('/base/images/placeholder-organization.png') }}" alt="{{ pkg.organization.name }}" class="img-responsive media-image" >
+        {{ c.group_dict.display_name }}
+    </div>
+</div>
+{% endblock %}
+
+{% block page_header %}
+<header class="package-header">
+<div class="row">
+    {% if pkg.private %}
+      <span class="col col-sm-1 col-xs-1 dataset-private label label-inverse private-icon">
+        <i class="fa fa-lock fa-lg"></i>
+      </span>
+    {% endif %}
+
+    <div class="col col-sm-9 col-xs-9">
+    <h2> {{ _('DATA AND RESOURCES') }} </h2>
+    </div>
+
+    {% if self.content_action() | trim %}
+    <div class="col col-sm-2 content_action">
+        {% block content_action %}
+        {% if h.check_access('package_update', {'id':pkg.id }) %}
+        {% link_for _('EDIT'), controller='package', action='edit', id=pkg.name, class_='btn btn-default' %}
+        {% endif %}
+        {% endblock %}
+    </div>
+    {% endif %}
+</div>
+</header>
+{% endblock %}
+
+<div class="col-xs-12 row">
+    {% block secondary %}
+    <aside class="secondary col-sm-3 col-xs-12 pckg_rsrc_actvty">
+        <h2>ACTIVITY</h2>
+        {% block activity_stream %}
+        <div class="activity-item">{{ h.justicehub_theme_package_activity_stream(pkg.id) }}</div>
+        {% endblock %}
+    </aside>
+    {% endblock %}
+
+    {% block primary %}
+    <div class="primary col-sm-9 col-xs-12">
+        {% block primary_content %}
+        {{ super() }}
+        {% endblock %}
+    </div>
+
+    <div class="col-xs-12 row page-section">
+       <span>{{ _('External Links') }}</span>
+       <ul class="list-unstyled links-list">
+        {% for link in pkg.links %}
+          <li>
+              <a href="{{ link }}">{{ link }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class= "col-xs-12 page-section">
+        <div class="col-xs-12">
+            {% block package_additional_info %}
+            {% snippet "package/snippets/additional_info.html", pkg_dict=pkg %}
+            {% endblock %}
+        </div>
+
+    {% endblock %}
+</div>
+
+{% block content_primary_nav %}
+{% endblock %}
