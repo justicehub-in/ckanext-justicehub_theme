@@ -1,0 +1,40 @@
+{% ckan_extends %}
+
+{% block pre_primary %}
+  <div class="row">
+      <div class="col col-md-3">
+      </div>
+      <div class="col col-md-9 login-heading">
+          <h1>{% block page_heading %}{{ _('LOGIN') }}{% endblock %}</h1>
+      </div>
+  </div>
+{% endblock %}
+
+{% block primary_content %}
+  <section class="module">
+    <div class="module-content">
+      {% block form %}
+        {% snippet "user/snippets/login_form.html", action=g.login_handler, error_summary=error_summary %}
+      {% endblock %}
+    </div>
+  </section>
+{% endblock %}
+
+{% block secondary_content %}
+  {% if h.check_access('user_create') %}
+  {% block help_register %}
+  <section class="login-sidebar">
+    {% block help_register_inner %}
+      <h2 class="login-sidebar-heading">{{ _('NEED AN ACCOUNT?') }}</h2>
+      <div class="module-content">
+        <p class="action">
+        {% block help_register_button %}
+          <a class="btn btn-default btn-register" href="{{ h.url_for('user.register') }}">{{ _('Create an Account') }}</a>
+        {% endblock %}
+        </p>
+      </div>
+    {% endblock %}
+  </section>
+  {% endblock %}
+  {% endif %}
+{% endblock %}
