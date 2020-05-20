@@ -232,7 +232,6 @@ body {
 
 .module-content {
     padding-left: 0;
-    padding: 0;
 }
 .module-footer {
     border: none;
@@ -267,7 +266,4 @@ hr {
     border-radius: 30px;
     padding: 5px 25px;
     font-size: 20px;
-}
-[role="main"] .secondary {
-    padding-right: 0;
 }
