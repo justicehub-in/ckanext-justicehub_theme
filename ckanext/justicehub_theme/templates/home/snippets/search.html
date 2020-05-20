@@ -17,7 +17,6 @@
       </div>
       <div class="col col-xs-4 col-sm-3 stats-box">
           <h3>{{ _('Popular tags') }}</h3>
-          <a class="tag" href="#">{{ _('Hello') }}</a>
           {% for tag in tags %}
           <a class="tag" href="{% url_for controller='package', action='search', tags=tag.name %}">{{ h.truncate(tag.display_name, 22) }}</a>
           {% endfor %}
