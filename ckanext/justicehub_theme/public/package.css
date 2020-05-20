@@ -79,6 +79,7 @@ aside .module-content {
     border: none;
     border-bottom: 1px solid #403644;
 }
+.nav-tabs,
 .stages {
     margin: 50px -65px 0 0;
 }

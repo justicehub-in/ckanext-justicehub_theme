@@ -185,6 +185,10 @@
 }
 
 /* ------------- sidebar --------- */
+.context-info .module-content {
+    padding: 0;
+}
+.module-narrow h1.heading,
 .module-narrow h2.module-heading {
     font-size: 22px;
     background-color: #f65940;
@@ -192,6 +196,10 @@
     padding-left: 25px;
     padding-top: 30px;
     border-bottom: none;
+}
+.context-info .nums {
+    border: none;
+    height: 100vh;
 }
 .module-footer {
     border: none;
