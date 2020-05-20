@@ -39,12 +39,23 @@
 /* ----------- stages ----------- */
 
 /* ------------ background borders fonts ------ */
+.page-header .content_action {
+    color: #403644;
+}
+.page-header,
+.page-header .nav {
+    background: transparent;
+    border: none;
+}
+.page-header .nav-tabs li.active a,
+.page-header .nav-tabs li.active a:hover,
 .stages li,
 .stages li.active .highlight,
 .metadata-heading,
 aside .module-content {
     background-color: #403644;
 }
+.page-header .nav-tabs li.active a:hover,
 .stages,
 .stages li.active .highlight,
 .module-heading,
@@ -62,13 +73,19 @@ aside .module-content {
 .stages li .highlight {
     font-size: 19px;
 }
+.page-header .nav,
+.page-header .nav li a:hover,
+.stages {
+    border: none;
+    border-bottom: 1px solid #403644;
+}
 .stages {
     margin: 50px -65px 0 0;
-    border-bottom: 1px solid #403644;
 }
 .stages li {
     padding: 0;
 }
+.page-header .nav-tabs li a,
 .stages li .highlight {
     position: static;
     text-align: center;
@@ -89,6 +106,15 @@ aside .module-content {
 
 /* --------------- layout sizing ------------- */
 .metadata-heading {
-    padding: 10px 270px;
+    padding: 10px 0;
     margin-left: -30px;
+    width: 55%;
+    display: inline-block;
+    text-align: center;
+}
+
+@media (max-device-width: 600px) and (orientation: portrait) {
+    .metadata-heading {
+        margin-left: 0;
+    }
 }
