@@ -1,0 +1,32 @@
+{% extends 'package/base.html' %}
+
+{% set pkg = c.pkg_dict %}
+{% set pkg_dict = c.pkg_dict %}
+
+{% block breadcrumb_content_selected %}{% endblock %}
+
+{% block breadcrumb_content %}
+  {{ super() }}
+  {% if pkg %}
+    <li class="active">{% link_for _('Edit'), controller='package', action='edit', id=pkg.name %}</li>
+  {% endif %}
+{% endblock %}
+
+{% block pre_primary %}
+    <div class="col-xs-12 edit-pkg-header">
+      <div class="col-sm-3 col-xs-12"></div>
+      <div class="col-sm-9 col-xs-12" style="margin-top:50px;">
+          <ul class="nav nav-tabs" style="background:white; color:black;">
+          {{ h.build_nav_icon('dataset_edit', _('ABOUT DATASET'), id=pkg.name, class_='nav-tab') }}
+          {{ h.build_nav_icon('dataset_resources', _('DATA & RESOURCES'), id=pkg.name,  class_='nav-tab') }}
+          </ul>
+      </div>
+    </div>
+{% endblock %}
+
+{% block page_header %}
+    <div class="content_action pull-right" style="padding-right:50px;">
+       {% link_for _('View'), controller='package', action='read', id=pkg.name, class_='btn btn-default' %}
+    </div>
+{% endblock %}
+
