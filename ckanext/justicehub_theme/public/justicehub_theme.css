@@ -86,7 +86,7 @@
     box-shadow: none;
     min-height: 600px;
     margin-top: 50px;
-    border: none;
+    box-shadow: 0 0 5px 1px #bcb4bf;
 }
 .wrapper::before {
     border-right: none;
@@ -436,5 +436,14 @@ hr {
     }
     aside .module {
         display: none;
+    }
+    [role="main"] .container {
+        width: 90%;
+    }
+    .wrapper {
+        margin-top: 0;
+    }
+    .module .module-content {
+        padding: 0;
     }
 }
