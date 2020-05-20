@@ -1,0 +1,34 @@
+{% set tags = h.get_facet_items_dict('tags', limit=3) %}
+{% set placeholder = _('Search for legal datasets...') %}
+{% set stats=h.get_site_statistics() %}
+
+<div class="module module-search module-narrow module-shallow box">
+  <form class="module-content search-form" method="get" action="{% url_for controller='package', action='search' %}">
+    <div class="search-input form-group search-giant">
+      <input aria-label="{% block header_site_search_label %}{{ _('Search datasets') }}{% endblock %}" id="field-main-search" type="text" class="form-control" name="q" value="" autocomplete="off" placeholder="{% block search_placeholder %}{{ placeholder }}{% endblock %}" />
+      <button type="submit">
+        <i class="fa fa-search fa-flip-horizontal"></i>
+        <span class="sr-only">{{ _('Search') }}</span>
+      </button>
+    </div>
+  </form>
+  <div class="row search-meta">
+      <div class="col col-sm-5">
+      </div>
+      <div class="col col-xs-4 col-sm-3 stats-box">
+          <h3>{{ _('Popular tags') }}</h3>
+          <a class="tag" href="#">{{ _('Hello') }}</a>
+          {% for tag in tags %}
+          <a class="tag" href="{% url_for controller='package', action='search', tags=tag.name %}">{{ h.truncate(tag.display_name, 22) }}</a>
+          {% endfor %}
+      </div>
+      <div class="col col-xs-4 col-sm-2 stats-box">
+          <span class="stats">{{ stats.organization_count }}</span>
+          <span class="stats-text">{{ _('CONTRIBUTORS') }}</span>
+      </div>
+      <div class="col col-xs-4 col-sm-2 stats-box">
+          <span class="stats">{{ stats.dataset_count }}</span>
+          <span class="stats-text">{{ _('DATASETS') }}</span>
+      </div>
+  </div>
+</div>
