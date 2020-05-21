@@ -202,7 +202,6 @@
 }
 .context-info .nums {
     border: none;
-    height: 100vh;
 }
 .module-footer {
     border: none;
@@ -240,6 +239,12 @@ hr {
 }
 [role="main"] .secondary {
     padding-right: 0;
+    min-height: 700px;
+    background-color: #403644;
+}
+aside .module-content {
+    color: #ffffff;
+    background-color: #403644;
 }
 
 /* ------------------------------- Login ------------------------- */
@@ -445,7 +450,7 @@ hr {
         padding: 2% 0;
         margin-bottom: 30px;
     }
-    aside .module {
+    [role="main"] .secondary {
         display: none;
     }
     [role="main"] .container {

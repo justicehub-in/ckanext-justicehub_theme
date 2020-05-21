@@ -51,16 +51,14 @@
 .page-header .nav-tabs li.active a:hover,
 .stages li,
 .stages li.active .highlight,
-.metadata-heading,
-aside .module-content {
+.metadata-heading {
     background-color: #403644;
 }
 .page-header .nav-tabs li.active a:hover,
 .stages,
 .stages li.active .highlight,
 .module-heading,
-.metadata-heading,
-aside .module-content {
+.metadata-heading {
     color: #ffffff;
 }
 
