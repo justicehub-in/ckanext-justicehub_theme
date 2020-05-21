@@ -3,6 +3,22 @@
 }
 
 
+.activity .item {
+    font-weight: normal;
+    font-style: italic;
+}
+.activity .item .actor a {
+    color: #f65940;
+}
+.activity .item a {
+    font-weight: bold;
+    font-style: normal;
+}
+.activity .item .icon {
+    background-color: #00abb7 !important;
+    height: 40px;
+    width: 40px;
+}
 .activity .item p{
   font-size:16px;
   margin-left:50px;
@@ -12,7 +28,7 @@
   margin-top:10px;
 }
 
-.activity .item{
+.activity .item {
   margin-left:15px;
 }
 
@@ -37,6 +53,7 @@
 
 .stats-box {
     margin-top: 50px;
+    margin-bottom: 20px;
 }
 .stats {
     color:#f65940;
@@ -95,11 +112,14 @@
     font-weight:bold;
 }
 .org-box {
-    padding-top: 40px;
-    padding-bottom: 40px;
-    padding-right: 50px;
-    width: 400px;
-    height:100%;
+    width: 350px;
+    height: 250px;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+}
+.org-box img.media-image {
+    margin:auto;
 }
 
 .pkg_tags {

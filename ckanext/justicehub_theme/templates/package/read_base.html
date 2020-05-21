@@ -38,7 +38,7 @@
     </div>
     <div class="col-sm-1 org_box">
     </div>
-    <div class="col-sm-5 col-xs-12 org-box">
+    <div class="col-sm-4 col-xs-12 org-box">
         <a href="{{ h.url_for(controller='organization', action='read', id=pkg.organization.id) }}">
         {% set image_path = h.url_for_static('uploads/group/' + pkg.organization.image_url, qualified=True) %}
         <img src="{{ image_path or h.url_for_static('/base/images/placeholder-organization.png') }}" alt="{{ pkg.organization.name }}" class="img-responsive media-image" >

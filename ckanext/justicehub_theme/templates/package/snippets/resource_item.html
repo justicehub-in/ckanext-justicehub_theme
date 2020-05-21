@@ -19,22 +19,22 @@
   {% if not url_is_edit %}
   <div class="dropdown btn-group">
     <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="background:#403644;">
-      <i class="fa fa-share"></i>
       {{ _('Explore') }}
       <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
       {% block resource_item_explore_links %}
       <li>
-        <a href="{{ url }}">
-          {% if res.has_views %}
+        <!-- NOTE: Decide post usability testing -->
+        <!--a href="{{ url }}"-->
+          {#% if res.has_views %}
             <i class="fa fa-bar-chart-o"></i>
             {{ _('Preview') }}
           {% else %}
             <i class="fa fa-info-circle"></i>
             {{ _('More information') }}
-          {% endif %}
-        </a>
+          {% endif %#}
+        <!--/a-->
       </li>
       {% if res.url and h.is_url(res.url) %}
       <li>
