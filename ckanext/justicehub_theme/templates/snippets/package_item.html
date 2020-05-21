@@ -7,6 +7,10 @@
         <div class="col col-md-5">
           {% block heading %}
           <h3 class="dataset-heading">
+          {% block heading_title %}
+              {{ h.link_to(h.truncate(title, truncate_title), h.url_for(package.type + '_read', controller='package', action='read', id=package.name)) }}
+          {% endblock %}
+
 
           {% block heading_private %}
             {% if package.private %}
@@ -14,10 +18,6 @@
                 <i class="fa fa-lock fa-lg" data-toggle="tooltip"></i>
             </span>
             {% endif %}
-          {% endblock %}
-
-          {% block heading_title %}
-              {{ h.link_to(h.truncate(title, truncate_title), h.url_for(package.type + '_read', controller='package', action='read', id=package.name)) }}
           {% endblock %}
 
           {% block heading_meta %}
