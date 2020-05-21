@@ -48,32 +48,6 @@
 </div>
 {% endblock %}
 
-{% block page_header %}
-<header class="package-header">
-<div class="row">
-    {% if pkg.private %}
-      <span class="col col-sm-1 col-xs-1 dataset-private label label-inverse private-icon">
-        <i class="fa fa-lock fa-lg"></i>
-      </span>
-    {% endif %}
-
-    <div class="col col-sm-9 col-xs-9">
-    <h2> {{ _('DATA AND RESOURCES') }} </h2>
-    </div>
-
-    {% if self.content_action() | trim %}
-    <div class="col col-sm-2 content_action">
-        {% block content_action %}
-        {% if h.check_access('package_update', {'id':pkg.id }) %}
-        {% link_for _('EDIT'), controller='package', action='edit', id=pkg.name, class_='btn btn-default' %}
-        {% endif %}
-        {% endblock %}
-    </div>
-    {% endif %}
-</div>
-</header>
-{% endblock %}
-
 <div class="col-xs-12 row">
     {% block secondary %}
     <aside class="secondary col-sm-3 col-xs-12 pckg_rsrc_actvty">
@@ -112,5 +86,34 @@
     {% endblock %}
 </div>
 
-{% block content_primary_nav %}
+{% block page_header %}
+<header>
+    <div class="row package-header">
+        <div class="col col-sm-9 dataset-private label label-inverse private-icon">
+        </div>
+        {% if pkg.private %}
+          <div class="col col-sm-1 col-xs-6 dataset-private label label-inverse private-icon">
+            <i class="fa fa-lock fa-lg"></i>
+          </div>
+        {% endif %}
+        {% if self.content_action() | trim %}
+        <div class="col col-xs-6 col-sm-2 content_action">
+            {% block content_action %}
+            {% if h.check_access('package_update', {'id':pkg.id }) %}
+            {% link_for _('EDIT'), controller='package', action='edit', id=pkg.name, class_='btn btn-default' %}
+            {% endif %}
+            {% endblock %}
+        </div>
+        {% endif %}
+    </div>
+    <div class="row">
+        <div class="col col-sm-12 col-xs-9 package-tabs">
+            <ul class="nav nav-tabs">
+            {% block content_primary_nav %}
+              {{ h.build_nav_icon('dataset_read', _('Files'), id=pkg.name) }}
+            {% endblock %}
+            </ul>
+        </div>
+    </div>
+</header>
 {% endblock %}
