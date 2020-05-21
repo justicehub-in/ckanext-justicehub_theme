@@ -65,6 +65,7 @@
         {% endblock %}
     </div>
 
+    {% if pkg.links %}
     <div class="col-xs-12 row page-section">
        <span>{{ _('External Links') }}</span>
        <ul class="list-unstyled links-list">
@@ -75,6 +76,7 @@
         {% endfor %}
       </ul>
     </div>
+    {% endif %}
 
     <div class= "col-xs-12 page-section">
         <div class="col-xs-12">
