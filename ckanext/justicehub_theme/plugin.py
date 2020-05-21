@@ -89,7 +89,6 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         u'''Extensions will receive a dictionary with the query parameters,
         and should return a modified (or not) version of it.
         '''
-        search_params['include_drafts'] = True
         return search_params
 
     def before_view(self, package_dict):
