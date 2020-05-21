@@ -33,10 +33,10 @@
 .nav-item > a:hover {
     color: #403644;
 }
-.nav-simple > li {
+.nav-facet > li {
     border-bottom: none;
 }
-.nav, .filters .module-content.empty {
+.nav-facet, .filters .module-content.empty {
     background-color: #403644;
     color: #ffffff;
 }

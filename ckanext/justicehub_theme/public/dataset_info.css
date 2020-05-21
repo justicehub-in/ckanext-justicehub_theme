@@ -125,23 +125,17 @@
 }
 .pckg_rsrc_actvty,
 .package-header {
-    border:2px solid #f65940;
-    border-right:0px;
-    border-left:0px;
+    border-bottom: 2px solid #f65940;
+    margin-left: 0;
 }
 .pckg_rsrc_actvty > .activity-item {
     color: #ffffff;
     margin-left: 10px;
     margin-right: 20px;
 }
-.package-header h2,
 .pckg_rsrc_actvty h2 {
     font-weight:bolder;
     font-size: 24px;
-}
-.package-header h2 {
-    display:inline-block;
-    padding: 0;
 }
 .pckg_rsrc_actvty h2 {
     color:white;
@@ -161,6 +155,13 @@
     color: #f65940;
     background-color: inherit;
     border: 1px solid #f65940;
+}
+.package-tabs .nav-tabs {
+    width: 100%;
+}
+.package-tabs .nav-tabs li a {
+    border-radius: 0;
+    font-size: 24px;
 }
 .pkg_tags:nth-child(even) {background-color:#00abb7;}
 .pkg_tags:nth-child(odd) {background-color:#f65940;}
@@ -225,41 +226,37 @@
 }
 
 .nav-tabs > li >  a {
-        color:black;
-        border: None;
-        font-size: 20px;
-        font-weight: bolder;
+    color: #403644;
+    border: None;
+    font-size: 20px;
+    font-weight: bolder;
 }
 
 .nav-tabs > li >  a > i {
-        display:None;
-}
-
-.nav-tabs > li {
-        margin-right:30px;
+    display:None;
 }
 
 .nav-tabs > li.active >  a {
-	background:black;
-        color:white;
-        border: None;
+	background: #403644;
+    color:#ffffff;
+    border: None;
 }
 
 .page_primary_action .btn-flat {
 	border-radius:0px;
-        margin-right :40px;
+    margin-right :40px;
 }
 
 @media only screen and (max-width: 768px){
 	.nav-tabs > li {
-        	margin-right:0px;
+        margin-right:0px;
 	}
 	.nav-tabs > li >  a {
-        	font-size: 15px;
+        font-size: 15px;
 	}
 	.page_primary_action .btn-flat {
 		border-radius:0px;
-        	margin-right :0px;
+        margin-right :0px;
 	}
 }
 

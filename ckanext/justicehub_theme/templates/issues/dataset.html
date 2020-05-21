@@ -1,0 +1,86 @@
+{% ckan_extends %}
+
+{% import 'macros/form.html' as form %}
+
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="/ckanext-issues/style.css" />
+{% endblock %}
+
+{% set pkg = c.pkg %}
+{% set filters = h.get_issue_filter_types() %}
+{% set issues_per_page = h.get_issues_per_page() %}
+{% set fields=(('page', pagination.page), ('per_page', pagination.per_page), ('status', status), ('visibility', visibility)) %}
+
+{% block subtitle %}{{ _('Issues') }} - {{ super() }}{% endblock %}
+
+{% block primary_content_inner %}
+<section class="module issues-home">
+    <div class="header row">
+        <h1 class="page-heading">
+            <div class="issues-actions">
+                {{ h.nav_link(_('New Issue'), named_route='issues_new', dataset_id=pkg.name, class_='btn btn-success') }}
+            </div>
+        </h1>
+    </div>
+
+   <div class="row">
+
+    <div class="col col-md-7 input-group pull-left">
+      <input aria-label="{% block header_site_search_label %}{{ placeholder }}{% endblock %}" id="field-giant-search" type="text" class="form-control input-lg" name="q" value="{{ q }}" autocomplete="off" placeholder="{{ _('Search issues') }}">
+      {% block search_input_button %}
+      <span class="input-group-btn">
+        <button class="btn btn-default btn-lg" type="submit" value="search">
+          <i class="fa fa-search fa-flip-horizontal"></i>
+        </button>
+      </span>
+      {% endblock %}
+    </div>
+
+    {% block search_search_fields %}
+      {% if fields -%}
+        <span>{{ form.hidden_from_list(fields=fields) }}</span>
+      {%- endif %}
+    {% endblock %}
+
+    {% block search_sortby %}
+    {% if filters %}
+      <div class="col col-md-5 input-group">
+        <span class="input-group-addon bg-clear">{{ _('SORT BY') }}</span>
+        <select id="field-order-by" name="sort" class="form-control input-lg sort-box">
+          {% for label, value in filters %}
+            {% if label and value %}
+              <option value="{{ value }}"{% if sorting_selected == value %} selected="selected"{% endif %}>{{ label }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+        {% block search_sortby_button %}
+        <button class="btn btn-default js-hide" type="submit">{{ _('Go') }}</button>
+        {% endblock %}
+      </div>
+    {% endif %}
+    {% endblock %}
+   </div>
+
+   <h2 id="issues-found">
+       {{ ungettext('{number} issue found', '{number} issues found', pagination.total_count) .format(number=pagination.total_count) }}
+   </h2>
+
+   {% if issues %}
+   <ul id="issue-list" class="issue-list-group list-group">
+       {% for issue in issues %}
+       {{ common.issue_item(issue, pkg, c.user) }}
+       {% endfor %}
+   </ul>
+   {% else %}
+   <p class="empty">{{ _('No issues') }}</p>
+   {% endif %}
+
+  {{ common.page_selector(pagination, issues_per_page, url_params={'dataset_id': pkg['id']}) }}
+</section>
+{% endblock %}
+
+{% block secondary_content %}
+  {% snippet "package/snippets/info.html", pkg=pkg %}
+  {{ common.search_options_sidebar(user_can_change_visibility=h.check_access('package_update', {'id': pkg.id }), url_params={'dataset_id':pkg['id']}) }}
+{% endblock %}

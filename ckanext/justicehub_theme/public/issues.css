@@ -1,0 +1,19 @@
+.issues-home {
+    padding: 0 30px;
+}
+.issues-home .input-group .btn {
+    border-left: none;
+}
+.issues-actions a {
+    border-radius: 30px;
+    background-color: #403644;
+    border-color: #403644;
+}
+.issues-actions a:hover {
+    background-color: #ffffff;
+    border-color: #f65940;
+    color: #f65940;
+}
+.issues-actions {
+    margin-bottom: 20px;
+}

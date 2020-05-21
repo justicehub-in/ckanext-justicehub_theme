@@ -98,6 +98,10 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         '''
         for resource_dict in package_dict['resources']:
             resource_dict['downloads'] = get_resource_downloads(resource_dict)
+
+        package_dict['tracking_summary'] = (
+            model.TrackingSummary.get_for_package(package_dict['id']))
+
         return package_dict
 
     def after_search(self, search_results, search_params):
