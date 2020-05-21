@@ -74,6 +74,9 @@
   box-shadow: none;
   border: none;
 }
+.module-content {
+    padding: 0;
+}
 .module-content:last-child {
   padding-bottom: 0px;
 }
