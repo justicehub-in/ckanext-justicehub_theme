@@ -13,3 +13,74 @@
 .media-item {
     height: 210px;
 }
+
+
+/*----------------- partner editing data set page css ----------------------*/
+.partner-datset-content{
+    margin-top:60px;
+    margin-left:15px;
+}
+
+.partner-dataset-table > tbody > tr > td{
+    border-top:None;
+    height:150px;
+}
+
+.partner-dataset-table > tbody > tr > td  a{
+    font-size:25px;
+}
+
+.partner-dataset-table > thead > tr > th{
+    border-bottom:None;
+    height:150px;
+    vertical-align:middle;
+}
+
+.dataset-notes{
+    font-size:18px;
+}
+
+.context .content_action a {
+    padding-right:25px;
+    padding-left:25px;
+    font-size:16px;
+    font-weight:bolder;
+}
+
+.btn-icon{
+    background: white;
+    border:None;
+    font-size:15px;
+}
+
+.action-fa{
+   font-size:40px;
+}
+
+.btn-icon:hover{
+    background: white;
+    border:None;
+}
+
+.page_primary_action > form .col-md-2,.page_primary_action > form .col-md-3{
+   display:None;
+}
+
+.page_primary_action > form .input-group input{
+   border-radius:30px;
+}
+
+.page_primary_action > form .input-group span .btn .btn-default, .page_primary_action > form [class^="input-group"] > :first-child{
+   border-top-right-radius:30px;
+   border-bottom-right-radius:30px;
+}
+
+.page_primary_action{
+   padding-right:0px;
+}
+
+.private-icon{
+   font-size:25px; 
+   margin-left:10px; 
+}
+
