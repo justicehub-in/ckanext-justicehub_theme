@@ -26,8 +26,9 @@
 
    <div class="row">
 
+    <form {% if form_id %}id="{{ form_id }}" {% endif %}class="search-form{% if no_bottom_border %} no-bottom-border{% endif %}" method="get" data-module="select-switch">
     <div class="col col-md-7 input-group pull-left">
-      <input aria-label="{% block header_site_search_label %}{{ placeholder }}{% endblock %}" id="field-giant-search" type="text" class="form-control input-lg" name="q" value="{{ q }}" autocomplete="off" placeholder="{{ _('Search issues') }}">
+      <input aria-label="{% block header_site_search_label %}{{ _('Search issues...') }}{% endblock %}" id="field-giant-search" type="text" class="form-control input-lg" name="q" value="{{ q }}" autocomplete="off" placeholder="{{ _('Search issues...') }}">
       {% block search_input_button %}
       <span class="input-group-btn">
         <button class="btn btn-default btn-lg" type="submit" value="search">
@@ -38,9 +39,9 @@
     </div>
 
     {% block search_search_fields %}
-      {% if fields -%}
+      {% if fields %}
         <span>{{ form.hidden_from_list(fields=fields) }}</span>
-      {%- endif %}
+      {% endif %}
     {% endblock %}
 
     {% block search_sortby %}
@@ -60,7 +61,6 @@
       </div>
     {% endif %}
     {% endblock %}
-   </div>
 
    <h2 id="issues-found">
        {{ ungettext('{number} issue found', '{number} issues found', pagination.total_count) .format(number=pagination.total_count) }}
@@ -76,7 +76,10 @@
    <p class="empty">{{ _('No issues') }}</p>
    {% endif %}
 
-  {{ common.page_selector(pagination, issues_per_page, url_params={'dataset_id': pkg['id']}) }}
+   {{ common.page_selector(pagination, issues_per_page, url_params={'dataset_id': pkg['id']}) }}
+   </div>
+   </form>
+
 </section>
 {% endblock %}
 
