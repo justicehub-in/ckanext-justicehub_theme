@@ -108,7 +108,9 @@ fieldset.checkboxes + label {
 .select2-container-multi .select2-choices > li.select2-search-choice {
     background-color: #403644;
 }
-.sort-box, .search-form .btn,
+.sort-box,
+.sort-box:focus,
+.search-form .btn,
 .controls .select2-container .select2-choice .select2-arrow {
     border-left: none;
 }
@@ -135,6 +137,7 @@ fieldset.checkboxes + label {
 .control-label {
     font-size: 21px;
 }
+#field-giant-search:focus,
 .input-group .input-group-addon {
     border-right: none;
 }
@@ -192,7 +195,6 @@ fieldset.checkboxes label {
 }
 .form-group,
 #resource-schema-buttons > .control-label,
-.search-form .input-group .form-control:first-child,
 .dataset-form .input-group .form-control:first-child {
     padding-top: 30px;
     padding-left: 30px;

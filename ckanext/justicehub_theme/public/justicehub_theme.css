@@ -35,7 +35,7 @@
 }
 .masthead .navigation .nav-pills li a:hover {
   background-color: #f65940;
-  color: white;
+  color: #ffffff;
 }
 .masthead .navigation .nav-pills li.active a {
   background-color: #403644;
@@ -47,7 +47,7 @@
 
 .masthead .navigation .nav-pills li:last-child {
   background-color: #f65940;
-  color: white;
+  color: #ffffff;
   padding-top: 20px;
   font-size: 20px;
   border-bottom: 12px solid #f65940;
@@ -97,7 +97,7 @@
 
 [role="main"], body {
   background: none;
-  background-color: white;
+  background-color: #ffffff;
 }
 .site-footer {
   background: none;
@@ -115,7 +115,7 @@
 }
 
 .site-footer {
-    color: white;
+    color: #ffffff;
 }
 
 .footer-links {
@@ -136,7 +136,7 @@
   text-decoration: none;
   border-radius: 50%;
   background-color: #f65940;
-  color: white;
+  color: #ffffff;
 }
 
 .social-links li {
@@ -150,9 +150,11 @@
   border: 1px solid #ffffff;
   color: #ffffff;
 }
+.footer-links .nav-item > a:hover, 
 .footer-links .nav-item > a {
     margin: 0;
     padding: 0;
+    color: #ffffff;
 }
 
 .footer-disclaimer {
@@ -254,7 +256,7 @@ aside .module-content {
     height: 700px;
 }
 .login-sidebar-heading {
-    color: white;
+    color: #ffffff;
     font-size: 28px;
     padding: 50px 60px;
     padding-bottom: 10px;
@@ -391,7 +393,7 @@ aside .module-content {
     }
     .masthead .navigation .nav-pills li:last-child {
       background-color: #f65940;
-      color: white;
+      color: #ffffff;
       padding-top: 5px;
       font-size: 18px;
       border-bottom: none;

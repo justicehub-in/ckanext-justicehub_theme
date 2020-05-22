@@ -17,3 +17,103 @@
 .issues-actions {
     margin-bottom: 20px;
 }
+.issue-comment-header {
+    background-color: #f65940 !important;
+    color: #ffffff !important;
+    font-size: 18px;
+}
+.issue-comment-action [class^="subtle-btn"] {
+    border: none;
+    color: #ffffff;
+    background: transparent;
+}
+.issue-comment-action [class^="subtle-btn"] i {
+    font-size: 24px;
+    color: #ffffff;
+}
+.issues-sidebar-heading {
+    color: #ffffff;
+    background-color: #f65940;
+    padding: 5px 20px;
+}
+.add-member-form .btn-success:focus,
+.add-member-form .btn-success {
+    border-color: #f65940;
+}
+.add-member-form .btn-success:hover,
+.add-member-form .btn-success:focus {
+    color: #f65940;
+}
+.issue-new,
+.issue-show {
+    padding: 20px 30px;
+}
+.issue-comment-label {
+    font-weight: bold;
+}
+.issue-new .form-actions .btn {
+    font-size: 20px;
+    color: #f65940;
+}
+.issue-new .dataset-form {
+    margin-left: -15px;
+}
+.issue-list-group .list-group-item {
+    box-shadow: 0 0 10px 1px #bcb4bf;
+}
+.issue-list-group .list-group-item-name,
+.issue-list-group .list-group-item-number {
+    font-size: 18px;
+}
+.open.icon {
+    padding-top: 5px;
+}
+.icon-exclamation-sign:before {
+    content: "\f12a";
+    font: normal normal normal 16px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.icon-clock:before {
+    content: "\f017";
+    font: normal normal normal 16px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.icon-flag:before {
+    content: "\f024";
+    font: normal normal normal 16px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.icon-remove:before {
+    content: "\f00d";
+    font: normal normal normal 16px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.icon-comment:before {
+    content: "\f075";
+    font: normal normal normal 16px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.icon-comments:before {
+    content: "\f086";
+    font: normal normal normal 16px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.icon-filter:before {
+    content: "\f0b0";
+    font: normal normal normal 16px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
