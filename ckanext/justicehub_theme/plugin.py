@@ -114,6 +114,14 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         package_dict['tracking_summary'] = (
             model.TrackingSummary.get_for_package(package_dict['id']))
 
+        context = {'model': model, 'session': model.Session,
+                   'user': c.user, 'for_view': True,
+                   'auth_user_obj': c.userobj}
+        partner = toolkit.get_action('get_package_owner_details')(
+                context,
+                data_dict={'org_id': package_dict['owner_org']}
+        )
+        package_dict['partner'] = partner
         return package_dict
 
     def after_search(self, search_results, search_params):

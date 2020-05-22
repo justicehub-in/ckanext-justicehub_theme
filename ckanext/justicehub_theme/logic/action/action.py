@@ -1,5 +1,8 @@
 from ckanext.issues.logic import schema
 
+import ckan.lib.dictization.model_dictize as model_dictize
+import ckan.lib.plugins as lib_plugins
+import ckan.logic as logic
 import ckan.model as model
 import ckan.plugins as p
 from ckan.logic import validate
@@ -34,3 +37,20 @@ def partner_users_autocomplete(context, data_dict):
     for user in query.all():
         users.append(user)
     return users
+
+@p.toolkit.side_effect_free
+def get_package_owner_details(context, data_dict):
+    session = context['session']
+    org_id = data_dict['org_id']
+    partner = session.query(model.Group).filter(model.Group.id == org_id).first()
+    partner_dict = model_dictize.group_dictize(partner, context,
+                                               packages_field='dataset_count',
+                                               include_extras=True
+                                               )
+
+    group_plugin = lib_plugins.lookup_group_plugin(partner_dict['type'])
+    schema = logic.schema.default_show_group_schema()
+    partner, errors = lib_plugins.plugin_validate(
+        group_plugin, context, partner_dict, schema, 'organization_show'
+    )
+    return partner
