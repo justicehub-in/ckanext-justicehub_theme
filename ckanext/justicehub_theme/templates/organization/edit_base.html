@@ -1,11 +1,9 @@
-{% extends "page.html" %}
+{% ckan_extends %}
 
-{% set organization = c.group_dict %}
-
-{% block subtitle %}{{ c.group_dict.display_name }} - {{ _('Organizations') }}{% endblock %}
+{% block subtitle %}{{ c.group_dict.display_name }} - {{ _('Partners') }}{% endblock %}
 
 {% block breadcrumb_content %}
-  <li>{% link_for _('Organizations'), controller='organization', action='index', named_route=group_type + '_index' %}</li>
+  <li>{% link_for _('Partners'), controller='organization', action='index', named_route=group_type + '_index' %}</li>
   {% block breadcrumb_content_inner %}
     <li>{% link_for organization.display_name|truncate(35), controller='organization', action='read', id=organization.name, named_route=group_type + '_read' %}</li>
     <li class="active">{% link_for _('Manage'), controller='organization', action='edit', id=organization.name, named_route=group_type + '_edit' %}</li>
