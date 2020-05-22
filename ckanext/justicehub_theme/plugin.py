@@ -1,5 +1,6 @@
 import json
 
+import ckanext.justicehub_theme.logic.action as jh_action
 from sqlalchemy import MetaData
 from sqlalchemy.sql import select
 
@@ -65,6 +66,7 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.ITemplateHelpers)
     plugins.implements(plugins.IPackageController)
+    plugins.implements(plugins.IActions)
 
     # IConfigurer
 
@@ -72,6 +74,8 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
         toolkit.add_resource('fanstatic', 'justicehub_theme')
+
+    # ITemplateHelpers
 
     def get_helpers(self):
         '''
@@ -84,6 +88,15 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
                 'justicehub_theme_get_package_avg_downloads': get_package_avg_downloads,
                 'justicehub_theme_package_activity_stream': package_activity_stream
                 }
+
+    #IActions
+    def get_actions(self):
+        return dict((name, function) for name, function
+                    in jh_action.__dict__.items()
+                    if callable(function))
+
+
+    # IPackageController
 
     def before_search(self, search_params):
         u'''Extensions will receive a dictionary with the query parameters,

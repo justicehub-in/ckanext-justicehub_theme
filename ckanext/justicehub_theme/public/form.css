@@ -54,7 +54,6 @@ fieldset.checkboxes > label > input,
 .select2-container-multi .select2-choices {
     border-radius: 0px;
 }
-.controls > input:first-child,
 .input-group > *:first-child,
 .editor .editor-info-block,
 [class^="input-group"] > *:first-child,
@@ -63,9 +62,9 @@ fieldset.checkboxes > label > input,
 .dataset-form .form-actions .btn-finish:hover,
 .dataset-form .form-actions .btn-finish:focus,
 .dataset-form .form-actions .btn-finish:active,
-fieldset.checkboxes > label > input,
 .select2-drop,
 .select2-container .select2-choice,
+.select2-container-multi.form-control,
 .select2-container-multi .select2-choices {
     border: 1px solid #f65940;
 }
@@ -108,7 +107,9 @@ fieldset.checkboxes + label {
 .select2-container-multi .select2-choices > li.select2-search-choice {
     background-color: #403644;
 }
-.sort-box, .search-form .btn,
+.sort-box,
+.sort-box:focus,
+.search-form .btn,
 .controls .select2-container .select2-choice .select2-arrow {
     border-left: none;
 }
@@ -135,6 +136,7 @@ fieldset.checkboxes + label {
 .control-label {
     font-size: 21px;
 }
+#field-giant-search:focus,
 .input-group .input-group-addon {
     border-right: none;
 }
@@ -171,6 +173,9 @@ fieldset.checkboxes label {
 .dataset-form .form-actions {
     margin-top: 50px;
 }
+.controls .select2-container.select2-container-multi .select2-choices {
+    padding-top: 10px;
+}
 .controls input[class^="form-control"],
 .controls select.form-control,
 .controls .select2-container .select2-choice,
@@ -183,7 +188,6 @@ fieldset.checkboxes label {
     padding-bottom: 3px;
 }
 .dataset-form .form-actions .btn-primary,
-.controls > .select2-container.form-control .select2-choice,
 .controls > .select2-container .select2-choices {
     border: none;
 }
@@ -192,7 +196,6 @@ fieldset.checkboxes label {
 }
 .form-group,
 #resource-schema-buttons > .control-label,
-.search-form .input-group .form-control:first-child,
 .dataset-form .input-group .form-control:first-child {
     padding-top: 30px;
     padding-left: 30px;

@@ -1,0 +1,21 @@
+{% extends "issues/base.html" %}
+
+{% block primary_content %}
+  <section class="module issue-new">
+    <div class="module-content">
+      <h1 class="page-heading">{% block page_heading %}{% endblock %}</h1>
+      {% block ourform %}{% endblock %}
+    </div>
+  </section>
+{% endblock %}
+
+{% block secondary_content %}
+  <section class="module module-narrow">
+    <h2 class="module-heading">{{ _('What are issues?') }}</h2>
+    <div class="module-content">
+      {% trans %}
+        <p>Issues are ... .</p>
+      {% endtrans %}
+    </div>
+  </section>
+{% endblock %}
