@@ -113,10 +113,11 @@
 }
 .org-box {
     width: 350px;
-    height: 250px;
+    height: 350px;
     display:flex;
     justify-content:center;
     align-items: center;
+    margin-top: -30px;
 }
 .org-box img.media-image {
     margin:auto;
@@ -145,6 +146,7 @@
 }
 .pckg_rsrc_actvty,
 .package-header {
+    border-top: 2px solid #f65940;
     border-bottom: 2px solid #f65940;
     margin-left: 0;
 }
@@ -237,7 +239,8 @@
         font-size: 16px;
     }
 }
-
+.partner-links .social-links {
+}
 
 
 /*----------------- data set editing page css ----------------------*/
@@ -279,5 +282,3 @@
         margin-right :0px;
 	}
 }
-
-
