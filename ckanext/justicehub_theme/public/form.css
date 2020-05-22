@@ -54,7 +54,6 @@ fieldset.checkboxes > label > input,
 .select2-container-multi .select2-choices {
     border-radius: 0px;
 }
-.controls > input:first-child,
 .input-group > *:first-child,
 .editor .editor-info-block,
 [class^="input-group"] > *:first-child,
@@ -63,9 +62,9 @@ fieldset.checkboxes > label > input,
 .dataset-form .form-actions .btn-finish:hover,
 .dataset-form .form-actions .btn-finish:focus,
 .dataset-form .form-actions .btn-finish:active,
-fieldset.checkboxes > label > input,
 .select2-drop,
 .select2-container .select2-choice,
+.select2-container-multi.form-control,
 .select2-container-multi .select2-choices {
     border: 1px solid #f65940;
 }
@@ -174,6 +173,9 @@ fieldset.checkboxes label {
 .dataset-form .form-actions {
     margin-top: 50px;
 }
+.controls .select2-container.select2-container-multi .select2-choices {
+    padding-top: 10px;
+}
 .controls input[class^="form-control"],
 .controls select.form-control,
 .controls .select2-container .select2-choice,
@@ -186,7 +188,6 @@ fieldset.checkboxes label {
     padding-bottom: 3px;
 }
 .dataset-form .form-actions .btn-primary,
-.controls > .select2-container.form-control .select2-choice,
 .controls > .select2-container .select2-choices {
     border: none;
 }
