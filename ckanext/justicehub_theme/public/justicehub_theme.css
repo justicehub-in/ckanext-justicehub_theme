@@ -30,6 +30,15 @@
     padding-top: 0;
     padding-bottom: 0;
 }
+.masthead .navigation {
+    height: 140px;
+}
+.masthead .navigation .nav-pills {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .masthead .navigation .nav-pills li {
     font-size: 18px;
     font-weight: bold;
@@ -41,7 +50,7 @@
   color: #ffffff;
 }
 .masthead .navigation .nav-pills li.active a {
-  background-color: #403644;
+    background-color: #403644;
 }
 
 .masthead .navigation .nav-pills li.active {
@@ -63,8 +72,8 @@
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: -45px;
-    width: 300px;
-    height: 80px;
+    width: 490px;
+    height: 120px;
 }
 .logo img {
     min-width: 100%;
