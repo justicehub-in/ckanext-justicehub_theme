@@ -8,7 +8,7 @@
 
 {% block pre_primary %}
   {% block organizations_search_form %}
-    {% snippet 'snippets/search_form.html', form_id='organization-search-form', type='organization', query=c.q, sorting_selected=c.sort_by_selected, count=c.page.item_count, placeholder=_('Search Partners...'), show_empty=request.params if c.page.items, sorting = [(_('Name Ascending'), 'title asc'), (_('Name Descending'), 'title desc')] %}
+    {% snippet 'snippets/search_form.html', form_id='organization-search-form', type='organization', query=c.q, sorting_selected=c.sort_by_selected, count=c.page.item_count, placeholder=_('Search Partners...'), show_empty=request.params if c.page.items, sorting = [(_('Name (A-Z)'), 'title asc'), (_('Name (Z-A)'), 'title desc')] %}
   {% endblock %}
 {% endblock %}
 
