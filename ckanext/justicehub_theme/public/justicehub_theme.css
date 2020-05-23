@@ -320,14 +320,13 @@ aside .module-content {
     color: #f65940;
 }
 .homepage .module-search {
-    min-height: 700px;
+    min-height: 860px;
     background: url('/uploads/admin/JH Logomark.png') no-repeat;
     background-clip: border-box;
-    background-position: -310px -230px;
-    background-size: 80%;
+    background-position: -390px -320px;
+    background-size: 75%;
     padding-top: 320px;
     padding-left: 200px;
-    margin-bottom: 100px;
 }
 .search-form .search-input.search-giant .form-control {
     border-radius: 60px;
@@ -437,7 +436,7 @@ aside .module-content {
     }
     .homepage .module-search {
         background-clip: border-box;
-        background-position: -130px -80px;
+        background-position: -155px -95px;
         background-size: 120%;
         padding-top: 160px;
         padding-left: 70px;
