@@ -3,8 +3,8 @@
 {% block header_site_navigation %}
     <nav class="section navigation">
     <ul class="nav nav-pills">
-        {% block header_site_navigation_tabs %} {{ h.build_nav_main( ('search', _('Datasets')), ('organizations_index', _('Partners')),
-        ('group_index', _('Sectors')), ('home.about', _('About Us')) ) }} {% endblock %}
+        {% block header_site_navigation_tabs %} {{ h.build_nav_main( ('home.about', _('About Us')), ('search', _('Datasets')), ('organizations_index', _('Partners')),
+        ('group_index', _('Sectors')) ) }} {% endblock %}
 
         {% if not c.userobj %}
           {% block header_account_notlogged %}
@@ -15,12 +15,16 @@
           {% block header_account_log_out_link %}
           <li>
               <a href="{{ h.url_for('/user/_logout') }}" title="{{ _('Log out') }}">
-                  <i class="fa fa-sign-out" aria-hidden="true"></i>
                   <span class="text">{{ _('Log out') }}</span>
               </a>
           </li>
           {% endblock %}
         {% endif %}
+        <li>
+            <a href="https://justicehub.in/" title="{{ _('WIKI') }}">
+                <span class="text">{{ _('WIKI') }}</span>
+            </a>
+        </li>
     </ul>
     </nav>
 {% endblock %}
