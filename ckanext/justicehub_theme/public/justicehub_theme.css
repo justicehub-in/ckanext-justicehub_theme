@@ -188,19 +188,22 @@
 .footer-links .input-group input {
     border-radius: 30px;
 }
-.footer-links input:focus {
+.footer-links .input-group .form-control:focus {
     border-color: #f65940;
+    z-index: 0;
 }
 .footer-links input {
     font-size: 20px !important;
     font-style: italic;
     color: #b9b4b4;
+    padding: 23px 15px;
 }
 .footer-links .input-group-btn .btn {
     margin-left: -20px;
     background-color: #f65940;
     font-size: 20px;
     border-color: #f65940;
+    text-align: center;
 }
 
 /* ------------- sidebar --------- */
