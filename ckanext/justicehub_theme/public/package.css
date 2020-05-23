@@ -96,6 +96,8 @@
 .stages li .highlight {
     position: static;
     text-align: center;
+    text-indent: 0;
+    padding: 10px 10px;
 }
 .stages li.complete .highlight,
 .stages li.uncomplete .highlight {

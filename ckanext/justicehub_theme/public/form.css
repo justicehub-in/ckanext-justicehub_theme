@@ -34,6 +34,7 @@
 .control-label {
     color: #403644;
 }
+.select2-results .select2-highlighted,
 .control-label,
 .dataset-form .form-actions .btn-primary,
 .dataset-form .form-actions .btn-primary:focus,
@@ -128,6 +129,7 @@ fieldset.checkboxes + label {
     padding: 7px 25px;
     border-radius: 30px;
 }
+.select2-results .select2-highlighted,
 .select2-container-multi .select2-choices > li.select2-search-choice:nth-child(2n) {
     background-color: #f65940 !important;
     background: none;
@@ -148,6 +150,13 @@ fieldset.checkboxes + label {
     border-top: none;
     border-left: none;
     border-right: none;
+}
+.select2-container .select2-choice .select2-arrow {
+    margin-top: 7px;
+    margin-right: 10px;
+}
+.select2-container .select2-choice .select2-arrow b {
+    background-size: cover;
 }
 
 /*------------------ form control layout ----------------*/
