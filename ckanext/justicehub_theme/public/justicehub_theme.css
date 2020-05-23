@@ -108,6 +108,7 @@
 }
 
 [role="main"], body {
+  font-family: 'Montserrat';
   background: none;
   background-color: #ffffff;
 }
