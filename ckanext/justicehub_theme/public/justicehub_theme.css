@@ -74,6 +74,9 @@
     object-fit: cover;
 }
 
+.toolbar {
+    padding: 20px 20px;
+}
 .box {
   box-shadow: none;
   border: none;
@@ -381,10 +384,13 @@ aside .module-content {
 
 /* -------------------------------------- Mobile adjustments ----------------------------- */
 @media (max-device-width: 600px) and (orientation: portrait) {
+    .toolbar .breadcrumb,
+    .toolbar .breadcrumb a {
+        color: #403644;
+    }
     .footer-links:last-of-type div:last-of-type ul {
         float: left !important;
     }
-
     .masthead {
         margin-bottom: initial;
         padding: 10px 0;
