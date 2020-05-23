@@ -21,10 +21,10 @@
     width: 100%;
 }
 .masthead {
-  background: none;
-  background-color: #403644;
-  padding-top: 0;
-  padding-bottom: 0;
+    background: none;
+    background-color: #403644;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 .masthead .navbar-collapse {
     padding-top: 0;
@@ -33,34 +33,28 @@
 .masthead .navigation .nav-pills li {
     font-size: 25px;
     font-weight: bold;
+    padding-top: 40px;
     height: 140px;
 }
-.masthead .navigation .nav-pills {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.masthead .navigation .nav-pills li.active {
+    border-bottom: 15px solid #f65940;
 }
-.masthead .navigation .nav-pills li {
-    font-size: 18px;
-    font-weight: bold;
-    padding-top: 20px;
-    padding-bottom: 20px;
+.masthead .navigation .nav-pills li:hover {
+    border-bottom: 15px solid #f65940;
 }
 .masthead .navigation .nav-pills li a:hover {
-  background-color: #f65940;
-  color: #ffffff;
+    background-color: #403644;
 }
 .masthead .navigation .nav-pills li.active a {
     background-color: #403644;
 }
-
-.masthead .navigation .nav-pills li.active {
-  border-bottom: 15px solid #f65940;
-}
-
 .masthead .navigation .nav-pills li:last-child {
+    height: 140px;
+    background-color: #f65940;
+    color: #ffffff;
     font-size: 25px;
+    padding-left: 5px;
+    padding-right: 10px;
 }
 .masthead .navigation .nav-pills li:last-child a:hover {
   color: #ffffff;
@@ -395,10 +389,21 @@ aside .module-content {
         margin-bottom: initial;
         padding: 10px 0;
     }
+    .masthead .logo {
+        margin-top: 0;
+        margin-bottom: 0;
+        height: 80px;
+        width: 390px;
+    }
+    .navbar-toggle {
+        font-size: 40px;
+        margin: 0;
+    }
     .masthead .navbar-collapse {
         padding: 10px 0;
     }
     .masthead .navigation .nav-pills li {
+        height: auto;
         font-size: 18px;
         font-weight: bold;
         padding-top: 5px;
@@ -407,8 +412,16 @@ aside .module-content {
     .masthead .navigation .nav-pills li.active {
       border-bottom: 5px solid #f65940;
     }
+    .masthead .navigation .nav-pills li:hover {
+      border-bottom: 5px solid #f65940;
+    }
     .masthead .navigation .nav-pills li:last-child {
+        height: auto;
+        background-color: #f65940;
+        color: #ffffff;
+        padding-top: 5px;
         font-size: 18px;
+        border-bottom: none;
     }
     .masthead .navigation .nav-pills li:last-child a:hover {
       color: #ffffff;
