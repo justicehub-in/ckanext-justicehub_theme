@@ -95,8 +95,8 @@
 .wrapper {
     box-shadow: none;
     min-height: 600px;
-    margin-top: 50px;
-    box-shadow: 0 0 5px 1px #bcb4bf;
+    margin-top: 0;
+    border: none;
 }
 .wrapper::before {
     border-right: none;
@@ -259,6 +259,10 @@ hr {
 aside .module-content {
     color: #ffffff;
     background-color: #403644;
+}
+aside .module [class^=module] {
+    padding: 30px;
+    padding-bottom: 10px;
 }
 
 /* ------------------------------- Login ------------------------- */
@@ -487,9 +491,6 @@ aside .module-content {
     }
     [role="main"] .secondary {
         display: none;
-    }
-    .wrapper {
-        margin-top: 0;
     }
     .module .module-content {
         padding: 0;
