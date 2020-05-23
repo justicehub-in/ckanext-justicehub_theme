@@ -4,16 +4,23 @@
     padding: 6px 21px;
     border-radius: 15px;
     font-weight: bold;
+    font-size: 18px;
 }
 .dataset-heading {
     margin-bottom: 0;
+    font-weight: bold;
 }
 .dataset-item {
     border-bottom: none;
 }
+.dataset-desc {
+    font-size: 20px;
+}
+.downloads, .dataset-meta {
+    font-style: italic;
+}
 .dataset-org, .downloads, .dataset-heading, .dataset-meta {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 25px;
 }
 .dataset-org > a{
     color: #f65940;

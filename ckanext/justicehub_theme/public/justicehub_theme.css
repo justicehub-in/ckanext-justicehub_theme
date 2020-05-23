@@ -30,7 +30,9 @@
     padding-top: 0;
     padding-bottom: 0;
 }
-.masthead .navigation {
+.masthead .navigation .nav-pills li {
+    font-size: 25px;
+    font-weight: bold;
     height: 140px;
 }
 .masthead .navigation .nav-pills {
@@ -58,11 +60,7 @@
 }
 
 .masthead .navigation .nav-pills li:last-child {
-  background-color: #f65940;
-  color: #ffffff;
-  padding-top: 20px;
-  font-size: 20px;
-  border-bottom: 12px solid #f65940;
+    font-size: 25px;
 }
 .masthead .navigation .nav-pills li:last-child a:hover {
   color: #ffffff;
@@ -168,14 +166,15 @@
     margin: 0;
     padding: 0;
     color: #ffffff;
+    font-size: 16px;
 }
 
 .footer-disclaimer {
-    font-size: 17px;
+    font-size: 25px;
 }
 .footer-disclaimer div:last-child {
     color: #f65940;
-    font-size: 20px;
+    font-size: 30px;
     font-style: italic;
 }
 .footer-links i.fa-circle.fa-sm {
@@ -191,14 +190,14 @@
     border-color: #f65940;
 }
 .footer-links input {
-    font-size: 20px;
+    font-size: 20px !important;
     font-style: italic;
     color: #b9b4b4;
 }
 .footer-links .input-group-btn .btn {
     margin-left: -20px;
     background-color: #f65940;
-    font-size: 18px;
+    font-size: 20px;
     border-color: #f65940;
 }
 
@@ -237,6 +236,9 @@
     padding-left: 0;
 }
 
+h1 {
+    font-size: 30px;
+}
 hr {
     margin-top: 20px;
     border-top: 1.5px solid #403644;
@@ -293,7 +295,7 @@ aside .module-content {
 }
 [role="main"] .container .row .col2 {
     padding: 13% 10%;
-    font-size: 24px;
+    font-size: 25px;
     font-style: italic;
     color: #707070;
 }
@@ -303,14 +305,14 @@ aside .module-content {
     padding: 40px 60px;
 }
 [role="main"] .container .row .col3 h2{
-    font-size: 35px;
+    font-size: 40px;
     border-bottom: 2px solid #f65940;
     padding-bottom: 10px;
     margin-bottom: 30px;
 }
 [role="main"] .container .row .col3 p {
     padding: 10px 0;
-    font-size: 24px;
+    font-size: 25px;
 }
 .col-circle {
     position: relative;
@@ -331,7 +333,7 @@ aside .module-content {
 .search-form .search-input.search-giant .form-control {
     border-radius: 60px;
     line-height: 2;
-    font-size: 28px;
+    font-size: 32px;
     font-style: italic;
     border: 5px solid #f65940;
     padding-left: 30px;
@@ -371,7 +373,7 @@ aside .module-content {
 }
 .search-meta .stats {
     color:#f65940;
-    font-size:70px;
+    font-size: 80px;
     font-weight:bolder;
     display: block;
 }
@@ -406,11 +408,7 @@ aside .module-content {
       border-bottom: 5px solid #f65940;
     }
     .masthead .navigation .nav-pills li:last-child {
-      background-color: #f65940;
-      color: #ffffff;
-      padding-top: 5px;
-      font-size: 18px;
-      border-bottom: none;
+        font-size: 18px;
     }
     .masthead .navigation .nav-pills li:last-child a:hover {
       color: #ffffff;

@@ -107,6 +107,9 @@ fieldset.checkboxes + label {
 .select2-container-multi .select2-choices > li.select2-search-choice {
     background-color: #403644;
 }
+.sort-box {
+    font-size: 25px;
+}
 .sort-box,
 .sort-box:focus,
 .search-form .btn,
