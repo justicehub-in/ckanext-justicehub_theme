@@ -22,22 +22,26 @@
 .filters .module-content {
     height: 100%;
 }
-.nav-item.active > a{
+.nav-facet .nav-item.active > a{
     background-color: #f65940;
     color: #ffffff;
 }
 .nav-item.active > a:hover {
-    background-color: #eeeeee;
     color: #403644;
 }
-.nav-item > a{
+.nav-facet .nav-item > a {
     color: #ffffff;
     font-size: 20px;
 }
-.nav-item > a:hover {
+.nav-facet .nav-item > a:hover {
     color: #403644;
+    background-color: #ffffff;
 }
-.nav-facet > li {
+.nav-facet .nav-item > a:hover::after {
+    background: none;
+}
+.filters .nav-facet .nav-item {
+    padding-left: 40px;
     border-bottom: none;
 }
 .nav-facet, .filters .module-content.empty {

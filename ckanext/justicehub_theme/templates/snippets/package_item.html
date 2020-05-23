@@ -38,10 +38,12 @@
           {% endblock %}
         </div>
     
-        <div class="col col-md-5">
+        <div class="col col-md-1">
+        </div>
+        <div class="col col-md-6">
             {% block notes %}
                 {% if notes %}
-                <div>{{ notes|urlize }}</div>
+                <div class="dataset-desc">{{ notes|urlize }}</div>
                 {% else %}
                 <div class="empty">{{ _("This dataset has no description") }}</div>
                 {% endif %}
@@ -58,6 +60,11 @@
             </div>
             {% endblock %}
             
+        </div>
+    </div>
+
+    <div class="row package-item-row">
+        <div class="col col-md-5">
             {% block package_meta %}
             <div class="dataset-meta">
                 <span>{{ package.update_frequency or _('Not updated') }}</span>
@@ -66,8 +73,10 @@
             </div>
             {% endblock %}
         </div>
-        
-        <div class="col col-md-5">
+
+        <div class="col col-md-1">
+        </div>
+        <div class="col col-md-6">
             {% block resources %}
             <div>
                 {% if package.resources and not hide_resources %}
@@ -76,7 +85,8 @@
                     {% block resources_inner %}
                     {% for resource in h.dict_list_reduce(package.resources, 'format') %}
                         <li>
-                        <a href="{{ h.url_for(controller='package', action='read', id=package.name) }}" class="label label-default" data-format="{{ resource.lower() }}">{{ resource }}</a>
+                        <span class="label label-default" data-format="{{ resource.lower() }}">{{ resource }}</span>
+                        <!-- a href="{{ h.url_for(controller='package', action='read', id=package.name) }}" class="label label-default" data-format="{{ resource.lower() }}">{{ resource }}</a-->
                         </li>
                     {% endfor %}
                     {% endblock %}
