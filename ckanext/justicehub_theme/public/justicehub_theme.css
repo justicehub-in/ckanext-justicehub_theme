@@ -15,42 +15,46 @@
 
 
 .container {
-    width: 80%;
+    width: 92%;
+}
+[role="main"] .container {
+    width: 100%;
 }
 .masthead {
-  background: none;
-  background-color: #403644;
-  padding-top: 0;
-  padding-bottom: 0;
+    background: none;
+    background-color: #403644;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 .masthead .navbar-collapse {
     padding-top: 0;
     padding-bottom: 0;
 }
 .masthead .navigation .nav-pills li {
-    font-size: 18px;
+    font-size: 25px;
     font-weight: bold;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 40px;
+    height: 140px;
+}
+.masthead .navigation .nav-pills li.active {
+    border-bottom: 15px solid #f65940;
+}
+.masthead .navigation .nav-pills li:hover {
+    border-bottom: 15px solid #f65940;
 }
 .masthead .navigation .nav-pills li a:hover {
-  background-color: #f65940;
-  color: #ffffff;
+    background-color: #403644;
 }
 .masthead .navigation .nav-pills li.active a {
-  background-color: #403644;
+    background-color: #403644;
 }
-
-.masthead .navigation .nav-pills li.active {
-  border-bottom: 15px solid #f65940;
-}
-
 .masthead .navigation .nav-pills li:last-child {
-  background-color: #f65940;
-  color: #ffffff;
-  padding-top: 20px;
-  font-size: 20px;
-  border-bottom: 12px solid #f65940;
+    height: 140px;
+    background-color: #f65940;
+    color: #ffffff;
+    font-size: 25px;
+    padding-left: 5px;
+    padding-right: 10px;
 }
 .masthead .navigation .nav-pills li:last-child a:hover {
   color: #ffffff;
@@ -60,8 +64,8 @@
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: -45px;
-    width: 300px;
-    height: 80px;
+    width: 490px;
+    height: 120px;
 }
 .logo img {
     min-width: 100%;
@@ -70,6 +74,9 @@
     object-fit: cover;
 }
 
+.toolbar {
+    padding: 20px 20px;
+}
 .box {
   box-shadow: none;
   border: none;
@@ -88,14 +95,15 @@
 .wrapper {
     box-shadow: none;
     min-height: 600px;
-    margin-top: 50px;
-    box-shadow: 0 0 5px 1px #bcb4bf;
+    margin-top: 0;
+    border: none;
 }
 .wrapper::before {
     border-right: none;
 }
 
 [role="main"], body {
+  font-family: 'Montserrat';
   background: none;
   background-color: #ffffff;
 }
@@ -127,16 +135,21 @@
 
 
 /* https://www.w3schools.com/howto/howto_css_social_media_buttons.asp */
+.social-links a {
+  text-decoration: none;
+}
 .social-links .fa {
   padding: 12px 5px;
-  font-size: 30px;
-  width: 50px;
-  height: 50px;
-  text-align: center;
+  font-size: 45px;
+  width: 75px;
+  height: 75px;
   text-decoration: none;
   border-radius: 50%;
   background-color: #f65940;
   color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .social-links li {
@@ -155,14 +168,15 @@
     margin: 0;
     padding: 0;
     color: #ffffff;
+    font-size: 16px;
 }
 
 .footer-disclaimer {
-    font-size: 17px;
+    font-size: 25px;
 }
 .footer-disclaimer div:last-child {
     color: #f65940;
-    font-size: 20px;
+    font-size: 30px;
     font-style: italic;
 }
 .footer-links i.fa-circle.fa-sm {
@@ -174,19 +188,22 @@
 .footer-links .input-group input {
     border-radius: 30px;
 }
-.footer-links input:focus {
+.footer-links .input-group .form-control:focus {
     border-color: #f65940;
+    z-index: 0;
 }
 .footer-links input {
-    font-size: 20px;
+    font-size: 20px !important;
     font-style: italic;
     color: #b9b4b4;
+    padding: 23px 15px;
 }
 .footer-links .input-group-btn .btn {
     margin-left: -20px;
     background-color: #f65940;
-    font-size: 18px;
+    font-size: 20px;
     border-color: #f65940;
+    text-align: center;
 }
 
 /* ------------- sidebar --------- */
@@ -224,6 +241,9 @@
     padding-left: 0;
 }
 
+h1 {
+    font-size: 30px;
+}
 hr {
     margin-top: 20px;
     border-top: 1.5px solid #403644;
@@ -247,6 +267,10 @@ hr {
 aside .module-content {
     color: #ffffff;
     background-color: #403644;
+}
+aside .module [class^=module] {
+    padding: 30px;
+    padding-bottom: 10px;
 }
 
 /* ------------------------------- Login ------------------------- */
@@ -280,7 +304,7 @@ aside .module-content {
 }
 [role="main"] .container .row .col2 {
     padding: 13% 10%;
-    font-size: 24px;
+    font-size: 25px;
     font-style: italic;
     color: #707070;
 }
@@ -290,14 +314,14 @@ aside .module-content {
     padding: 40px 60px;
 }
 [role="main"] .container .row .col3 h2{
-    font-size: 35px;
+    font-size: 40px;
     border-bottom: 2px solid #f65940;
     padding-bottom: 10px;
     margin-bottom: 30px;
 }
 [role="main"] .container .row .col3 p {
     padding: 10px 0;
-    font-size: 24px;
+    font-size: 25px;
 }
 .col-circle {
     position: relative;
@@ -307,22 +331,22 @@ aside .module-content {
     color: #f65940;
 }
 .homepage .module-search {
-    min-height: 700px;
+    min-height: 860px;
     background: url('/uploads/admin/JH Logomark.png') no-repeat;
     background-clip: border-box;
-    background-position: -310px -230px;
-    background-size: 80%;
+    background-position: -390px -320px;
+    background-size: 75%;
     padding-top: 320px;
     padding-left: 200px;
-    margin-bottom: 100px;
 }
 .search-form .search-input.search-giant .form-control {
-    border-radius: 40px;
+    border-radius: 60px;
     line-height: 2;
-    font-size: 24px;
+    font-size: 32px;
     font-style: italic;
-    border: 3px solid #f65940;
+    border: 5px solid #f65940;
     padding-left: 30px;
+    height: 100px;
 }
 .homepage .module-search .form-group {
     padding: 10px 0;
@@ -335,6 +359,7 @@ aside .module-content {
 }
 .search-form .search-input.search-giant .fa {
     color: #403644;
+    margin-right: 20px;
 }
 .homepage .module-search .stats-box .tag {
     background-color: #f65940;
@@ -347,7 +372,7 @@ aside .module-content {
     color: #f65940;
 }
 .search-form .search-input.search-giant {
-    width: 90%;
+    width: 88%;
 }
 .module-search .search-form {
     padding: 0;
@@ -357,7 +382,7 @@ aside .module-content {
 }
 .search-meta .stats {
     color:#f65940;
-    font-size:70px;
+    font-size: 80px;
     font-weight:bolder;
     display: block;
 }
@@ -371,18 +396,32 @@ aside .module-content {
 
 /* -------------------------------------- Mobile adjustments ----------------------------- */
 @media (max-device-width: 600px) and (orientation: portrait) {
+    .toolbar .breadcrumb,
+    .toolbar .breadcrumb a {
+        color: #403644;
+    }
     .footer-links:last-of-type div:last-of-type ul {
         float: left !important;
     }
-
     .masthead {
         margin-bottom: initial;
         padding: 10px 0;
+    }
+    .masthead .logo {
+        margin-top: 0;
+        margin-bottom: 0;
+        height: 80px;
+        width: 390px;
+    }
+    .navbar-toggle {
+        font-size: 40px;
+        margin: 0;
     }
     .masthead .navbar-collapse {
         padding: 10px 0;
     }
     .masthead .navigation .nav-pills li {
+        height: auto;
         font-size: 18px;
         font-weight: bold;
         padding-top: 5px;
@@ -391,12 +430,16 @@ aside .module-content {
     .masthead .navigation .nav-pills li.active {
       border-bottom: 5px solid #f65940;
     }
+    .masthead .navigation .nav-pills li:hover {
+      border-bottom: 5px solid #f65940;
+    }
     .masthead .navigation .nav-pills li:last-child {
-      background-color: #f65940;
-      color: #ffffff;
-      padding-top: 5px;
-      font-size: 18px;
-      border-bottom: none;
+        height: auto;
+        background-color: #f65940;
+        color: #ffffff;
+        padding-top: 5px;
+        font-size: 18px;
+        border-bottom: none;
     }
     .masthead .navigation .nav-pills li:last-child a:hover {
       color: #ffffff;
@@ -417,10 +460,12 @@ aside .module-content {
     }
     .search-form .search-input.search-giant .form-control {
         line-height: 1;
+        height: 65px;
+        border: 3px solid #f65940;
     }
     .homepage .module-search {
         background-clip: border-box;
-        background-position: -130px -80px;
+        background-position: -155px -95px;
         background-size: 120%;
         padding-top: 160px;
         padding-left: 70px;
@@ -454,12 +499,6 @@ aside .module-content {
     }
     [role="main"] .secondary {
         display: none;
-    }
-    [role="main"] .container {
-        width: 90%;
-    }
-    .wrapper {
-        margin-top: 0;
     }
     .module .module-content {
         padding: 0;

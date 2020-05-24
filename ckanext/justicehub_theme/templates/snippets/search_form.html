@@ -1,15 +1,19 @@
 {% ckan_extends %}
 
 {% block search_input %}
-{% set stats=h.get_site_statistics() %}
-<div class="col col-md-2 pull-left input-group">
+<div class="col col-md-3 pull-left input-group">
     <div class="form-control input-lg square-border dataset-count-box">
-        <span>{{_('DATA')}}</span>
-        <span class="dataset-count">{{ _('[') }}{{ stats.dataset_count }}{{ _(']') }}</span>
+        {% if c.page.items %}
+            <span>{{ c.page.items[0]['type'] | capitalize }}{{_('s')}}</span>
+        {% else %}
+          <span>{{_('DATA')}}</span>
+        {% endif %}
+
+        <span class="dataset-count">{{ _('[') }}{{ c.page.items | length }}{{ _(']') }}</span>
     </div>
 </div>
 
-<div class="col col-md-7 input-group pull-left">
+<div class="col col-md-6 input-group pull-left">
   <input aria-label="{% block header_site_search_label %}{{ placeholder }}{% endblock %}" id="field-giant-search" type="text" class="form-control input-lg square-border" name="q" value="{{ query }}" autocomplete="off" placeholder="{{ placeholder }}">
   {% block search_input_button %}
   <span class="input-group-btn">

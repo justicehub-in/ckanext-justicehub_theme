@@ -1,8 +1,13 @@
+.field-giant-search {
+}
 .dataset-count-box {
-    font-weight: bold;
     color: #202020;
-    padding: 25px 0 !important;
+    padding: 20px 0 !important;
     text-align: center;
+}
+.dataset-count-box span {
+    font-size: 25px;
+    font-weight: bold;
 }
 .dataset-count {
     color: #f65940;
@@ -10,7 +15,7 @@
 .filters .module-heading {
     color: #ffffff;
     font-weight: bold;
-    font-size: 21px;
+    font-size: 30px;
     background-color: #403644;
     border-color: #f65940;
     margin-bottom: 0 !important;
@@ -19,21 +24,26 @@
 .filters .module-content {
     height: 100%;
 }
-.nav-item.active > a{
+.nav-facet .nav-item.active > a{
     background-color: #f65940;
     color: #ffffff;
 }
 .nav-item.active > a:hover {
-    background-color: #eeeeee;
     color: #403644;
 }
-.nav-item > a{
+.nav-facet .nav-item > a {
     color: #ffffff;
+    font-size: 20px;
 }
-.nav-item > a:hover {
+.nav-facet .nav-item > a:hover {
     color: #403644;
+    background-color: #ffffff;
 }
-.nav-facet > li {
+.nav-facet .nav-item > a:hover::after {
+    background: none;
+}
+.filters .nav-facet .nav-item {
+    padding-left: 40px;
     border-bottom: none;
 }
 .nav-facet, .filters .module-content.empty {

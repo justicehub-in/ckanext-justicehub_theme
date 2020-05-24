@@ -5,7 +5,7 @@
         {% block footer_content %}
         <div class="row footer-links">
             <div class="col col-md-3">
-                <div style="font-size: 20px; font-weight: bold;">{{ _('GET IN TOUCH') }}</div>
+                <div style="font-size: 30px; font-weight: bold;">{{ _('GET IN TOUCH') }}</div>
             </div>
         </div>
 
@@ -49,7 +49,7 @@
         </div>
 
         <div class="row footer-links">
-            <div class="col col-md-3 footer-disclaimer">
+            <div class="col col-md-4 footer-disclaimer">
                 <div>
                     This is an Alpha release, we will be working to add more datasets in the coming days to the Justice Hub.
                 </div>
@@ -68,6 +68,16 @@
                     </li>
                     {% endblock %}
                     <i class="fa fa-circle fa-sm"></i>
+                    {% block footer_links_legal %}
+                    <li class="nav-item">
+                        <a href="https://justicehub.in/terms">{{ _('Terms & Conditions') }}</a>
+                    </li>
+                    <i class="fa fa-circle fa-sm"></i>
+                    <li class="nav-item">
+                        <a href="https://github.com/justicehub-in/Justice-Hub/blob/master/CODE_OF_CONDUCT.md">{{ _('Code of Conduct') }}</a>
+                    </li>
+                    {% endblock %}
+                    <i class="fa fa-circle fa-sm"></i>
                     {% block footer_links_ckan %}
                     {% set api_url = 'http://docs.ckan.org/en/{0}/api/'.format(g.ckan_doc_version) %}
                     <li class="nav-item">
@@ -76,19 +86,6 @@
                     <i class="fa fa-circle fa-sm"></i>
                     <li class="nav-item">
                         <a href="http://www.opendefinition.org/okd/"><img src="{{ h.url_for_static('/base/images/od_80x15_blue.png') }}" alt="Open Data"></a>
-                    </li>
-                    {% endblock %}
-                </ul>
-            </div>
-            <div class="col col-md-4">
-                <ul class="list-unstyled list-inline pull-right">
-                    {% block footer_links_legal %}
-                    <li class="nav-item">
-                        <a href="https://justicehub.in/terms">{{ _('Terms & Conditions') }}</a>
-                    </li>
-                    <i class="fa fa-circle fa-sm"></i>
-                    <li class="nav-item">
-                        <a href="https://github.com/justicehub-in/Justice-Hub/blob/master/CODE_OF_CONDUCT.md">{{ _('Code of Conduct') }}</a>
                     </li>
                     {% endblock %}
                 </ul>

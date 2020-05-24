@@ -1,19 +1,29 @@
 /* ---------- package-item ------- */
 
+.dataset-list {
+    padding-top: 20px;
+}
 .label {
-    padding: 6px 21px;
-    border-radius: 15px;
+    padding: 5px 20px;
+    border-radius: 25px;
     font-weight: bold;
+    font-size: 18px;
 }
 .dataset-heading {
     margin-bottom: 0;
+    font-weight: bold;
 }
 .dataset-item {
     border-bottom: none;
 }
+.dataset-desc {
+    font-size: 20px;
+}
+.downloads, .dataset-meta {
+    font-style: italic;
+}
 .dataset-org, .downloads, .dataset-heading, .dataset-meta {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 25px;
 }
 .dataset-org > a{
     color: #f65940;
@@ -89,6 +99,8 @@
 .stages li .highlight {
     position: static;
     text-align: center;
+    text-indent: 0;
+    padding: 10px 10px;
 }
 .stages li.complete .highlight,
 .stages li.uncomplete .highlight {

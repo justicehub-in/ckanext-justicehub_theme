@@ -210,7 +210,7 @@
 {% endblock %}
 
 {% block form_actions %}
-<div class="form-actions">
+<div class="form-actions form-group">
   {% block disclaimer %}
     <p class="action-info small">
       {%- trans -%}
@@ -228,8 +228,10 @@
     {% endif %}
   {% endblock %}
   {% block save_button %}
-  <button class="btn btn-primary" type="submit" name="save">{% block save_button_text %}{{ _('NEXT') }}{% endblock %}<i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i></button>
+  <button class="btn btn-primary" type="submit" name="save">{% block save_button_text %}{{ _('NEXT: FILES UPLOAD') }}{% endblock %}<i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i></button>
   {% endblock %}
-  {{ form.required_message() }}
+  <p class="control-required-message">
+    {{ _("Required field") }} <span class="control-required">*</span>
+  </p>
 </div>
 {% endblock %}
