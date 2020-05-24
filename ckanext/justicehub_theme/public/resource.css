@@ -1,0 +1,138 @@
+.btn-action{
+    background-color: #f65940;
+    border-radius: 30px;
+    padding: 5px 30px;
+    color: #ffffff;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.resource-desc{
+   font-size:20px;
+}
+
+.res-line-margin-bottom{
+   margin-bottom:20px;
+}
+
+.res-title{
+   font-size:20px;
+   color:#f65940;
+   font-weight:bolder;
+}
+
+.res-url-src{
+   font-size:17px;
+   color : #403644;
+}
+
+.module-content .nav-tabs {
+    margin: 0px;
+    margin-top: 50px;
+    border-top: 2px solid #f65940;
+    border-bottom: 2px solid #f65940;
+}
+
+.module-content .nav-tabs-plain {
+    padding: 0px;
+}
+
+.module-content .nav {
+    background-color: #ffffff;
+    color: #403644;
+}
+
+.module-content .nav-tabs > li.active > a {
+    background: white;
+    color: #403644;
+    border-bottom:0.1px solid #f65940;
+}
+
+.rsrc-list-side > li {
+    padding-left:15px;
+    border-bottom: 1px dotted #dddddd;
+}
+
+.rsrc-list-side .rsrc-item-side:hover {
+    background:#eeeeee;
+    color:#403644;
+}
+
+.rsrc-list-side{
+   height:100vh;
+}
+
+.context-info h1.rsrc-info-heading{
+   background:#f65940;
+   padding-top:40px;
+   padding-bottom:40px;
+   padding-left:15px;
+}
+
+.module .rsrc-list-side .rsrc-item-side a{
+   margin-top:5px;
+   margin-left:0px;
+   font-size:18px;
+   font-weight:bolder;
+   padding-left:0px;
+}
+
+
+.rsrc-item-desc-side{
+   color: #f65940;
+   font-size:15px;
+}
+
+.res-social{
+    position:absolute; 
+    bottom:17px; 
+    right:0;
+}
+
+
+.content_action .rsrc-edit-actn-btn{
+   font-size:15px;
+   padding: 5px 20px;
+}
+
+
+.module-narrow h2.social-heading {
+    font-size: 20px;
+    background-color: #ffffff;
+    color: #f65940;
+    height: 70px;
+    padding-top: 20px;
+    padding-left:0px;
+    border-bottom: none;
+}
+
+
+.social .social-links .fa:hover {
+  background-color: #ffffff;
+  border: 1px solid #403644;
+  color: #403644;
+}
+
+
+.social .social-links .fa {
+  padding: 12px 5px;
+  font-size: 30px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
+  background-color: #403644;
+  color: #ffffff;
+}
+
+
+.module-content .res-actions{
+  position: None;
+  float: None;
+  top: None;
+  right: 0px;
+  margin-top:30px;
+  margin-bottom:30px;
+}
+
