@@ -152,12 +152,11 @@
     font-weight:bolder;
     font-size: 24px;
     line-height: 1.2;
-}
-.pckg_rsrc_actvty h2 {
     color:white;
     text-align:center;
     border-bottom: 2px solid #f65940;
-    padding-bottom:13px;
+    padding-top:5px;
+    padding-bottom:21px;
 }
 .content_action a {
     background-color: #f65940;

@@ -81,6 +81,7 @@
   box-shadow: none;
   border: none;
 }
+.module > .module-content:nth-child(2),
 .module-content {
     padding: 0;
 }

@@ -3,8 +3,10 @@
 {% block search_input %}
 <div class="col col-md-3 pull-left input-group">
     <div class="form-control input-lg square-border dataset-count-box">
-        {% if c.page.items %}
-            <span>{{ c.page.items[0]['type'] | capitalize }}{{_('s')}}</span>
+        {% if count_box_title %}
+          <span>{{ count_box_title }}</span>
+        {% elif type %}
+            <span>{{ type | capitalize }}{{_('s')}}</span>
         {% else %}
           <span>{{_('DATA')}}</span>
         {% endif %}

@@ -3,8 +3,18 @@
 {% block subtitle %}{{ _('Edit datasets') }} - {{ super() }}{% endblock %}
 
 {% block page_primary_action %}
+    {% block search_form %}
+        {% set sorting = [
+        (_('Name (A-Z)'), 'title_string asc'),
+        (_('Name (Z-A)'), 'title_string desc'),
+        (_('Last Modified'), 'data_modified desc'),
+        (_('Popular'), 'views_recent desc') if g.tracking_enabled else (false, false) ]
+        %}
+        {% snippet 'snippets/search_form.html', form_id='organization-datasets-search-form', type='dataset', query=c.q, count=c.page.item_count, sorting=sorting, sorting_selected=c.sort_by_selected,    no_title=true, search_class=' ', count_box_title='EDIT DATASETS' %}
+    {% endblock %}
+    <div class="row">
     {% snippet 'snippets/add_dataset.html', group=c.group_dict.id %}
-    {% snippet 'snippets/search_form.html', form_id='organization-datasets-search-form', type='dataset', query=c.q, count=c.page.item_count, sorting=sorting, sorting_selected=c.sort_by_selected,    no_title=true, search_class=' ' %}
+    </div>
 {% endblock %}
 
 {% block secondary_content %}
