@@ -8,7 +8,8 @@
 {% endblock %}
 
 {% block pre_primary %}
-<div class="col-xs-12 row top-section">
+<div class="col-xs-12 col-md-12 row top-section">
+<div class="row">
     
     {% block image %}
         <div class="image dataset-org col-sm-3 col-md-3 col-xs-12">
@@ -29,7 +30,7 @@
             {{ h.markdown_extract(c.group_dict.description) }}
             </p>
         {% else %}
-            <p class="empty">{{ _('There is no description for this organization') }}</p>
+            <p class="empty">{{ _('There is no description for this partner') }}</p>
         {% endif %}
         {% endblock %}
 
@@ -40,7 +41,7 @@
         {% endblock %}
     </div>
     <div class="partner-links col-md-4 col-sm-4 col-xs-12">
-            <div class="col col-md-12 social-links">
+        <div class="col col-md-12 social-links">
             <ul class="list-unstyled list-inline">
                 <li>
                     <a href="{{ c.group_dict.website }}"
@@ -79,10 +80,20 @@
                     </a>
                 </li>
             </ul>
-            </div>
         </div>
+    </div>
+</div>
+        {% block content_action %}
+        <div class="row content_action pull-left">
+            {% if h.check_access('organization_update', {'id': c.group_dict.id}) %}
+                {% link_for _('Edit'), controller='organization', action='edit', id=c.group_dict.name, class_='btn btn-default', icon='wrench', named_route=group_type + '_edit'  %}
+            {% endif %}
+        </div>
+        {% endblock %}
 </div>
 {% endblock %}
+
+
 
 
 
