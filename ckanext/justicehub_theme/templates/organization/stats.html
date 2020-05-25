@@ -1,12 +1,6 @@
 {% extends "organization/read.html" %}
 
-{% set is_sys_admin = c.userobj.sysadmin %}
-
-
-{% set is_single_admin = (c.member_groups['admin'] | length) == 1 %}
-{% set current_member = c.current_user %}
-
-{% block subtitle %}{{ _('Members') }} - {{ c.group_dict.display_name }}{% endblock %}
+{% block subtitle %}{{ _('Stats') }} - {{ c.group_dict.display_name }}{% endblock %}
 
 {% block page_primary_action %}
 {% endblock %}
@@ -20,6 +14,10 @@
             <div class="col-xs-6 col-sm-4">
                 <span class="stats">200{{ _('+') }}</span>
                 <span class="stats-text">{{ _('Visits') }}</span>
+            </div>
+            <div class="col-xs-6 col-sm-4">
+                <span class="stats">{{ c.group_dict.num_followers }}{{ _('+') }}</span>
+                <span class="stats-text">{{ _('Followers') }}</span>
             </div>
         </div>
     {% block page_pagination %}

@@ -251,6 +251,7 @@ hr {
 
 .page_primary_action {
     padding-right: 40px;
+    height: 40px;
 }
 .page_primary_action .btn-primary {
     background-color: #403644;
