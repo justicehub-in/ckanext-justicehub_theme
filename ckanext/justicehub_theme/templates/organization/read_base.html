@@ -1,0 +1,100 @@
+{% ckan_extends %}
+{% set url = h.url_for(c.group_dict.type + '_read', id=c.group_dict.name, ) %}
+{% block subtitle %}{{ c.group_dict.display_name }} - {{ _('Partners') }}{% endblock %}
+
+{% block breadcrumb_content %}
+  <li>{% link_for _('Partners'), controller='organization', action='index', named_route=group_type + '_index' %}</li>
+  <li class="active">{% link_for c.group_dict.display_name|truncate(35), controller='organization', action='read', id=c.group_dict.name, named_route=group_type + '_read' %}</li>
+{% endblock %}
+
+{% block pre_primary %}
+<div class="col-xs-12 row top-section">
+    
+    {% block image %}
+        <div class="image dataset-org col-sm-3 col-md-3 col-xs-12">
+        <a href="{{ url }}">
+            <img src="{{ c.group_dict.image_display_url or h.url_for_static('/base/images/placeholder-organization.png') }}" width="200" alt="{{ c.group_dict.name }}" />
+        </a>
+        </div>
+    {% endblock %}
+    <div class="col-md-5 col-sm-5 col-xs-12">
+        <h1 class="heading">{{ c.group_dict.title or c.group_dict.name }}
+            {% if c.group_dict.state == 'deleted' %}
+            [{{ _('Deleted') }}]
+            {% endif %}
+        </h1>
+        {% block description %}
+        {% if c.group_dict.description %}
+            <p>
+            {{ h.markdown_extract(c.group_dict.description) }}
+            </p>
+        {% else %}
+            <p class="empty">{{ _('There is no description for this organization') }}</p>
+        {% endif %}
+        {% endblock %}
+
+        {% block follow %}
+        <div class="follow_button">
+          {{ h.follow_button('group', c.group_dict.id) }}
+        </div>
+        {% endblock %}
+    </div>
+    <div class="partner-links col-md-4 col-sm-4 col-xs-12">
+            <div class="col col-md-12 social-links">
+            <ul class="list-unstyled list-inline">
+                <li>
+                    <a href="{{ c.group_dict.website }}"
+                       aria-hidden="true" alt="{{ c.group_dict.name }}'s Website"
+                       role="link" title="Official Website"
+                       aria-label="{{ c.group_dict.name }}'s Website"
+                       target="_blank">
+                        <i class="fa fa-link fa-lg"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ c.group_dict.email }}"
+                       aria-hidden="true" alt="{{ c.group_dict.name }}'s Email Address"
+                       role="link" title="Email Address"
+                       aria-label="{{ c.group_dict.name }}'s Email Address"
+                       target="_blank">
+                    <i class="fa fa-envelope fa-lg"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ c.group_dict.twitter }}"
+                       aria-hidden="true" alt="{{ c.group_dict.name }}'s Twitter Handle"
+                       role="link" title="Official Twitter Handle"
+                       aria-label="{{ c.group_dict.name }}'s Twitter Handle"
+                       target="_blank">
+                        <i class="fa fa-twitter fa-lg"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ c.group_dict.twitter }}"
+                       aria-hidden="true" alt="{{ c.group_dict.name }}'s Facebook Page"
+                       role="link" title="Official Facebook Page"
+                       aria-label="{{ c.group_dict.name }}'s Facebook Page"
+                       target="_blank">
+                        <i class="fa fa-facebook fa-lg"></i>
+                    </a>
+                </li>
+            </ul>
+            </div>
+        </div>
+</div>
+{% endblock %}
+
+
+
+{% block page_header %}
+<div class="row header-tabs">
+    <ul class="nav nav-tabs">
+        {% block content_primary_nav %}
+        {{ h.build_nav_icon(group_type + '_read', _('Datasets'), id=c.group_dict.name) }}
+        {{ h.build_nav_icon(group_type + '_activity', _('Activity'), id=c.group_dict.name, offset=0) }}
+        {{ h.build_nav_icon('jhorg' + '_stats', _('Stats'), id=c.group_dict.name, offset=0) }}
+        {{ h.build_nav_icon('jhorg' + '_members', _('Members'), id=c.group_dict.name) }}
+        {% endblock %}
+    </ul>
+</div>
+{% endblock %}
