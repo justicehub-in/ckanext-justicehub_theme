@@ -5,12 +5,12 @@
         {% block footer_content %}
         <div class="row footer-links">
             <div class="col col-md-3">
-                <div style="font-size: 30px; font-weight: bold;">{{ _('GET IN TOUCH') }}</div>
+                <div class="footer-intro">{{ _('GET IN TOUCH') }}</div>
             </div>
         </div>
 
         <div class="row footer-links">
-            <div class="col col-md-6 social-links">
+            <div class="col col-md-6 col-xs-5 social-links">
                 <ul class="list-unstyled list-inline">
                     <li>
                         <a href="mailto:info@justicehub.in" aria-hidden="true" alt="Justice Hub's Email Address" role="link" title="Email Address" aria-label="Justice Hub's Email Address" target="_blank">
@@ -35,13 +35,13 @@
                 </ul>
             </div>
 
-            <div class="col col-md-1 social-links">
+            <div class="col col-md-1 social-links hidden-xs">
             </div>
 
-            <div class="col col-md-5 social-links" data-module="justicehub_theme_subscribe">
+            <div class="col col-md-5 col-xs-7 social-links" data-module="justicehub_theme_subscribe">
                 <form id="subscribe-form" method="post" action="{{h.url_for('jhsubscribe')}}">
                 <div class="input-group">
-                    <input type="email" class="form-control input-lg" placeholder="Enter you email id" name="email">
+                    <input type="email" class="form-control" placeholder="Enter you email id" name="email">
                     <span class="input-group-btn">
                         <button class="btn btn-default btn-lg" type="submit">Subscribe</button>
                     </span>

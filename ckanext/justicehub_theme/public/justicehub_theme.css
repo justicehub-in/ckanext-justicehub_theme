@@ -31,10 +31,10 @@
     padding-bottom: 0;
 }
 .masthead .navigation .nav-pills li {
-    font-size: 25px;
+    font-size: 1.5em;
     font-weight: bold;
     padding-top: 40px;
-    height: 140px;
+    height: 120px;
 }
 .masthead .navigation .nav-pills li.active {
     border-bottom: 15px solid #f65940;
@@ -49,10 +49,10 @@
     background-color: #403644;
 }
 .masthead .navigation .nav-pills li:last-child {
-    height: 140px;
+    height: 120px;
     background-color: #f65940;
     color: #ffffff;
-    font-size: 25px;
+    font-size: 1.5em;
     padding-left: 5px;
     padding-right: 10px;
 }
@@ -64,8 +64,8 @@
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: -45px;
-    width: 490px;
-    height: 120px;
+    width: 410px;
+    height: 100px;
 }
 .logo img {
     min-width: 100%;
@@ -169,15 +169,18 @@
     margin: 0;
     padding: 0;
     color: #ffffff;
-    font-size: 16px;
+    font-size: 1em;
 }
-
+.footer-intro {
+    font-size: 2.5em;
+    font-weight: bold;
+}
 .footer-disclaimer {
-    font-size: 25px;
+    font-size: 1.4em;
 }
 .footer-disclaimer div:last-child {
     color: #f65940;
-    font-size: 30px;
+    font-size: 1.3em;
     font-style: italic;
 }
 .footer-links i.fa-circle.fa-sm {
@@ -194,7 +197,7 @@
     z-index: 0;
 }
 .footer-links input {
-    font-size: 20px !important;
+    font-size: 1.5em !important;
     font-style: italic;
     color: #b9b4b4;
     padding: 23px 15px;
@@ -302,28 +305,31 @@ aside .module [class^=module] {
 
 /* ----------------------------- homepage --------------------------- */
 [role="main"] .container .row .col1 {
-    padding: 10% 4%;
+    padding: 10% 2%;
+    margin-top: -250px;
 }
 [role="main"] .container .row .col2 {
     padding: 13% 10%;
-    font-size: 25px;
+    font-size: 1.7em;
     font-style: italic;
     color: #707070;
+    margin-top: -250px;
 }
 [role="main"] .container .row .col3 {
     background-color: #403644;
     color: #ffffff;
-    padding: 40px 60px;
+    padding: 20px 60px;
+    margin-top: -310px;
 }
 [role="main"] .container .row .col3 h2{
-    font-size: 40px;
+    font-size: 2.5em;
     border-bottom: 2px solid #f65940;
     padding-bottom: 10px;
     margin-bottom: 30px;
 }
 [role="main"] .container .row .col3 p {
     padding: 10px 0;
-    font-size: 25px;
+    font-size: 1.5em;
 }
 .col-circle {
     position: relative;
@@ -336,19 +342,19 @@ aside .module [class^=module] {
     min-height: 860px;
     background: url('/uploads/admin/JH Logomark.png') no-repeat;
     background-clip: border-box;
-    background-position: -390px -320px;
+    background-position: -270px -200px;
     background-size: 75%;
     padding-top: 320px;
-    padding-left: 200px;
+    padding-left: 150px;
 }
 .search-form .search-input.search-giant .form-control {
     border-radius: 60px;
     line-height: 2;
-    font-size: 32px;
+    font-size: 1.7em;
     font-style: italic;
-    border: 5px solid #f65940;
+    border: 4px solid #f65940;
     padding-left: 30px;
-    height: 100px;
+    height: 80px;
 }
 .homepage .module-search .form-group {
     padding: 10px 0;
@@ -361,7 +367,7 @@ aside .module [class^=module] {
 }
 .search-form .search-input.search-giant .fa {
     color: #403644;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 .homepage .module-search .stats-box .tag {
     background-color: #f65940;
@@ -374,26 +380,32 @@ aside .module [class^=module] {
     color: #f65940;
 }
 .search-form .search-input.search-giant {
-    width: 88%;
+    width: 80%;
 }
 .module-search .search-form {
+    margin-top: -50px;
     padding: 0;
 }
 .search-meta {
-    width: 95%;
+    width: 85%;
 }
 .search-meta .stats {
     color:#f65940;
-    font-size: 80px;
+    font-size: 5em;
     font-weight:bolder;
     display: block;
+    text-align: center;
+}
+.search-meta .stats-box {
+    margin-top: 0;
 }
 .stats-text {
     margin-top: -20px;
     color:#403644;
     font-size:20px;
-    font-weight:bold;
+    font-weight: bolder;
     display: block;
+    text-align: center;
 }
 
 /* -------------------------------------- Mobile adjustments ----------------------------- */
@@ -502,7 +514,42 @@ aside .module [class^=module] {
     [role="main"] .secondary {
         display: none;
     }
+    [role="main"] .container .row .col1,
+    [role="main"] .container .row .col2,
+    [role="main"] .container .row .col3 {
+        margin-top: 0;
+    }
     .module .module-content {
         padding: 0;
+    }
+    .search-meta .stats-box {
+        margin-top: 50px;
+    }
+    .footer-disclaimer {
+        display: none;
+    }
+    .footer-intro {
+        font-size: 1.5em;
+    }
+    .social-links .fa {
+        font-size: 1.5em;
+        width: 33px;
+        height: 33px;
+    }
+    .footer-links .col {
+        padding: 0;
+    }
+    .social-links li {
+        margin-right: 0;
+    }
+    .footer-links {
+        padding: 5px 0;
+    }
+    .footer-links input {
+        padding: 18px 10px;
+        font-size: 1em !important;
+    }
+    .footer-links .input-group-btn .btn {
+        font-size: 12px;
     }
 }
