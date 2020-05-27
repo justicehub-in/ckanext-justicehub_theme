@@ -407,6 +407,34 @@ aside .module [class^=module] {
     display: block;
     text-align: center;
 }
+.label[data-format="doc"],
+.label[data-format*="doc"] {
+    background-color: #115abe;
+}
+.label[data-format="tsv"],
+.label[data-format*="tsv"] {
+    background-color: #7ca34c;
+}
+.label[data-format="zip"],
+.label[data-format*="zip"] {
+    background-color: #7ca34c;
+}
+.label[data-format="ods"],
+.label[data-format*="ods"] {
+    background-color: #2db55d;
+}
+.label[data-format="odb"],
+.label[data-format*="odb"] {
+    background-color: #85c12a;
+}
+.label[data-format="txt"],
+.label[data-format*="txt"] {
+    background-color: #55a4b5;
+}
+.label[data-format="odt"],
+.label[data-format*="odt"] {
+    background-color: #862112;
+}
 
 /* -------------------------------------- Mobile adjustments ----------------------------- */
 @media (max-device-width: 600px) and (orientation: portrait) {
