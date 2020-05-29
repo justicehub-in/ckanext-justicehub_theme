@@ -14,3 +14,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat" />
 {% endblock %}
 
+{%- block scripts %}
+  {{ super() }}
+  {% resource 'ckanext_issues/autocomplete-action-api.js' %}
+{% endblock -%}
