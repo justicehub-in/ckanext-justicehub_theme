@@ -182,7 +182,11 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         pass
 
     def after_show(self, context, pkg_dict):
-        pass
+        partner = toolkit.get_action('get_package_owner_details')(
+                context,
+                data_dict={'org_id': pkg_dict['owner_org']}
+        )
+        pkg_dict['partner'] = partner
 
     def before_index(self, pkg_dict):
         return pkg_dict

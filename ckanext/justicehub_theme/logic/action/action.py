@@ -2,16 +2,9 @@ from ckanext.issues.logic import schema
 from six import string_types
 
 import ckan.lib.dictization.model_dictize as model_dictize
-import ckan.lib.plugins as lib_plugins
-import ckan.logic as logic
 import ckan.model as model
 import ckan.plugins as p
 from ckan.logic import validate
-
-try:
-    import ckan.authz as authz
-except ImportError:
-    import ckan.new_authz as authz
 
 
 @p.toolkit.side_effect_free
@@ -49,6 +42,13 @@ def get_package_owner_details(context, data_dict):
                                                include_extras=True
                                                )
 
+    # NOTE: commented becaues this validation causes solr to fail reindexing
+    # group_plugin = lib_plugins.lookup_group_plugin(partner_dict['type'])
+    # schema = logic.schema.default_show_group_schema()
+    # partner, errors = lib_plugins.plugin_validate(
+    #     group_plugin, context, partner_dict, schema, 'organization_show'
+    # )
+    return partner_dict
 
 
 @p.toolkit.side_effect_free
