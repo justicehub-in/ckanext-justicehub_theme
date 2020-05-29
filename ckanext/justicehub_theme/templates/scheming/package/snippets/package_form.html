@@ -9,6 +9,7 @@
   {%- endif -%}
   {%- set schema = h.scheming_get_dataset_schema(dataset_type) -%}
 
+  {% set dataset_state = [] %}
   {% set org_fields = [] %}
   {% set geo_fields = [] %}
   {% set data_timeline_fields = [] %}
@@ -21,7 +22,10 @@
   {% set extras = [] %}
 
   {%- for field in schema.dataset_fields[4:] -%}
-      {%- if field.field_name in ['owner_org', 'license_id'] -%}
+      {%- if field.field_name in ['verified', 'state'] -%}
+          {% do dataset_state.append(field) %}
+
+      {%- elif field.field_name in ['owner_org', 'license_id'] -%}
           {% do org_fields.append(field) %}
 
       {%- elif field.field_name in ['states', 'district', 'village'] -%}
@@ -61,6 +65,18 @@
     {%- if field.form_snippet is not none -%}
       {%- snippet 'scheming/snippets/form_field.html',
         field=field, data=data, errors=errors, licenses=c.licenses,
+        entity_type='dataset', object_type=dataset_type -%}
+    {%- endif -%}
+    </div>
+  {%- endfor -%}
+  </div>
+
+  <div class="row">
+  {%- for field in dataset_state -%}
+    <div class="col col-md-6">
+    {%- if field.form_snippet is not none -%}
+      {%- snippet 'scheming/snippets/form_field.html',
+        field=field, data=data, errors=errors,
         entity_type='dataset', object_type=dataset_type -%}
     {%- endif -%}
     </div>

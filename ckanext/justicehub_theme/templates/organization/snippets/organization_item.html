@@ -1,5 +1,14 @@
 {% ckan_extends %}
 
+{% block title %}
+    <h3 class="media-heading">
+        {{ organization.display_name }}
+    {% if organization.signed_pledge %}
+        <i class="fa fa-certificate"></i>
+    {% endif %}
+    </h3>
+{% endblock %}
+
 {% block description %}
 {% endblock %}
 

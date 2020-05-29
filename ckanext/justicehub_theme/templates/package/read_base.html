@@ -14,6 +14,9 @@
             {% if pkg.private %}
                 <i style="margin-left: 10px;" class="fa fa-lock fa-lg"></i>
             {% endif %}
+            {% if pkg.verified %}
+                <i style="margin-left: 10px;" class="fa fa-check fa-lg"></i>
+            {% endif %}
             </h1>
             <p class="package-desc"> {{h.get_translated(pkg, 'notes')}}</p>
         </div>
