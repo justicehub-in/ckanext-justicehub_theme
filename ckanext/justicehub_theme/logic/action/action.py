@@ -1,4 +1,5 @@
 from ckanext.issues.logic import schema
+from six import string_types
 
 import ckan.lib.dictization.model_dictize as model_dictize
 import ckan.lib.plugins as lib_plugins
@@ -48,9 +49,40 @@ def get_package_owner_details(context, data_dict):
                                                include_extras=True
                                                )
 
-    group_plugin = lib_plugins.lookup_group_plugin(partner_dict['type'])
-    schema = logic.schema.default_show_group_schema()
-    partner, errors = lib_plugins.plugin_validate(
-        group_plugin, context, partner_dict, schema, 'organization_show'
-    )
-    return partner
+
+
+@p.toolkit.side_effect_free
+def metadata_autocomplete(context, data_dict):
+    session = context['session']
+    field = data_dict['field']
+    term = data_dict['incomplete']
+    limit = data_dict.get('limit', 10)
+    matching = []
+
+    if term and isinstance(term, string_types):
+        q = model.Session.query(model.PackageExtra)
+        results = q.filter(model.PackageExtra.key == field)\
+                .filter(model.PackageExtra.value.ilike('{0}%'.format(term)))\
+                .distinct()\
+                .limit(limit)
+        matching = [result.value for result in results]
+
+    return matching
+
+@p.toolkit.side_effect_free
+def resource_metadata_autocomplete(context, data_dict):
+    session = context['session']
+    field = data_dict['field']
+    term = data_dict['incomplete']
+    limit = data_dict.get('limit', 10)
+    matching = []
+
+    if term and isinstance(term, string_types):
+        results = session.execute("""select extras::json->>'{field}'
+                                  from resource
+                                  where extras::json->>'{field}' ilike '{term}%'
+                                  limit {limit};""".format(field=field, term=term, limit=limit)
+                                  ).fetchall()
+        matching = [result[0] for result in results]
+
+    return matching
