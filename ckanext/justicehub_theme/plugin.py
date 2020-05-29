@@ -23,6 +23,9 @@ clean_dict = logic.clean_dict
 parse_params = logic.parse_params
 tuplize_dict = logic.tuplize_dict
 
+def parse_json(string):
+    return json.loads(string)
+
 def package_activity_stream(id):
     context = {'model': model, 'session': model.Session,
                'user': c.user, 'for_view': True,
@@ -115,7 +118,8 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         # other extensions.
         return {
                 'justicehub_theme_get_package_avg_downloads': get_package_avg_downloads,
-                'justicehub_theme_package_activity_stream': package_activity_stream
+                'justicehub_theme_package_activity_stream': package_activity_stream,
+                'justicehub_theme_parse_json': parse_json
                 }
 
     #IActions

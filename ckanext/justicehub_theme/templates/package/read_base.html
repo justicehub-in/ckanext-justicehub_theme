@@ -124,15 +124,20 @@
     </div>
 
     {% if pkg.links %}
+    {% set links = h.justicehub_theme_parse_json(pkg.links) %}
     <div class="col-xs-12 row page-section">
        <span>{{ _('External Links') }}</span>
-       <ul class="list-unstyled links-list">
-        {% for link in pkg.links %}
+        {% for item in links %}
+           <ul class="list-unstyled links-list list-inline">
+          {% set item = h.composite_get_as_dict(item) %}
           <li>
-              <a href="{{ link }}">{{ link }}</a>
+              <a href="{{ link }}">{{ item['title'] }}</a>
           </li>
+          <li>
+              <p>{{ item['description'] }}</p>
+          </li>
+          </ul>
         {% endfor %}
-      </ul>
     </div>
     {% endif %}
 
