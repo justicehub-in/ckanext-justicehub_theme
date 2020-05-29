@@ -1,0 +1,8 @@
+<div class="form-group control-medium">
+    <label for="field-{{ field.field_name }}" class="control-label">{{ field.label }}</label>
+    <div class="controls">
+        <input id="field-{{ field.field_name }}" name="{{ field.field_name }}" type="text" placeholder="{{ field.form_placeholder }}"
+               value="{{ data[field.field_name] }}" class="form-control" data-module="autocomplete-action-api"
+               data-module-source="{{ field.form_attrs['data-module-source'] }}">
+    </div>
+</div>
