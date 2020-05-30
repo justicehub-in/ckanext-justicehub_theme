@@ -8,7 +8,10 @@ import ckan.logic as logic
 import ckan.model as model
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
-from ckan.common import c
+from ckan.common import c,request
+
+
+import ckan.controllers.organization as org
 
 cached_tables = {}
 
@@ -61,10 +64,29 @@ def get_package_avg_downloads(pkg):
     avg_downloads = total_downloads / float(len(pkg['resources']))
     return int(avg_downloads)
 
+def get_package_visits(pkg):
+    '''
+    Returns the number of times the package is accessed
+    '''
+    connection = model.Session.connection()
+    total = 0
+    recent = 0
+    tracking_summary = get_table('tracking_summary')
+    s = select([tracking_summary.c.package_id,
+                tracking_summary.c.recent_views,
+                tracking_summary.c.running_total]
+        ).where(tracking_summary.c.package_id == pkg['id'])
+    res = connection.execute(s).fetchone()
+    if res:
+        total = res.running_total
+        recent = res.recent_views
+    return {'total' : total,
+            'recent': recent}
 
 class Justicehub_ThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.ITemplateHelpers)
+    plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(plugins.IPackageController)
     plugins.implements(plugins.IActions)
 
@@ -153,3 +175,77 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
 
     def before_index(self, pkg_dict):
         return pkg_dict
+
+    # IRoute
+    def after_map(self, map):
+        map.connect('jhorg_members', '/jhorg/members/{id}',
+                    controller='ckanext.justicehub_theme.plugin:JHOrgController',
+                    action='members')
+        map.connect('jhorg_stats', '/jhorg/stats/{id}',
+                    controller='ckanext.justicehub_theme.plugin:JHOrgController',
+                    action='org_stats')
+        return map
+    
+    def before_map(self, map):
+        map.connect('jhorg_members', '/organization/members/{id}',
+                    controller='ckanext.justicehub_theme.plugin:JHOrgController',
+                    action='members')
+        map.connect('jhorg_stats', '/jhorg/stats/{id}',
+                    controller='ckanext.justicehub_theme.plugin:JHOrgController',
+                    action='org_stats')
+        return map
+
+
+class JHOrgController(org.OrganizationController):
+    def members(self, id):
+        '''
+        Modified core method from 'group' controller.
+        Enable view for non signed in user.
+
+        :param id: id of the organization for which the member list is requested
+        :type id: string
+        :return: the rendered template
+        :rtype: unicode
+        '''
+        group_type = self._ensure_controller_matches_group_type(id)
+
+        context = {'model': model, 'session': model.Session,
+                   'user': c.user}
+
+        data_dict = {'id': id}
+        try:
+            c.members = self._action('member_list')(
+                context, {'id': id, 'object_type': 'user'}
+            )
+            data_dict['include_datasets'] = False
+            c.group_dict = self._action('group_show')(context, data_dict)
+        except NotFound:
+            abort(404, _('Oraganization not found'))
+
+        return self._render_template('organization/jh_members.html', group_type)
+
+    def org_stats(self, id):
+        group_type = self._ensure_controller_matches_group_type(id)
+
+        context = {'model': model, 'session': model.Session,
+                   'user': c.user,
+                   'schema': self._db_to_form_schema(group_type=group_type),
+                   'for_view': True}
+        data_dict = {'id': id, 'type': group_type}
+        # unicode format (decoded from utf8)
+        c.q = ''
+
+        try:
+            data_dict['include_datasets'] = True
+            c.group_dict = self._action('group_show')(context, data_dict)
+            c.group = context['group']
+        except NotFound:
+            abort(404, _('Organization not found'))
+        self._read(id, 999, group_type)
+        downloads = 0
+        visits = 0
+        for package in c.page.items:
+            downloads += get_package_avg_downloads(package)
+            visits += get_package_visits(package)['total']
+        c.group_dict.update({'downloads':downloads, 'visits': visits})
+        return plugins.toolkit.render('organization/stats.html', extra_vars={'group_type': group_type, 'downloads': downloads})

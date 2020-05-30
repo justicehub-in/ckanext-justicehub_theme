@@ -1,0 +1,29 @@
+{% extends "organization/read.html" %}
+{% block groups_search_form %}
+{% endblock %}
+{% block organization_facets %}
+{% endblock %}
+
+{% block subtitle %}{{ _('Stats') }} - {{ c.group_dict.display_name }}{% endblock %}
+
+{% block page_primary_action %}
+{% endblock %}
+
+{% block primary_content_inner %}
+	<div class="row stats-box">
+        <div class="col-xs-6 col-sm-4">
+            <span class="stats">{{ c.group_dict.downloads }}{{ _('+') }}</span>
+            <span class="stats-text">{{ _('DOWNLOADS') }}</span>
+        </div>
+        <div class="col-xs-6 col-sm-4">
+            <span class="stats">{{ c.group_dict.visits }}{{ _('+') }}</span>
+            <span class="stats-text">{{ _('Visits') }}</span>
+        </div>
+        <div class="col-xs-6 col-sm-4">
+            <span class="stats">{{ c.group_dict.num_followers }}{{ _('+') }}</span>
+            <span class="stats-text">{{ _('Followers') }}</span>
+        </div>
+    </div>
+    {% block page_pagination %}
+    {% endblock %}
+{% endblock %}

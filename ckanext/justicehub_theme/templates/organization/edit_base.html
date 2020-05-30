@@ -14,7 +14,7 @@
 
 {% block content_action %}
   {% if organization and h.check_access('organization_update', {'id': organization.id}) %}
-    {% link_for _('View'), controller='organization', action='read', id=organization.name, class_='btn btn-default', icon='eye', named_route=group_type + '_read' %}
+    {% link_for _('View'), controller='organization', action='read', id=organization.name, class_='btn btn-default', named_route=group_type + '_read' %}
   {% endif %}
 {% endblock %}
 

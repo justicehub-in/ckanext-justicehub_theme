@@ -1,0 +1,215 @@
+/* ---------- package-item ------- */
+
+.label {
+    padding: 6px 21px;
+    border-radius: 15px;
+    font-weight: bold;
+}
+.dataset-heading {
+    margin-bottom: 0;
+}
+.dataset-item {
+    border-bottom: none;
+}
+.dataset-org, .downloads, .dataset-heading, .dataset-meta {
+    font-size: 18px;
+    font-weight: bold;
+}
+.dataset-org > a{
+    color: #f65940;
+}
+.downloads, .dataset-meta {
+    color: #bcb4bf;
+}
+.heading {
+    padding-bottom: 20px;
+}
+.org-row {
+    padding-left:50px;
+}
+.org-row .private-icon
+{
+    padding: 0;
+    background: none;
+}
+.org-row .private-icon i {
+    color: #403644;
+}
+.partner-logo a {
+    height: 200px;
+}
+.follow_button a {
+    background-color: #f65940;
+    border-radius: 30px;
+    padding: 5px 50px;
+    color: #ffffff;
+    font-size: 24px;
+    margin-top: 10px;
+    border: 0;
+}
+.follow_button a:hover {
+    color: #f65940;
+    background-color: inherit;
+    border: 1px solid #f65940;
+}
+
+.header-tabs {
+    margin-left: 0;
+}
+.header-tabs .nav-tabs {
+    width: 100%;
+    margin-top: -60px;
+    border-bottom: 2px solid #f65940;
+}
+.header-tabs .nav-tabs li a {
+    border-radius: 0;
+    font-size: 30px;
+}
+
+/* ----------- stages ----------- */
+
+/* ------------ background borders fonts ------ */
+.page-header .content_action {
+    color: #403644;
+}
+.page-header,
+.page-header .nav {
+    background: transparent;
+    border: none;
+}
+.page-header .nav-tabs li.active a,
+.page-header .nav-tabs li.active a:hover,
+.stages li,
+.stages li.active .highlight,
+.metadata-heading,
+aside .module-content {
+    background-color: #403644;
+}
+.page-header .nav-tabs li.active a:hover,
+.stages,
+.stages li.active .highlight,
+.module-heading,
+.metadata-heading,
+aside .module-content {
+    color: #ffffff;
+}
+
+.module-heading,
+.metadata-heading,
+.stages li .highlight {
+    font-weight: bold;
+}
+.metadata-heading,
+.stages li .highlight {
+    font-size: 19px;
+}
+.page-header .nav,
+.page-header .nav li a:hover,
+.stages {
+    border: none;
+    border-bottom: 1px solid #403644;
+}
+.nav-tabs,
+.stages {
+    margin: 50px -65px 0 0;
+}
+.stages li {
+    padding: 0;
+}
+.page-header .nav-tabs li a,
+.stages li .highlight {
+    position: static;
+    text-align: center;
+}
+.stages li.complete .highlight,
+.stages li.uncomplete .highlight {
+    background-color: #ffffff;
+    color: #403644;
+}
+.stages li:before {
+    content: none;
+}
+.stages li:after {
+    top: 0;
+    border:none;
+    margin: 0;
+}
+
+/* --------------- layout sizing ------------- */
+.metadata-heading {
+    padding: 10px 0;
+    margin-left: -30px;
+    width: 55%;
+    display: inline-block;
+    text-align: center;
+}
+
+@media (max-device-width: 600px) and (orientation: portrait) {
+    .metadata-heading {
+        margin-left: 0;
+    }
+}
+
+.wrapper::before {
+    top: auto;
+}
+
+
+/* members table */
+
+.members-table {
+    margin-top: 30px;
+}
+
+.members-table > thead > tr > th{
+    text-align: left;
+    background-color: white;
+    border: 0;
+    border-bottom: 2px solid #f65940;
+    padding: 25px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.members-table > tbody > tr > td{
+    padding: 35px;
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+}
+
+.member_media > img {
+    width: 50px;
+    height: 50px;
+}
+
+.member_media > a {
+    color: black;
+    padding-left: 10px;
+    
+}
+
+.member_action .btn-primary {
+    background-color: #403644;
+    color: #ffffff;
+    border-radius: 30px;
+    padding: 5px 25px;
+    font-size: 20px;
+}
+
+.member_action .delete {
+    background-color: red;
+    color: #ffffff;
+    border-radius: 25px;
+    padding: 5px 10px;
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+.add_member {
+    background-color: #403644;
+    color: #ffffff;
+    border-radius: 30px;
+    padding: 5px 25px;
+    font-size: 20px;
+}
