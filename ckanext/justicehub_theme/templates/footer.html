@@ -39,12 +39,14 @@
             </div>
 
             <div class="col col-md-5 social-links">
+                <form id="subscribe-form" method="post" action="{{h.url_for('jhsubscribe')}}">
                 <div class="input-group">
-                    <input type="url" class="form-control input-lg" placeholder="Enter you email id">
+                    <input type="email" class="form-control input-lg" placeholder="Enter you email id" name="email">
                     <span class="input-group-btn">
-                        <button class="btn btn-default btn-lg" type="button">Subscribe</button>
+                        <button class="btn btn-default btn-lg" type="submit">Subscribe</button>
                     </span>
                 </div>
+                </form>
             </div>
         </div>
 
@@ -102,3 +104,25 @@
     {% endblock %}
 
 </footer>
+<script type="application/javascript">
+function subscribeSubmit(event) {
+  console.log(event);
+  var url = event.target.action;
+  var request = new XMLHttpRequest();
+  request.open('POST', url, true);
+  request.onload = function() { 
+  // success
+    console.log(request.responseText);
+  };
+
+  request.onerror = function() {
+    // request failed
+  };
+
+  request.send(new FormData(event.target));
+  event.preventDefault();
+}
+
+document.getElementById("subscribe-form").addEventListener("submit", subscribeSubmit);
+
+</script>
