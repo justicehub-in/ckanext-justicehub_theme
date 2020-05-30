@@ -12,7 +12,7 @@
 
 {% block primary_content_inner %}
     {% if h.check_access('organization_update', {'id': c.group_dict.id}) %}
-        {% link_for _('Add Member'), controller='organization', action='member_new', id=c.group_dict.id, class_='btn btn-primary add_member', icon='plus-square', named_route=group_type + '_member_new' %}
+        {% link_for _('Add Member'), controller='organization', action='member_new', id=c.group_dict.id, class_='btn btn-primary add_member', named_route=group_type + '_member_new' %}
     {% endif %}
 
 
