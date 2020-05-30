@@ -4,7 +4,7 @@
     height:200px;
 }
 .count {
-    color:#403644;
+    color:#f65940;
 }
 .media-item .media-image {
     height: 130px;
@@ -17,7 +17,6 @@
 
 /*----------------- partner editing data set page css ----------------------*/
 .partner-datset-content{
-    margin-top:60px;
     margin-left:15px;
 }
 
@@ -62,21 +61,12 @@
     border:None;
 }
 
-.page_primary_action > form .col-md-2,.page_primary_action > form .col-md-3{
-   display:None;
-}
-
-.page_primary_action > form .input-group input{
-   border-radius:30px;
-}
-
-.page_primary_action > form .input-group span .btn .btn-default, .page_primary_action > form [class^="input-group"] > :first-child{
-   border-top-right-radius:30px;
-   border-bottom-right-radius:30px;
-}
-
-.page_primary_action{
+.page_primary_action {
    padding-right:0px;
+   margin-bottom: 0;
+}
+.page_primary_action .search-form {
+    margin-bottom: 10px;
 }
 
 .private-icon{

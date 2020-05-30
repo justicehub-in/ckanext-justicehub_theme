@@ -1,5 +1,11 @@
-.issues-home {
-    padding: 0 30px;
+.issues-home .search-form {
+    margin-right: -15px;
+}
+#issues-found,
+.issue-list-group {
+    padding-left: 30px;
+    margin-left: 0;
+    margin-top: 0;
 }
 .issues-home .input-group .btn {
     border-left: none;
