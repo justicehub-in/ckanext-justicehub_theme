@@ -1,3 +1,49 @@
+.footer-links .nav-item a {
+    font-size: 14px;
+}
+.footer-links .input-group-btn .btn {
+    font-size: 16px;
+}
+.nav-pills li {
+    font-size: 18px;
+}
+body,
+.stats-box,
+.search-form .search-input.search-giant input,
+.nav-pills li:last-child {
+    font-size: 20px;
+}
+.col2 p,
+.footer-intro {
+    font-size: 25px;
+}
+.col3 h2 {
+    font-size: 30px;
+}
+.footer-links .nav-item a {
+    font-weight: 400;
+}
+.nav-pills li,
+.footer-disclaimer div:last-child {
+    font-weight: 600;
+}
+.footer-links .input-group-btn .btn {
+    font-weight: 700;
+}
+.stats-box,
+.col3 h2,
+.footer-intro,
+.nav-pills li:last-child {
+    font-weight: 800;
+}
+.search-form .search-input.search-giant input {
+    font-weight: 300;
+}
+.col2 p,
+.footer-disclaimer div:last-child,
+.search-form .search-input.search-giant input {
+    font-style: italic;
+}
 .account-masthead {
     background-color: rgb(40, 40, 40);
     display: none;
@@ -101,7 +147,8 @@
 }
 
 [role="main"], body {
-  font-family: 'Montserrat';
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
   background: none;
   background-color: #ffffff;
 }
@@ -363,10 +410,9 @@ aside .module [class^=module] {
 .search-meta {
     width: 85%;
 }
-.search-meta .stats {
-    color:#f65940;
-    font-size: 5em;
-    font-weight:bolder;
+.stats {
+    color: #f65940;
+    font-size: 60px;
     display: block;
     text-align: center;
 }
