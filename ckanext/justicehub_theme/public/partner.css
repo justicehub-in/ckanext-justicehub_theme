@@ -25,18 +25,10 @@
     height:150px;
 }
 
-.partner-dataset-table > tbody > tr > td  a{
-    font-size:25px;
-}
-
 .partner-dataset-table > thead > tr > th{
     border-bottom:None;
     height:150px;
     vertical-align:middle;
-}
-
-.dataset-notes{
-    font-size:18px;
 }
 
 .context .content_action a {

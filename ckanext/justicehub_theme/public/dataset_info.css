@@ -25,7 +25,6 @@
 }
 .activity .item p {
     margin-left:50px;
-    font-size: 16px;
 }
 
 .activity .item .fa{
@@ -66,15 +65,11 @@
 }
 .stats-text {
     color:#403644;
-    font-size:20px;
     font-weight:bold;
     display: block;
 }
 .pckg_rsrc_actvty {
     background:#403644;
-}
-.additional-info h3 {
-    font-size: 25px;
 }
 .pckg_rsrc_actvty,
 .page-section {
@@ -87,14 +82,12 @@
     margin-left: 0;
 }
 .page-section > span:first-child {
-    font-size: 25px;
     display: inline-block;
     margin-bottom: 30px;
     padding-left: 15px;
 }
 .page-section .links-list {
     padding-left: 15px;
-    font-size: 20px;
     font-weight: normal;
     height: 150px;
 }
@@ -150,7 +143,6 @@
 }
 .pckg_rsrc_actvty h2 {
     font-weight:bolder;
-    font-size: 24px;
     line-height: 1.2;
     color:white;
     text-align:center;
@@ -163,7 +155,6 @@
     border-radius: 30px;
     padding: 5px 50px;
     color: #ffffff;
-    font-size: 24px;
     margin-top: 10px;
 }
 .content_action a:hover {
@@ -181,7 +172,6 @@
 }
 .package-tabs .nav-tabs li a {
     border-radius: 0;
-    font-size: 30px;
 }
 .pkg_tags:nth-child(even) {background-color:#00abb7;}
 .pkg_tags:nth-child(odd) {background-color:#f65940;}
@@ -189,14 +179,12 @@
 .additional-info .table {
     width: 50%;
     margin-left: 25%;
-    font-size: 16px;
 }
 .table-striped thead tr th,
 .table-striped thead tr td {
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 10%;
-    font-size: 20px;
 }
 .table-striped tbody tr th,
 .table-striped tbody tr td {
@@ -232,7 +220,6 @@
 .nav-tabs > li >  a {
     color: #403644;
     border: None;
-    font-size: 20px;
     font-weight: bolder;
 }
 
@@ -256,9 +243,6 @@
 	.nav-tabs > li {
         margin-right:0px;
 	}
-	.nav-tabs > li >  a {
-        font-size: 15px;
-	}
 	.page_primary_action .btn-flat {
 		border-radius:0px;
         margin-right :0px;
@@ -269,6 +253,5 @@
     .additional-info .table {
         width: 100%;
         margin-left: 0;
-        font-size: 16px;
     }
 }

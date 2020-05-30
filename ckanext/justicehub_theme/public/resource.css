@@ -3,7 +3,6 @@
     border-radius: 30px;
     padding: 5px 30px;
     color: #ffffff;
-    font-size: 15px;
     margin-top: 10px;
     border: none;
 }
@@ -14,22 +13,16 @@
   color: #f65940;
 }
 
-.resource-desc{
-   font-size:20px;
-}
-
 .res-line-margin-bottom{
    margin-bottom:20px;
 }
 
 .res-title{
-   font-size:20px;
    color:#f65940;
    font-weight:bolder;
 }
 
 .res-url-src{
-   font-size:17px;
    color : #403644;
 }
 
@@ -93,7 +86,6 @@
 .module .rsrc-list-side .rsrc-item-side a{
    margin-top:5px;
    margin-left:0px;
-   font-size:18px;
    font-weight:bolder;
    padding-left:0px;
 }
@@ -101,7 +93,6 @@
 
 .rsrc-item-desc-side{
    color: #f65940;
-   font-size:15px;
    border-bottom: 1px dotted #dddddd;
    padding-left:15px;
 }
@@ -121,13 +112,11 @@
 
 
 .content_action .rsrc-edit-actn-btn{
-   font-size:15px;
    padding: 5px 20px;
 }
 
 
 .module-narrow h2.social-heading {
-    font-size: 20px;
     background-color: #ffffff;
     color: #f65940;
     height: 70px;

@@ -31,8 +31,6 @@
     padding-bottom: 0;
 }
 .masthead .navigation .nav-pills li {
-    font-size: 1.5em;
-    font-weight: bold;
     padding-top: 40px;
     height: 120px;
 }
@@ -52,7 +50,6 @@
     height: 120px;
     background-color: #f65940;
     color: #ffffff;
-    font-size: 1.5em;
     padding-left: 5px;
     padding-right: 10px;
 }
@@ -169,19 +166,9 @@
     margin: 0;
     padding: 0;
     color: #ffffff;
-    font-size: 1em;
-}
-.footer-intro {
-    font-size: 2.5em;
-    font-weight: bold;
-}
-.footer-disclaimer {
-    font-size: 1.4em;
 }
 .footer-disclaimer div:last-child {
     color: #f65940;
-    font-size: 1.3em;
-    font-style: italic;
 }
 .footer-links i.fa-circle.fa-sm {
     font-size: 9px;
@@ -197,7 +184,6 @@
     z-index: 0;
 }
 .footer-links input {
-    font-size: 1.5em !important;
     font-style: italic;
     color: #b9b4b4;
     padding: 23px 15px;
@@ -216,7 +202,6 @@
 }
 .module-narrow h1.heading,
 .module-narrow h2.module-heading {
-    font-size: 22px;
     background-color: #f65940;
     height: 100px;
     padding-left: 25px;
@@ -234,7 +219,6 @@
 .module-heading {
     color: #ffffff;
     font-weight: bold;
-    font-size: 1.5em;
     background-color: #403644;
     border-color: #f87c69;
     margin-bottom: 0 !important;
@@ -245,9 +229,6 @@
     padding-left: 0;
 }
 
-h1 {
-    font-size: 30px;
-}
 hr {
     margin-top: 20px;
     border-top: 1.5px solid #403644;
@@ -262,7 +243,6 @@ hr {
     color: #ffffff;
     border-radius: 30px;
     padding: 5px 25px;
-    font-size: 20px;
 }
 [role="main"] .secondary {
     padding-right: 0;
@@ -286,13 +266,11 @@ aside .module [class^=module] {
 }
 .login-sidebar-heading {
     color: #ffffff;
-    font-size: 28px;
     padding: 50px 60px;
     padding-bottom: 10px;
 }
 .login-sidebar p {
     padding: 15px 5px;
-    font-size: 16px;
 }
 .login-sidebar p.action {
     background-color: #f65940;
@@ -310,7 +288,6 @@ aside .module [class^=module] {
 }
 [role="main"] .container .row .col2 {
     padding: 13% 10%;
-    font-size: 1.7em;
     font-style: italic;
     color: #707070;
     margin-top: -250px;
@@ -322,14 +299,12 @@ aside .module [class^=module] {
     margin-top: -310px;
 }
 [role="main"] .container .row .col3 h2{
-    font-size: 2.5em;
     border-bottom: 2px solid #f65940;
     padding-bottom: 10px;
     margin-bottom: 30px;
 }
 [role="main"] .container .row .col3 p {
     padding: 10px 0;
-    font-size: 1.5em;
 }
 .col-circle {
     position: relative;
@@ -350,7 +325,6 @@ aside .module [class^=module] {
 .search-form .search-input.search-giant .form-control {
     border-radius: 60px;
     line-height: 2;
-    font-size: 1.7em;
     font-style: italic;
     border: 4px solid #f65940;
     padding-left: 30px;
@@ -464,8 +438,6 @@ aside .module [class^=module] {
     }
     .masthead .navigation .nav-pills li {
         height: auto;
-        font-size: 18px;
-        font-weight: bold;
         padding-top: 5px;
         padding-bottom: 5px;
     }
@@ -480,7 +452,6 @@ aside .module [class^=module] {
         background-color: #f65940;
         color: #ffffff;
         padding-top: 5px;
-        font-size: 18px;
         border-bottom: none;
     }
     .masthead .navigation .nav-pills li:last-child a:hover {
@@ -523,12 +494,8 @@ aside .module [class^=module] {
         width: 120%;
         margin-left: -80px;
     }
-    .search-meta .stats {
-        font-size:50px;
-    }
     .search-meta .stats-text {
         margin-top: 0;
-        font-size: 16px;
     }
     .col-circle i.fa {
         font-size: 100px;
@@ -555,9 +522,6 @@ aside .module [class^=module] {
     }
     .footer-disclaimer {
         display: none;
-    }
-    .footer-intro {
-        font-size: 1.5em;
     }
     .social-links .fa {
         font-size: 1.5em;
