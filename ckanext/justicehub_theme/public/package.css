@@ -4,7 +4,8 @@
     padding-top: 20px;
 }
 .label {
-    padding: 5px 20px;
+    display: inline-block;
+    padding: 5px 15px;
     border-radius: 25px;
 }
 .dataset-heading {

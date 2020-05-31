@@ -11,12 +11,12 @@
               {{ h.link_to(h.truncate(title, truncate_title), h.url_for(package.type + '_read', controller='package', action='read', id=package.name)) }}
           {% endblock %}
 
-
           {% block heading_private %}
             {% if package.private %}
-            <span class="dataset-private label label-inverse private-icon">
-                <i class="fa fa-lock fa-lg" data-toggle="tooltip"></i>
-            </span>
+                <i class="fa fa-lock" data-toggle="tooltip"></i>
+            {% endif %}
+            {% if package.verified %}
+                <i class="fa fa-check" data-toggle="tooltip"></i>
             {% endif %}
           {% endblock %}
 
@@ -67,8 +67,8 @@
         <div class="col col-md-5">
             {% block package_meta %}
             <div class="dataset-meta">
-                <span>{{ package.update_frequency or _('Not updated') }}</span>
-                <span>{{ _('|') }}</span>
+                <!--span>{#{ package.update_frequency or _('Not updated') #}}</span>
+                <span>{#{ _('|') }#}</span-->
                 <span>{{ _('Data Timeline:') }} {% if package.start_year %}{{ package.start_year }}-{{ package.end_year }} {% else %}{{ _('Not Available')}} {% endif %}</span>
             </div>
             {% endblock %}
@@ -85,8 +85,9 @@
                     {% block resources_inner %}
                     {% for resource in h.dict_list_reduce(package.resources, 'format') %}
                         <li>
-                        <span class="label label-default" data-format="{{ resource.lower() }}">{{ resource }}</span>
-                        <!-- a href="{{ h.url_for(controller='package', action='read', id=package.name) }}" class="label label-default" data-format="{{ resource.lower() }}">{{ resource }}</a-->
+                        <a href="{{ h.url_for(controller='package', action='read', id=package.name) }}"
+                           class="label label-default"
+                           data-format="{{ resource.lower() }}">{{ resource | upper }}</a>
                         </li>
                     {% endfor %}
                     {% endblock %}
