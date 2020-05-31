@@ -1,8 +1,6 @@
 .activity .item::after{
   margin-bottom:40px;
 }
-
-
 .activity .item {
     font-weight: normal;
     font-style: italic;
@@ -148,6 +146,11 @@
 .package-tabs {
     margin-left: 0;
 }
+.package-tabs .nav-tabs::before,
+.package-tabs .nav-tabs::after {
+    margin-bottom: 2px;
+    border: none;
+}
 .package-tabs .nav-tabs {
     width: 100%;
     margin-top: -60px;
@@ -200,22 +203,20 @@
 	border-bottom:1px solid #403644;
 }
 
+.nav-tabs > li {
+    margin-bottom: -2px;
+}
 .nav-tabs > li >  a {
     color: #403644;
     border: None;
-    font-weight: bolder;
 }
-
 .nav-tabs > li >  a > i {
     display:None;
 }
-
 .nav-tabs > li.active >  a {
 	background: #403644;
     color:#ffffff;
-    border: None;
 }
-
 .page_primary_action .btn-flat {
 	border-radius:0px;
     margin-right :40px;
