@@ -3,15 +3,16 @@
 {% block search_input %}
 <div class="col col-md-3 pull-left input-group">
     <div class="form-control input-lg square-border dataset-count-box">
-        {% if count_box_title %}
-          <span>{{ count_box_title }}</span>
-        {% elif type %}
-            <span>{{ type | capitalize }}{{_('s')}}</span>
-        {% else %}
-          <span>{{_('DATA')}}</span>
-        {% endif %}
-
-        <span class="dataset-count">{{ _('[') }}{{ c.page.items | length }}{{ _(']') }}</span>
+        <span>
+            {% if count_box_title %}
+                {{ count_box_title }}
+            {% elif type %}
+                {{ type | upper }}{{_('S')}}
+            {% else %}
+              {{_('DATA')}}
+            {% endif %}
+            <span class="dataset-count">{{ _('[') }}{{ c.page.items | length }}{{ _(']') }}</span>
+        </span>
     </div>
 </div>
 
@@ -20,7 +21,7 @@
   {% block search_input_button %}
   <span class="input-group-btn">
     <button class="btn btn-default btn-lg square-border" type="submit" value="search">
-      <i class="fa fa-search fa-flip-horizontal"></i>
+      <i class="fa fa-search fa-flip-horizontal fa-lg"></i>
     </button>
   </span>
   {% endblock %}

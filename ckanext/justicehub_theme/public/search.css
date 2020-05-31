@@ -1,12 +1,12 @@
 .field-giant-search {
 }
 .dataset-count-box {
-    color: #202020;
-    padding: 20px 0 !important;
-    text-align: center;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
 }
 .dataset-count-box span {
-    font-weight: bold;
+    margin: auto;
 }
 .dataset-count {
     color: #f65940;
@@ -21,7 +21,8 @@
 .filters .module-content {
     height: 100%;
 }
-.nav-facet .nav-item.active > a{
+.nav-facet .nav-item.active,
+.nav-facet .nav-item.active a {
     background-color: #f65940;
     color: #ffffff;
 }
@@ -31,13 +32,18 @@
 .nav-facet .nav-item > a {
     color: #ffffff;
 }
+.nav-facet .nav-item:hover,
 .nav-facet .nav-item > a:hover {
     color: #403644;
     background-color: #ffffff;
 }
-.nav-facet .nav-item > a:hover::after {
+.nav-facet .nav-item.active > a::before {
+    border-left: none;
+}
+.nav-facet .nav-item:not(.active) > a:hover::after {
     background: none;
 }
+.filters .module-content.empty,
 .filters .nav-facet .nav-item {
     padding-left: 40px;
     border-bottom: none;
