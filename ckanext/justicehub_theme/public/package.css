@@ -6,7 +6,6 @@
 .label {
     padding: 5px 20px;
     border-radius: 25px;
-    font-weight: bold;
 }
 .dataset-heading {
     margin-bottom: 0;
@@ -14,9 +13,6 @@
 }
 .dataset-item {
     border-bottom: none;
-}
-.downloads, .dataset-meta {
-    font-style: italic;
 }
 .dataset-org > a{
     color: #f65940;
@@ -66,7 +62,6 @@
     color: #ffffff;
 }
 
-.module-heading,
 .metadata-heading,
 .stages li .highlight {
     font-weight: bold;

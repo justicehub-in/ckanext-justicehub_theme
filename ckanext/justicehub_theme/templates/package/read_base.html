@@ -158,9 +158,9 @@
 <div class="row package-tabs">
     <ul class="nav nav-tabs">
         {% block content_primary_nav %}
-        {{ h.build_nav_icon('dataset_read', _('Files'), id=pkg.name) }}
+        {{ h.build_nav_icon('dataset_read', _('FILES'), id=pkg.name) }}
         {% if h.issues_enabled(pkg) %}
-        {{ h.build_nav_icon('issues_dataset', _('Issues'), dataset_id=pkg.name) }}
+        {{ h.build_nav_icon('issues_dataset', _('ISSUES'), dataset_id=pkg.name) }}
         {% endif %}
         {% endblock %}
     </ul>
