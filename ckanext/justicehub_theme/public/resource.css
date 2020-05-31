@@ -1,3 +1,17 @@
+.resource-item .heading {
+    color:#403644;
+}
+.format-label {
+    margin-top:10px;
+}
+.description {
+    color:#f65940;
+    font-size:16px;
+    font-weight:bold;
+}
+.dropdown-toggle {
+    background:#403644;
+}
 .btn-action{
     background-color: #f65940;
     border-radius: 30px;
