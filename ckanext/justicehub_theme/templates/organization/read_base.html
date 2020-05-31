@@ -11,8 +11,8 @@
 <div class="row top-section">
     
     {% block image %}
-        <div class="image dataset-org col-sm-3 col-md-3 col-xs-12 image-box partner-logo">
-        <a href="{{ url }}">
+        <div class="image dataset-org col-sm-3 col-md-3 col-xs-12">
+        <a href="{{ url }}" class="image-box partner-logo">
             <img src="{{ c.group_dict.image_display_url or h.url_for_static('/base/images/placeholder-organization.png') }}" class="media-image" alt="{{ c.group_dict.name }}" />
         </a>
         </div>

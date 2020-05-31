@@ -1,19 +1,18 @@
 .media-item {
     color:#f65940;
-    margin:20px;
-    height:200px;
+    width:200px;
+}
+.count,
+.media-item .media-heading {
+    line-height: 1;
+    margin-bottom: 0;
 }
 .count {
     color:#f65940;
 }
-.media-item .media-image {
-    height: 130px;
-    width: 150px;
+.media-logo {
+    height: 150px;
 }
-.media-item {
-    height: 210px;
-}
-
 
 /*----------------- partner editing data set page css ----------------------*/
 .partner-datset-content{

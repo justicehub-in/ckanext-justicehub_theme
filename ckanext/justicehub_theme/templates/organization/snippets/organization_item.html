@@ -1,5 +1,11 @@
 {% ckan_extends %}
 
+{% block image %}
+<div class="image-box media-logo">
+    <img src="{{ organization.image_display_url or h.url_for_static('/base/images/placeholder-organization.png') }}" alt="{{ organization.name }}" class="img-responsive media-image">
+</div>
+{% endblock %}
+
 {% block title %}
     <h3 class="media-heading">
         {{ organization.display_name }}

@@ -34,7 +34,7 @@
 .org-row .private-icon i {
     color: #403644;
 }
-.partner-logo a {
+.partner-logo {
     height: 200px;
 }
 .follow_button a {

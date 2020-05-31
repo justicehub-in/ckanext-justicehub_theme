@@ -68,6 +68,19 @@ h1,
 .search-form .search-input.search-giant input {
     font-style: italic;
 }
+
+/* ----------------------- images --------------------------- */
+/* Ref: https://stackoverflow.com/a/36311846/3860168 */
+.image-box {
+    display:flex;
+    justify-content:center;
+    align-items: center;
+}
+.image-box img.media-image {
+    margin:auto;
+}
+
+
 .account-masthead {
     background-color: rgb(40, 40, 40);
     display: none;
