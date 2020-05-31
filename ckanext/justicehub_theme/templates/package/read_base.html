@@ -63,6 +63,13 @@
         {{ c.group_dict.display_name }}
         </a>
         </div>
+        <div class="row">
+            <div class="col col-md-3">
+            </div>
+            <div class="col col-md-4 dataset-org">
+            <a href="{{ h.url_for(controller='organization', action='read', id=pkg.organization.id) }}">{{ pkg.organization.title}}</a>
+            </div>
+        </div>
         <div class="row partner-links">
             <div class="col col-md-12 social-links">
             <ul class="list-unstyled list-inline">
