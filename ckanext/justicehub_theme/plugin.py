@@ -268,7 +268,8 @@ class SubscribeController(base.BaseController):
         basic_auth_key = config.get("mailchimp_api_key", "")
         subscriber_list_id = config.get("mailchimp_list_id", "")
         subscriber_tag_id = config.get("mailchimp_tag_id", "")
-        url = "https://us19.api.mailchimp.com/3.0/lists/" + subscriber_list_id + "/members"
+        mailchimp_base_url = config.get("mailchimp_base_url", "")
+        url = mailchimp_base_url + subscriber_list_id + "/members"
 
         request_body = clean_dict(dict_fns.unflatten(
                     tuplize_dict(parse_params(request.params))))
@@ -282,13 +283,11 @@ class SubscribeController(base.BaseController):
         'Authorization': 'Basic '+ basic_auth_key
         }
 
-        print payload
-
         response = requests.request("POST", url, headers=headers, data = json.dumps(payload))
 
         print(response.text.encode('utf8'))
 
-        tag_url = "https://us19.api.mailchimp.com/3.0/lists/" + subscriber_list_id + "/segments/" + subscriber_tag_id + "/members"
+        tag_url = mailchimp_base_url + subscriber_list_id + "/segments/" + subscriber_tag_id + "/members"
 
         payload = {
             "email_address": str(request_body.get("email", ""))
@@ -296,6 +295,4 @@ class SubscribeController(base.BaseController):
 
         response = requests.request("POST", tag_url, headers=headers, data = json.dumps(payload))
 
-        print(response.text.encode('utf8'))
-
-
+        print response.text.encode('utf8')
