@@ -187,9 +187,8 @@ h1,
   box-shadow: none;
   border: none;
 }
-.module > .module-content:nth-child(2),
 .module-content {
-    padding: 0;
+    padding-right: 5px;
 }
 .module-content:last-child {
   padding-bottom: 0px;
@@ -338,6 +337,7 @@ h1,
 
 .primary {
     padding-left: 0;
+    padding-right: 0;
 }
 
 hr {
