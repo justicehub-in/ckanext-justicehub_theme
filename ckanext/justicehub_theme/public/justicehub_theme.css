@@ -1,8 +1,15 @@
 /* ---------------------- Site Fonts ------------------- */
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400; /* Regular */
+}
 .count,
 .footer-links .nav-item a {
     font-size: 14px;
 }
+.sort-box,
+.form-control,
+.input-group-addon,
 .package-item-row,
 .footer-links .input-group-btn .btn {
     font-size: 16px;
@@ -52,6 +59,9 @@ h1,
 .media-item .media-heading {
     font-weight: 600; /* Semi Bold */
 }
+.sort-box,
+.form-control,
+.input-group-addon,
 .col3 h2,
 .nav-tabs > li >  a,
 .content_action a,
@@ -196,8 +206,6 @@ h1,
 }
 
 [role="main"], body {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 400; /* Regular */
   background: none;
   background-color: #ffffff;
 }

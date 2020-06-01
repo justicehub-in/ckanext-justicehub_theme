@@ -34,14 +34,6 @@
 .control-label {
     color: #403644;
 }
-.select2-results .select2-highlighted,
-.control-label,
-.dataset-form .form-actions .btn-primary,
-.dataset-form .form-actions .btn-primary:focus,
-.select2-container-multi .select2-choices > li.select2-search-choice:nth-child(2n),
-.select2-container-multi .select2-choices > li.select2-search-choice:nth-child(2n+1) {
-    font-weight: bold;
-}
 .page_primary_action .btn.btn-default,
 .controls > input:first-child,
 .input-group > *:first-child,
@@ -83,33 +75,11 @@ fieldset.checkboxes > label > input,
     box-shadow: none;
 }
 .page_primary_action .btn.btn-default,
-.controls > *:first-child,
-.controls > a.btn,
-.dataset-form .form-actions .btn-danger,
-.dataset-form .form-actions .btn-finish,
-.dataset-form .form-actions .btn-primary,
-.input-group > *:first-child,
-.editor .editor-info-block,
-fieldset.radios label,
-fieldset.checkboxes label,
-fieldset.checkboxes + label,
-.select2-container-multi .select2-choices > li.select2-search-choice {
-    font-size: 18px;
-}
-fieldset.radios label,
-fieldset.checkboxes label,
-fieldset.checkboxes + label {
-    font-weight: normal;
-}
-.page_primary_action .btn.btn-default,
 .controls > a.btn,
 .controls .btn,
 .dataset-form .form-actions .btn-finish,
 .select2-container-multi .select2-choices > li.select2-search-choice {
     background-color: #403644;
-}
-.sort-box {
-    font-size: 25px;
 }
 .sort-box,
 .sort-box:focus,
@@ -137,9 +107,6 @@ fieldset.checkboxes + label {
 .select2-container-multi .select2-choices > li.select2-search-choice:nth-child(2n+1) {
     background: none;
     background-color: #403644 !important;
-}
-.control-label {
-    font-size: 21px;
 }
 #field-giant-search:focus,
 .input-group .input-group-addon {
@@ -253,8 +220,6 @@ input[type="month"].form-control {
 .btn-register:active,
 .btn-register:hover,
 .btn-register {
-    font-size: 30px;
-    font-weight: bold;
     color: white !important;
     border: none;
     background-color: #f65940 !important;
@@ -272,14 +237,12 @@ input[type="month"].form-control {
     background-color: #ffffff;
     border: none;
     color: #f65940;
-    font-size: 18px;
     padding-right: 0;
 }
 .login-form .form-actions .btn-primary {
     background-color: #403644;
     border-radius: 30px;
     color: #ffffff;
-    font-size: 23px;
     padding: 6px 40px;
     float: right;
 }

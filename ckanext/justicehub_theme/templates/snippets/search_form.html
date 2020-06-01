@@ -7,7 +7,7 @@
 {% set form_id = form_id if form_id else false %}
 
 <form {% if form_id %}id="{{ form_id }}" {% endif %}class="search-form{% if no_bottom_border %} no-bottom-border{% endif %}" method="get" data-module="select-switch">
-<div class="col col-md-3 col-xs-4 input-group pull-left">
+<div class="col col-md-3 col-xs-5 input-group pull-left">
     <div class="form-control input-lg square-border dataset-count-box">
         <span>
             {% if count_box_title %}
@@ -24,12 +24,12 @@
 
 {% block search_sortby %}
 {% if sorting %}
-  <div class="col col-md-3 col-xs-8 input-group pull-right">
+  <div class="col col-md-3 col-xs-7 input-group pull-right">
     <span class="input-group-addon square-border bg-clear">{{ _('SORT BY') }}</span>
     <select id="field-order-by" name="sort" class="form-control input-lg square-border sort-box">
       {% for label, value in sorting %}
         {% if label and value %}
-          <option value="{{ value }}"{% if sorting_selected == value %} selected="selected"{% endif %}>{{ label }}</option>
+          <option value="{{ value }}"{% if sorting_selected == value %} selected="selected"{% endif %}>{{ label | upper }}</option>
         {% endif %}
       {% endfor %}
     </select>

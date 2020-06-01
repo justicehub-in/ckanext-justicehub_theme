@@ -36,6 +36,7 @@
     display: flex !important;
     justify-content: center;
     align-items: center;
+    padding: 10px;
 }
 .dataset-count-box span {
     margin: auto;
