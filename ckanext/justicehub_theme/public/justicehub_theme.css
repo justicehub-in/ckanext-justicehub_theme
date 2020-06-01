@@ -415,27 +415,11 @@ aside .module [class^=module] {
     padding-top: 320px;
     padding-left: 150px;
 }
-.search-form .search-input.search-giant .form-control {
-    border-radius: 60px;
-    line-height: 2;
-    font-style: italic;
-    border: 4px solid #f65940;
-    padding-left: 30px;
-    height: 80px;
-}
-.homepage .module-search .form-group {
-    padding: 10px 0;
-}
 .footer-intro-invert,
 .homepage .module-search .module-content,
-.homepage .search-form .search-giant,
 .homepage .module-search .stats-box {
     background: transparent;
     color: #403644;
-}
-.search-form .search-input.search-giant .fa {
-    color: #403644;
-    margin-right: 10px;
 }
 .homepage .module-search .stats-box .tag {
     background-color: #f65940;
@@ -446,9 +430,6 @@ aside .module [class^=module] {
 .homepage .module-search .stats-box .tag:hover {
     background-color: inherit;
     color: #f65940;
-}
-.search-form .search-input.search-giant {
-    width: 80%;
 }
 .module-search .search-form {
     margin-top: -50px;
@@ -569,11 +550,6 @@ aside .module [class^=module] {
     .login-sidebar {
         height: 100%;
     }
-    .search-form .search-input.search-giant .form-control {
-        line-height: 1;
-        height: 65px;
-        border: 3px solid #f65940;
-    }
     .homepage .module-search {
         background-clip: border-box;
         background-position: -155px -95px;
@@ -583,10 +559,6 @@ aside .module [class^=module] {
         min-height: 500px;
         border-bottom: 2px solid #f65940;
         margin-bottom: 50px;
-    }
-    .search-form .search-input.search-giant {
-        width: 100%;
-        margin-bottom: 80px;
     }
     .search-meta {
         width: 120%;
