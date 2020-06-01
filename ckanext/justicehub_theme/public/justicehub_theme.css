@@ -81,7 +81,8 @@ h1,
 }
 
 /* ----------------------- colors ------------------------- */
-.fa-certificate {
+.fa-certificate,
+.fa-check {
     color: #f65940;
 }
 
