@@ -28,8 +28,10 @@ body,
 .dataset-heading,
 .dataset-org,
 .res-actions a,
+.issues-actions a,
 .content_action a,
 .btn-primary,
+#field-giant-search,
 .search-form .search-input.search-giant input,
 .nav-pills li:last-child {
     font-size: 20px;
@@ -45,6 +47,7 @@ h1,
     font-size: 30px;
 }
 .footer-links .nav-item a,
+#field-giant-search,
 .search-form .search-input.search-giant input {
     font-weight: 300; /* Light */
 }
@@ -79,6 +82,7 @@ h1,
 .downloads,
 .footer-disclaimer div:last-child,
 .filters .module-content.empty,
+#field-giant-search,
 .search-form .search-input.search-giant input {
     font-style: italic;
 }
