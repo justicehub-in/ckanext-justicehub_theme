@@ -13,6 +13,12 @@
 .media-logo {
     height: 150px;
 }
+.partner-links.social-links .fa:hover {
+    background-color: #ffffff;
+    color: #f65940;
+    border: 1px solid #f65940;
+}
+
 
 /*----------------- partner editing data set page css ----------------------*/
 .partner-datset-content{
