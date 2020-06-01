@@ -43,6 +43,9 @@
 .dataset-count {
     color: #f65940;
 }
+.empty, .extra {
+    padding-left: 20px;
+}
 .filters .module-heading {
     color: #ffffff;
     background-color: #403644;

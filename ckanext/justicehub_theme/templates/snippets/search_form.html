@@ -7,8 +7,7 @@
 {% set form_id = form_id if form_id else false %}
 
 <form {% if form_id %}id="{{ form_id }}" {% endif %}class="search-form{% if no_bottom_border %} no-bottom-border{% endif %}" method="get" data-module="select-switch">
-{% block search_input %}
-<div class="col col-md-3 pull-left input-group">
+<div class="col col-md-3 col-xs-4 input-group pull-left">
     <div class="form-control input-lg square-border dataset-count-box">
         <span>
             {% if count_box_title %}
@@ -23,21 +22,9 @@
     </div>
 </div>
 
-<div class="col col-md-6 input-group pull-left">
-  <input aria-label="{% block header_site_search_label %}{{ placeholder }}{% endblock %}" id="field-giant-search" type="text" class="form-control input-lg square-border" name="q" value="{{ query }}" autocomplete="off" placeholder="{{ placeholder }}">
-  {% block search_input_button %}
-  <span class="input-group-btn">
-    <button class="btn btn-default btn-lg square-border" type="submit" value="search">
-      <i class="fa fa-search fa-flip-horizontal fa-lg"></i>
-    </button>
-  </span>
-  {% endblock %}
-</div>
-{% endblock %}
-
 {% block search_sortby %}
 {% if sorting %}
-  <div class="col col-md-3 input-group">
+  <div class="col col-md-3 col-xs-8 input-group pull-right">
     <span class="input-group-addon square-border bg-clear">{{ _('SORT BY') }}</span>
     <select id="field-order-by" name="sort" class="form-control input-lg square-border sort-box">
       {% for label, value in sorting %}
@@ -53,11 +40,25 @@
 {% endif %}
 {% endblock %}
 
+{% block search_input %}
+<div class="col col-md-6 col-xs-12 input-group">
+  <input aria-label="{% block header_site_search_label %}{{ placeholder }}{% endblock %}" id="field-giant-search" type="text" class="form-control input-lg square-border" name="q" value="{{ query }}" autocomplete="off" placeholder="{{ placeholder }}">
+  {% block search_input_button %}
+  <span class="input-group-btn">
+    <button class="btn btn-default btn-lg square-border" type="submit" value="search">
+      <i class="fa fa-search fa-flip-horizontal fa-lg"></i>
+    </button>
+  </span>
+  {% endblock %}
+</div>
+{% endblock %}
 
 {% block search_title %}
     {% if not error and count == 0 %}
-      <h2>{% snippet 'snippets/search_result_text.html', query=query, count=count, type=type %}</h2>
-      <p class="extra">Please try another search.</p>
+      <div class="extra">
+          <h2>{% snippet 'snippets/search_result_text.html', query=query, count=count, type=type %}</h2>
+          <p>Please try another search.</p>
+      </div>
     {% endif %}
 {% endblock %}
 
