@@ -22,6 +22,9 @@
             {% if c.group_dict.state == 'deleted' %}
             [{{ _('Deleted') }}]
             {% endif %}
+            {% if c.group_dict.signed_pledge %}
+                <i class="fa fa-certificate"></i>
+            {% endif %}
         </h1>
         {% block description %}
         {% if c.group_dict.description %}

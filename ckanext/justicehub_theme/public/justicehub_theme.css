@@ -80,6 +80,11 @@ h1,
     margin:auto;
 }
 
+/* ----------------------- colors ------------------------- */
+.fa-certificate {
+    color: #f65940;
+}
+
 
 .account-masthead {
     background-color: rgb(40, 40, 40);
