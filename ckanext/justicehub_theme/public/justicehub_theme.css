@@ -90,7 +90,9 @@ h1,
     color: #f65940;
 }
 
-
+.btn {
+    padding: 8px 25px;
+}
 .account-masthead {
     background-color: rgb(40, 40, 40);
     display: none;
@@ -339,7 +341,7 @@ hr {
     background-color: #403644;
     color: #ffffff;
     border-radius: 30px;
-    padding: 8px 25px;
+    padding: 5px 25px;
 }
 [role="main"] .secondary {
     padding-right: 0;

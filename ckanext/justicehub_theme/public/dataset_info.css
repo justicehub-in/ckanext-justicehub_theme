@@ -191,18 +191,17 @@
 .dropdown-toggle {
     border-radius: 30px;
 }
-.fa-bars+span {
+.btn-default .fa-bars+span {
     display: none;
 }
-.fa-bars::before {
+.btn-default .fa-bars::before {
     display: none;
 }
-.fa-bars:after {
+.btn-default .fa-bars:after {
     content: ' REORDER';
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    font-size: 14px;
-    padding: 8px 15px;
+    font-size: 20px;
 }
 
 /*----------------- data set editing page css ----------------------*/
