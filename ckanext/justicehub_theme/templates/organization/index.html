@@ -14,7 +14,7 @@
 
 {% block page_primary_action %}
   {% if h.check_access('organization_create') %}
-    {% link_for _('Add Partner'), controller='organization', action='new', class_='btn btn-primary', named_route=group_type + '_new' %}
+    {% link_for _('ADD PARTNER'), controller='organization', action='new', class_='btn btn-primary pull-right', named_route=group_type + '_new' %}
   {% endif %}
 {% endblock %}
 
