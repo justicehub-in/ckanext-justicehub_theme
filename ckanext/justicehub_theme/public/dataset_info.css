@@ -22,7 +22,7 @@
     font-size: 25px;
 }
 .activity .item p {
-    margin-left:50px;
+    margin-left:60px;
 }
 
 .activity .item .fa{
@@ -34,7 +34,7 @@
 }
 
 .activity .item a{
-  color:white;
+  color: #bcb4bf;
 }
 
 .activity {
@@ -65,7 +65,6 @@
 }
 .pckg_rsrc_actvty,
 .page-section {
-    font-weight: bolder;
     border-top: 2px solid #f65940;
     padding-top: 20px;
 }
@@ -79,23 +78,23 @@
     padding-left: 15px;
 }
 .page-section .links-list {
-    padding-left: 15px;
+    padding-left: 0;
     font-weight: normal;
     height: 150px;
 }
 .page-section .links-list a {
     color: #f65940;
 }
-.resources {
-    padding: 10px 0;
-}
 .top-section {
     margin: 0 20px;
-    margin-bottom: 100px;
+    margin-bottom: 250px;
 }
 .package-desc {
     width:75%;
-    margin-bottom:50px;
+    margin-bottom:20px;
+}
+.meta-desc {
+    padding: 10px 0;
 }
 /* Ref: https://stackoverflow.com/a/36311846/3860168 */
 .org-box {
@@ -107,6 +106,7 @@
     border-radius:30px;
     padding: 5px 20px;
     display:inline-flex;
+    background-color: #bcb4bf;
 }
 .pkg_tags a {
     color:white;
@@ -131,6 +131,13 @@
     padding-top:5px;
     padding-bottom:21px;
 }
+.page-heading {
+    border-bottom: 2px solid #f65940;
+    margin-left: -30px;
+    padding-left: 15px;
+    padding-bottom: 20px;
+    margin-bottom: 10px !important;
+}
 .content_action a {
     background-color: #f65940;
     border-radius: 30px;
@@ -154,28 +161,25 @@
 .package-tabs .nav-tabs {
     width: 100%;
     margin-top: -60px;
-    border-bottom: 2px solid #f65940;
+    border-bottom: 1px solid #f65940;
 }
 .package-tabs .nav-tabs li a {
     border-radius: 0;
 }
-.pkg_tags:nth-child(even) {background-color:#00abb7;}
-.pkg_tags:nth-child(odd) {background-color:#f65940;}
-
 .additional-info .table {
-    width: 50%;
-    margin-left: 25%;
+    width: 65%;
 }
 .table-striped thead tr th,
 .table-striped thead tr td {
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left: 10%;
+    padding-left: 5%;
 }
 .table-striped tbody tr th,
 .table-striped tbody tr td {
     padding-top: 12px;
     padding-bottom: 12px;
+    padding-left: 5%;
 }
 .table-striped tbody tr:nth-child(2n) td,
 .table-striped tbody tr:nth-child(2n) th {

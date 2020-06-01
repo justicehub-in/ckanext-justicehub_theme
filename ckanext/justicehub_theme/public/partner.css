@@ -13,10 +13,13 @@
 .media-logo {
     height: 150px;
 }
+.partner-links.social-links .fa {
+    background-color: #403644;
+}
 .partner-links.social-links .fa:hover {
     background-color: #ffffff;
-    color: #f65940;
-    border: 1px solid #f65940;
+    color: #403644;
+    border: 1px solid #403644;
 }
 
 

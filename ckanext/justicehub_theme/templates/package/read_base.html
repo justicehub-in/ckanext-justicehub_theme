@@ -21,16 +21,15 @@
             <p class="package-desc"> {{h.get_translated(pkg, 'notes')}}</p>
         </div>
 
-        <div class="row meta-desc">
-            <a href="{{ pkg.license_url }}">{{ pkg.license_title }}</a>
-            <a href="http://www.opendefinition.org/okd/"><img src="{{ h.url_for_static('/base/images/od_80x15_blue.png') }}" alt="Open Data"></a>
-        </div>
         <div class="row">
             {% for tag in pkg.tags %}
             <div class="pkg_tags">
                 <a href="{% url_for controller='package', action='search', tags=tag.name %}">{{ h.truncate(tag.display_name, 22) }}</a>
             </div>
             {% endfor %}
+        </div>
+        <div class="row meta-desc">
+            <a href="{{ pkg.license_url }}">{{ pkg.license_title }}</a>
         </div>
         <div class="row stats-box">
             <div class="col-xs-6 col-sm-4">
@@ -62,13 +61,6 @@
         <img src="{{ image_path or h.url_for_static('/base/images/placeholder-organization.png') }}" alt="{{ pkg.organization.name }}" class="img-responsive media-image" >
         {{ c.group_dict.display_name }}
         </a>
-        </div>
-        <div class="row">
-            <div class="col col-md-3">
-            </div>
-            <div class="col col-md-4 dataset-org">
-            <a href="{{ h.url_for(controller='organization', action='read', id=pkg.organization.id) }}">{{ pkg.organization.title}}</a>
-            </div>
         </div>
         <div class="row">
             <div class="col col-md-12 partner-links social-links">
@@ -136,23 +128,25 @@
     {% if pkg.links %}
     {% set links = h.justicehub_theme_parse_json(pkg.links) %}
     <div class="col-xs-12 row page-section">
-       <span>{{ _('External Links') }}</span>
+        <div class="col col-sm-9 col-xs-12 pull-right">
+        <h1 class="heading">{{ _('EXTERNAL LINKS') }}</h1>
         {% for item in links %}
            <ul class="list-unstyled links-list list-inline">
           {% set item = h.composite_get_as_dict(item) %}
           <li>
               <a href="{{ link }}">{{ item['title'] }}</a>
           </li>
-          <li>
+          <li class="pull-right">
               <p>{{ item['description'] }}</p>
           </li>
           </ul>
         {% endfor %}
+        </div>
     </div>
     {% endif %}
 
     <div class= "col-xs-12 row page-section">
-        <div class="col-xs-12">
+        <div class="col col-sm-9 col-xs-12 pull-right">
             {% block package_additional_info %}
             {% snippet "package/snippets/additional_info.html", pkg_dict=pkg %}
             {% endblock %}

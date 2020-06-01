@@ -1,5 +1,3 @@
-{% extends "package/snippets/additional_info.html" %}
-
 {%- set exclude_fields = [
     'id',
     'title',
@@ -11,25 +9,39 @@
     'links'
     ] -%}
 
-{% block package_additional_info %}
-  {%- for field in schema.dataset_fields -%}
-    {%- if field.field_name not in exclude_fields
-        and field.display_snippet is not none
-        and pkg_dict[field.field_name] -%}
+<section class="additional-info">
+  <h1>{{ _('ADDITIONAL INFO') }}</h1>
+  <table class="table table-striped table-bordered table-condensed">
+    <thead>
       <tr>
-        <th scope="row" class="dataset-label" title="{{ field.description }}">{{
-          h.scheming_language_text(field.label) }}</th>
-        <td class="dataset-details"{%
-          if field.display_property %} property="{{ field.display_property
-          }}"{% endif %}>{%- snippet 'scheming/snippets/display_field.html',
-          field=field, data=pkg_dict, schema=schema -%}</td>
+        <th scope="col">{{ _('Field') }}</th>
+        <th scope="col">{{ _('Value') }}</th>
       </tr>
-    {%- endif -%}
-  {%- endfor -%}
-  {% if h.check_access('package_update',{'id':pkg_dict.id}) %}
-    <tr>
-      <th scope="row" class="dataset-label">{{ _("State") }}</th>
-      <td class="dataset-details">{{ _(pkg_dict.state) }}</td>
-    </tr>
-  {% endif %}
-{% endblock %}
+    </thead>
+
+    <tbody>
+    {% block package_additional_info %}
+      {%- for field in schema.dataset_fields -%}
+        {%- if field.field_name not in exclude_fields
+            and field.display_snippet is not none
+            and pkg_dict[field.field_name] -%}
+          <tr>
+            <td scope="row" class="dataset-label" title="{{ field.description }}">{{
+              h.scheming_language_text(field.label) }}</th>
+            <td class="dataset-details"{%
+              if field.display_property %} property="{{ field.display_property
+              }}"{% endif %}>{%- snippet 'scheming/snippets/display_field.html',
+              field=field, data=pkg_dict, schema=schema -%}</td>
+          </tr>
+        {%- endif -%}
+      {%- endfor -%}
+      {% if h.check_access('package_update',{'id':pkg_dict.id}) %}
+        <tr>
+          <td scope="row" class="dataset-label">{{ _("State") }}</th>
+          <td class="dataset-details">{{ _(pkg_dict.state) }}</td>
+        </tr>
+      {% endif %}
+    {% endblock %}
+    </tbody>
+  </table>
+</section>

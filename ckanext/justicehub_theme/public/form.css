@@ -1,7 +1,7 @@
 /*----------------- form style ----------------------*/
 .search-form, .dataset-form {
     border-bottom: none;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 .dataset-form {
     padding-right: 50px;
@@ -108,6 +108,7 @@ fieldset.checkboxes > label > input,
     background: none;
     background-color: #403644 !important;
 }
+.sort-box,
 #field-giant-search:focus,
 .input-group .input-group-addon {
     border-right: none;
@@ -183,7 +184,7 @@ fieldset.checkboxes label {
 .search-form .input-group .btn,
 .dataset-form .input-group .btn {
     padding-top: 26px;
-    padding-bottom: 23px;
+    padding-bottom: 21px;
 }
 .select2-container {
     padding: 0;
@@ -224,7 +225,8 @@ input[type="month"].form-control {
     border: none;
     background-color: #f65940 !important;
     box-shadow: none;
-    width: 100%;
+    border-radius: 30px;
+    margin: auto;
 }
 #user-register-form,
 .login-form {

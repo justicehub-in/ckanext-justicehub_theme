@@ -1,9 +1,11 @@
 /* ---------------------- Site Fonts ------------------- */
+.footer-links .input-group input,
 body {
   font-family: 'Montserrat', sans-serif;
   font-weight: 400; /* Regular */
 }
 .count,
+.pkg_tags,
 .meta-desc,
 .footer-links .nav-item a {
     font-size: 14px;
@@ -12,6 +14,7 @@ body {
 .form-control,
 .input-group-addon,
 .package-item-row,
+.rsrc-list-side > li a,
 .footer-links .input-group-btn .btn {
     font-size: 16px;
 }
@@ -21,6 +24,7 @@ body {
 .filters .module-content.empty,
 .dataset-desc,
 .downloads, .dataset-meta,
+.edit-module-heading,
 .nav-pills li {
     font-size: 18px;
 }
@@ -31,7 +35,7 @@ body,
 .res-actions a,
 .issues-actions a,
 .content_action a,
-.btn-primary,
+.btn,
 #field-giant-search,
 .search-form .search-input.search-giant input,
 .nav-pills li:last-child {
@@ -41,6 +45,7 @@ h1,
 .col2 p,
 .nav-tabs > li >  a,
 .module-heading,
+.login-sidebar-heading,
 .footer-intro {
     font-size: 25px;
 }
@@ -49,6 +54,7 @@ h1,
 }
 .footer-links .nav-item a,
 #field-giant-search,
+.footer-links .input-group input::placeholder,
 .search-form .search-input.search-giant input {
     font-weight: 300; /* Light */
 }
@@ -60,6 +66,7 @@ h1,
 .footer-disclaimer div:last-child {
     font-weight: 500; /* Medium */
 }
+.rsrc-list-side > li a,
 .media-item .media-heading {
     font-weight: 600; /* Semi Bold */
 }
@@ -84,6 +91,7 @@ h1,
 .footer-disclaimer div:last-child,
 .filters .module-content.empty,
 #field-giant-search,
+.footer-links .input-group input,
 .search-form .search-input.search-giant input {
     font-style: italic;
 }
@@ -103,6 +111,15 @@ h1,
 .fa-certificate,
 .fa-check {
     color: #f65940;
+}
+h1 {
+    color: #403644;
+}
+.edit-module-heading {
+    color: #ffffff;
+    text-align: center;
+    border: 1px solid #f65940;
+    margin: 0;
 }
 
 .btn {
@@ -124,10 +141,8 @@ h1,
 }
 
 
-.container {
-    width: 92%;
-}
-[role="main"] .container {
+[role="main"] .container,
+.site-footer .container {
     width: 100%;
 }
 .masthead {
@@ -188,11 +203,16 @@ h1,
   box-shadow: none;
   border: none;
 }
+.module-content.page-header {
+    padding: 0;
+}
 .module-content {
     padding-right: 5px;
 }
+.module-shallow .module-content:last-child,
 .module-content:last-child {
   padding-bottom: 0px;
+  padding-top: 0px;
 }
 .homepage [role="main"] {
   background: none;
@@ -234,7 +254,7 @@ h1,
 }
 
 .footer-links {
-    padding: 20px 10px;
+    padding: 20px 30px;
 }
 .footer-links [class*="col-md"] {
     margin-top: 20px;
@@ -261,7 +281,6 @@ h1,
 .fa.fa-envelope {
   font-size: 30px;
 }
-
 .social-links li {
     margin-right: 18px;
 }
@@ -287,26 +306,6 @@ h1,
     color: #f65940;
     padding: 10px;
 }
-.footer-links .input-group-btn .btn,
-.footer-links .input-group input {
-    border-radius: 30px;
-}
-.footer-links .input-group .form-control:focus {
-    border-color: #f65940;
-    z-index: 0;
-}
-.footer-links input {
-    font-style: italic;
-    color: #b9b4b4;
-    padding: 22px 15px;
-}
-.footer-links .input-group-btn .btn {
-    margin-left: -20px;
-    background-color: #403644;
-    color: #ffffff;
-    border-color: #403644;
-    text-align: center;
-}
 
 /* ------------- sidebar --------- */
 .context-info .module-content {
@@ -314,11 +313,9 @@ h1,
 }
 .module-narrow h1.heading,
 .module-narrow h2.module-heading {
-    background-color: #f65940;
-    height: 100px;
     padding-left: 25px;
-    padding-top: 30px;
-    border-bottom: none;
+    padding-top: 20px;
+    padding-bottom: 20px !important;
 }
 .context-info .nums {
     border: none;
@@ -348,6 +345,7 @@ hr {
 
 .page_primary_action {
     padding-right: 40px;
+    margin-bottom: 40px;
     height: 40px;
 }
 .page_primary_action .btn-primary {
@@ -364,9 +362,11 @@ hr {
 aside .module-content {
     color: #ffffff;
     background-color: #403644;
+    padding-left: 0;
 }
 aside .module [class^=module] {
-    padding: 30px;
+    padding-left: 40px;
+    padding-top: 30px;
     padding-bottom: 10px;
 }
 
@@ -378,14 +378,13 @@ aside .module [class^=module] {
 }
 .login-sidebar-heading {
     color: #ffffff;
-    padding: 50px 60px;
+    padding: 50px 70px;
     padding-bottom: 10px;
 }
 .login-sidebar p {
-    padding: 15px 5px;
-}
-.login-sidebar p.action {
-    background-color: #f65940;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .login-heading {
     border-bottom: 1px solid #f65940;
@@ -455,13 +454,12 @@ aside .module [class^=module] {
     padding: 0;
 }
 .search-meta {
-    width: 85%;
+    width: 95%;
 }
 .stats {
     color: #f65940;
     font-size: 60px;
     display: block;
-    text-align: center;
 }
 .search-meta .stats-box {
     margin-top: 0;
@@ -471,7 +469,6 @@ aside .module [class^=module] {
     color:#403644;
     font-weight: 700;
     display: block;
-    text-align: center;
 }
 .subscribe-box {
     background-color: #f65940;
@@ -623,16 +620,6 @@ aside .module [class^=module] {
     }
     .footer-links {
         padding: 5px 0;
-    }
-    .footer-links input {
-        padding: 18px 10px;
-    }
-    .footer-links .input-group-btn .btn {
-        font-size: 14px;
-        padding: 9px 10px;
-        width: 100px;
-        background-color: #f65940;
-        border-color: #f65940;
     }
     .subscribe-box {
         background: transparent;

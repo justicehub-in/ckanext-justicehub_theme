@@ -33,8 +33,8 @@
 }
 .header-tabs .nav-tabs {
     width: 100%;
-    margin-top: -60px;
-    border-bottom: 2px solid #f65940;
+    margin-top: -56px;
+    border-bottom: 1px solid #f65940;
 }
 .header-tabs .nav-tabs li a {
     border-radius: 0;

@@ -13,21 +13,17 @@
     </div>
   </form>
   <div class="row search-meta">
-      <div class="col col-sm-7 col-xs-1">
-      </div>
       <div class="col col-sm-3 stats-box hidden col-xs-hidden">
           <h3>{{ _('Popular tags') }}</h3>
           {% for tag in tags %}
           <a class="tag" href="{% url_for controller='package', action='search', tags=tag.name %}">{{ h.truncate(tag.display_name, 22) }}</a>
           {% endfor %}
       </div>
-      <div class="col col-xs-5 col-sm-2 stats-box">
+      <div class="col col-xs-5 col-sm-2 stats-box pull-right">
           <span class="stats">{{ stats.organization_count }}</span>
           <span class="stats-text">{{ _('CONTRIBUTORS') }}</span>
       </div>
-      <div class="col col-sm-1 col-xs-1">
-      </div>
-      <div class="col col-xs-5 col-sm-2 stats-box">
+      <div class="col col-xs-5 col-sm-2 stats-box pull-right">
           <span class="stats">{{ stats.dataset_count }}</span>
           <span class="stats-text">{{ _('DATASETS') }}</span>
       </div>

@@ -1,5 +1,10 @@
 {% ckan_extends %}
 
+{% block pre_primary %}
+<div class="col-xs-12 row top-section">
+</div>
+{% endblock %}
+
 {% block content_primary_nav %}
   {{ h.build_nav_icon('dataset_edit', _('ABOUT DATASET'), id=pkg.name) }}
   {{ h.build_nav_icon('dataset_resources', _('DATA & RESOURCES'), id=pkg.name) }}
@@ -7,4 +12,8 @@
 
 {% block content_action %}
   {% link_for _('VIEW'), controller='package', action='read', id=pkg.name, class_='btn btn-default' %}
+{% endblock %}
+
+{% block secondary_content %}
+    <h2 class="edit-module-heading">{{ pkg.title }}</h2>
 {% endblock %}
