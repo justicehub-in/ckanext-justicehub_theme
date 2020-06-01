@@ -20,16 +20,16 @@
             {% endif %}
         </div>
 
-        <div class="res-line-margin-bottom">
+        <div class="res-line-margin-bottom meta-desc">
             <a href="{{ pkg.license_url }}">{{ pkg.license_title }}</a>
             <a href="http://www.opendefinition.org/okd/"><img src="{{ h.url_for_static('/base/images/od_80x15_blue.png') }}" alt="Open Data"></a>
         </div>
 
         {% block resource_read_url %}
             {% if res.url and h.is_url(res.url) %}
-              <p class="text-muted ellipsis res-title">{{ _('URL:') }} <a class="resource-url-analytics res-url-src" href="{{ res.url }}" title="{{ res.url }}">{{ res.url }}</a></p>
+              <p class="text-muted ellipsis res-title meta-desc">{{ _('URL:') }} <a class="resource-url-analytics res-url-src" href="{{ res.url }}" title="{{ res.url }}">{{ res.url }}</a></p>
             {% elif res.url %}
-              <p class="text-muted break-word res-title">{{ _('URL:') }} {{ res.url }}</p>
+              <p class="text-muted break-word res-title meta-desc">{{ _('URL:') }} {{ res.url }}</p>
             {% endif %}
         {% endblock %}
 
@@ -76,13 +76,13 @@
 {% endblock %}
 
 {% block primary_content %}
-  <div class="col-sm-10 col-xs-12">
+  <div class="col-sm-9 col-xs-12">
   {% block resource_additional_information %}
     {{ super() }}
   {% endblock %}
   </div>
 
-  <div class="col-sm-2  col-xs-12 res-social">
+  <div class="col-sm-3  col-xs-12 res-social">
     {% snippet "snippets/social.html" %}
   </div>
 {% endblock %}

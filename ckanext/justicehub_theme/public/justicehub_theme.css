@@ -4,6 +4,7 @@ body {
   font-weight: 400; /* Regular */
 }
 .count,
+.meta-desc,
 .footer-links .nav-item a {
     font-size: 14px;
 }
@@ -601,9 +602,6 @@ aside .module [class^=module] {
     [role="main"] .container .row .col2,
     [role="main"] .container .row .col3 {
         margin-top: 0;
-    }
-    .module .module-content {
-        padding: 0;
     }
     .search-meta .stats-box {
         margin-top: 50px;
