@@ -20,6 +20,9 @@ body,
 .stats-box,
 .dataset-heading,
 .dataset-org,
+.res-actions a,
+.content_action a,
+.btn-primary,
 .search-form .search-input.search-giant input,
 .nav-pills li:last-child {
     font-size: 20px;
@@ -51,6 +54,7 @@ h1,
 }
 .col3 h2,
 .nav-tabs > li >  a,
+.content_action a,
 .dataset-heading,
 .module-heading,
 .footer-links .input-group-btn .btn {
@@ -335,7 +339,7 @@ hr {
     background-color: #403644;
     color: #ffffff;
     border-radius: 30px;
-    padding: 5px 25px;
+    padding: 8px 25px;
 }
 [role="main"] .secondary {
     padding-right: 0;

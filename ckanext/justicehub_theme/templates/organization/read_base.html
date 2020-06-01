@@ -40,7 +40,7 @@
             {% block content_action %}
             <div class="col col-md-4 col-xs-6 content_action">
                 {% if h.check_access('organization_update', {'id': c.group_dict.id}) %}
-                    {% link_for _('Edit'), controller='organization', action='edit', id=c.group_dict.name, class_='btn btn-default', named_route=group_type + '_edit'  %}
+                    {% link_for _('EDIT'), controller='organization', action='edit', id=c.group_dict.name, class_='btn btn-default', named_route=group_type + '_edit'  %}
                 {% endif %}
             </div>
             {% endblock %}
@@ -103,10 +103,10 @@
 <div class="row header-tabs">
     <ul class="nav nav-tabs">
         {% block content_primary_nav %}
-        {{ h.build_nav_icon(group_type + '_read', _('Datasets'), id=c.group_dict.name) }}
-        {{ h.build_nav_icon(group_type + '_activity', _('Activity'), id=c.group_dict.name, offset=0) }}
-        {{ h.build_nav_icon('jhorg' + '_stats', _('Stats'), id=c.group_dict.name) }}
-        {{ h.build_nav_icon('jhorg' + '_members', _('Members'), id=c.group_dict.name) }}
+        {{ h.build_nav_icon(group_type + '_read', _('DATASETS'), id=c.group_dict.name) }}
+        {{ h.build_nav_icon(group_type + '_activity', _('ACTIVITY'), id=c.group_dict.name, offset=0) }}
+        {{ h.build_nav_icon('jhorg' + '_stats', _('STATS'), id=c.group_dict.name) }}
+        {{ h.build_nav_icon('jhorg' + '_members', _('MEMBERS'), id=c.group_dict.name) }}
         {% endblock %}
     </ul>
 </div>

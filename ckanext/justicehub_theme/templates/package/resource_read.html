@@ -46,13 +46,13 @@
 		        <div class="btn-group">
 		        <a class="btn btn-primary btn-action resource-url-analytics resource-type-{{ res.resource_type }}" href="{{ res.url }}">
 		          {% if res.resource_type in ('listing', 'service') %}
-                      {{ _('View') }}
+                      {{ _('VIEW') }}
 		          {% elif  res.resource_type == 'api' %}
-                      {{ _('API Endpoint') }}
+                      {{ _('API ENDPOINT') }}
 		          {% elif (not res.has_views or not res.can_be_previewed) and not res.url_type == 'upload' %}
                       {{ _('Go to resource') }}
 		          {% else %}
-                      {{ _('Download') }}
+                      {{ _('DOWNLOAD') }}
 		          {% endif %}
 		        </a>
 

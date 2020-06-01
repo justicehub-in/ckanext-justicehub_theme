@@ -134,7 +134,7 @@
 .content_action a {
     background-color: #f65940;
     border-radius: 30px;
-    padding: 5px 50px;
+    padding: 5px 25px;
     color: #ffffff;
     margin-top: 10px;
 }
@@ -202,6 +202,7 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 14px;
+    padding: 8px 15px;
 }
 
 /*----------------- data set editing page css ----------------------*/
