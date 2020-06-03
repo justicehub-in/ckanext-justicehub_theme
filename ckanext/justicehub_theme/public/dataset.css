@@ -1,0 +1,130 @@
+/* ------------- package-item --------------- */
+.dataset-title {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.dataset-org {
+    margin-bottom: 20px;
+}
+.package-item-row .dataset-desc {
+    margin-top: 20px;
+}
+.dataset-resources {
+    margin-top: 0;
+}
+
+/* ------------- package-detail ------------ */
+
+.resource-list {
+    margin-top: 20px;
+}
+.pkg_tags {
+    border-radius:30px;
+    padding: 5px 20px;
+    display:inline-flex;
+}
+.dataset-desc {
+    width:80%;
+    margin-bottom:20px;
+}
+.row.dataset-meta {
+    padding: 10px 0;
+}
+.org-box {
+    width: 350px;
+    height: 350px;
+    margin-top: -30px;
+}
+.activity {
+  background:none
+}
+.activity .item .date {
+  display:block
+}
+.actor .gravatar {
+    display:none
+}
+.activity .item a {
+    font-style: normal;
+}
+.activity .item .icon {
+    height: 45px;
+    width: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+}
+.activity .item {
+    margin: 25px;
+}
+.activity .item .fa {
+    margin-top: 10px;
+}
+.activity .item::after {
+    margin-bottom: 30px;
+}
+.page-section {
+    border-top: 2px solid #f65940;
+}
+.additional-info .table {
+    width: 65%;
+}
+.additional-info thead tr th,
+.additional-info tbody tr td {
+    padding: 10px;
+    padding-left: 5%;
+}
+
+/* -------------------------- dataset-edit ----------------------- */
+.btn-default .fa-bars+span {
+    display: none;
+}
+.btn-default .fa-bars::before {
+    display: none;
+}
+.btn-default .fa-bars:after {
+    content: ' REORDER';
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+}
+.stages {
+    border-bottom: 2px solid #f65940;
+    margin-left: -30px;
+    margin-top: -30px;
+}
+.stages li {
+    padding: 0;
+}
+.stages li .highlight {
+    position: static;
+    text-align: center;
+    padding: 20px 0;
+}
+.stages li:before {
+    content: none;
+}
+.stages li:after {
+    top: 0;
+    border:none;
+    margin: 0;
+}
+.metadata-heading {
+    padding: 10px 0;
+    width: 50%;
+    display: inline-block;
+    text-align: center;
+    margin-left: -30px;
+}
+
+/* --------------------- responsive ------------------------- */
+@media (max-device-width: 600px) and (orientation: portrait) {
+    .metadata-heading {
+            margin-left: 0;
+    }
+    .additional-info .table {
+        width: 100%;
+        margin-left: 0;
+    }
+}
