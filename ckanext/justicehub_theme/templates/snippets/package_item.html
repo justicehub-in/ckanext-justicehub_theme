@@ -3,10 +3,10 @@
 {% block content %}
 <div class="dataset-content">
 
-    <div class="row package-item-row heading">
+    <div class="row package-item-row">
         <div class="col col-md-5">
           {% block heading %}
-          <h3 class="dataset-heading">
+          <h3 class="dataset-title">
           {% block heading_title %}
               {{ h.link_to(h.truncate(title, truncate_title), h.url_for(package.type + '_read', controller='package', action='read', id=package.name)) }}
           {% endblock %}

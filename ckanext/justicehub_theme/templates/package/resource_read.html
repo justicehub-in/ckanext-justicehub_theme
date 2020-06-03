@@ -1,7 +1,7 @@
 {% ckan_extends %}
 
 {% block resource_inner %}
-    <div class="module-content res-top-content">
+    <div class="module-content top-section">
 
     {% block resource_content %}
 
@@ -16,23 +16,24 @@
             {% if not res.description and c.package.notes %}
               <h3>{{ _('From the dataset abstract') }}</h3>
               <blockquote>{{ h.markdown_extract(h.get_translated(c.package, 'notes')) }}</blockquote>
-              <p class="res-title">{% trans dataset=c.package.title, url=h.url_for(controller='package', action='read', id=c.package['name']) %}Source: <a class="res-url-src" href="{{ url }}">{{ dataset }}</a>{% endtrans %}
+              <p class="res-title">{% trans dataset=c.package.title, url=h.url_for(controller='package', action='read', id=c.package['name']) %}Source: <a href="{{ url }}">{{ dataset }}</a>{% endtrans %}
             {% endif %}
         </div>
 
-        <div class="res-line-margin-bottom meta-desc">
+        <div class="meta-desc">
             <a href="{{ pkg.license_url }}">{{ pkg.license_title }}</a>
         </div>
 
         {% block resource_read_url %}
             {% if res.url and h.is_url(res.url) %}
-              <p class="text-muted ellipsis res-title meta-desc">{{ _('URL:') }} <a class="resource-url-analytics res-url-src" href="{{ res.url }}" title="{{ res.url }}">{{ res.url }}</a></p>
+              <p class="text-muted ellipsis res-title meta-desc">{{ _('URL:') }} <a class="resource-url-analytics" href="{{ res.url }}" title="{{ res.url }}">{{ res.url }}</a></p>
             {% elif res.url %}
               <p class="text-muted break-word res-title meta-desc">{{ _('URL:') }} {{ res.url }}</p>
             {% endif %}
         {% endblock %}
 
-		<div class="actions res-actions">
+		<div class="row">
+		<div class="actions res-actions pull-left">
 		  {% block resource_actions %}
 		  <ul>
 		  {% block resource_actions_inner %}
@@ -64,6 +65,7 @@
 		  {% endblock %}
 		  </ul>
 		  {% endblock %}
+		</div>
 		</div>
     {% endblock %}
 

@@ -10,20 +10,30 @@
 {% endblock %}
 
 {% block primary_content_inner %}
+  {% block package_description %}
+    <h1 class="page-heading">
+        {{ _('STATS') }}
+    </h1>
+  {% endblock %}
 	<div class="row stats-box">
         <div class="col-xs-6 col-sm-4">
-            <span class="stats">{{ c.group_dict.downloads }}{{ _('+') }}</span>
+            <span class="stats">{{ c.group_dict.downloads }}{% if c.group_dict.downloads %}{{ _('+') }}{% endif %}</span>
             <span class="stats-text">{{ _('DOWNLOADS') }}</span>
         </div>
         <div class="col-xs-6 col-sm-4">
-            <span class="stats">{{ c.group_dict.visits }}{{ _('+') }}</span>
-            <span class="stats-text">{{ _('Visits') }}</span>
+            <span class="stats">{{ c.group_dict.visits }}{% if c.group_dict.downloads %}{{ _('+') }}{% endif %}</span>
+            <span class="stats-text">{{ _('VISITS') }}</span>
         </div>
         <div class="col-xs-6 col-sm-4">
-            <span class="stats">{{ c.group_dict.num_followers }}{{ _('+') }}</span>
-            <span class="stats-text">{{ _('Followers') }}</span>
+            <span class="stats">{{ c.group_dict.num_followers }}{% if c.group_dict.downloads %}{{ _('+') }}{% endif %}</span>
+            <span class="stats-text">{{ _('FOLLOWERS') }}</span>
         </div>
     </div>
     {% block page_pagination %}
     {% endblock %}
+{% endblock %}
+{% block secondary_content %}
+  <div class="sidebar">
+      <h2>{{ c.group_dict.title }}</h2>
+  </div>
 {% endblock %}
