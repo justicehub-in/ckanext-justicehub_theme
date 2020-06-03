@@ -15,7 +15,7 @@
                 <i style="margin-left: 10px;" class="fa fa-lock fa-lg"></i>
             {% endif %}
             {% if pkg.verified %}
-                <i style="margin-left: 10px;" class="fa fa-check fa-lg"></i>
+                <img class="fa fa-check fa-lg" src="{{ h.url_for_static('uploads/admin/verified_icon.png') }}" alt="verified" title="verified"></img>
             {% endif %}
             </h1>
             <p class="dataset-desc"> {{h.get_translated(pkg, 'notes')}}</p>
