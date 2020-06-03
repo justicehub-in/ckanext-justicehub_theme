@@ -1,5 +1,9 @@
+/* -------------------------- org-item ----------------------- */
+.media-grid {
+    margin-top: 10px;
+    border: none;
+}
 .media-item {
-    color:#f65940;
     width:200px;
 }
 .count,
@@ -7,66 +11,58 @@
     line-height: 1;
     margin-bottom: 0;
 }
-.count {
-    color:#f65940;
-}
 .media-logo {
     height: 150px;
 }
-.partner-links.social-links .fa {
-    background-color: #403644;
-}
-.partner-links.social-links .fa:hover {
-    background-color: #ffffff;
-    color: #403644;
-    border: 1px solid #403644;
-}
 
-
-/*----------------- partner editing data set page css ----------------------*/
-.partner-datset-content{
-    margin-left:15px;
+/* ------------------------- org-detail ---------------------- */
+.partner-logo {
+    height: 200px;
+}
+.follow_button a {
+    margin-top: 10px;
 }
 
-.partner-dataset-table > tbody > tr > td{
+/* ----------------------- members --------------------------- */
+.members-table > thead > tr > th {
+    border-bottom: 2px solid #f65940;
+    padding: 25px;
+}
+.members-table > tbody > tr > td {
+    padding: 35px;
+}
+.member_media > img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+.member_media > a {
+    padding-left: 10px;
+    
+}
+.member_action .delete {
+    border-radius: 25px;
+    padding: 3px 6px;
+    margin-left: 5px;
+    font-size: 16px;
+}
+
+/*----------------- org-edit dataset ----------------------*/
+.partner-dataset-table > tbody > tr > td {
     border-top:None;
     height:150px;
 }
-
-.partner-dataset-table > thead > tr > th{
+.partner-dataset-table > thead > tr > th {
     border-bottom:None;
     height:150px;
     vertical-align:middle;
 }
-
-.context .content_action a {
-    padding-right:25px;
-    padding-left:25px;
-    font-size:16px;
-    font-weight:bolder;
-}
-
-.btn-icon{
-    background: white;
+.btn-icon {
     border:None;
-    font-size:15px;
 }
-
-.action-fa{
-   font-size:40px;
-}
-
 .btn-icon:hover{
-    background: white;
-    border:None;
+    background: #ffffff;
 }
-
-.page_primary_action .search-form {
-    margin-bottom: 10px;
+.partner-dataset-table td.context {
+    padding-left: 20px;
 }
-
-.private-icon{
-   font-size:25px; 
-   margin-left:10px; 
-}
-

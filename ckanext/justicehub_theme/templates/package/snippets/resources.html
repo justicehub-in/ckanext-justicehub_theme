@@ -20,9 +20,9 @@ Example:
           <h2 class="module-heading">{{ _("LIST OF ALL FILES") }}</h2>
         {% endblock %}
         {% block resources_list %}
-          <ul class="list-unstyled nav nav-simple rsrc-list-side">
+          <ul class="list-unstyled nav nav-simple">
             {% for resource in resources %}
-              <li class="nav-item rsrc-item-side">
+              <li class="nav-item">
                 {% link_for h.resource_display_name(resource)|truncate(25), controller='package', action=action or 'resource_read', id=pkg.name, resource_id=resource.id, inner_span=true %}
               </li>
               
