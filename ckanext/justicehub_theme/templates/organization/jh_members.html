@@ -47,7 +47,7 @@
                 {% if h.check_access('organization_update', {'id': c.group_dict.id}) %}
                     <td>
                         <div class="btn-group member_action pull-right">
-                                <a class="btn-primary" href="{{ h.url_for(group_type + '_member_new', id=c.group_dict.id, user=user_id) }}" title="{{ _('Edit') }}">
+                                <a class="btn btn-primary bg-clear" href="{{ h.url_for(group_type + '_member_new', id=c.group_dict.id, user=user_id) }}" title="{{ _('Edit') }}">
                             {{ _('EDIT') }}
                             </a>
                         <a class="delete" href="{{ h.url_for(group_type + '_member_delete', id=c.group_dict.id, user=user_id) }}" data-module="confirm-action" data-module-content="{{ _('Are you sure you want to delete this member?') }}" title="{{ _('Delete') }}">{% block delete_button_text %}<i class="fa fa-times"></i>{% endblock %}</a>
