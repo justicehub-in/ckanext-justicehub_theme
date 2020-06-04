@@ -65,7 +65,7 @@
         </a>
         </div>
         <div class="row">
-            <div class="col col-md-12 partner-links social-links">
+            <div class="col col-md-12 col-xs-12 partner-links social-links">
             <ul class="list-unstyled list-inline">
                 <li>
                     <a href="{{ pkg.partner.website }}"
@@ -130,25 +130,25 @@
     {% if pkg.links %}
     {% set links = h.justicehub_theme_parse_json(pkg.links) %}
     <div class="col-xs-12 row page-section">
-        <div class="col col-sm-9 col-xs-12 pull-right">
+        <div class="col col-sm-9 col-sm-offset-3 col-xs-12">
         <h1 class="heading">{{ _('EXTERNAL LINKS') }}</h1>
         {% for item in links %}
-           <ul class="list-unstyled links-list list-inline">
+           <dl class="dl-horizontal links-list">
           {% set item = h.composite_get_as_dict(item) %}
-          <li>
+          <dt>
               <a href="{{ link }}">{{ item['title'] }}</a>
-          </li>
-          <li class="pull-right">
+          </dt>
+          <dd>
               <p>{{ item['description'] }}</p>
-          </li>
-          </ul>
+          </dd>
+          </dl>
         {% endfor %}
         </div>
     </div>
     {% endif %}
 
     <div class= "col-xs-12 row page-section">
-        <div class="col col-sm-9 col-xs-12 pull-right">
+        <div class="col col-sm-9 col-sm-offset-3 col-xs-12">
             {% block package_additional_info %}
             {% snippet "package/snippets/additional_info.html", pkg_dict=pkg %}
             {% endblock %}

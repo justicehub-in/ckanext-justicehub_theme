@@ -55,6 +55,10 @@
 .footer-links .input-group input {
     border-radius: 30px;
 }
+.footer-links .input-group-btn:last-child > .btn {
+    border-bottom-right-radius: 30px !important;
+    border-top-right-radius: 30px !important;
+}
 .footer-links .input-group .form-control:focus {
     border-color: #f65940;
     z-index: 0;
@@ -112,7 +116,12 @@
 }
 
 /* -------------------------------------- Mobile adjustments ----------------------------- */
-@media (max-device-width: 600px) and (orientation: portrait) {
+@media (min-width: 320px) and (orientation: portrait) {
+    .search-form .input-group-btn .btn,
+    .search-form .input-group >:first-child,
+    .search-form .input-group > select {
+        height: 50px;
+    }
     .search-form .search-input.search-giant .form-control {
         line-height: 1;
         height: 65px;
@@ -129,13 +138,27 @@
         background: transparent;
     }
     .footer-links input {
-        padding: 18px 10px;
+        padding: 0 10px;
+        line-height: 1;
+        font-size: 12px;
+    }
+    .footer-links .input-group .form-control {
+        border-top-right-radius: 30px;
+        border-bottom-right-radius: 30px;
     }
     .footer-links .input-group-btn .btn {
-        font-size: 14px;
-        padding: 9px 10px;
-        width: 100px;
+        position: absolute;
+        top: 5px;
+        left: -10px;
+    }
+    .footer-links .input-group-btn .btn {
         background-color: #f65940;
         border-color: #f65940;
+        padding: 0 5px;
+    }
+    .footer-links .input-group-btn .fa {
+        text-align: center;
+        font-size: 14px;
+        width: 10px;
     }
 }

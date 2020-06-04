@@ -19,7 +19,7 @@
     right: 0;
 }
 .social-heading {
-    background-color: #ffffff;
+    background-color: #ffffff !important;
     color: #f65940;
     height: 70px;
     padding-top: 20px;

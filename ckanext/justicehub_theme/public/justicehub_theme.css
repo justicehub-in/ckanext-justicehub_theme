@@ -323,13 +323,23 @@ aside .module [class^=module] {
 }
 
 /* -------------------------------------- Mobile adjustments ----------------------------- */
-@media (max-device-width: 600px) and (orientation: portrait) {
+@media (min-width:320px) and (orientation: portrait) {
+    .module-content {
+        padding: 10px;
+    }
+    .top-section {
+        margin: 0 5px;
+        padding: 5px;
+    }
+    .page-header .nav-tabs {
+        margin-top: 50px;
+    }
+    .page-heading {
+        display: none;
+    }
     .toolbar .breadcrumb,
     .toolbar .breadcrumb a {
         color: #403644;
-    }
-    .footer-links:last-of-type div:last-of-type ul {
-        float: left !important;
     }
     .masthead {
         margin-bottom: initial;
@@ -338,11 +348,11 @@ aside .module [class^=module] {
     .masthead .logo {
         margin-top: 0;
         margin-bottom: 0;
-        height: 80px;
-        width: 390px;
+        height: 60px;
+        width: 340px;
     }
     .navbar-toggle {
-        font-size: 40px;
+        font-size: 30px;
         margin: 0;
     }
     .masthead .navbar-collapse {
@@ -363,12 +373,6 @@ aside .module [class^=module] {
         height: auto;
         padding-top: 5px;
         border-bottom: none;
-    }
-    .footer-links {
-        padding: 5px 10px;
-    }
-    .footer-links {
-        padding-bottom: 20px;
     }
     .login-heading {
         padding-left: 20px;
@@ -419,22 +423,17 @@ aside .module [class^=module] {
     .footer-disclaimer {
         display: none;
     }
-    .social-links .fa {
-        width: 37px;
-        height: 37px;
-        font-size: 22px;
-    }
     .footer-links .col {
         padding: 0;
     }
-    .social-links li {
-        margin-right: 0;
-    }
     .footer-links {
-        padding: 5px 0;
+        padding: 5px 5px;
     }
     .subscribe-box {
-        background: transparent;
+        background-color: #403644;
         min-height: 100%;
+    }
+    .footer-links i.fa-circle.fa-sm {
+        padding: 0;
     }
 }

@@ -342,3 +342,38 @@ img.fa-certificate.fa-lg {
     padding: 5px 15px;
     border-radius: 25px;
 }
+
+/* -------------------------------------- Mobile adjustments ----------------------------- */
+@media (min-width:320px) and (orientation: portrait) {
+    .meta-desc,
+    .dataset-meta {
+        font-size: 12px;
+    }
+    .btn,
+    .dataset-count-box,
+    .resource-item .heading,
+    body {
+        font-size: 14px;
+    }
+    .btn.bg-clear {
+        font-size: 16px;
+    }
+    .stages .highlight,
+    .nav-tabs li a {
+        font-size: 18px;
+    }
+    .footer-links .social-links .fa {
+        width: 29px;
+        height: 30px;
+        font-size: 20px;
+    }
+    .footer-links .social-links li {
+        margin-right: 0;
+    }
+    .subscribe-box {
+        background-color: #403644;
+    }
+    .footer-intro {
+        font-size: 18px;
+    }
+}

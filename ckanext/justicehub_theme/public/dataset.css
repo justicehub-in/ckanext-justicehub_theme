@@ -101,6 +101,7 @@
     position: static;
     text-align: center;
     padding: 20px 0;
+    text-indent: 5mm; /* important for responsive mode */
 }
 .stages li:before {
     content: none;
@@ -119,9 +120,12 @@
 }
 
 /* --------------------- responsive ------------------------- */
-@media (max-device-width: 600px) and (orientation: portrait) {
+@media (min-width: 320px) and (orientation: portrait) {
+    .page-section {
+        padding-right: 0;
+    }
     .metadata-heading {
-            margin-left: 0;
+        margin-left: 0;
     }
     .additional-info .table {
         width: 100%;
