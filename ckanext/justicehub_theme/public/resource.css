@@ -4,7 +4,7 @@
 .nav-simple li {
     border-bottom: none;
 }
-.nav-simple > .nav-item {
+.nav-simple:not(.nav-facet) > .nav-item {
     padding-left: 50px;
     padding-top: 30px;
 }
