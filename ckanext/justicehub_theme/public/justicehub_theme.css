@@ -23,26 +23,31 @@
     padding-bottom: 0;
 }
 .masthead .navigation .nav-pills li {
-    padding-top: 40px;
+    padding-top: 7%;
     height: 120px;
 }
 .masthead .navigation .nav-pills li.active {
-    border-bottom: 15px solid #f65940;
+    border-bottom: 1.5vh solid #f65940;
 }
 .masthead .navigation .nav-pills li:hover {
-    border-bottom: 15px solid #f65940;
+    border-bottom: 1.5vh solid #f65940;
 }
 .masthead .navigation .nav-pills li:last-child {
-    height: 120px;
     padding-left: 5px;
     padding-right: 10px;
 }
+.header-image {
+    width: 35%;
+    height: 10vh;
+}
 .masthead .logo {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: -45px;
-    width: 410px;
-    height: 100px;
+    margin-top: 1%;
+    width: 100%;
+    height: 100%;
+}
+.navbar-toggle {
+    font-size: 8vw;
+    margin: 0;
 }
 .logo img {
     min-width: 100%;
@@ -53,6 +58,9 @@
 
 /* -------------------- body layout ----------------------- */
 
+.container {
+    width: 80%;
+}
 [role="main"] .container,
 .site-footer .container {
     width: 100%;
@@ -275,17 +283,15 @@ aside .module [class^=module] {
 
 /* ----------------------------- homepage --------------------------- */
 [role="main"] .container .row .col1 {
-    padding: 10% 5%;
-    margin-top: -250px;
+    margin-top: 20vh;
 }
 [role="main"] .container .row .col2 {
-    padding: 13% 10%;
+    padding: 5% 5%;
     font-style: italic;
-    margin-top: -250px;
+    margin-top: 20vh;
 }
 [role="main"] .container .row .col3 {
-    padding: 20px 60px;
-    margin-top: -310px;
+    padding: 1% 4%;
 }
 [role="main"] .container .row .col3 h2 {
     border-bottom: 2px solid #f65940;
@@ -296,30 +302,27 @@ aside .module [class^=module] {
     padding: 10px 0;
 }
 .col-circle img {
-    width: 250px;
-    height: 250px;
+    width: 90%;
+    height: 90%;
 }
 .homepage .module-search {
-    min-height: 860px;
+    min-height: 30vh;
+    margin-top: 15%;
+    background: transparent;
+}
+.homepage .container {
     background: url('/uploads/admin/JH Logomark.png') no-repeat;
-    background-clip: border-box;
-    background-position: -270px -200px;
-    background-size: 75%;
-    padding-top: 320px;
-    padding-left: 150px;
+    background-position: -13vw -20vh;
+    background-size: 100vh;
 }
 .homepage .module-search .module-content {
     background: transparent;
 }
-.module-search .search-form {
-    margin-top: -50px;
-    padding: 0;
-}
 .search-meta {
-    width: 95%;
+    width: 90%;
 }
 .search-meta .stats-box {
-    margin-top: 0;
+    margin-top: 3%;
 }
 
 /* -------------------------------------- Mobile adjustments ----------------------------- */
@@ -341,37 +344,18 @@ aside .module [class^=module] {
     .toolbar .breadcrumb a {
         color: #403644;
     }
-    .masthead {
-        margin-bottom: initial;
-        padding: 10px 0;
+    .header-image {
+        width: 70%;
     }
     .masthead .logo {
         margin-top: 0;
-        margin-bottom: 0;
-        height: 60px;
-        width: 340px;
-    }
-    .navbar-toggle {
-        font-size: 30px;
-        margin: 0;
-    }
-    .masthead .navbar-collapse {
-        padding: 10px 0;
     }
     .masthead .navigation .nav-pills li {
         height: auto;
-        padding-top: 5px;
-        padding-bottom: 5px;
-    }
-    .masthead .navigation .nav-pills li.active {
-      border-bottom: 5px solid #f65940;
-    }
-    .masthead .navigation .nav-pills li:hover {
-      border-bottom: 5px solid #f65940;
+        padding-top: 0;
+        padding-bottom: 3%;
     }
     .masthead .navigation .nav-pills li:last-child {
-        height: auto;
-        padding-top: 5px;
         border-bottom: none;
     }
     .login-heading {
@@ -382,19 +366,16 @@ aside .module [class^=module] {
     .login-sidebar {
         height: 100%;
     }
+    .container {
+        width: 100%;
+    }
+    .homepage .container {
+        background-position: -27vw -10vh;
+        background-size: 50vh;
+    }
     .homepage .module-search {
-        background-clip: border-box;
-        background-position: -155px -95px;
-        background-size: 120%;
-        padding-top: 160px;
-        padding-left: 70px;
-        min-height: 500px;
         border-bottom: 2px solid #f65940;
         margin-bottom: 50px;
-    }
-    .search-meta {
-        width: 120%;
-        margin-left: -80px;
     }
     .search-meta .stats-text {
         margin-top: 0;
@@ -416,9 +397,6 @@ aside .module [class^=module] {
     [role="main"] .container .row .col3 {
         margin-top: 0;
     }
-    .search-meta .stats-box {
-        margin-top: 50px;
-    }
     .footer-intro-invert,
     .footer-disclaimer {
         display: none;
@@ -435,5 +413,13 @@ aside .module [class^=module] {
     }
     .footer-links i.fa-circle.fa-sm {
         padding: 0;
+    }
+    .footer-links .social-links .fa {
+        width: 7.5vw;
+        height: 28px;
+        font-size: 5vw;
+    }
+    .footer-links .social-links li {
+        margin-right: 0;
     }
 }

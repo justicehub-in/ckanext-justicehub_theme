@@ -350,25 +350,20 @@ img.fa-certificate.fa-lg {
         font-size: 12px;
     }
     .btn,
+    .col2 p,
+    .stats-box,
     .dataset-count-box,
     .resource-item .heading,
     body {
         font-size: 14px;
     }
+    .search-form .search-input.search-giant input,
     .btn.bg-clear {
         font-size: 16px;
     }
     .stages .highlight,
     .nav-tabs li a {
         font-size: 18px;
-    }
-    .footer-links .social-links .fa {
-        width: 29px;
-        height: 30px;
-        font-size: 20px;
-    }
-    .footer-links .social-links li {
-        margin-right: 0;
     }
     .subscribe-box {
         background-color: #403644;

@@ -28,8 +28,8 @@
     border-radius: 60px;
     line-height: 2;
     border: 4px solid #f65940;
-    padding-left: 30px;
-    height: 80px;
+    padding-left: 3%;
+    height: 50%;
 }
 .search-form .search-input.search-giant .fa {
     color: #ffffff;
@@ -49,7 +49,8 @@
     padding: 0 0;
 }
 .search-form .search-input.search-giant {
-    width: 94%;
+    width: 80%;
+    margin: auto;
 }
 .footer-links .input-group-btn .btn,
 .footer-links .input-group input {
@@ -124,11 +125,10 @@
     }
     .search-form .search-input.search-giant .form-control {
         line-height: 1;
-        height: 65px;
         border: 3px solid #f65940;
     }
     .search-form .search-input.search-giant {
-        width: 100%;
+        width: 90%;
         margin-bottom: 80px;
     }
     .search-form .search-input.search-giant .fa {
@@ -136,6 +136,7 @@
     }
     .search-form .search-input.search-giant button {
         background: transparent;
+        margin-right: -5%;
     }
     .footer-links input {
         padding: 0 10px;

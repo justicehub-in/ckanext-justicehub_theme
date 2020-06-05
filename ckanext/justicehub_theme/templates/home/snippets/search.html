@@ -19,11 +19,11 @@
           <a class="tag" href="{% url_for controller='package', action='search', tags=tag.name %}">{{ h.truncate(tag.display_name, 22) }}</a>
           {% endfor %}
       </div>
-      <div class="col col-xs-5 col-sm-2 stats-box pull-right">
+      <div class="col col-xs-6 col-sm-2 col-md-2 col-lg-2 col-xs-offset-1 col-sm-offset-8 col-md-offset-8 col-lg-offset-9 stats-box">
           <span class="stats">{{ stats.organization_count }}</span>
           <span class="stats-text">{{ _('CONTRIBUTORS') }}</span>
       </div>
-      <div class="col col-xs-5 col-sm-2 stats-box pull-right">
+      <div class="col col-xs-5 col-sm-2 col-md-2 col-lg-1 stats-box pull-right">
           <span class="stats">{{ stats.dataset_count }}</span>
           <span class="stats-text">{{ _('DATASETS') }}</span>
       </div>
