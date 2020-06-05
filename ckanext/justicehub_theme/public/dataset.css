@@ -131,4 +131,7 @@
         width: 100%;
         margin-left: 0;
     }
+    .partner-links.social-links {
+        margin-top: 5%;
+    }
 }

@@ -94,7 +94,7 @@
     margin: 0 20px;
     margin-bottom: 250px;
 }
-.content_action {
+.nav-tabs .content_action {
     margin-right: 30px;
 }
 [class^="btn btn-"],
