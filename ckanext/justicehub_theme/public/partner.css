@@ -50,15 +50,20 @@
 /*----------------- org-edit dataset ----------------------*/
 .partner-dataset-table > tbody > tr > td {
     border-top:None;
-    height:150px;
+}
+.partner-dataset-table > thead tr th {
+    padding-bottom: 5%;
 }
 .partner-dataset-table > thead > tr > th {
     border-bottom:None;
-    height:150px;
     vertical-align:middle;
 }
 .btn-icon {
     border:None;
+    padding: 0;
+}
+.table thead tr th.table-actions {
+    padding-left: 15px;
 }
 .btn-icon:hover{
     background: #ffffff;

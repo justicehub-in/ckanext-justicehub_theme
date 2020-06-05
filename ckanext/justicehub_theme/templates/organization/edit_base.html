@@ -32,7 +32,6 @@
   {% if organization and h.check_access('organization_update', {'id': organization.id}) %}
 
   <div class="content_action">
-    <div class="row">
     {% link_for _('VIEW'), controller='organization', action='read', id=organization.name, class_='btn btn-default', named_route=group_type + '_read' %}
 
     {% if h.check_access('organization_delete', {'id': organization.id})  %}
@@ -42,7 +41,6 @@
             {% block delete_button_text %}{{ _('DELETE') }}{% endblock %}
         </a>
     {% endif %}
-    </div>
   </div>
 
   {% endif %}

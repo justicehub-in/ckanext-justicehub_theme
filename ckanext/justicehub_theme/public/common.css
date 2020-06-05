@@ -355,6 +355,7 @@ img.fa-certificate.fa-lg {
     .content_action a,
     .dataset-count-box,
     .resource-item .heading,
+    .table thead tr th.table-actions .btn,
     body {
         font-size: 14px;
     }

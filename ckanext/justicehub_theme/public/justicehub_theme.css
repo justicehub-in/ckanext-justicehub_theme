@@ -94,6 +94,7 @@
     margin: 0 20px;
     margin-bottom: 250px;
 }
+.context .content_action,
 .nav-tabs .content_action {
     margin-right: 30px;
 }
@@ -334,8 +335,18 @@ aside .module [class^=module] {
         margin: 0 5px;
         padding: 5px;
     }
+    .page_primary_action {
+        padding-right: 30px;
+    }
+    .context .content_action {
+        margin-right: 20px;
+    }
+    .nav-tabs .content_action {
+        margin-right: 10px;
+    }
     .page-header .nav-tabs {
         margin-top: 50px;
+        border-bottom: none;
     }
     .page-heading {
         display: none;

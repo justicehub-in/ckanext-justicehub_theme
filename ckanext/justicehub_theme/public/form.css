@@ -171,6 +171,9 @@ input[type="month"].form-control {
 
 /* ----------------------------- responsive ---------------------------- */
 @media (min-width: 320px) and (orientation: portrait) {
+    .search-form {
+        margin-bottom: 0;
+    }
     .form-group {
         padding-left: 10px;
     }
