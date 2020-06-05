@@ -3,8 +3,22 @@
 {% block header_site_navigation %}
     <nav class="section navigation">
     <ul class="nav nav-pills">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">About<b class="caret"></b></a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                <li>
+                    {% link_for _('The Hub'), named_route='home.about' %}
+                </li>
+                <li>
+                    <a href="https://github.com/justicehub-in">
+                        {{ _('Open Source') }}
+                        <i class="fa fa-sm fa-external-link"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
         {% block header_site_navigation_tabs %}
-            {{ h.build_nav_main( ('home.about', _('About Us')), ('search', _('Datasets')), ('organizations_index', _('Partners'))) }}
+            {{ h.build_nav_main( ('search', _('Datasets')), ('organizations_index', _('Partners'))) }}
         {% endblock %}
 
         {% if not c.userobj %}
@@ -21,10 +35,22 @@
           </li>
           {% endblock %}
         {% endif %}
-        <li>
-            <a href="https://justicehub.in/" title="{{ _('WIKI') }}">
-                <span class="text">{{ _('WIKI') }}</span>
-            </a>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">WIKI<b class="caret"></b></a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                <li>
+                    <a href="https://justicehub.in/resources/">
+                        {{ _('Resources') }}
+                        <i class="fa fa-sm fa-external-link"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://justicehub.in/covid-19/">
+                        {{ _('Covid-19') }}
+                        <i class="fa fa-sm fa-external-link"></i>
+                    </a>
+                </li>
+            </ul>
         </li>
     </ul>
     </nav>

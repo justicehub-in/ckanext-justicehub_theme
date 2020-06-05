@@ -16,6 +16,7 @@ body {
 .input-group-addon,
 .package-item-row,
 .rsrc-list-side > li a,
+.dropdown-menu > li > a,
 .footer-links .input-group-btn .btn {
     font-size: 16px;
 }
@@ -41,8 +42,7 @@ body,
 .content_action a,
 .btn,
 #field-giant-search,
-.search-form .search-input.search-giant input,
-.nav-pills li:last-child {
+.search-form .search-input.search-giant input {
     font-size: 20px;
 }
 h1,
@@ -163,6 +163,8 @@ body,
 .btn-register:hover,
 .context-info .follow_button .btn:hover,
 .page-header .nav-tabs li.active a,
+.dropdown-menu > li > a,
+.dropdown-menu > li > a:hover,
 .select2-container-multi .select2-choices > li.select2-search-choice {
     color: #ffffff;
 }
@@ -181,6 +183,7 @@ body,
 .account-masthead,
 .nav-facet,
 .sidebar,
+.dropdown-menu,
 [class^="btn btn-"],
 .nav-tabs .content_action a,
 .res-actions a,
@@ -193,6 +196,8 @@ body,
 .btn-register:hover,
 .context-info .follow_button .btn:hover,
 .masthead .navigation .nav-pills li a:hover,
+.masthead .navigation .nav-pills li a:active,
+.masthead .navigation .nav-pills li a:focus,
 .masthead .navigation .nav-pills li.active a,
 .footer-links .social-links .fa:hover,
 [role="main"] .container .row .col3 {
@@ -210,7 +215,7 @@ h2.module-heading,
 .nav-facet .nav-item.active,
 .nav-facet .nav-item.active a,
 .select2-results .select2-highlighted,
-.masthead .navigation .nav-pills li:last-child {
+.masthead .navigation .nav-pills > li:last-child {
     background: none;
     background-color: #f65940;
     border-color: #f65940;
@@ -319,6 +324,9 @@ img.fa.fa-certificate {
 img.fa-certificate.fa-lg {
     width: 22px;
     height: 28px;
+}
+.dropdown-toggle .caret {
+    width: 10px;
 }
 
 /* --------------------- stats ------------------------- */
