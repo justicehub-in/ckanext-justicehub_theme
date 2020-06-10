@@ -126,34 +126,6 @@
         {{ super() }}
         {% endblock %}
     </div>
-
-    {% if pkg.links %}
-    {% set links = h.justicehub_theme_parse_json(pkg.links) %}
-    <div class="col-xs-12 row page-section">
-        <div class="col col-sm-9 col-sm-offset-3 col-xs-12">
-        <h1 class="heading">{{ _('EXTERNAL LINKS') }}</h1>
-        {% for item in links %}
-           <dl class="dl-horizontal links-list">
-          {% set item = h.composite_get_as_dict(item) %}
-          <dt>
-              <a href="{{ link }}">{{ item['title'] }}</a>
-          </dt>
-          <dd>
-              <p>{{ item['description'] }}</p>
-          </dd>
-          </dl>
-        {% endfor %}
-        </div>
-    </div>
-    {% endif %}
-
-    <div class= "col-xs-12 row page-section">
-        <div class="col col-sm-9 col-sm-offset-3 col-xs-12">
-            {% block package_additional_info %}
-            {% snippet "package/snippets/additional_info.html", pkg_dict=pkg %}
-            {% endblock %}
-        </div>
-
     {% endblock %}
 </div>
 
@@ -165,6 +137,8 @@
         {% if h.issues_enabled(pkg) %}
         {{ h.build_nav_icon('issues_dataset', _('ISSUES'), dataset_id=pkg.name) }}
         {% endif %}
+        {{ h.build_nav_icon('jhpkg_metadata', _('METADATA'), dataset_id=pkg.name) }}
+        {{ h.build_nav_icon('jhpkg_links', _('EXTERNAL LINKS'), dataset_id=pkg.name) }}
         {% endblock %}
     </ul>
 </div>

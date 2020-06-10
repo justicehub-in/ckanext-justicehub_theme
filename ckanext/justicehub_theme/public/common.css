@@ -20,6 +20,7 @@ body {
 .footer-links .input-group-btn .btn {
     font-size: 16px;
 }
+.dl-horizontal,
 .resource-item .heading,
 .resource-item .description,
 .nav-simple .nav-item a,
@@ -121,7 +122,8 @@ h1,
 .dataset-org > a,
 .activity .item .date,
 .activity .item .actor a,
-.page-section .links-list a,
+.links-list a,
+.metadata-list dt,
 .footer-disclaimer div:last-child {
     color: #f65940;
 }
@@ -141,6 +143,7 @@ body,
 .page-header .nav-tabs li a,
 .footer-intro-invert,
 .stages li .highlight,
+.metadata-list dd,
 .stages li.complete .highlight {
     color: #403644;
 }

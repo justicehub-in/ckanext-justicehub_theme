@@ -1,3 +1,9 @@
+{% extends "package/read_base.html" %}
+{%- set schema = h.scheming_get_dataset_schema(dataset_type) -%}
+{% set pkg_dict = c.pkg_dict %}
+
+{% block subtitle %}{{ _('Metadata') }} - {{ super() }}{% endblock %}
+
 {%- set exclude_fields = [
     'id',
     'title',
@@ -6,42 +12,68 @@
     'tag_string',
     'license_id',
     'owner_org',
-    'links'
+    'links',
+    'state',
+    'verified',
+    'start_year',
+    'end_year',
+    'states',
+    'district',
+    'village'
     ] -%}
 
+{% block primary_content_inner %}
 <section class="additional-info">
-  <h1>{{ _('ADDITIONAL INFO') }}</h1>
-  <table class="table table-striped table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th scope="col">{{ _('Field') }}</th>
-        <th scope="col">{{ _('Value') }}</th>
-      </tr>
-    </thead>
+    <div class="header">
+        <h1 class="page-heading">{{ _('Metadata') }}</h1>
+    </div>
 
-    <tbody>
     {% block package_additional_info %}
-      {%- for field in schema.dataset_fields -%}
+
+    <dl class="dl-horizontal metadata-list">
+        <dt title="{{ _('The time interval the dataset span.') }}">
+            {{ _('Timeline of Dataset') }}
+            <strong style="float: right; color: #403644;">:</strong>
+        </dt>
+        <dd>{{ pkg_dict['start_year'] }}-{{ pkg_dict['end_year'] }}</dd>
+    </dl>
+
+    <dl class="dl-horizontal metadata-list">
+        <dt title="{{ _('Geographical coverage.') }}">
+            {{ _('Geography') }}
+            <strong style="float: right; color: #403644;">:</strong>
+        </dt>
+        <dd>{{ pkg_dict['states'] }}
+            {% if pkg_dict['district'] %} {{ pkg_dict['district'] }}{% endif %}
+            {% if pkg_dict['village'] %} {{ pkg_dict['village'] }}{% endif %}
+        </dd>
+    </dl>
+    {%- for field in schema.dataset_fields -%}
         {%- if field.field_name not in exclude_fields
             and field.display_snippet is not none
             and pkg_dict[field.field_name] -%}
-          <tr>
-            <td scope="row" class="dataset-label" title="{{ field.description }}">{{
-              h.scheming_language_text(field.label) }}</th>
-            <td class="dataset-details"{%
-              if field.display_property %} property="{{ field.display_property
-              }}"{% endif %}>{%- snippet 'scheming/snippets/display_field.html',
-              field=field, data=pkg_dict, schema=schema -%}</td>
-          </tr>
+
+        <dl class="dl-horizontal metadata-list">
+            <dt title="{{field.description}}">
+              {{ h.scheming_language_text(field.label) }}
+              <strong style="float: right; color: #403644;">:</strong>
+            </dt>
+            <dd {% if field.display_property %} property="{{ field.display_property}}"{% endif %}>
+              {%- snippet 'scheming/snippets/display_field.html', field=field, data=pkg_dict, schema=schema -%}
+            </dd>
+        </dl>
         {%- endif -%}
-      {%- endfor -%}
-      {% if h.check_access('package_update',{'id':pkg_dict.id}) %}
-        <tr>
-          <td scope="row" class="dataset-label">{{ _("State") }}</th>
-          <td class="dataset-details">{{ _(pkg_dict.state) }}</td>
-        </tr>
-      {% endif %}
+
+    {% endfor %}
+    {% if h.check_access('package_update',{'id':pkg_dict.id}) %}
+        <dl class="dl-horizontal metadata-list">
+          <dt>
+              {{ _("State") }}
+              <strong style="float: right; color: #403644;">:</strong>
+          </dt>
+          <dd class="dataset-details">{{ _(pkg_dict.state) }}</dd>
+        </dl>
+    {% endif %}
     {% endblock %}
-    </tbody>
-  </table>
 </section>
+{% endblock %}

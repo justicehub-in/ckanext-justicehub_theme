@@ -116,6 +116,14 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         map.connect('jhsubscribe', '/subscribe',
                     controller='ckanext.justicehub_theme.controllers:SubscribeController',
                     action='subscribe')
+
+        map.connect('jhpkg_links', '/dataset/:dataset_id/links',
+                controller='ckanext.justicehub_theme.controllers:JHPkgController',
+                action='links')
+
+        map.connect('jhpkg_metadata', '/dataset/:dataset_id/metadata',
+                controller='ckanext.justicehub_theme.controllers:JHPkgController',
+                action='metadata')
         return map
     
     def before_map(self, map):

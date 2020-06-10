@@ -1,0 +1,28 @@
+{% extends "package/read_base.html" %}
+{% set pkg = c.pkg %}
+
+{% block subtitle %}{{ _('External Links') }} - {{ super() }}{% endblock %}
+
+{% block primary_content_inner %}
+<section class="module">
+    <div class="header">
+        <h1 class="page-heading">{{ _('External Links') }}</h1>
+    </div>
+    {% if pkg.links %}
+        {% set links = h.justicehub_theme_parse_json(pkg.links) %}
+        {% for item in links %}
+           <dl class="dl-horizontal links-list">
+          {% set item = h.composite_get_as_dict(item) %}
+          <dt>
+              <a href="{{ link }}">{{ item['title'] }}</a>
+          </dt>
+          <dd>
+              <p>{{ item['description'] }}</p>
+          </dd>
+          </dl>
+        {% endfor %}
+    {% else %}
+        <p class="empty">{{ _('No Links') }}</p>
+    {% endif %}
+</section>
+{% endblock %}

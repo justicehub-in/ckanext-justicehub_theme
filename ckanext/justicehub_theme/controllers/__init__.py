@@ -1,1 +1,1 @@
-from controller import JHOrgController
+from controller import JHOrgController, JHPkgController

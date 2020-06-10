@@ -2,12 +2,48 @@ import requests
 from ckanext.justicehub_theme.lib import helpers
 
 import ckan.controllers.organization as org
+import ckan.lib.base as base
 import ckan.lib.plugins as plugins
 import ckan.logic as logic
 import ckan.model as model
 from ckan.common import c
 
 NotFound = logic.NotFound
+NotAuthorized = logic.NotAuthorized
+
+
+class JHPkgController(base.BaseController):
+    def links(self, dataset_id):
+        context = {'model': model, 'session': model.Session,
+                   'user': c.user, 'for_view': True,
+                   'auth_user_obj': c.userobj}
+        data_dict = {'id': dataset_id}
+
+        try:
+            c.pkg_dict = logic.get_action('package_show')(context, data_dict)
+            c.pkg = context['package']
+        except (NotFound, NotAuthorized):
+            abort(404, _('Dataset not found'))
+
+        package_type = c.pkg_dict['type'] or 'dataset'
+        return plugins.toolkit.render('snippets/external_links.html',
+                                      extra_vars={'dataset_type': package_type})
+
+    def metadata(self, dataset_id):
+        context = {'model': model, 'session': model.Session,
+                   'user': c.user, 'for_view': True,
+                   'auth_user_obj': c.userobj}
+        data_dict = {'id': dataset_id}
+
+        try:
+            c.pkg_dict = logic.get_action('package_show')(context, data_dict)
+            c.pkg = context['package']
+        except (NotFound, NotAuthorized):
+            abort(404, _('Dataset not found'))
+
+        package_type = c.pkg_dict['type'] or 'dataset'
+        return plugins.toolkit.render('scheming/package/snippets/additional_info.html',
+                                      extra_vars={'dataset_type': package_type})
 
 
 class JHOrgController(org.OrganizationController):

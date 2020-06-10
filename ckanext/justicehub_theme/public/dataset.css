@@ -76,6 +76,29 @@
     padding-left: 5%;
 }
 
+/* -------------------------- links ----------------------- */
+.links-list.dl-horizontal {
+    margin-left: -15px;
+}
+.links-list.dl-horizontal dt {
+    width: 30%;
+    text-align: left;
+}
+.links-list.dl-horizontal dd {
+    width: 70%;
+    margin-left: 35%;
+}
+
+/* -------------------------- metadata ----------------------- */
+.metadata-list.dl-horizontal dt {
+    width: 40%;
+    margin-left: -1%;
+    text-align: left;
+}
+.metadata-list.dl-horizontal dd {
+    width: 40%;
+    margin-left: 45%;
+}
 /* -------------------------- dataset-edit ----------------------- */
 .btn-default .fa-bars+span {
     display: none;
