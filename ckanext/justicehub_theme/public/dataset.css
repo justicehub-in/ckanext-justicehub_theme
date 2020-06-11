@@ -78,7 +78,7 @@
 
 /* -------------------------- links ----------------------- */
 .links-list.dl-horizontal {
-    margin-left: -15px;
+    margin-left: -1%;
 }
 .links-list.dl-horizontal dt {
     width: 30%;
@@ -91,13 +91,19 @@
 
 /* -------------------------- metadata ----------------------- */
 .metadata-list.dl-horizontal dt {
-    width: 40%;
+    display: inline;
+}
+.metadata-list.dl-horizontal dd {
+    display: inline-block;
+    margin-left: 10%;
+}
+.metadata-list.dl-horizontal dt {
+    width: 30%;
     margin-left: -1%;
     text-align: left;
 }
-.metadata-list.dl-horizontal dd {
-    width: 40%;
-    margin-left: 45%;
+.metadata-list.dl-horizontal dt strong {
+    float: right;
 }
 /* -------------------------- dataset-edit ----------------------- */
 .btn-default .fa-bars+span {
@@ -157,4 +163,22 @@
     .partner-links.social-links {
         margin-top: 5%;
     }
+    .links-list.dl-horizontal dt,
+    .links-list.dl-horizontal dd {
+        width: 100%;
+    }
+    .links-list.dl-horizontal dd {
+        margin-left: 0;
+    }
+
+    /* -------------------------- metadata ----------------------- */
+    .metadata-list.dl-horizontal dt strong {
+        float: none;
+    }
+    .metadata-list.dl-horizontal dt {
+        margin-left: 0;
+    }
+    .metadata-list.dl-horizontal dd {
+        margin-left: 5%;
+}
 }

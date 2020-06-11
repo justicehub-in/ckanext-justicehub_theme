@@ -33,7 +33,7 @@
     <dl class="dl-horizontal metadata-list">
         <dt title="{{ _('The time interval the dataset span.') }}">
             {{ _('Timeline of Dataset') }}
-            <strong style="float: right; color: #403644;">:</strong>
+            <strong style="color: #403644;">:</strong>
         </dt>
         <dd>{{ pkg_dict['start_year'] }}-{{ pkg_dict['end_year'] }}</dd>
     </dl>
@@ -41,7 +41,7 @@
     <dl class="dl-horizontal metadata-list">
         <dt title="{{ _('Geographical coverage.') }}">
             {{ _('Geography') }}
-            <strong style="float: right; color: #403644;">:</strong>
+            <strong style="color: #403644;">:</strong>
         </dt>
         <dd>{{ pkg_dict['states'] }}
             {% if pkg_dict['district'] %} {{ pkg_dict['district'] }}{% endif %}
@@ -56,7 +56,7 @@
         <dl class="dl-horizontal metadata-list">
             <dt title="{{field.description}}">
               {{ h.scheming_language_text(field.label) }}
-              <strong style="float: right; color: #403644;">:</strong>
+              <strong style="color: #403644;">:</strong>
             </dt>
             <dd {% if field.display_property %} property="{{ field.display_property}}"{% endif %}>
               {%- snippet 'scheming/snippets/display_field.html', field=field, data=pkg_dict, schema=schema -%}
@@ -69,7 +69,7 @@
         <dl class="dl-horizontal metadata-list">
           <dt>
               {{ _("State") }}
-              <strong style="float: right; color: #403644;">:</strong>
+              <strong style="color: #403644;">:</strong>
           </dt>
           <dd class="dataset-details">{{ _(pkg_dict.state) }}</dd>
         </dl>
