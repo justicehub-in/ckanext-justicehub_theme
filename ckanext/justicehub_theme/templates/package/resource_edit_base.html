@@ -14,10 +14,10 @@
 {% endblock %} 
 
 {% block content_action %}
-  {% link_for _('ALL RESOURCES'), controller='package', action='resources', id=pkg.name, class_='btn btn-default rsrc-edit-actn-btn', icon='arrow-left' %}
-  {% if res %}
-    {% link_for _('VIEW'), controller='package', action='resource_read', id=pkg.name, resource_id=res.id, class_='btn btn-default rsrc-edit-actn-btn' %}
-  {% endif %}
+{% endblock %}
+
+{% block pre_primary %}
+<div class="col-xs-12 row top-section"></div>
 {% endblock %}
 
 {% block content_primary_nav %}
@@ -25,6 +25,14 @@
   {% block inner_primary_nav %}{% endblock %}
   <!--NOTE: Removing for Alpha -->
   {#{ h.build_nav_icon('views', _('Views'), id=pkg.name, resource_id=res.id) }#}
+
+  <div class="content_action">
+      {% link_for _('ALL RESOURCES'), controller='package', action='resources', id=pkg.name, class_='btn btn-default', icon='arrow-left' %}
+      {% if res %}
+        {% link_for _('VIEW'), controller='package', action='resource_read', id=pkg.name, resource_id=res.id, class_='btn btn-default' %}
+      {% endif %}
+  </div>
+
 {% endblock %}
 
 {% block primary_content_inner %}
