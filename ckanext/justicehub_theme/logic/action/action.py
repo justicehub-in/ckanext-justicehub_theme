@@ -55,18 +55,34 @@ def get_package_owner_details(context, data_dict):
 def metadata_autocomplete(context, data_dict):
     session = context['session']
     field = data_dict['field']
+    is_list = data_dict.get('islist', False)
     term = data_dict['incomplete']
     limit = data_dict.get('limit', 10)
     matching = []
 
-    if term and isinstance(term, string_types):
+    if term and isinstance(term, string_types) and is_list:
+        results = session.execute(
+            """
+            select term
+            from (
+                select unnest(string_to_array(value, ',')) as term
+                from package_extra where key='{field}'
+            ) terms
+            where term ilike '%{term}%'
+            limit {limit};
+            """.format(field=field, term=term, limit=limit)
+        ).fetchall()
+        if results:
+            matching = [result for result in results[0]]
+
+    elif term and isinstance(term, string_types):
         q = model.Session.query(model.PackageExtra)
         results = q.filter(model.PackageExtra.key == field)\
                 .filter(model.PackageExtra.value.ilike('{0}%'.format(term)))\
                 .distinct()\
                 .limit(limit)
-        matching = [result.value for result in results]
 
+        matching = [result.value for result in results]
     return matching
 
 @p.toolkit.side_effect_free
