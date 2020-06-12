@@ -378,6 +378,10 @@ img.fa-certificate.fa-lg {
     .nav-tabs li a {
         font-size: 18px;
     }
+    .nav-pills li:last-child a.dropdown-toggle:active,
+    .nav-pills li:last-child a.dropdown-toggle:focus {
+        background-color: #f65940;
+    }
     .subscribe-box {
         background-color: #403644;
     }

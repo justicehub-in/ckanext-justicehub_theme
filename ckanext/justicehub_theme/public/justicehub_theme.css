@@ -433,4 +433,7 @@ aside .module [class^=module] {
     .footer-links .social-links li {
         margin-right: 0;
     }
+    .navigation .dropdown:last-child .dropdown-menu {
+        position: static;
+    }
 }
