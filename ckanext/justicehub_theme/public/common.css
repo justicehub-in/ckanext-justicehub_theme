@@ -6,7 +6,6 @@ body {
     font-weight: 400; /* Regular */
 }
 .pkg_tags,
-.meta-desc,
 .footer-links .nav-item a {
     font-size: 14px;
 }
@@ -361,7 +360,6 @@ img.fa-certificate.fa-lg {
 
 /* -------------------------------------- Mobile adjustments ----------------------------- */
 @media (min-width:320px) and (orientation: portrait) {
-    .meta-desc,
     .dataset-meta {
         font-size: 12px;
     }

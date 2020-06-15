@@ -1,13 +1,20 @@
 {% ckan_extends %}
 
 {% block resource_inner %}
-    <div class="module-content top-section">
+    <div class="top-section">
 
     {% block resource_content %}
 
+    <div class="row">
+        <div class="col col-sm-6 col-xs-12">
         {% block resource_read_title %}
             <h1>{{ h.resource_display_name(res) | truncate(50) }}</h1>
         {% endblock %}
+
+        <div class="dataset-meta">
+            {{ _('Updated') }}
+            {{ h.justicehub_theme_days_ago(res.last_modified) or h.justicehub_theme_days_ago(res.created) or _('unknown') }}
+        </div>
 
         <div class="prose notes resource-desc" property="rdfs:label">
             {% if res.description %}
@@ -15,27 +22,52 @@
             {% endif %}
             {% if not res.description and c.package.notes %}
               <h3>{{ _('From the dataset abstract') }}</h3>
-              <blockquote>{{ h.markdown_extract(h.get_translated(c.package, 'notes')) }}</blockquote>
-              <p class="res-title">{% trans dataset=c.package.title, url=h.url_for(controller='package', action='read', id=c.package['name']) %}Source: <a href="{{ url }}">{{ dataset }}</a>{% endtrans %}
+              <blockquote>
+                  {{ h.markdown_extract(h.get_translated(c.package, 'notes')) }}
+                  <p class="res-title">
+                  {% trans dataset=c.package.title, url=h.url_for(controller='package', action='read', id=c.package['name']) %}
+                  Source: <a href="{{ url }}">{{ dataset }}</a>
+                  {% endtrans %}
+                  </p>
+              </blockquote>
             {% endif %}
         </div>
 
-        <div class="meta-desc">
+        <div class="dataset-meta">
             <a href="{{ pkg.license_url }}">{{ pkg.license_title }}</a>
         </div>
 
         {% block resource_read_url %}
             {% if res.url and h.is_url(res.url) %}
-              <p class="text-muted ellipsis res-title meta-desc">{{ _('URL:') }} <a class="resource-url-analytics" href="{{ res.url }}" title="{{ res.url }}">{{ res.url }}</a></p>
+              <p class="text-muted ellipsis res-title dataset-meta">
+                  <strong>{{ _('URL:') }}</strong><br>
+                  <a class="resource-url-analytics" href="{{ res.url }}" title="{{ res.url }}">{{ res.url | truncate(100) }}</a>
+              </p>
             {% elif res.url %}
-              <p class="text-muted break-word res-title meta-desc">{{ _('URL:') }} {{ res.url }}</p>
+              <p class="text-muted break-word res-title dataset-meta">
+                  <strong>{{ _('URL:') }}</strong><br>
+                  {{ res.url | truncate(100) }}
+              </p>
             {% endif %}
         {% endblock %}
 
-		<div class="row">
-		<div class="actions res-actions pull-left">
+        {% if res.variable_measured %}
+        <div class="dataset-desc">
+            {{ _('Resource captures: ') }}
+            {{ res.variable_measured }}
+        </div>
+        {% endif %}
+
+        </div>
+
+        <div class="col col-sm-3 col-sm-offset-3 col-xs-12">
+            {% snippet "snippets/social.html" %}
+        </div>
+    </div>
+    <div class="row">
+		<div class="res-actions col-sm-6 col-xs-12">
 		  {% block resource_actions %}
-		  <ul>
+		  <ul class="list-unstyled list-inline">
 		  {% block resource_actions_inner %}
 		    {% if h.check_access('package_update', {'id':pkg.id }) %}
 		        {% link_for _('EDIT'), controller='package', action='resource_edit', id=pkg.name, resource_id=res.id, class_='btn btn-default btn-action' %}
@@ -66,7 +98,7 @@
 		  </ul>
 		  {% endblock %}
 		</div>
-		</div>
+    </div>
     {% endblock %}
 
     {% if res.format == 'CSV' %}
@@ -77,63 +109,7 @@
 {% endblock %}
 
 {% block primary_content %}
-  <div class="col-sm-9 col-xs-12">
-  {% block resource_additional_information %}
-  {% if res %}
-      <section class="module">
-          <h1 class="page-heading">{{ _('ADDITIONAL INFORMATION') }}</h2>
-          {% block resource_additional_information_inner %}
-          <div class="module-content">
-          <table class="table table-striped table-bordered table-condensed" data-module="table-toggle-more">
-            <thead>
-              <tr>
-                <th scope="col">{{ _('Field') }}</th>
-                <th scope="col">{{ _('Value') }}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td scope="row">{{ _('Data last updated') }}</th>
-                <td>{{ h.render_datetime(res.last_modified) or h.render_datetime(res.created) or _('unknown') }}</td>
-              </tr>
-              <tr>
-                <td scope="row">{{ _('Metadata last updated') }}</th>
-                <td>{{ h.render_datetime(res.revision_timestamp) or h.render_datetime(res.created) or _('unknown') }}</td>
-              </tr>
-              <tr>
-                <td scope="row">{{ _('Created') }}</th>
-                <td>{{ h.render_datetime(res.created) or _('unknown') }}</td>
-              </tr>
-              <tr>
-                <td scope="row">{{ _('Format') }}</th>
-                <td>{{ res.mimetype_inner or res.mimetype or res.format or _('unknown') }}</td>
-              </tr>
-              <tr>
-                <td scope="row">{{ _('License') }}</th>
-                <td>{% snippet "snippets/license.html", pkg_dict=pkg, text_only=True %}</td>
-              </tr>
-              {% for key, value in h.format_resource_items(res.items()) %}
-                <tr class="toggle-more"><td scope="row">{{ key }}</th><td>{{ value }}</td></tr>
-              {% endfor %}
-            </tbody>
-          </table>
-          </div>
-          {% endblock %}
-      </section>
-  {% endif %}
-  {% endblock %}
-  </div>
-
-  <div class="col-sm-3  col-xs-12 res-social">
-    {% snippet "snippets/social.html" %}
-  </div>
 {% endblock %}
 
 {% block secondary_content %}
-
-  {% block resources_list %}
-    {% snippet "package/snippets/resources.html", pkg=pkg, active=res.id %}
-  {% endblock %}
-
 {% endblock %}
-
