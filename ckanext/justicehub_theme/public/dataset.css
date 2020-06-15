@@ -93,7 +93,7 @@ h1+.dataset-meta {
 
 /* -------------------------- metadata ----------------------- */
 .metadata-list {
-    margin-left: 15px;
+    margin: 30px 15px;
 }
 .metadata-list.dl-horizontal dt {
     display: inline;
