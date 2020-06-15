@@ -91,7 +91,7 @@
 
 /* ----------------------- pre-primary-blocks ----------------- */
 .top-section {
-    margin: 0 20px;
+    margin: 0 40px;
     margin-bottom: 230px;
 }
 .context .content_action,
@@ -336,7 +336,7 @@ aside .module [class^=module] {
         padding: 10px;
     }
     .top-section {
-        margin: 0 5px;
+        margin: 0 20px;
         padding: 5px;
     }
     .page_primary_action {

@@ -185,5 +185,12 @@ h1+.dataset-meta {
     }
     .metadata-list.dl-horizontal dd {
         margin-left: 5%;
-}
+    }
+    .dataset-desc {
+        width:100%;
+    }
+    .org-box {
+        width: 200px;
+        height: 200px;
+    }
 }

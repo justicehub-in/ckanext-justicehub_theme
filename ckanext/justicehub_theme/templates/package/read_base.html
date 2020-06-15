@@ -7,38 +7,56 @@
 {% endblock %}
 
 {% block pre_primary %}
-<div class="col-xs-12 row top-section">
-    <div class="col-sm-7 col-xs-12">
-        <div class="row">
-            <h1>{{h.dataset_display_name(pkg)}}
-            {% if pkg.private %}
-                <i style="margin-left: 10px;" class="fa fa-lock fa-lg"></i>
-            {% endif %}
-            {% if pkg.verified %}
-                <img class="fa fa-check fa-lg" src="{{ h.url_for_static('uploads/admin/verified_icon.png') }}" alt="verified" title="verified"></img>
-            {% endif %}
-            </h1>
-            <div class="dataset-meta">
-                <span>{{ _('Maintained by ') }}
-                    <a href="mailto:{{ pkg.maintainer_email }}">{{ pkg.maintainer }}</a>
-                </span>
+<div class="top-section">
+    <div class="row">
+        <div class="col col-sm-7 col-xs-12">
+            <div class="row">
+                <h1>{{h.dataset_display_name(pkg)}}
+                {% if pkg.private %}
+                    <i style="margin-left: 10px;" class="fa fa-lock fa-lg"></i>
+                {% endif %}
+                {% if pkg.verified %}
+                    <img class="fa fa-check fa-lg" src="{{ h.url_for_static('uploads/admin/verified_icon.png') }}" alt="verified" title="verified"></img>
+                {% endif %}
+                </h1>
+                <div class="dataset-meta">
+                    <span>{{ _('Maintained by ') }}
+                        <a href="mailto:{{ pkg.maintainer_email }}">{{ pkg.maintainer }}</a>
+                    </span>
+                </div>
+                <div class="row col col-sm-8 col-xs-12">
+                    <p class="dataset-desc"> {{h.get_translated(pkg, 'notes')}}</p>
+                </div>
             </div>
-            <p class="dataset-desc"> {{h.get_translated(pkg, 'notes')}}</p>
-        </div>
-        <div class="row">
-            {% for tag in pkg.tags %}
-            <div class="pkg_tags">
-                <a href="{% url_for controller='package', action='search', tags=tag.name %}">{{ h.truncate(tag.display_name, 22) }}</a>
+            <div class="row">
+                <div class="row col col-sm-8 col-xs-12">
+                {% for tag in pkg.tags %}
+                    <div class="pkg_tags">
+                        <a href="{% url_for controller='package', action='search', tags=tag.name %}">{{ h.truncate(tag.display_name, 22) }}</a>
+                    </div>
+                {% endfor %}
+                </div>
             </div>
-            {% endfor %}
+            <div class="row dataset-meta">
+                <a href="{{ pkg.license_url }}">{{ pkg.license_title }}</a>
+            </div>
+            <div class="row" style="height: 40px;"></div>
         </div>
-        <div class="row dataset-meta">
-            <a href="{{ pkg.license_url }}">{{ pkg.license_title }}</a>
+
+        <div class="col col-sm-5 col-xs-12 text-center">
+            <div class="col col-sm-8 col-sm-offset-3 org-box image-box">
+                <a href="{{ h.url_for(controller='organization', action='read', id=pkg.organization.id) }}">
+                {% set image_path = h.url_for_static('uploads/group/' + pkg.organization.image_url, qualified=True) %}
+                <img src="{{ image_path or h.url_for_static('/base/images/placeholder-organization.png') }}" alt="{{ pkg.organization.name }}" class="img-responsive media-image" >
+                {{ c.group_dict.display_name }}
+                </a>
+            </div>
         </div>
-        <div class="row" style="height: 40px;">
-        </div>
-        <div class="row text-center dataset-meta">
-            <span class="col-xs-4 col-sm-2">
+    </div>
+
+    <div class="row">
+        <div class="col col-sm-6 col-xs-12 text-center">
+            <span class="col-xs-4 col-sm-3">
                 {% set downloads = h.justicehub_theme_get_package_avg_downloads(pkg) %}
                 <span class="stats">{{ downloads }}{% if downloads %}{{ _('+') }}{% endif %}</span>
                 <span>{{ _('Downloads') }}</span>
@@ -50,38 +68,18 @@
                 <span>{{ _('Views') }}</span>
             </span>
             <span class="hidden-xs" style="float: left;">{{ _('|') }}</span>
-            <span class="col-xs-5 col-sm-3">
+            <span class="col-xs-5 col-sm-4">
                 <span>{{ _('Updated ') }}{{ h.justicehub_theme_days_ago(pkg.last_updated) }}</span>
             </span>
         </div>
-
-        {% if self.content_action() | trim %}
-        <div class="row content_action pull-left">
-            {% block content_action %}
-            {% if h.check_access('package_update', {'id':pkg.id }) %}
-            {% link_for _('EDIT'), controller='package', action='edit', id=pkg.name, class_='btn btn-default' %}
-            {% endif %}
-            {% endblock %}
-        </div>
-        {% endif %}
-    </div>
-    <div class="col-sm-4 col-xs-12 text-center">
-        <div class="row">
-            <div class="col col-sm-8 col-sm-offset-3 org-box image-box">
-            <a href="{{ h.url_for(controller='organization', action='read', id=pkg.organization.id) }}">
-            {% set image_path = h.url_for_static('uploads/group/' + pkg.organization.image_url, qualified=True) %}
-            <img src="{{ image_path or h.url_for_static('/base/images/placeholder-organization.png') }}" alt="{{ pkg.organization.name }}" class="img-responsive media-image" >
-            {{ c.group_dict.display_name }}
-            </a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col col-sm-5 col-xs-12 dataset-meta">
+        <div class="col col-sm-5 col-sm-offset-1 col-xs-12 text-center">
+            <div class="col col-sm-5 col-xs-12">
                 <span>{{ _('Email ') }}
                 <a href="mailto:{{ pkg.maintainer_email }}">{{ pkg.maintainer }}</a>
                 </span>
             </div>
             <span class="hidden-xs" style="float: left;">{{ _('|') }}</span>
+
             <div class="col col-sm-7 col-xs-12 partner-links social-links">
             <ul class="list-unstyled list-inline">
                 <li>
@@ -124,7 +122,18 @@
             </div>
         </div>
     </div>
+
+    {% if self.content_action() | trim %}
+        <div class="row content_action pull-left">
+            {% block content_action %}
+            {% if h.check_access('package_update', {'id':pkg.id }) %}
+            {% link_for _('EDIT'), controller='package', action='edit', id=pkg.name, class_='btn btn-default' %}
+            {% endif %}
+            {% endblock %}
+        </div>
+    {% endif %}
 </div>
+
 {% endblock %}
 
 <div class="col-xs-12 row">
