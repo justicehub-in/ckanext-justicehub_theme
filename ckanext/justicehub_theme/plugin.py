@@ -33,7 +33,8 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         return {
             'justicehub_theme_get_package_avg_downloads': helpers.get_package_avg_downloads,
             'justicehub_theme_package_activity_stream': helpers.package_activity_stream,
-            'justicehub_theme_parse_json': helpers.parse_json
+            'justicehub_theme_parse_json': helpers.parse_json,
+            'justicehub_theme_days_ago': helpers.days_ago
         }
 
     #IActions

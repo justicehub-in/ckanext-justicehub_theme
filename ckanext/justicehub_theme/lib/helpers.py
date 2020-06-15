@@ -1,5 +1,7 @@
 import json
+from datetime import datetime
 
+from dateutil.parser import parse as parse_dates
 from sqlalchemy import MetaData
 from sqlalchemy.sql import select
 
@@ -8,6 +10,26 @@ import ckan.model as model
 from ckan.common import c
 
 cached_tables = {}
+
+def days_ago(date):
+    date = parse_dates(date)
+    diff = (datetime.today() - date).days
+
+    elapsed = '{0} Days ago'.format(diff)
+    if diff > 31:
+        months = int(diff/31.0)
+        if months > 1:
+            elapsed = '{0} Months ago'.format(months)
+        else:
+            elapsed = '{0} Month ago'.format(months)
+    if diff > 365:
+        years = int(diff/365.0)
+        if years > 1:
+            elapsed = '{0} Years ago'.format(years)
+        else:
+            elapsed = '{0} Year ago'.format(years)
+
+    return elapsed
 
 def parse_json(string):
     return json.loads(string)
