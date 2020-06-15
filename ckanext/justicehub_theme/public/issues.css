@@ -4,6 +4,15 @@
     margin-left: 0;
     margin-top: 0;
 }
+.issues-home .gravatar {
+    border-radius: 50%;
+}
+.issues-home .page-heading {
+    padding-bottom: 40px;
+}
+.issues-home .input-group {
+    border-bottom: 1px solid #f65940;
+}
 .issues-home .input-group .btn {
     border-left: none;
 }

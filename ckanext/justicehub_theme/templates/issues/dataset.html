@@ -5,25 +5,56 @@
   <link rel="stylesheet" href="/ckanext-issues/style.css" />
 {% endblock %}
 
+{% block content_primary_nav %}
+    {{ super() }}
+    <div class="issues-actions">
+        {{ h.nav_link(_('New Issue'), named_route='issues_new', dataset_id=pkg.name, class_='btn btn-success pull-right') }}
+    </div>
+{% endblock %}
+
 {% block primary_content_inner %}
 <section class="module issues-home">
 
-    {% snippet 'snippets/search_form.html', type='issue', query=q, fields=(('page', pagination.page), ('per_page', pagination.per_page), ('status', status), ('visibility', visibility)), sorting=filters, sorting_selected=sort, placeholder=_('Search issues...'), no_bottom_border=true, no_title=true %}
-    <h1 class="row">
-        <div class="issues-actions page_primary_action">
-            {{ h.nav_link(_('New Issue'), named_route='issues_new', dataset_id=pkg.name, class_='btn btn-success pull-right') }}
-        </div>
-    </h1>
-
-   <h2 id="issues-found">
-       {{ ungettext('{number} issue found', '{number} issues found', pagination.total_count) .format(number=pagination.total_count) }}
-   </h2>
+    {% snippet 'snippets/search_form.html', type='issue', query=q, fields=(('page', pagination.page), ('per_page', pagination.per_page), ('status', status), ('visibility', visibility)), sorting=filters, sorting_selected=sort, placeholder=_('Search issues...'), no_bottom_border=true, no_title=true, count=pagination.total_count %}
 
    {% if issues %}
-   <ul id="issue-list" class="issue-list-group list-group">
-       {% for issue in issues %}
-       {{ common.issue_item(issue, pkg, c.user) }}
-       {% endfor %}
+   <h2 class="page-heading">
+       <div class="col col-sm-6">
+           {{ _('Issue') }}
+       </div>
+       <div class="col col-sm-2 col-sm-offset-2">
+           {{ _('Replies') }}
+       </div>
+       <div class="col col-sm-2">
+           {{ _('Activity') }}
+       </div>
+   </h2>
+
+   <ul id="issue-list" class="issue-list-group list-group list-unstyled">
+   {% for issue in issues %}
+       <li>
+       <a href="{{ h.url_for('issues_show', dataset_id=pkg.id, issue_number=issue.number) }}" {% if issue.visibility == 'hidden'%} class="issue-abuse"{% endif%}>
+       <div class="row">
+           <h2>{{ issue.title }}</h2>
+       </div>
+       <div class="row">
+           <div class="col col-sm-6">
+               {{ issue.description | truncate }}
+           </div>
+           <div class="col col-sm-2">
+           {% if issue.assignee_id %}
+               {{ h.gravatar(h.justicehub_theme_get_assignee_user(issue.assignee_id).email_hash, size=32) }}
+           {% endif %}
+           </div>
+           <div class="col col-sm-2">
+               {{ issue.comment_count }}
+           </div>
+           <div class="col col-sm-2">
+               {{ h.time_ago_from_timestamp(issue.created) }}
+           </div>
+       </a>
+       </li>
+   {% endfor %}
    </ul>
    {% else %}
    <p class="empty">{{ _('No issues') }}</p>

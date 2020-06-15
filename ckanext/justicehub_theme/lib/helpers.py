@@ -11,7 +11,23 @@ from ckan.common import c
 
 cached_tables = {}
 
+def get_assignee_user(user_id):
+    '''
+    return user object for a user id.
+    '''
+    context = {'model': model, 'session': model.Session,
+               'user': c.user, 'for_view': True,
+               'auth_user_obj': c.userobj}
+    user = model.Session.query(model.User)\
+            .filter(model.User.id == user_id)\
+            .distinct()\
+            .first()
+    return user
+
 def days_ago(date):
+    '''
+    Calculates days elapsed for the given date.
+    '''
     date = parse_dates(date)
     diff = (datetime.today() - date).days
 
@@ -30,6 +46,7 @@ def days_ago(date):
             elapsed = '{0} Year ago'.format(years)
 
     return elapsed
+
 
 def parse_json(string):
     return json.loads(string)

@@ -153,6 +153,7 @@ body,
 .footer-intro-invert,
 .stages li .highlight,
 .metadata-list dd,
+.issue-list-group li a,
 .stages li.complete .highlight {
     color: #403644;
 }
