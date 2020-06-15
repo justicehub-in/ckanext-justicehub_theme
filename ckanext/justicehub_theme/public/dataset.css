@@ -14,7 +14,9 @@
 }
 
 /* ------------- package-detail ------------ */
-
+h1+.dataset-meta {
+    margin-bottom: 30px;
+}
 .resource-list {
     margin-top: 20px;
 }
@@ -90,6 +92,9 @@
 }
 
 /* -------------------------- metadata ----------------------- */
+.metadata-list {
+    margin-left: 15px;
+}
 .metadata-list.dl-horizontal dt {
     display: inline;
 }

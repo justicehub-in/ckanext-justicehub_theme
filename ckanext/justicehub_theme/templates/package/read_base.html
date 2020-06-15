@@ -18,9 +18,13 @@
                 <img class="fa fa-check fa-lg" src="{{ h.url_for_static('uploads/admin/verified_icon.png') }}" alt="verified" title="verified"></img>
             {% endif %}
             </h1>
+            <div class="dataset-meta">
+                <span>{{ _('Maintained by ') }}
+                    <a href="mailto:{{ pkg.maintainer_email }}">{{ pkg.maintainer }}</a>
+                </span>
+            </div>
             <p class="dataset-desc"> {{h.get_translated(pkg, 'notes')}}</p>
         </div>
-
         <div class="row">
             {% for tag in pkg.tags %}
             <div class="pkg_tags">
@@ -31,17 +35,24 @@
         <div class="row dataset-meta">
             <a href="{{ pkg.license_url }}">{{ pkg.license_title }}</a>
         </div>
-        <div class="row stats-box">
-            <div class="col-xs-6 col-sm-4">
+        <div class="row" style="height: 40px;">
+        </div>
+        <div class="row text-center dataset-meta">
+            <span class="col-xs-4 col-sm-2">
                 {% set downloads = h.justicehub_theme_get_package_avg_downloads(pkg) %}
                 <span class="stats">{{ downloads }}{% if downloads %}{{ _('+') }}{% endif %}</span>
-                <span class="stats-text">{{ _('DOWNLOADS') }}</span>
-            </div>
-            <div class="col-xs-6 col-sm-4">
+                <span>{{ _('Downloads') }}</span>
+            </span>
+            <span class="hidden-xs" style="float: left;">{{ _('|') }}</span>
+            <span class="col-xs-3 col-sm-2">
                 {% set views = pkg.tracking_summary.total %}
                 <span class="stats">{{ views }}{% if views %}{{ _('+') }}{% endif %}</span>
-                <span class="stats-text">{{ _('VIEWS') }}</span>
-            </div>
+                <span>{{ _('Views') }}</span>
+            </span>
+            <span class="hidden-xs" style="float: left;">{{ _('|') }}</span>
+            <span class="col-xs-5 col-sm-3">
+                <span>{{ _('Updated ') }}{{ h.justicehub_theme_days_ago(pkg.last_updated) }}</span>
+            </span>
         </div>
 
         {% if self.content_action() | trim %}
@@ -54,18 +65,24 @@
         </div>
         {% endif %}
     </div>
-    <div class="col-sm-1">
-    </div>
-    <div class="col-sm-4 col-xs-12">
-        <div class="row org-box image-box">
-        <a href="{{ h.url_for(controller='organization', action='read', id=pkg.organization.id) }}">
-        {% set image_path = h.url_for_static('uploads/group/' + pkg.organization.image_url, qualified=True) %}
-        <img src="{{ image_path or h.url_for_static('/base/images/placeholder-organization.png') }}" alt="{{ pkg.organization.name }}" class="img-responsive media-image" >
-        {{ c.group_dict.display_name }}
-        </a>
+    <div class="col-sm-4 col-xs-12 text-center">
+        <div class="row">
+            <div class="col col-sm-8 col-sm-offset-3 org-box image-box">
+            <a href="{{ h.url_for(controller='organization', action='read', id=pkg.organization.id) }}">
+            {% set image_path = h.url_for_static('uploads/group/' + pkg.organization.image_url, qualified=True) %}
+            <img src="{{ image_path or h.url_for_static('/base/images/placeholder-organization.png') }}" alt="{{ pkg.organization.name }}" class="img-responsive media-image" >
+            {{ c.group_dict.display_name }}
+            </a>
+            </div>
         </div>
         <div class="row">
-            <div class="col col-md-12 col-xs-12 partner-links social-links">
+            <div class="col col-sm-5 col-xs-12 dataset-meta">
+                <span>{{ _('Email ') }}
+                <a href="mailto:{{ pkg.maintainer_email }}">{{ pkg.maintainer }}</a>
+                </span>
+            </div>
+            <span class="hidden-xs" style="float: left;">{{ _('|') }}</span>
+            <div class="col col-sm-7 col-xs-12 partner-links social-links">
             <ul class="list-unstyled list-inline">
                 <li>
                     <a href="{{ pkg.partner.website }}"
@@ -134,11 +151,11 @@
     <ul class="nav nav-tabs">
         {% block content_primary_nav %}
         {{ h.build_nav_icon('dataset_read', _('FILES'), id=pkg.name) }}
+        {{ h.build_nav_icon('jhpkg_metadata', _('METADATA'), dataset_id=pkg.name) }}
+        {{ h.build_nav_icon('jhpkg_links', _('EXTERNAL LINKS'), dataset_id=pkg.name) }}
         {% if h.issues_enabled(pkg) %}
         {{ h.build_nav_icon('issues_dataset', _('ISSUES'), dataset_id=pkg.name) }}
         {% endif %}
-        {{ h.build_nav_icon('jhpkg_metadata', _('METADATA'), dataset_id=pkg.name) }}
-        {{ h.build_nav_icon('jhpkg_links', _('EXTERNAL LINKS'), dataset_id=pkg.name) }}
         {% endblock %}
     </ul>
 </div>

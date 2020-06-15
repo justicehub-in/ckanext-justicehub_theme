@@ -92,7 +92,7 @@
 /* ----------------------- pre-primary-blocks ----------------- */
 .top-section {
     margin: 0 20px;
-    margin-bottom: 250px;
+    margin-bottom: 230px;
 }
 .context .content_action,
 .nav-tabs .content_action {
@@ -134,7 +134,7 @@
 .page-heading {
     border-bottom: 2px solid #f65940;
     padding-top: 6px;
-    padding-left: 15px;
+    padding-left: 30px;
     padding-bottom: 20px;
     margin-bottom: 10px !important;
     margin-left: -30px;
@@ -152,6 +152,7 @@
 }
 .page-header .nav-tabs li a {
     border-radius: 0;
+    padding-left: 30px;
 }
 .page-header .nav-tabs li a:hover {
     border-bottom: 1.5px solid #f65940;
@@ -222,6 +223,9 @@ aside .module [class^=module] {
     padding-left: 40px;
     padding-top: 20px;
     padding-bottom: 20px;
+}
+.social-links.col-sm-7 {
+    width: 55%;
 }
 
 
@@ -435,5 +439,8 @@ aside .module [class^=module] {
     }
     .navigation .dropdown:last-child .dropdown-menu {
         position: static;
+    }
+    .social-links.col-xs-12 {
+        width: 100%;
     }
 }

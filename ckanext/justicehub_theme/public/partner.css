@@ -16,6 +16,10 @@
 }
 
 /* ------------------------- org-detail ---------------------- */
+.partner-links.social-links .fa {
+    width: 31px;
+    height: 31px;
+}
 .partner-logo {
     height: 200px;
 }
