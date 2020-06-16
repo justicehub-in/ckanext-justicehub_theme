@@ -20,13 +20,13 @@
 
    {% if issues %}
    <h2 class="page-heading">
-       <div class="col col-sm-6">
+       <div class="col col-sm-6 col-xs-5">
            {{ _('Issue') }}
        </div>
-       <div class="col col-sm-2 col-sm-offset-2">
+       <div class="col col-sm-2 col-sm-offset-2 col-xs-3">
            {{ _('Replies') }}
        </div>
-       <div class="col col-sm-2">
+       <div class="col col-sm-2 col-xs-4">
            {{ _('Activity') }}
        </div>
    </h2>
@@ -40,18 +40,22 @@
            <h2>{{ issue.title }}</h2>
        </div>
        <div class="row">
-           <div class="col col-sm-6">
-               {{ issue.description | urlize }}
+           <div class="col col-sm-8 col-xs-5">
+               <div class="row">
+                   <div class="col col-sm-10 col-xs-12">
+                       {{ issue.description | urlize }}
+                   </div>
+                   <div class="col col-sm-2 col-xs-12">
+                   {% if issue.assignee_id %}
+                       {{ h.gravatar(h.justicehub_theme_get_assignee_user(issue.assignee_id).email_hash, size=32) }}
+                   {% endif %}
+                   </div>
+               </div>
            </div>
-           <div class="col col-sm-2">
-           {% if issue.assignee_id %}
-               {{ h.gravatar(h.justicehub_theme_get_assignee_user(issue.assignee_id).email_hash, size=32) }}
-           {% endif %}
-           </div>
-           <div class="col col-sm-2">
+           <div class="col col-sm-2 col-xs-3">
                {{ issue.comment_count }}
            </div>
-           <div class="col col-sm-2">
+           <div class="col col-sm-2 col-xs-4">
                {{ h.time_ago_from_timestamp(issue.created) }}
            </div>
        <!--/a-->

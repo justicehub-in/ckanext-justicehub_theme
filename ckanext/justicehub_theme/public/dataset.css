@@ -79,9 +79,6 @@ h1+.dataset-meta {
 }
 
 /* -------------------------- links ----------------------- */
-.links-list.dl-horizontal {
-    margin-left: -1%;
-}
 .links-list.dl-horizontal dt {
     width: 30%;
     text-align: left;
@@ -177,6 +174,9 @@ h1+.dataset-meta {
     }
 
     /* -------------------------- metadata ----------------------- */
+    .metadata-list {
+        margin-left: 0;
+    }
     .metadata-list.dl-horizontal dt strong {
         float: none;
     }

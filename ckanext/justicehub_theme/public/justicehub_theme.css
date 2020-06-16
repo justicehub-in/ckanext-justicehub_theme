@@ -355,9 +355,6 @@ aside .module [class^=module] {
         margin-top: 50px;
         border-bottom: none;
     }
-    .page-heading {
-        display: none;
-    }
     .toolbar .breadcrumb,
     .toolbar .breadcrumb a {
         color: #403644;
