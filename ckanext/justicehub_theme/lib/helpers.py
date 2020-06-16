@@ -1,6 +1,7 @@
 import json
 from datetime import datetime
 
+from ckanext.issues.controller.controller import issues_for_dataset
 from dateutil.parser import parse as parse_dates
 from sqlalchemy import MetaData
 from sqlalchemy.sql import select
@@ -10,6 +11,10 @@ import ckan.model as model
 from ckan.common import c
 
 cached_tables = {}
+
+def issues_vars(dataset_id, request):
+    extra_vars = issues_for_dataset(dataset_id, request.GET)
+    return extra_vars
 
 def get_assignee_user(user_id):
     '''
