@@ -1,8 +1,5 @@
-{% extends "package/read_base.html" %}
-{%- set schema = h.scheming_get_dataset_schema(dataset_type) -%}
+{%- set schema = h.scheming_get_dataset_schema(pkg_dict.type) -%}
 {% set pkg_dict = c.pkg_dict %}
-
-{% block subtitle %}{{ _('Metadata') }} - {{ super() }}{% endblock %}
 
 {%- set exclude_fields = [
     'id',
@@ -19,17 +16,17 @@
     'end_year',
     'states',
     'district',
-    'village'
+    'village',
+    'update_frequency',
+    'maintainer',
+    'maintainer_email'
     ] -%}
 
-{% block primary_content_inner %}
-<section class="additional-info">
-    <div class="header">
-        <h1 class="page-heading">{{ _('METADATA') }}</h1>
-    </div>
+<div class="header">
+    <h1 class="page-heading">{{ _('METADATA') }}</h1>
+</div>
 
-    {% block package_additional_info %}
-
+{% block package_additional_info %}
     <dl class="dl-horizontal metadata-list">
         <dt title="{{ _('The time interval the dataset span.') }}">
             {{ _('Timeline of Dataset') }}
@@ -70,6 +67,4 @@
           <dd class="dataset-details">{{ _(pkg_dict.state) }}</dd>
         </dl>
     {% endif %}
-    {% endblock %}
-</section>
 {% endblock %}

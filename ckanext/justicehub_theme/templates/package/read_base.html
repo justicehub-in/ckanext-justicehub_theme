@@ -133,7 +133,6 @@
         </div>
     {% endif %}
 </div>
-
 {% endblock %}
 
 <div class="col-xs-12 row">
@@ -159,13 +158,61 @@
 <div class="row page-header">
     <ul class="nav nav-tabs">
         {% block content_primary_nav %}
-        {{ h.build_nav_icon('dataset_read', _('FILES'), id=pkg.name) }}
-        {{ h.build_nav_icon('jhpkg_metadata', _('METADATA'), dataset_id=pkg.name) }}
-        {{ h.build_nav_icon('jhpkg_links', _('EXTERNAL LINKS'), dataset_id=pkg.name) }}
+
+        <li class="active">
+            <a href='#resources' data-toggle="tab">
+                {{ _('FILES') }}
+            </a>
+        </li>
+        <li>
+            <a href='#metadata' data-toggle="tab">
+                {{ _('METADATA') }}
+            </a>
+        </li>
+        <li>
+            <a href='#links' data-toggle="tab">
+                {{ _('EXTERNAL LINKS') }}
+            </a>
+        </li>
         {% if h.issues_enabled(pkg) %}
-        {{ h.build_nav_icon('issues_dataset', _('ISSUES'), dataset_id=pkg.name) }}
+            <li>
+            <a href='#issues' data-toggle="tab">
+                {{ _('ISSUES') }}
+            </a>
+            </li>
+
+            <!-- NOTE: need to figure out how to conditionally show, disabling for Alpha
+            <div class="issues-actions">
+                {{ h.nav_link(_('New Issue'), named_route='issues_new', dataset_id=pkg.name, class_='btn btn-success pull-right') }}
+            </div-->
         {% endif %}
         {% endblock %}
     </ul>
 </div>
+{% endblock %}
+{% block primary_content_inner %}
+    <div class="tab-content">
+        <div class="tab-pane active" id="resources">
+        {% block package_resources %}
+            <h1 class="page-heading">
+                {{ _('FILES') }}
+            </h1>
+            {% snippet "package/snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
+        {% endblock %}
+        </div>
+
+        <div class="tab-pane" id="metadata">
+        {% block indicator_additional_info %}
+            {% snippet "scheming/package/snippets/additional_info.html", pkg_dict=pkg %}
+        {% endblock %}
+        </div>
+
+        <div class="tab-pane" id="links">
+            {% snippet "snippets/external_links.html", pkg_dict=pkg %}
+        </div>
+
+        <div class="tab-pane" id="issues">
+            {% snippet "issues/dataset.html", pkg=pkg %}
+        </div>
+    </div>
 {% endblock %}

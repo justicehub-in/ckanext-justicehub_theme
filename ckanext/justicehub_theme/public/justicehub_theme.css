@@ -167,8 +167,11 @@
 .nav-tabs > li >  a > i {
     display: None;
 }
+.js .tab-content {
+    display: block;
+}
 
-/* ------------- sidebar --------- */
+/* ------------------------- sidebar ------------------------ */
 .context-info .module-content {
     padding: 0;
 }
