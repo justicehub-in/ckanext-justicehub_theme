@@ -59,10 +59,9 @@
 /* -------------------- body layout ----------------------- */
 
 .container {
-    width: 90%;
+    width: 95%;
 }
-[role="main"] .container,
-.site-footer .container {
+[role="main"] .container {
     width: 100%;
 }
 .box {
@@ -234,36 +233,28 @@ aside .module [class^=module] {
 
 /* ------------------------ footer ------------------------ */
 .site-footer {
-    padding: 0;
+    padding: 0 30px;
 }
 .footer-links {
-    padding: 20px 30px;
+    padding: 50px 0;
 }
-.footer-links [class*="col-md"] {
-    margin-top: 20px;
+.footer-links > .row {
+    margin-bottom: 20px;
 }
-.footer-links .nav-item > a:hover, 
-.footer-links .nav-item > a {
-    margin: 0;
-    padding: 0;
+.footer-links .nav-item {
+    display: inline;
+}
+.footer-disclaimer {
+    margin-bottom: 10px;
 }
 .footer-links i.fa-circle.fa-sm {
     font-size: 9px;
     color: #f65940;
     padding: 10px;
 }
-.footer-links .social-links .fa {
-    background-color: #f65940;
-    color: #ffffff;
-}
-.footer-links .social-links .fa:hover {
-    border-color: #ffffff;
-    color: #ffffff;
-}
 .subscribe-box {
-    min-height: 300px;
     padding-right: 60px;
-    padding-left: 30px;
+    padding-left: 50px;
 }
 .subscribe-box .btn.btn-default {
     padding: 10px 25px;
@@ -290,44 +281,61 @@ aside .module [class^=module] {
 }
 
 /* ----------------------------- homepage --------------------------- */
-[role="main"] .container .row .col1 {
-    margin-top: 20vh;
+.intro-box span:first-child {
+    display: inline-block;
+    width: 400px;
 }
-[role="main"] .container .row .col2 {
-    padding: 5% 5%;
-    font-style: italic;
-    margin-top: 20vh;
+.intro-box span:nth-child(2) {
+    display: inline-block;
+    width: 500px;
 }
-[role="main"] .container .row .col3 {
-    padding: 1% 4%;
+.search-meta .content_action {
+    margin-bottom: 5%;
+    padding-left: 20px;
 }
-[role="main"] .container .row .col3 h2 {
-    border-bottom: 2px solid #f65940;
-    padding-bottom: 10px;
-    margin-bottom: 30px;
+.landing-desc {
+    padding: 40px 40px;
 }
-[role="main"] .container .row .col3 p {
-    padding: 10px 0;
+.landing-desc .row:first-child {
+    margin-bottom: 40px;
 }
-.col-circle img {
-    width: 90%;
-    height: 90%;
+.landing-desc .row:nth-child(2) {
+    margin-bottom: 3%;
+}
+.landing-desc .nav-item > a {
+    margin: 0;
+    padding: 0;
+}
+.landing-desc .social-links .fa {
+    background-color: #f65940;
+    color: #ffffff;
+}
+.landing-desc .social-links .fa:hover {
+    border-color: #ffffff;
+    color: #ffffff;
+}
+.landing-quotes-top {
+	position: relative;
+	top: 35px;
+	left: 5%;
+	z-index: 1;
+}
+.landing-quotes-bottom {
+	position: relative;
+	top: -40px;
+	right: -60%;
 }
 .homepage .module-search {
     min-height: 30vh;
-    margin-top: 15%;
+    margin-top: 5%;
     background: transparent;
-}
-.homepage .container {
-    background: url('/uploads/admin/JH Logomark.png') no-repeat;
-    background-position: -13vw -20vh;
-    background-size: 100vh;
 }
 .homepage .module-search .module-content {
     background: transparent;
 }
 .search-meta {
-    width: 90%;
+    width: 80%;
+    margin: auto;
 }
 .search-meta .stats-box {
     margin-top: 3%;
@@ -384,36 +392,21 @@ aside .module [class^=module] {
     .container {
         width: 100%;
     }
-    .homepage .container {
-        background-position: -27vw -10vh;
-        background-size: 50vh;
+    .intro-box span:first-child {
+        width: 100%;
     }
-    .homepage .module-search {
-        border-bottom: 2px solid #f65940;
-        margin-bottom: 50px;
+    .search-meta {
+        width: 90%;
     }
     .search-meta .stats-text {
         margin-top: 0;
     }
-    .col-circle i.fa {
-        font-size: 100px;
-        color: #f65940;
-        text-align: center;
-    }
-    [role="main"] .container .row .col2 {
-        padding: 2% 0;
-        margin-bottom: 30px;
+    .landing-quotes-bottom {
+        position: relative;
+        top: -35px;
+        right: -80%;
     }
     [role="main"] .secondary {
-        display: none;
-    }
-    [role="main"] .container .row .col1,
-    [role="main"] .container .row .col2,
-    [role="main"] .container .row .col3 {
-        margin-top: 0;
-    }
-    .footer-intro-invert,
-    .footer-disclaimer {
         display: none;
     }
     .footer-links .col {
@@ -424,11 +417,14 @@ aside .module [class^=module] {
     }
     .subscribe-box {
         background-color: #403644;
-        min-height: 100%;
     }
     .footer-links i.fa-circle.fa-sm {
-        padding: 0;
+        padding: 5px;
     }
+    .footer-links > .row {
+        margin-bottom: 10px;
+    }
+    .landing-desc .social-links .fa,
     .footer-links .social-links .fa {
         width: 7.5vw;
         height: 28px;

@@ -58,13 +58,13 @@
         <div class="col col-sm-6 col-xs-12 text-center">
             <span class="col-xs-4 col-sm-3">
                 {% set downloads = h.justicehub_theme_get_package_avg_downloads(pkg) %}
-                <span class="stats">{{ downloads }}{% if downloads %}{{ _('+') }}{% endif %}</span>
+                <span class="primary-color">{{ downloads }}{% if downloads %}{{ _('+') }}{% endif %}</span>
                 <span>{{ _('Downloads') }}</span>
             </span>
             <span class="hidden-xs" style="float: left;">{{ _('|') }}</span>
             <span class="col-xs-3 col-sm-2">
                 {% set views = pkg.tracking_summary.total %}
-                <span class="stats">{{ views }}{% if views %}{{ _('+') }}{% endif %}</span>
+                <span class="primary-color">{{ views }}{% if views %}{{ _('+') }}{% endif %}</span>
                 <span>{{ _('Views') }}</span>
             </span>
             <span class="hidden-xs" style="float: left;">{{ _('|') }}</span>

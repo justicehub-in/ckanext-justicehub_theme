@@ -59,8 +59,17 @@ h1,
 .col3 h2 {
     font-size: 30px;
 }
-.stats.stats-big {
+.landing-desc {
+    font-size: 40px;
+}
+.intro-box span {
+    font-size: 50px;
+}
+.stats-big {
     font-size: 60px;
+}
+.fa.fa-circle {
+    font-size: 90px;
 }
 .footer-links .nav-item a,
 #field-giant-search,
@@ -68,17 +77,20 @@ h1,
 .search-form .search-input.search-giant input {
     font-weight: 300; /* Light */
 }
+.intro-box,
+.landing-desc,
 .resource-item .description,
 .dataset-org,
 .dataset-meta,
 .nav-pills li,
-.footer-disclaimer div:last-child {
+.footer-disclaimer {
     font-weight: 500; /* Medium */
 }
 .count,
 .activity .item a,
 .rsrc-list-side > li a,
-.media-item .media-heading {
+.media-item .media-heading,
+.footer-disclaimer div:last-child {
     font-weight: 600; /* Semi Bold */
 }
 .stats-box,
@@ -97,7 +109,7 @@ h1,
 .footer-links .input-group-btn .btn {
     font-weight: 700; /* Bold */
 }
-.stats.stats-big,
+.stats-big,
 .footer-intro,
 .nav-pills li:last-child {
     font-weight: 800; /* Extra Bold */
@@ -105,6 +117,7 @@ h1,
 .col2 p,
 .downloads,
 .activity .item,
+.intro-box span:nth-child(2),
 .footer-disclaimer div:last-child,
 .filters .module-content.empty,
 #field-giant-search,
@@ -115,12 +128,12 @@ h1,
 
 /* ----------------------- colors ------------------------- */
 a,
-.stats,
 .count,
 .media-item,
 .res-title,
 .fa-check,
 .btn-xs,
+.primary-color,
 .btn-xs:active:hover,
 .bg-clear.btn,
 .bg-clear.btn:hover,
@@ -145,6 +158,7 @@ body,
 .res-title a,
 .fa.fa-lock,
 .fa.fa-trash,
+.secondary-color,
 .fa.fa-unlock-alt,
 .dataset-title a,
 .resource-item .heading,
@@ -159,6 +173,7 @@ body,
 .context-info .nums dl,
 .homepage .col3,
 .secondary,
+.landing-desc,
 .site-footer,
 .pkg_tags a,
 .nav-facet,
@@ -191,6 +206,7 @@ body,
 }
 .secondary,
 .masthead,
+.landing-desc,
 .site-footer,
 .account-masthead,
 .nav-facet,
@@ -211,6 +227,7 @@ body,
 .masthead .navigation .nav-pills li a:active,
 .masthead .navigation .nav-pills li a:focus,
 .masthead .navigation .nav-pills li.active a,
+.landing-desc .social-links .fa:hover,
 .footer-links .social-links .fa:hover,
 [role="main"] .container .row .col3 {
     background: none;
@@ -317,10 +334,6 @@ h2.module-heading,
 }
 
 /* --------------------- icons ------------------------- */
-.col-circle i.fa {
-    font-size: 350px;
-    color: #f65940;
-}
 img.fa.fa-check {
     width: 20px;
     height: 20px;
@@ -346,7 +359,7 @@ img.fa-certificate.fa-lg {
     margin-top: 50px;
     margin-bottom: 20px;
 }
-.stats.stats-big {
+.stats-big {
     display: block;
     line-height: 1;
 }
@@ -373,17 +386,25 @@ img.fa-certificate.fa-lg {
     body {
         font-size: 14px;
     }
+    .landing-desc,
     .search-form .search-input.search-giant input,
     .btn.bg-clear {
         font-size: 16px;
     }
+    .intro-box span,
     .stages .highlight,
     .nav-tabs li a {
         font-size: 18px;
     }
+    .fa.fa-circle {
+        font-size: 60px;
+    }
     .nav-pills li:last-child a.dropdown-toggle:active,
     .nav-pills li:last-child a.dropdown-toggle:focus {
         background-color: #f65940;
+    }
+    .footer-intro-invert {
+        color: #ffffff;
     }
     .subscribe-box {
         background-color: #403644;

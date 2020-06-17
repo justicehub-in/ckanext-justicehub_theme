@@ -129,7 +129,6 @@
     }
     .search-form .search-input.search-giant {
         width: 90%;
-        margin-bottom: 80px;
     }
     .search-form .search-input.search-giant .fa {
         color: #403644;
@@ -142,6 +141,9 @@
         padding: 0 10px;
         line-height: 1;
         font-size: 12px;
+    }
+    .footer-links .input-group {
+        display: block;
     }
     .footer-links .input-group .form-control {
         border-top-right-radius: 30px;

@@ -3,12 +3,19 @@
 {% set stats=h.get_site_statistics() %}
 
 <div class="module module-search module-narrow module-shallow box">
-  <div class="row">
-    <div class="col col-xs-6 col-lg-2 col-xs-offset-6 col-lg-offset-9">
+  <div class="row search-meta">
+    <div class="col col-xs-12 col-sm-5 intro-box">
+        <span class="secondary-color">{{ _('Find, Share & Co-create')}}</span>
+        <span class="primary-color">{{ _('data for justice') }}</span>
+    </div>
+  </div>
+
+  <div class="row search-meta">
+    <div class="col col-xs-6 col-sm-2 content_action">
       {% if not c.userobj %}
-          {% link_for _('UPLOAD'), named_route='user.login', class_='btn btn-primary' %}
+          {% link_for _('ADD DATA'), named_route='user.login', class_='btn btn-primary' %}
       {% else %}
-          {% link_for _('UPLOAD'), controller='package', action='new', named_route='dataset_new', class_='btn btn-primary' %}
+          {% link_for _('ADD DATA'), controller='package', action='new', named_route='dataset_new', class_='btn btn-primary' %}
       {% endif %}
     </div>
   </div>
@@ -23,19 +30,19 @@
     </div>
   </form>
   <div class="row search-meta">
+      <div class="col col-xs-6 col-sm-3 stats-box">
+          <span class="primary-color stats-big">{{ stats.organization_count }}</span>
+          <span>{{ _('CONTRIBUTORS') }}</span>
+      </div>
+      <div class="col col-xs-5 col-sm-1 stats-box">
+          <span class="primary-color stats-big">{{ stats.dataset_count }}</span>
+          <span>{{ _('DATASETS') }}</span>
+      </div>
       <div class="col col-sm-3 stats-box hidden col-xs-hidden">
           <h3>{{ _('Popular tags') }}</h3>
           {% for tag in tags %}
           <a class="tag" href="{% url_for controller='package', action='search', tags=tag.name %}">{{ h.truncate(tag.display_name, 22) }}</a>
           {% endfor %}
-      </div>
-      <div class="col col-xs-6 col-sm-2 col-md-2 col-lg-2 col-xs-offset-1 col-sm-offset-8 col-md-offset-8 col-lg-offset-9 stats-box">
-          <span class="stats stats-big">{{ stats.organization_count }}</span>
-          <span>{{ _('CONTRIBUTORS') }}</span>
-      </div>
-      <div class="col col-xs-5 col-sm-2 col-md-2 col-lg-1 stats-box pull-right">
-          <span class="stats stats-big">{{ stats.dataset_count }}</span>
-          <span>{{ _('DATASETS') }}</span>
       </div>
   </div>
 </div>
