@@ -31,12 +31,16 @@
   </form>
   <div class="row search-meta">
       <div class="col col-xs-6 col-sm-3 stats-box">
-          <span class="primary-color stats-big">{{ stats.organization_count }}</span>
-          <span>{{ _('CONTRIBUTORS') }}</span>
+          <a href={{ h.url_for('organization') }}>
+              <span class="primary-color stats-big">{{ stats.organization_count }}</span>
+              <span class="secondary-color">{{ _('CONTRIBUTORS') }}</span>
+          </a>
       </div>
       <div class="col col-xs-5 col-sm-1 stats-box">
-          <span class="primary-color stats-big">{{ stats.dataset_count }}</span>
-          <span>{{ _('DATASETS') }}</span>
+          <a href={{ h.url_for('search') }}>
+              <span class="primary-color stats-big">{{ stats.dataset_count }}</span>
+              <span class="secondary-color">{{ _('DATASETS') }}</span>
+          </a>
       </div>
       <div class="col col-sm-3 stats-box hidden col-xs-hidden">
           <h3>{{ _('Popular tags') }}</h3>

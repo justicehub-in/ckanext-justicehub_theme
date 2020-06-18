@@ -340,6 +340,9 @@ aside .module [class^=module] {
 .search-meta .stats-box {
     margin-top: 3%;
 }
+.search-meta .stats-box a:hover {
+    text-decoration: none;
+}
 
 /* -------------------------------------- Mobile adjustments ----------------------------- */
 @media (min-width:320px) and (orientation: portrait) {
