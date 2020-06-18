@@ -365,6 +365,9 @@ aside .module [class^=module] {
     .nav-tabs .content_action {
         margin-right: 10px;
     }
+    .hug.page-header .nav-tabs {
+        margin-top: 0;
+    }
     .page-header .nav-tabs {
         margin-top: 50px;
         border-bottom: none;
