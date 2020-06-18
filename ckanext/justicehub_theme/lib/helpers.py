@@ -33,7 +33,11 @@ def days_ago(date):
     '''
     Calculates days elapsed for the given date.
     '''
-    date = parse_dates(date)
+    try:
+        date = parse_dates(date)
+    except:
+        return ''
+
     diff = (datetime.today() - date).days
 
     elapsed = '{0} Days ago'.format(diff)
