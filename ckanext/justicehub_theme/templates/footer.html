@@ -27,11 +27,11 @@
                         <i class="fa fa-circle fa-sm"></i>
                         {% block footer_links_legal %}
                         <li class="nav-item">
-                            <a href="https://justicehub.in/terms">{{ _('Terms & Conditions') }}</a>
+                            <a href="{{ h.url_for('/pages/tos')}}">{{ _('Terms & Conditions') }}</a>
                         </li>
                         <i class="fa fa-circle fa-sm"></i>
                         <li class="nav-item">
-                            <a href="https://github.com/justicehub-in/Justice-Hub/blob/master/CODE_OF_CONDUCT.md">{{ _('Code of Conduct') }}</a>
+                            <a href="{{ h.url_for('/pages/coc')}}">{{ _('Code of Conduct') }}</a>
                         </li>
                         {% endblock %}
                         <i class="fa fa-circle fa-sm"></i>
