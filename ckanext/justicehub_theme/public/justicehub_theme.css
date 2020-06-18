@@ -292,7 +292,7 @@ aside .module [class^=module] {
     display: inline-block;
     width: 500px;
 }
-.search-meta .content_action {
+.search-meta .page_primary_action {
     margin-bottom: 5%;
     padding-left: 20px;
 }
