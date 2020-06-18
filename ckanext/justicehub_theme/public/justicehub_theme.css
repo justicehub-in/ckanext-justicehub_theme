@@ -22,9 +22,20 @@
     padding-top: 0;
     padding-bottom: 0;
 }
+.masthead .navigation .nav-pills > li a {
+    padding: 10px 10px;
+}
+/* .masthead .navigation .nav-pills > li a {
+    line-height: 1;
+}
 .masthead .navigation .nav-pills > li {
     padding-top: 5%;
-    height: 120px;
+    min-height: 100px;
+}*/
+.masthead .navigation .nav-pills > li {
+    min-height: 100px;
+    display: flex;
+    align-items: center;
 }
 .masthead .navigation .nav-pills > li.active {
     border-bottom: 1.5vh solid #f65940;
@@ -32,27 +43,19 @@
 .masthead .navigation .nav-pills > li:not(.dropdown):hover {
     border-bottom: 1.5vh solid #f65940;
 }
-.masthead .navigation .nav-pills > li:last-child {
-    padding-left: 5px;
-    padding-right: 10px;
-}
 .header-image {
     width: 28%;
-    height: 10vh;
 }
 .masthead .logo {
-    margin-top: 1%;
-    width: 100%;
-    height: 100%;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
 }
 .navbar-toggle {
     font-size: 8vw;
     margin: 0;
 }
 .logo img {
-    min-width: 100%;
-    max-width: 100%;
-    min-height: 100%;
     object-fit: cover;
 }
 
@@ -374,15 +377,12 @@ aside .module [class^=module] {
         width: 70%;
     }
     .masthead .logo {
-        margin-top: 0;
+        min-height: 60px;
     }
-    .masthead .navigation .nav-pills li {
+    .masthead .navigation .nav-pills > li {
         height: auto;
-        padding-top: 0;
-        padding-bottom: 3%;
-    }
-    .masthead .navigation .nav-pills li:last-child {
-        border-bottom: none;
+        min-height: 50px;
+        display: block;
     }
     .login-heading {
         padding-left: 20px;

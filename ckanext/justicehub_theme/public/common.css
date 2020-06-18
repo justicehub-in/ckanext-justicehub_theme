@@ -110,12 +110,12 @@ h1,
 .content_action a,
 .dataset-title,
 .module-heading,
+.intro-box span:nth-child(2),
 .footer-links .input-group-btn .btn {
     font-weight: 700; /* Bold */
 }
 .stats-big,
-.footer-intro,
-.nav-pills li:last-child {
+.footer-intro {
     font-weight: 800; /* Extra Bold */
 }
 .col2 p,
@@ -249,8 +249,8 @@ h2.module-heading,
 .member_action .delete,
 .nav-facet .nav-item.active,
 .nav-facet .nav-item.active a,
-.select2-results .select2-highlighted,
-.masthead .navigation .nav-pills > li:last-child {
+.nav-pills .dropdown .dropdown-menu > li a:hover,
+.select2-results .select2-highlighted {
     background: none;
     background-color: #f65940;
     border-color: #f65940;
@@ -406,8 +406,8 @@ img.fa-certificate.fa-lg {
     .fa.fa-circle {
         font-size: 60px;
     }
-    .nav-pills li:last-child a.dropdown-toggle:active,
-    .nav-pills li:last-child a.dropdown-toggle:focus {
+    .nav-pills li.dropdown a.dropdown-toggle:active,
+    .nav-pills li.dropdown a.dropdown-toggle:focus {
         background-color: #f65940;
     }
     .footer-intro-invert {
