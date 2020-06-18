@@ -13,9 +13,9 @@
   <div class="row search-meta">
     <div class="col col-xs-6 col-sm-2 page_primary_action">
       {% if not c.userobj %}
-          {% link_for _('PUBLISH DATA'), named_route='user.login', class_='btn btn-primary' %}
+          {% link_for _('Publish Data'), named_route='user.login', class_='btn btn-primary' %}
       {% else %}
-          {% link_for _('PUBLISH DATA'), controller='package', action='new', named_route='dataset_new', class_='btn btn-primary' %}
+          {% link_for _('Publish Data'), controller='package', action='new', named_route='dataset_new', class_='btn btn-primary' %}
       {% endif %}
     </div>
   </div>

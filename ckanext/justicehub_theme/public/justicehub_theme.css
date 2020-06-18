@@ -235,6 +235,20 @@ aside .module [class^=module] {
 
 
 /* ------------------------ footer ------------------------ */
+.footer-links .image-box {
+    margin-top: -20px;
+    height: 70px;
+    width: 30%;
+    display: inline-block;
+}
+.footer-links .agami-logo {
+    width: 162px;
+    height: 44px;
+}
+.footer-links .cdl-logo {
+    width: 204.07px;
+    height: 70px;
+}
 .site-footer {
     padding: 0 30px;
 }
@@ -242,7 +256,7 @@ aside .module [class^=module] {
     padding: 50px 0;
 }
 .footer-links > .row {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 .footer-links .nav-item {
     display: inline;
@@ -387,6 +401,9 @@ aside .module [class^=module] {
         min-height: 50px;
         display: block;
     }
+    .navigation .dropdown:last-child .dropdown-menu {
+        position: static;
+    }
     .login-heading {
         padding-left: 20px;
         margin-bottom: 20px;
@@ -438,9 +455,6 @@ aside .module [class^=module] {
     }
     .footer-links .social-links li {
         margin-right: 0;
-    }
-    .navigation .dropdown:last-child .dropdown-menu {
-        position: static;
     }
     .social-links.col-xs-12 {
         width: 100%;

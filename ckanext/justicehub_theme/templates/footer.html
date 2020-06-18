@@ -4,9 +4,22 @@
     {% block footer_content %}
     <div class="row">
 
-        <div class="col col-md-6 col-sm-6 footer-links">
+        <div class="col col-sm-6 footer-links">
             <div class="row hidden-xs">
-                <div class="col col-md-7 col-sm-7 footer-disclaimer">
+                <div class="col col-xs-12">
+                    <i style="font-size: 16px; font-weight: 500;">{{ _('Created by:') }}</i>
+                </div>
+            </div>
+            <div class="hidden-xs">
+                <div class="image-box">
+                    <img class="agami-logo" src="{{ h.url_for_static('/uploads/admin/agami_logo.png')}}"></img>
+                </div>
+                <div class="image-box">
+                    <img class="cdl-logo" src="{{ h.url_for_static('/uploads/admin/cdl_logo.png')}}"></img>
+                </div>
+            </div>
+            <div class="row hidden-xs">
+                <div class="col col-sm-7 footer-disclaimer">
                     <div>
                     This is an Alpha release, we will be working to add more datasets in the coming days to the Justice Hub.
                     </div>
@@ -17,7 +30,7 @@
             </div>
 
             <div class="row hidden-xs">
-                <div class="col col-md-12 col-xs-12">
+                <div class="col col-sm-12 col-xs-12">
                     <ul class="list-unstyled list-inline">
                         {% block footer_links %}
                         <li class="nav-item">
@@ -50,22 +63,21 @@
             </div>
         </div>
 
-        <div class="col col-xs-12 col-md-6 col-sm-6 subscribe-box footer-links">
-
+        <div class="col col-xs-12 col-sm-6 subscribe-box footer-links">
             <div class="row hidden-xs">
-                <div class="col col-md-12 col-sm-12">
+                <div class="col col-sm-12">
                     <div class="footer-intro footer-intro-invert">{{ _('SUBSCRIBE') }}</div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col col-md-10 col-sm-10 col-xs-12" data-module="justicehub_theme_subscribe">
+                <div class="col col-sm-10 col-xs-12" data-module="justicehub_theme_subscribe">
                     <form id="subscribe-form" method="post" action="{{h.url_for('jhsubscribe')}}">
                     <div class="input-group">
                         <input type="email" class="form-control" placeholder="Enter you email id" name="email">
                         <span class="input-group-btn">
                             <button class="btn btn-default btn-lg hidden-xs" type="submit">{{ _('SUBSCRIBE') }}</button>
-                            <button class="btn visible-xs" type="button">
+                            <button class="btn visible-xs" type="submit">
                                 <i class="fa fa-bell"></i>
                             </button>
                         </span>
@@ -75,13 +87,13 @@
             </div>
 
             <div class="row">
-                <div class="col col-xs-12 col-sm-10 col-md-10 col-lg-10">
+                <div class="col col-xs-12 col-sm-10 col-lg-10">
                     <p class="footer-intro-invert">Be part of our mailing list, to keep up with the latest happenings and events of the Hub.</p>
                 </div>
             </div>
 
             <div class="row visible-xs">
-                <div class="col col-md-12 col-xs-12">
+                <div class="col col-sm-12 col-xs-12">
                     <ul class="list-unstyled">
                         <li class="nav-item">
                             <a href="{{ h.url_for(controller='home', action='about') }}">{{ _('About') }}</a></li>
