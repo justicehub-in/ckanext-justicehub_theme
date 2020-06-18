@@ -1,6 +1,30 @@
 {% ckan_extends %}
 
-{% block resource_item_description %}
+{% block resource_item_title %}
+    <a class="heading" href="{{ url }}" title="{{ res.name or res.description }}">
+        {{ h.resource_display_name(res) | truncate(50) }}
+        <span class="format-label" property="dc:format" data-format="{{ res.format.lower() or 'data' }}">
+            {{ h.get_translated(res, 'format') }}
+        </span>
+        {{ h.popular('views', res.tracking_summary.total, min=10) }}
+
+        {% if res.variable_measured %}
+            <p class="res-meta">
+            {{ _('Each row represents:') }}
+            {{ res.variable_measured }}
+            </p>
+        {% endif %}
+
+        <p class="res-meta" style="font-style: italic;">
+                {{ _('Updated:') }}
+                {{ h.justicehub_theme_days_ago(res.last_modified) or h.justicehub_theme_days_ago(res.created) }}
+            {% if res.Created %}
+            <br>
+                {{ _('Created:') }}
+                {{ h.render_datetime(res.Created) }}
+            {% endif %}
+        </p>
+  </a>
 {% endblock %}
 
 {% block resource_item_explore %}

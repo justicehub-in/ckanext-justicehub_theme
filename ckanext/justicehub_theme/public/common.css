@@ -5,6 +5,9 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-weight: 400; /* Regular */
 }
+.res-meta {
+    font-size: 12px;
+}
 .pkg_tags,
 .footer-links .nav-item a {
     font-size: 14px;
@@ -81,6 +84,7 @@ h1,
 .landing-desc,
 .resource-item .description,
 .dataset-org,
+.res-meta,
 .dataset-meta,
 .nav-pills li,
 .footer-disclaimer {
@@ -150,7 +154,9 @@ a,
 .activity .item a {
     color: #bcb4bf;
 }
-.downloads, .dataset-meta {
+.res-meta,
+.downloads,
+.dataset-meta {
     color: #707070;
 }
 body,
@@ -373,6 +379,7 @@ img.fa-certificate.fa-lg {
 
 /* -------------------------------------- Mobile adjustments ----------------------------- */
 @media (min-width:320px) and (orientation: portrait) {
+    .res-meta,
     .dataset-meta {
         font-size: 12px;
     }

@@ -78,6 +78,10 @@ h1+.dataset-meta {
     padding-left: 5%;
 }
 
+/* -------------------------- files ----------------------- */
+.resource-item .heading:hover {
+    text-decoration: none;
+}
 /* -------------------------- links ----------------------- */
 .links-list.dl-horizontal dt {
     width: 30%;
