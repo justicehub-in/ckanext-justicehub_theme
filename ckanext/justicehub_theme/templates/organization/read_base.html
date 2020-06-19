@@ -56,6 +56,7 @@
         <div class="social-links col-md-4 col-sm-4 col-xs-12">
             <ul class="list-unstyled list-inline">
                 <li>
+                {% if c.group_dict.website %}
                     <a href="{{ c.group_dict.website }}"
                        aria-hidden="true" alt="{{ c.group_dict.name }}'s Website"
                        role="link" title="Official Website"
@@ -63,17 +64,21 @@
                        target="_blank">
                         <i class="fa fa-link fa-lg"></i>
                     </a>
+                {% endif %}
                 </li>
                 <li>
-                    <a href="{{ c.group_dict.email }}"
+                {% if c.group_dict.email %}
+                    <a href="mailto:{{ c.group_dict.email }}"
                        aria-hidden="true" alt="{{ c.group_dict.name }}'s Email Address"
                        role="link" title="Email Address"
                        aria-label="{{ c.group_dict.name }}'s Email Address"
                        target="_blank">
                     <i class="fa fa-envelope fa-lg"></i>
                     </a>
+                {% endif %}
                 </li>
                 <li>
+                {% if c.group_dict.twitter %}
                     <a href="{{ c.group_dict.twitter }}"
                        aria-hidden="true" alt="{{ c.group_dict.name }}'s Twitter Handle"
                        role="link" title="Official Twitter Handle"
@@ -81,15 +86,18 @@
                        target="_blank">
                         <i class="fa fa-twitter fa-lg"></i>
                     </a>
+                {% endif %}
                 </li>
                 <li>
-                    <a href="{{ c.group_dict.twitter }}"
+                {% if c.group_dict.facebook %}
+                    <a href="{{ c.group_dict.facebook }}"
                        aria-hidden="true" alt="{{ c.group_dict.name }}'s Facebook Page"
                        role="link" title="Official Facebook Page"
                        aria-label="{{ c.group_dict.name }}'s Facebook Page"
                        target="_blank">
                         <i class="fa fa-facebook fa-lg"></i>
                     </a>
+                {% endif %}
                 </li>
             </ul>
         </div>
