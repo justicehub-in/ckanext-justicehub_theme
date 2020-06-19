@@ -261,13 +261,17 @@ aside .module [class^=module] {
 .footer-links .nav-item {
     display: inline;
 }
+.footer-links .list-inline > li {
+    padding-left: 0.1em;
+    padding-right: 0.2em;
+}
 .footer-disclaimer {
     margin-bottom: 10px;
 }
 .footer-links i.fa-circle.fa-sm {
     font-size: 9px;
     color: #f65940;
-    padding: 10px;
+    padding: 0;
 }
 .subscribe-box {
     padding-right: 60px;

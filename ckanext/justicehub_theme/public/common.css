@@ -297,6 +297,7 @@ h2.module-heading,
 .module-heading {
     border-bottom-color: #f65940;
 }
+.subscribe-box .input-group .form-control,
 .btn-register:hover,
 .context-info .follow_button .btn:hover {
     border-color: #ffffff;
