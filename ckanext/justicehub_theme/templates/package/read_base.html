@@ -9,7 +9,7 @@
 {% block pre_primary %}
 <div class="top-section">
     <div class="row">
-        <div class="col col-sm-7 col-xs-12">
+        <div class="col col-sm-8 col-xs-12">
             <div class="row">
                 <h1>{{h.dataset_display_name(pkg)}}
                 {% if pkg.private %}
@@ -24,7 +24,7 @@
                         <a href="mailto:{{ pkg.maintainer_email }}">{{ pkg.maintainer }}</a>
                     </span>
                 </div>
-                <div class="row col col-sm-8 col-xs-12">
+                <div class="row col col-sm-10 col-xs-12">
                     <p class="dataset-desc"> {{h.get_translated(pkg, 'notes')}}</p>
                 </div>
             </div>
@@ -43,8 +43,8 @@
             <div class="row" style="height: 40px;"></div>
         </div>
 
-        <div class="col col-sm-5 col-xs-12 text-center">
-            <div class="col col-sm-8 col-sm-offset-3 org-box image-box">
+        <div class="col col-sm-4 col-xs-12 text-center">
+            <div class="col col-sm-8 org-box image-box">
                 <a href="{{ h.url_for(controller='organization', action='read', id=pkg.organization.id) }}">
                 {% set image_path = h.url_for_static('uploads/group/' + pkg.organization.image_url, qualified=True) %}
                 <img src="{{ image_path or h.url_for_static('/base/images/placeholder-organization.png') }}" alt="{{ pkg.organization.name }}" class="img-responsive media-image" >
@@ -83,6 +83,7 @@
             <div class="col col-sm-7 col-xs-12 partner-links social-links">
             <ul class="list-unstyled list-inline">
                 <li>
+                {% if pkg.partner.website %}
                     <a href="{{ pkg.partner.website }}"
                        aria-hidden="true" alt="{{ pkg.organization.name }}'s Website"
                        role="link" title="Official Website"
@@ -90,8 +91,10 @@
                        target="_blank">
                         <i class="fa fa-link fa-lg"></i>
                     </a>
+                {% endif %}
                 </li>
                 <li>
+                {% if pkg.partner.email %}
                     <a href="{{ pkg.partner.email }}"
                        aria-hidden="true" alt="{{ pkg.organization.name }}'s Email Address"
                        role="link" title="Email Address"
@@ -99,8 +102,10 @@
                        target="_blank">
                     <i class="fa fa-envelope fa-lg"></i>
                     </a>
+                {% endif %}
                 </li>
                 <li>
+                {% if pkg.partner.twitter %}
                     <a href="{{ pkg.partner.twitter }}"
                        aria-hidden="true" alt="{{ pkg.organization.name }}'s Twitter Handle"
                        role="link" title="Official Twitter Handle"
@@ -108,15 +113,18 @@
                        target="_blank">
                         <i class="fa fa-twitter fa-lg"></i>
                     </a>
+                {% endif %}
                 </li>
                 <li>
-                    <a href="{{ pkg.partner.twitter }}"
+                {% if pkg.partner.facebook %}
+                    <a href="{{ pkg.partner.facebook }}"
                        aria-hidden="true" alt="{{ pkg.organization.name }}'s Facebook Page"
                        role="link" title="Official Facebook Page"
                        aria-label="{{ pkg.organization.name }}'s Facebook Page"
                        target="_blank">
                         <i class="fa fa-facebook fa-lg"></i>
                     </a>
+                {% endif %}
                 </li>
             </ul>
             </div>

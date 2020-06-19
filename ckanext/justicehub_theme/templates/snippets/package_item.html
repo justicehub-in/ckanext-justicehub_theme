@@ -16,7 +16,7 @@
                 <i class="fa fa-lock" data-toggle="tooltip"></i>
             {% endif %}
             {% if package.verified %}
-                <img class="fa fa-check" src="{{ h.url_for_static('uploads/admin/verified_icon.png') }}" alt="verified" title="verified"></img>
+                <img class="fa fa-check" src="{{ h.url_for_static('uploads/admin/verified_icon.png') }}" alt="Verified" title="Verified"></img>
             {% endif %}
           {% endblock %}
 
@@ -41,7 +41,7 @@
               {% if item['key'] == 'signed_pledge' %}
                   {% set signed_pledge = item['value'] %}
                   {% if signed_pledge == 'true' %}
-                    <img class="fa fa-certificate" src="{{ h.url_for_static('uploads/admin/signed_pledge_icon.png') }}" alt="verified" title="verified"></img>
+                    <img class="fa fa-certificate" src="{{ h.url_for_static('uploads/admin/signed_pledge_icon.png') }}" alt="Signed Open Data Pledge" title="Signed Open Data Pledge"></img>
                   {% endif %}
               {% endif %}
               {% endfor %}

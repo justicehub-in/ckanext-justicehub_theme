@@ -6,9 +6,6 @@
 .dataset-org {
     margin-bottom: 20px;
 }
-.package-item-row .dataset-desc {
-    margin-top: 20px;
-}
 .dataset-resources {
     margin-top: 0;
 }
@@ -28,6 +25,7 @@ h1+.dataset-meta {
 .dataset-desc {
     width:80%;
     margin-bottom:20px;
+    text-align: justify;
 }
 .row.dataset-meta {
     padding: 10px 0;

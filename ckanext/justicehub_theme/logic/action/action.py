@@ -48,6 +48,11 @@ def get_package_owner_details(context, data_dict):
     # partner, errors = lib_plugins.plugin_validate(
     #     group_plugin, context, partner_dict, schema, 'organization_show'
     # )
+    for item in partner_dict['extras']:
+        if item['state'] == 'active':
+            partner_dict[item['key']] = item['value']
+
+    partner_dict.pop('extras')
     return partner_dict
 
 

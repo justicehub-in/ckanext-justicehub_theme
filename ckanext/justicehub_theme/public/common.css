@@ -236,9 +236,11 @@ body,
 .masthead .navigation .nav-pills li.active a,
 .landing-desc .social-links .fa:hover,
 .footer-links .social-links .fa:hover,
+.composite-control-repeating .btn-success,
 [role="main"] .container .row .col3 {
     background: none;
     background-color: #403644;
+    border-color: #403644;
 }
 .context-info .follow_button .btn,
 .subscribe-box,
@@ -250,6 +252,7 @@ h2.module-heading,
 .member_action .delete,
 .nav-facet .nav-item.active,
 .nav-facet .nav-item.active a,
+.composite-control-repeating .btn-danger,
 .nav-pills .dropdown .dropdown-menu > li a:hover,
 .select2-results .select2-highlighted {
     background: none;
@@ -389,6 +392,7 @@ img.fa-certificate.fa-lg {
     .col2 p,
     .stats-box,
     .content_action a,
+    .dataset-desc,
     .dataset-count-box,
     .resource-item .heading,
     .table thead tr th.table-actions .btn,
