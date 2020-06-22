@@ -1,10 +1,20 @@
+import json
+
 import requests
 from ckanext.justicehub_theme.lib import helpers
+from pylons import config
 
 import ckan.controllers.organization as org
+import ckan.lib.base as base
+import ckan.lib.navl.dictization_functions as dict_fns
 import ckan.lib.plugins as plugins
+import ckan.logic as logic
 import ckan.model as model
-from ckan.common import c
+from ckan.common import c, request
+
+clean_dict = logic.clean_dict
+parse_params = logic.parse_params
+tuplize_dict = logic.tuplize_dict
 
 
 class JHOrgController(org.OrganizationController):
@@ -78,20 +88,18 @@ class SubscribeController(base.BaseController):
             "status": "subscribed"
             }
         headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Basic '+ basic_auth_key
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic '+ basic_auth_key
         }
 
         response = requests.request("POST", url, headers=headers, data = json.dumps(payload))
-
-        print(response.text.encode('utf8'))
 
         tag_url = mailchimp_base_url + subscriber_list_id + "/segments/" + subscriber_tag_id + "/members"
 
         payload = {
             "email_address": str(request_body.get("email", ""))
-            }
+        }
 
-        response = requests.request("POST", tag_url, headers=headers, data = json.dumps(payload))
+        tag_response = requests.request("POST", tag_url, headers=headers, data = json.dumps(payload))
 
-        print response.text.encode('utf8')
+        return response.text.encode('utf8')

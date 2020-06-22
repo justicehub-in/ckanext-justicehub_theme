@@ -26,3 +26,50 @@ ckan.module('justicehub_theme_tabs', function ($) {
         }
     };
 });
+
+ckan.module('justicehub_theme_subscribe', function ($) {
+    return {
+        initialize: function () {
+            $('[data-toggle="popover"]').popover();
+
+            function subscribeSubmit(event) {
+                $('[data-toggle="popover"]').popover('hide');
+
+                console.log(event);
+                var url = event.target.action;
+                var request = new XMLHttpRequest();
+
+                request.open('POST', url, true);
+
+                request.onload = function() {
+                    // success
+                    response = JSON.parse(request.response)
+
+                    if (response.errors) {
+                        msg = response.errors[0].message;
+
+                    }
+                    else if (response.status == 400 && response.errors==undefined) {
+                        msg = response.detail.split('. ')[0];
+                    }
+                    else if (response.status == 'subscribed') {
+                        msg = 'Subscribed!';
+                    }
+
+                    console.log(msg);
+                    $('[data-toggle="popover"]').data('bs.popover').options.content=msg;
+                    $('[data-toggle="popover"]').popover('show');
+                };
+
+                request.onerror = function() {
+                    // request failed
+                };
+
+                request.send(new FormData(event.target));
+                event.preventDefault();
+            }
+            console.log("initialized");
+            document.getElementById("subscribe-form").addEventListener("submit", subscribeSubmit);
+        }
+    };
+});
