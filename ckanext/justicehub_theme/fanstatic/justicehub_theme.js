@@ -1,3 +1,5 @@
+$('[data-toggle="tooltip"]').tooltip();
+
 ckan.module('justicehub_theme_tabs', function ($) {
     return {
         initialize: function () {

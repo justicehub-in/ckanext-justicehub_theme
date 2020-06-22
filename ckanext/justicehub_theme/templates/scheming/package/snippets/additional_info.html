@@ -28,14 +28,16 @@
 
 {% block package_additional_info %}
     <dl class="dl-horizontal metadata-list">
-        <dt title="{{ _('Timeline of the data. Start and End dates/years.') }}">
+        <dt data-toggle="tooltip"
+            title="{{ _('Timeline of the data. Start and End dates/years.') }}">
             {{ _('Timeline of Dataset') }}
         </dt>
         <dd>{{ pkg_dict['start_year'] }}-{{ pkg_dict['end_year'] }}</dd>
     </dl>
 
     <dl class="dl-horizontal metadata-list">
-        <dt title="{{ _('What is the geographical scope of this dataset (PAN India, selected states/districts, etc).') }}">
+        <dt data-toggle="tooltip"
+            title="{{ _('What is the geographical scope of this dataset (PAN India, selected states/districts, etc).') }}">
             {{ _('Geography') }}
         </dt>
         <dd>{{ pkg_dict['states'] }}
@@ -49,7 +51,8 @@
             and pkg_dict[field.field_name] -%}
 
         <dl class="dl-horizontal metadata-list">
-            <dt title="{{field.description}}">
+            <dt data-toggle="tooltip"
+                title="{{field.description}}">
               {{ h.scheming_language_text(field.label) }}
             </dt>
             <dd {% if field.display_property %} property="{{ field.display_property}}"{% endif %}>

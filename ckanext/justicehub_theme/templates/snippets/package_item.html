@@ -13,10 +13,14 @@
 
           {% block heading_private %}
             {% if package.private %}
-                <i class="fa fa-lock" data-toggle="tooltip"></i>
+                <i class="fa fa-lock" data-toggle="tooltip" title="Private Dataset"></i>
             {% endif %}
             {% if package.verified %}
-                <img class="fa fa-check" src="{{ h.url_for_static('uploads/admin/verified_icon.png') }}" alt="Verified" title="Verified"></img>
+                <img class="fa fa-check"
+                     src="{{ h.url_for_static('uploads/admin/verified_icon.png') }}"
+                     data-toggle="tooltip"
+                     alt="Verified"
+                     title="Verified"></img>
             {% endif %}
           {% endblock %}
 
@@ -34,17 +38,13 @@
           {% block organization %}
           <div class="dataset-org">
               {{ h.link_to(h.truncate(package.organization.title, truncate_title), h.url_for(controller='organization', action='read', id=package.organization.name)) }}
-
-              {# HACK: need to fix #}
-              {% set org_extras = package.partner['extras'] %}
-              {% for item in org_extras %}
-              {% if item['key'] == 'signed_pledge' %}
-                  {% set signed_pledge = item['value'] %}
-                  {% if signed_pledge == 'true' %}
-                    <img class="fa fa-certificate" src="{{ h.url_for_static('uploads/admin/signed_pledge_icon.png') }}" alt="Signed Open Data Pledge" title="Signed Open Data Pledge"></img>
-                  {% endif %}
+              {% if package.partner.signed_pledge %}
+                <img class="fa fa-certificate"
+                     src="{{ h.url_for_static('uploads/admin/signed_pledge_icon.png') }}"
+                     data-toggle="tooltip"
+                     alt="Signed Open Data Pledge"
+                     title="Signed Open Data Pledge"></img>
               {% endif %}
-              {% endfor %}
           </div>
           {% endblock %}
         </div>

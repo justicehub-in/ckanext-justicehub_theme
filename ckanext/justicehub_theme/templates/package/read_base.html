@@ -13,10 +13,18 @@
             <div class="row">
                 <h1>{{h.dataset_display_name(pkg)}}
                 {% if pkg.private %}
-                    <i style="margin-left: 10px;" class="fa fa-lock fa-lg"></i>
+                    <i style="margin-left: 10px;"
+                       class="fa fa-lock fa-lg"
+                       data-toggle="tooltip"
+                       alt="Private Dataset"
+                       title="Private Dataset"></i>
                 {% endif %}
                 {% if pkg.verified %}
-                    <img class="fa fa-check fa-lg" src="{{ h.url_for_static('uploads/admin/verified_icon.png') }}" alt="verified" title="verified"></img>
+                    <img class="fa fa-check fa-lg"
+                         src="{{ h.url_for_static('uploads/admin/verified_icon.png') }}"
+                         data-toggle="tooltip"
+                         alt="Verified"
+                         title="Verified"></img>
                 {% endif %}
                 </h1>
                 <div class="dataset-meta">
