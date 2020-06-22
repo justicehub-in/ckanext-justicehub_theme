@@ -1,5 +1,5 @@
 <footer class="site-footer">
-
+    {% resource "justicehub_theme/subscribe.js"%}
     <div class="container">
         
         {% block footer_content %}
@@ -38,13 +38,15 @@
             <div class="col col-md-1 social-links">
             </div>
 
-            <div class="col col-md-5 social-links">
+            <div class="col col-md-5 social-links" data-module="justicehub_theme_subscribe">
+                <form id="subscribe-form" method="post" action="{{h.url_for('jhsubscribe')}}">
                 <div class="input-group">
-                    <input type="url" class="form-control input-lg" placeholder="Enter you email id">
+                    <input type="email" class="form-control input-lg" placeholder="Enter you email id" name="email">
                     <span class="input-group-btn">
-                        <button class="btn btn-default btn-lg" type="button">Subscribe</button>
+                        <button class="btn btn-default btn-lg" type="submit">Subscribe</button>
                     </span>
                 </div>
+                </form>
             </div>
         </div>
 

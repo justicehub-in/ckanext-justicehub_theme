@@ -1,20 +1,27 @@
 import json
 
+import requests
+
 import ckanext.justicehub_theme.logic.action as jh_action
 from sqlalchemy import MetaData
 from sqlalchemy.sql import select
 
 import ckan.logic as logic
+import ckan.lib.base as base
 import ckan.model as model
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 from ckan.common import c,request
+import ckan.lib.navl.dictization_functions as dict_fns
 
+from pylons import config
 
 import ckan.controllers.organization as org
 
 cached_tables = {}
-
+clean_dict = logic.clean_dict
+parse_params = logic.parse_params
+tuplize_dict = logic.tuplize_dict
 
 def package_activity_stream(id):
     context = {'model': model, 'session': model.Session,
@@ -184,6 +191,9 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         map.connect('jhorg_stats', '/jhorg/stats/{id}',
                     controller='ckanext.justicehub_theme.plugin:JHOrgController',
                     action='org_stats')
+        map.connect('jhsubscribe', '/subscribe',
+                    controller='ckanext.justicehub_theme.plugin:SubscribeController',
+                    action='subscribe')
         return map
     
     def before_map(self, map):
@@ -193,6 +203,9 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         map.connect('jhorg_stats', '/jhorg/stats/{id}',
                     controller='ckanext.justicehub_theme.plugin:JHOrgController',
                     action='org_stats')
+        map.connect('jhsubscribe', '/subscribe',
+                    controller='ckanext.justicehub_theme.plugin:SubscribeController',
+                    action='subscribe')
         return map
 
 
@@ -249,3 +262,37 @@ class JHOrgController(org.OrganizationController):
             visits += get_package_visits(package)['total']
         c.group_dict.update({'downloads':downloads, 'visits': visits})
         return plugins.toolkit.render('organization/stats.html', extra_vars={'group_type': group_type, 'downloads': downloads})
+
+class SubscribeController(base.BaseController):
+    def subscribe(self):
+        basic_auth_key = config.get("mailchimp_api_key", "")
+        subscriber_list_id = config.get("mailchimp_list_id", "")
+        subscriber_tag_id = config.get("mailchimp_tag_id", "")
+        mailchimp_base_url = config.get("mailchimp_base_url", "")
+        url = mailchimp_base_url + subscriber_list_id + "/members"
+
+        request_body = clean_dict(dict_fns.unflatten(
+                    tuplize_dict(parse_params(request.params))))
+
+        payload = {
+            "email_address": str(request_body.get("email", "")),
+            "status": "subscribed"
+            }
+        headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic '+ basic_auth_key
+        }
+
+        response = requests.request("POST", url, headers=headers, data = json.dumps(payload))
+
+        print(response.text.encode('utf8'))
+
+        tag_url = mailchimp_base_url + subscriber_list_id + "/segments/" + subscriber_tag_id + "/members"
+
+        payload = {
+            "email_address": str(request_body.get("email", ""))
+            }
+
+        response = requests.request("POST", tag_url, headers=headers, data = json.dumps(payload))
+
+        print response.text.encode('utf8')
