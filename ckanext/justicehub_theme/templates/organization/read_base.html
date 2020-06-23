@@ -29,7 +29,7 @@
         {% block description %}
         {% if c.group_dict.notes %}
             <p>
-            {{ h.markdown_extract(c.group_dict.notes) }}
+            {{ h.render_markdown(c.group_dict.notes) }}
             </p>
         {% else %}
             <p class="empty">{{ _('There is no description for this partner') }}</p>

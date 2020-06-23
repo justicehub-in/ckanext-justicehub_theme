@@ -33,7 +33,7 @@
                     </span>
                 </div>
                 <div class="row col col-sm-10 col-xs-12">
-                    <p class="dataset-desc"> {{h.get_translated(pkg, 'notes')}}</p>
+                    <p class="dataset-desc"> {{h.render_markdown(h.get_translated(pkg, 'notes'))}}</p>
                 </div>
             </div>
             <div class="row">
