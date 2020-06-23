@@ -1,5 +1,17 @@
 $('[data-toggle="tooltip"]').tooltip();
 
+// https://stackoverflow.com/a/23006629/3860168
+$('.stats-big').each(function () {
+    var $this = $(this);
+    $({ value: 0 }).animate({ Counter: $this.text() }, {
+    duration: 500, /* NOTE: this duration should later be increased if the count goes up. */
+    easing: 'swing',
+    step: function () {
+      $this.text(Math.ceil(this.Counter));
+    }
+  });
+});
+
 ckan.module('justicehub_theme_tabs', function ($) {
     return {
         initialize: function () {
