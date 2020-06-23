@@ -1,5 +1,6 @@
 /* ---------------------- Site Fonts ------------------- */
 .radios label,
+.popover .popover-content,
 .footer-links .input-group input,
 body {
     font-family: 'Montserrat', sans-serif;
@@ -10,6 +11,7 @@ body {
 }
 .tooltip,
 .pkg_tags,
+.popover .popover-content,
 .footer-links .nav-item a {
     font-size: 14px;
 }
@@ -115,6 +117,7 @@ h1,
 .content_action a,
 .dataset-title,
 .module-heading,
+.popover .popover-content,
 .intro-box span:nth-child(2),
 .footer-links .input-group-btn .btn {
     font-weight: 700; /* Bold */
@@ -152,6 +155,7 @@ a,
 .activity .item .date,
 .activity .item .actor a,
 .links-list a,
+.subscribe-error,
 .page-header .nav-tabs li.active a,
 .footer-disclaimer div:last-child {
     color: #f65940;
@@ -165,6 +169,9 @@ a,
 .downloads,
 .dataset-meta {
     color: #707070;
+}
+.subscribe-success {
+    color: #10c6a0;
 }
 body,
 .stats-box,
@@ -183,6 +190,7 @@ body,
 .stages li.complete .highlight {
     color: #403644;
 }
+.popover .popover-content,
 .context-info .nums dl,
 .homepage .col3,
 .secondary,
@@ -223,6 +231,7 @@ body,
 .account-masthead,
 .nav-facet,
 .sidebar,
+.popover,
 .dropdown-menu,
 [class^="btn btn-"],
 .nav-tabs .content_action a,
@@ -368,6 +377,17 @@ img.fa-certificate.fa-lg {
 }
 .dropdown-toggle .caret {
     width: 10px;
+}
+.subscribe-error,
+.subscribe-success {
+    font-size: 26px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    text-align: center;
+    background-color: #ffffff;
+    padding: 3px;
+    margin-right: 10px;
 }
 
 /* --------------------- stats ------------------------- */

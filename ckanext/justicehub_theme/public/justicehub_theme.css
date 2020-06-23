@@ -301,6 +301,19 @@ aside .module [class^=module] {
 .subscribe-box .btn.btn-default {
     padding: 10px 25px;
 }
+.popover {
+    border-radius: 0;
+    box-shadow: 5px 5px 1px #403644;
+    max-width: 400px;
+    width: 350px;
+}
+.popover .popover-content {
+    display: flex;
+    align-items: center;
+}
+.popover > .arrow {
+    display: none;
+}
 
 /* ------------------------------- Login ------------------------- */
 .login-sidebar {

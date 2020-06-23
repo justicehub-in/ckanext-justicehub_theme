@@ -59,13 +59,16 @@ ckan.module('justicehub_theme_subscribe', function ($) {
 
                     if (response.errors) {
                         msg = response.errors[0].message;
+                        msg = "<i class='fa fa-times subscribe-error'></i> " + msg;
 
                     }
                     else if (response.status == 400 && response.errors==undefined) {
                         msg = response.detail.split('. ')[0];
+                        msg = "<i class='fa fa-times subscribe-error'></i> " + msg;
                     }
                     else if (response.status == 'subscribed') {
-                        msg = 'Subscribed!';
+                        msg = "You've been successfully Subscribed!";
+                        msg = "<i class='fa fa-check subscribe-success'></i> " + msg;
                     }
 
                     console.log(msg);
