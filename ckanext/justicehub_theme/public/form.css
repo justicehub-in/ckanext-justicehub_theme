@@ -39,6 +39,7 @@
 .btn-xs,
 .btn-xs:hover,
 .bg-clear.btn,
+.bg-clear.btn:active:hover,
 .controls .select2-container,
 .checkbox-other.select2-container {
     border: none;
@@ -52,6 +53,7 @@
 .bg-clear:focus,
 .bg-clear:hover,
 .bg-clear:active:hover,
+.bg-clear:active:focus,
 .bg-clear[disabled]:hover,
 .controls .select2-container > a.select2-choice,
 .checkbox-other.select2-container > .select2-choices {

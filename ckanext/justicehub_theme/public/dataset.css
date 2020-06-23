@@ -99,7 +99,8 @@ h1+.dataset-meta {
 }
 .metadata-list.dl-horizontal dd {
     display: inline-block;
-    margin-left: 10%;
+    margin-left: 0;
+    width: 70%;
 }
 .metadata-list.dl-horizontal dt {
     width: 30%;

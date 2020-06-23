@@ -13,12 +13,14 @@ body {
 .footer-links .nav-item a {
     font-size: 14px;
 }
+.badge,
 .count,
 .sort-box,
 .dataset-meta,
 .control-label,
 .input-group-addon,
 .package-item-row,
+.dataset-desc,
 .rsrc-list-side > li a,
 .dropdown-menu > li > a,
 .footer-links .input-group-btn .btn {
@@ -30,7 +32,6 @@ body {
 .nav-simple .nav-item a,
 .nav-facet .nav-item a,
 .filters .module-content.empty,
-.dataset-desc,
 .downloads,
 .nav-pills li,
 .partner-links.social-links .fa.fa-envelope {
@@ -81,6 +82,7 @@ h1,
 .search-form .search-input.search-giant input {
     font-weight: 300; /* Light */
 }
+.badge,
 .intro-box,
 .landing-desc,
 .resource-item .description,
@@ -102,6 +104,7 @@ h1,
 .stats-box,
 .pkg_tags a,
 .sort-box,
+.dataset-count-box,
 .input-group-addon,
 .col3 h2,
 .stages li,
@@ -143,11 +146,13 @@ a,
 .btn-xs:active:hover,
 .bg-clear.btn,
 .bg-clear.btn:hover,
+.bg-clear.btn:active:focus,
 .fa-certificate,
 .dataset-org > a,
 .activity .item .date,
 .activity .item .actor a,
 .links-list a,
+.page-header .nav-tabs li.active a,
 .footer-disclaimer div:last-child {
     color: #f65940;
 }
@@ -197,7 +202,6 @@ body,
 .footer-links .nav-item > a:hover,
 .btn-register:hover,
 .context-info .follow_button .btn:hover,
-.page-header .nav-tabs li.active a,
 .dropdown-menu > li > a,
 .dropdown-menu > li > a:hover,
 .select2-container-multi .select2-choices > li.select2-search-choice {

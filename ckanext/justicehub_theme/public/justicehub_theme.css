@@ -23,7 +23,7 @@
     padding-bottom: 0;
 }
 .masthead .navigation .nav-pills > li a {
-    padding: 10px 10px;
+    padding: 10px 15px;
 }
 /* .masthead .navigation .nav-pills > li a {
     line-height: 1;
@@ -39,9 +39,18 @@
 }
 .masthead .navigation .nav-pills > li.active {
     border-bottom: 1.5vh solid #f65940;
+    padding-top: 14px;
 }
-.masthead .navigation .nav-pills > li:not(.dropdown):hover {
+.masthead .navigation .nav-pills > li:hover {
     border-bottom: 1.5vh solid #f65940;
+    padding-top: 14px;
+}
+.navigation .dropdown .dropdown-menu {
+    padding: 0;
+    width: 100%;
+    min-width: 50px;
+    border-radius: 0;
+    border: none;
 }
 .header-image {
     width: 28%;
@@ -55,8 +64,9 @@
     font-size: 8vw;
     margin: 0;
 }
-.logo img {
+.masthead .logo img {
     object-fit: cover;
+    max-height: 50px;
 }
 
 /* -------------------- body layout ----------------------- */
@@ -95,6 +105,12 @@
 .top-section {
     margin: 0 40px;
     margin-bottom: 200px;
+}
+.top-section > .row:first-child {
+    margin-bottom: 3%;
+}
+.top-section > .row:nth-child(2) {
+    margin-bottom: 1%;
 }
 .context .content_action,
 .nav-tabs .content_action {
@@ -187,7 +203,8 @@
     border-top: 2px solid #f65940;
 }
 .module-shallow .module-content p {
-    padding: 20px 10px;
+    padding: 20px 20px;
+    padding-left: 0;
 }
 .module-shallow .module-content:first-child,
 .module-shallow .module-content:last-child {
@@ -256,10 +273,14 @@ aside .module [class^=module] {
     padding: 50px 0;
 }
 .footer-links > .row {
-    margin-bottom: 10px;
+    margin-top: 15px;
 }
 .footer-links .nav-item {
     display: inline;
+}
+.footer-links .nav-item a {
+    text-underline-offset: 3px;
+    text-decoration-color: #f65940;
 }
 .footer-links .list-inline > li {
     padding-left: 0.1em;
@@ -287,8 +308,9 @@ aside .module [class^=module] {
     height: 700px;
 }
 .login-sidebar-heading {
-    padding: 50px 70px;
+    padding-top: 50px;
     padding-bottom: 10px;
+    text-align: center;
 }
 .login-sidebar p {
     display: flex;
@@ -297,7 +319,7 @@ aside .module [class^=module] {
 }
 .login-heading {
     border-bottom: 1px solid #f65940;
-    padding: 0 50px;
+    padding: 0 80px;
     margin-bottom: -1.5px;
 }
 

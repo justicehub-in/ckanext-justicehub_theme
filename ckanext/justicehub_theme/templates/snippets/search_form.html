@@ -28,7 +28,7 @@
 {% block search_sortby %}
 {% if sorting %}
   <div class="col col-md-3 col-xs-7 input-group pull-right">
-    <span class="input-group-addon square-border bg-clear">{{ _('SORT BY') }}</span>
+    <span class="input-group-addon square-border bg-clear">{{ _('SORT BY:') }}</span>
     <select id="field-order-by" name="sort" class="form-control input-lg square-border sort-box">
       {% for label, value in sorting %}
         {% if label and value %}

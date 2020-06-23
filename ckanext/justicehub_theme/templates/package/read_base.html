@@ -32,8 +32,11 @@
                         <a href="mailto:{{ pkg.maintainer_email }}">{{ pkg.maintainer }}</a>
                     </span>
                 </div>
+                <div class="dataset-meta">
+                    <a href="{{ pkg.license_url }}">{{ pkg.license_title }}</a>
+                </div>
                 <div class="row col col-sm-10 col-xs-12">
-                    <p class="dataset-desc"> {{h.render_markdown(h.get_translated(pkg, 'notes'))}}</p>
+                    <div class="dataset-desc"> {{h.render_markdown(h.get_translated(pkg, 'notes'))}}</div>
                 </div>
             </div>
             <div class="row">
@@ -44,9 +47,6 @@
                     </div>
                 {% endfor %}
                 </div>
-            </div>
-            <div class="row dataset-meta">
-                <a href="{{ pkg.license_url }}">{{ pkg.license_title }}</a>
             </div>
             <div class="row" style="height: 40px;"></div>
         </div>
@@ -76,7 +76,7 @@
                 <span>{{ _('Views') }}</span>
             </span>
             <span class="hidden-xs" style="float: left;">{{ _('|') }}</span>
-            <span class="col-xs-5 col-sm-4">
+            <span class="col-xs-5 col-sm-5">
                 <span>{{ _('Updated ') }}{{ h.justicehub_theme_days_ago(pkg.last_updated) }}</span>
             </span>
         </div>
