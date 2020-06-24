@@ -15,7 +15,7 @@
             </p>
         {% endif %}
 
-        <p class="res-meta" style="font-style: italic;">
+        <p class="res-meta">
                 {{ _('Updated:') }}
                 {{ h.justicehub_theme_days_ago(res.last_modified) or h.justicehub_theme_days_ago(res.Created) }}
             {% if res.Created %}
@@ -25,6 +25,14 @@
             {% endif %}
         </p>
   </a>
+{% endblock %}
+
+{% block resource_item_description %}
+    <p class="description res-meta">
+      {% if res.description %}
+        {{ h.markdown_extract(h.get_translated(res, 'description'), extract_length=80) }}
+      {% endif %}
+    </p>
 {% endblock %}
 
 {% block resource_item_explore %}

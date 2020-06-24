@@ -20,6 +20,13 @@
     width: 31px;
     height: 31px;
 }
+.partner-links.social-links .fa-twitter {
+    padding-left: 6px;
+}
+.partner-links.social-links .fa-facebook {
+    padding-top: 13px;
+    padding-left: 4px;
+}
 .partner-logo {
     height: 200px;
 }

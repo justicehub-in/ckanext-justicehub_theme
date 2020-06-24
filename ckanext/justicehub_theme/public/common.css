@@ -6,9 +6,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-weight: 400; /* Regular */
 }
-.res-meta {
-    font-size: 12px;
-}
+.res-meta,
 .tooltip,
 .pkg_tags,
 .popover .popover-content,
@@ -156,7 +154,7 @@ a,
 .activity .item .actor a,
 .links-list a,
 .subscribe-error,
-.page-header .nav-tabs li.active a,
+.footer-links .nav-item > a:hover,
 .footer-disclaimer div:last-child {
     color: #f65940;
 }
@@ -207,11 +205,14 @@ body,
 .nav-facet .nav-item > a,
 .member_action .delete,
 .footer-links .nav-item > a,
-.footer-links .nav-item > a:hover,
 .btn-register:hover,
 .context-info .follow_button .btn:hover,
 .dropdown-menu > li > a,
 .dropdown-menu > li > a:hover,
+.nav-tabs-plain li.active a:hover,
+.page-header .nav-tabs li a:hover,
+.nav-tabs-plain li.active a,
+.page-header .nav-tabs li.active a,
 .select2-container-multi .select2-choices > li.select2-search-choice {
     color: #ffffff;
 }
@@ -233,11 +234,12 @@ body,
 .sidebar,
 .popover,
 .dropdown-menu,
+.dropdown-menu > li a,
 [class^="btn btn-"],
 .nav-tabs .content_action a,
-.res-actions a,
 .stages li.active .highlight,
 .metadata-heading,
+.nav-tabs-plain li.active a,
 .page-header .nav-tabs li.active a,
 .filters .module-heading,
 .filters .module-content.empty,
@@ -267,7 +269,9 @@ h2.module-heading,
 .nav-facet .nav-item.active,
 .nav-facet .nav-item.active a,
 .composite-control-repeating .btn-danger,
-.nav-pills .dropdown .dropdown-menu > li a:hover,
+.dropdown-menu > li a:hover,
+.nav-tabs-plain li.active a:hover,
+.page-header .nav-tabs li a:hover,
 .select2-results .select2-highlighted {
     background: none;
     background-color: #f65940;
@@ -321,6 +325,10 @@ h2.module-heading,
 }
 .subscribe-box .btn.btn-default:hover {
     border-color: #f65940;
+}
+.nav-tabs-plain,
+.page-header .nav-tabs {
+    border-bottom: 2px solid #f65940;
 }
 
 /* ---------------------- social links ------------------ */
@@ -449,5 +457,8 @@ img.fa-certificate.fa-lg {
     }
     .footer-intro {
         font-size: 18px;
+    }
+    .page-header .nav-tabs {
+        border-bottom: none;
     }
 }

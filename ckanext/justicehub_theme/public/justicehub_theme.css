@@ -39,11 +39,11 @@
 }
 .masthead .navigation .nav-pills > li.active {
     border-bottom: 1.5vh solid #f65940;
-    padding-top: 14px;
+    padding-top: 8px;
 }
 .masthead .navigation .nav-pills > li:hover {
     border-bottom: 1.5vh solid #f65940;
-    padding-top: 14px;
+    padding-top: 8px;
 }
 .navigation .dropdown .dropdown-menu {
     padding: 0;
@@ -139,6 +139,7 @@
 [class^="btn btn-"]:hover,
 [class^="btn btn-"]:active,
 [class^="btn btn-"]:focus,
+.open > .dropdown-toggle.btn,
 .bg-clear:active:hover,
 .res-actions a:hover,
 .content_action a:hover {
@@ -165,7 +166,6 @@
 }
 .page-header .nav-tabs {
     width: 100%;
-    border-bottom: 2px solid #f65940;
     margin-top: -55px;
 }
 .page-header .nav-tabs li a {
@@ -279,8 +279,7 @@ aside .module [class^=module] {
     display: inline;
 }
 .footer-links .nav-item a {
-    text-underline-offset: 3px;
-    text-decoration-color: #f65940;
+    text-decoration: none;
 }
 .footer-links .list-inline > li {
     padding-left: 0.1em;
@@ -423,7 +422,6 @@ aside .module [class^=module] {
     }
     .page-header .nav-tabs {
         margin-top: 50px;
-        border-bottom: none;
     }
     .toolbar .breadcrumb,
     .toolbar .breadcrumb a {
