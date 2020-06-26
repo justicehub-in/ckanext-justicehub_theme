@@ -20,9 +20,18 @@ Example:
   {{ form.input('login', label=_("Username"), id='field-login', value="", error=username_error, classes=["control-medium"]) }}
 
   {{ form.input('password', label=_("Password"), id='field-password', type="password", value="", error=password_error, classes=["control-medium"]) }}
-  <a class="btn btn-default btn-forgot bg-clear pull-right" href="{{ h.url_for('user.request_reset') }}">{{ _('Forgot password') }}</a>
 
-  {{ form.checkbox('remember', label=_("Remember me"), id='field-remember', checked=true, value="63072000") }}
+  <div class="row form-group">
+      <div class="col col-sm-6 col-xs-6">
+          <label class="checkbox" for="field-remember">
+              <input id="field-remember" type="checkbox" name="remember" value="63072000" checked="">
+              {{ _('Remember me') }}
+          </label>
+      </div>
+      <div class="col col-sm-6 col-xs-6 text-right">
+          <a class="btn btn-default btn-forgot bg-clear" href="{{ h.url_for('user.request_reset') }}">{{ _('Forgot password') }}</a>
+      </div>
+  </div>
 
   <div class="form-actions">
     {% block login_button %}

@@ -16,6 +16,9 @@
 }
 
 /* ------------------------- org-detail ---------------------- */
+.partner-links li {
+    margin-right: 0;
+}
 .partner-links.social-links .fa {
     width: 31px;
     height: 31px;

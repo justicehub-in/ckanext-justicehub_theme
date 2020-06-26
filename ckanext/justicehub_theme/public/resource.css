@@ -28,3 +28,11 @@
 .res-actions ul > li a[data-module=api-info] {
     display: none;
 }
+.res-actions .btn:active,
+.open > .dropdown-toggle.btn,
+.open > .dropdown-toggle.btn:hover,
+.res-actions .btn:hover {
+    background-color: #f65940;
+    border-color: #f65940;
+    color: #fff;
+}

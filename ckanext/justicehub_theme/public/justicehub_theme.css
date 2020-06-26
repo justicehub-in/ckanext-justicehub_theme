@@ -114,7 +114,7 @@ a.morelink:visited {
 	color: #f65940;
 }
 .top-section {
-    margin: 0 40px;
+    margin-left: 40px;
     margin-bottom: 200px;
 }
 .top-section > .row:first-child {
@@ -330,8 +330,8 @@ aside .module [class^=module] {
     height: 700px;
 }
 .login-sidebar-heading {
-    padding-top: 50px;
-    padding-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     text-align: center;
 }
 .login-sidebar p {
@@ -343,6 +343,9 @@ aside .module [class^=module] {
     border-bottom: 1px solid #f65940;
     padding: 0 80px;
     margin-bottom: -1.5px;
+}
+.btn-forgot {
+    margin-top: 5px;
 }
 
 /* ----------------------------- homepage --------------------------- */
