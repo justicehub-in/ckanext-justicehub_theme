@@ -39,11 +39,12 @@
 }
 .masthead .navigation .nav-pills > li.active {
     border-bottom: 1.5vh solid #f65940;
-    padding-top: 8px;
+    padding-top: 14px;
 }
+.navigation .open,
 .masthead .navigation .nav-pills > li:hover {
     border-bottom: 1.5vh solid #f65940;
-    padding-top: 8px;
+    padding-top: 14px;
 }
 .navigation .dropdown .dropdown-menu {
     padding: 0;
@@ -66,7 +67,7 @@
 }
 .masthead .logo img {
     object-fit: cover;
-    max-height: 50px;
+    max-height: 40px;
 }
 
 /* -------------------- body layout ----------------------- */
@@ -131,7 +132,6 @@
     padding: 5px 25px;
     color: #ffffff;
 }
-.res-actions a,
 .content_action a {
     margin-top: 10px;
 }
@@ -428,7 +428,7 @@ aside .module [class^=module] {
         color: #403644;
     }
     .header-image {
-        width: 70%;
+        width: 50%;
     }
     .masthead .logo {
         min-height: 60px;
