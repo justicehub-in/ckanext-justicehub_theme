@@ -93,6 +93,7 @@
                 <li>
                 {% if pkg.partner.website %}
                     <a href="{{ pkg.partner.website }}"
+                       data-toggle="tooltip"
                        aria-hidden="true" alt="{{ pkg.organization.name }}'s Website"
                        role="link" title="Official Website"
                        aria-label="{{ pkg.organization.name }}'s Website"
@@ -104,8 +105,9 @@
                 <li>
                 {% if pkg.partner.email %}
                     <a href="mailto:{{ pkg.partner.email }}"
+                       data-toggle="tooltip"
                        aria-hidden="true" alt="{{ pkg.organization.name }}'s Email Address"
-                       role="link" title="Email Address"
+                       role="link" title="Organization Email Address"
                        aria-label="{{ pkg.organization.name }}'s Email Address"
                        target="_blank">
                     <i class="fa fa-envelope fa-lg"></i>
@@ -115,6 +117,7 @@
                 <li>
                 {% if pkg.partner.twitter %}
                     <a href="{{ pkg.partner.twitter }}"
+                       data-toggle="tooltip"
                        aria-hidden="true" alt="{{ pkg.organization.name }}'s Twitter Handle"
                        role="link" title="Official Twitter Handle"
                        aria-label="{{ pkg.organization.name }}'s Twitter Handle"
@@ -126,6 +129,7 @@
                 <li>
                 {% if pkg.partner.facebook %}
                     <a href="{{ pkg.partner.facebook }}"
+                       data-toggle="tooltip"
                        aria-hidden="true" alt="{{ pkg.organization.name }}'s Facebook Page"
                        role="link" title="Official Facebook Page"
                        aria-label="{{ pkg.organization.name }}'s Facebook Page"

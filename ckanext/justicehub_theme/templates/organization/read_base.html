@@ -62,6 +62,7 @@
                     <li>
                     {% if c.group_dict.website %}
                         <a href="{{ c.group_dict.website }}"
+                           data-toggle="tooltip"
                            aria-hidden="true" alt="{{ c.group_dict.name }}'s Website"
                            role="link" title="Official Website"
                            aria-label="{{ c.group_dict.name }}'s Website"
@@ -73,6 +74,7 @@
                     <li>
                     {% if c.group_dict.email %}
                         <a href="mailto:{{ c.group_dict.email }}"
+                           data-toggle="tooltip"
                            aria-hidden="true" alt="{{ c.group_dict.name }}'s Email Address"
                            role="link" title="Email Address"
                            aria-label="{{ c.group_dict.name }}'s Email Address"
@@ -84,6 +86,7 @@
                     <li>
                     {% if c.group_dict.twitter %}
                         <a href="{{ c.group_dict.twitter }}"
+                           data-toggle="tooltip"
                            aria-hidden="true" alt="{{ c.group_dict.name }}'s Twitter Handle"
                            role="link" title="Official Twitter Handle"
                            aria-label="{{ c.group_dict.name }}'s Twitter Handle"
@@ -95,6 +98,7 @@
                     <li>
                     {% if c.group_dict.facebook %}
                         <a href="{{ c.group_dict.facebook }}"
+                           data-toggle="tooltip"
                            aria-hidden="true" alt="{{ c.group_dict.name }}'s Facebook Page"
                            role="link" title="Official Facebook Page"
                            aria-label="{{ c.group_dict.name }}'s Facebook Page"
