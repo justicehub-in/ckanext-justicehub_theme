@@ -17,7 +17,7 @@
             {% endif %}
             {% if package.verified %}
                 <img class="fa fa-check"
-                     src="{{ h.url_for_static('uploads/admin/verified_icon.png') }}"
+                     src="{{ h.url_for_static('/images/verified_icon.png') }}"
                      data-toggle="tooltip"
                      alt="Verified"
                      title="Verified"></img>
@@ -40,7 +40,7 @@
               {{ h.link_to(h.truncate(package.organization.title, truncate_title), h.url_for(controller='organization', action='read', id=package.organization.name)) }}
               {% if package.partner.signed_pledge %}
                 <img class="fa fa-certificate"
-                     src="{{ h.url_for_static('uploads/admin/signed_pledge_icon.png') }}"
+                     src="{{ h.url_for_static('/images/signed_pledge_icon.png') }}"
                      data-toggle="tooltip"
                      alt="Signed Open Data Pledge"
                      title="Signed Open Data Pledge"></img>
