@@ -7,7 +7,7 @@
        <dl class="dl-horizontal links-list">
       {% set item = h.composite_get_as_dict(item) %}
       <dt>
-          <a href="{{ link }}">{{ item['title'] }}</a>
+          <a href="{{ item['link'] }}">{{ item['title'] }}</a>
       </dt>
       <dd>
           <p>{{ item['description'] }}</p>
