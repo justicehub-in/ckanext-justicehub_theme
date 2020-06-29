@@ -29,7 +29,7 @@
                 </h1>
                 <div class="dataset-meta">
                     <span>{{ _('Maintained by ') }}
-                        <a href="mailto:{{ pkg.maintainer_email }}">{{ pkg.maintainer }}</a>
+                        <span style="color: #f65940; font-weight: 600;">{{ pkg.maintainer }}</span>
                     </span>
                 </div>
                 <div class="dataset-meta">
@@ -82,9 +82,7 @@
         </div>
         <div class="col col-sm-5 col-sm-offset-1 col-xs-12 text-center">
             <div class="col col-sm-5 col-xs-12">
-                <span>{{ _('Email ') }}
-                <a href="mailto:{{ pkg.maintainer_email }}">{{ pkg.maintainer }}</a>
-                </span>
+                <a href={% if c.userobj %}"mailto:{{ pkg.maintainer_email }}"{% else %}{{h.url_for('user.login', came_from=h.full_current_url())}}{% endif %}>Contact Maintainer</a>
             </div>
             <span class="hidden-xs" style="float: left;">{{ _('|') }}</span>
 
