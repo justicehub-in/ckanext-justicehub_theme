@@ -113,6 +113,10 @@
     padding: 20px 20px;
 }
 
+/* ----------------------- dashboard ----------------- */
+.popover-followee {
+    border-radius: 0;
+}
 /* ----------------------- pre-primary-blocks ----------------- */
 .morecontent span {
 	display: none;
@@ -321,13 +325,13 @@ aside .module [class^=module] {
 .subscribe-box .btn.btn-default {
     padding: 10px 25px;
 }
-.popover {
+.site-footer .popover {
     border-radius: 0;
     box-shadow: 5px 5px 1px #403644;
     max-width: 400px;
     width: 350px;
 }
-.popover .popover-content {
+.site-footer .popover .popover-content {
     display: flex;
     align-items: center;
 }

@@ -20,6 +20,16 @@
   </header>
 {% endblock %}
 
-{% block page_heading %}
-  {{ _('MY FEED') }}
+{% block primary_content_inner %}
+<div data-module="dashboard">
+  {% snippet 'user/snippets/followee_dropdown.html', context=dashboard_activity_stream_context, followees=followee_list %}
+  <h2 class="page-heading">
+    {% block page_heading %}
+      {{ _('MY FEED') }}
+    {% endblock %}
+  </h2>
+  {% block activity_stream %}
+    {{ dashboard_activity_stream|safe }}
+  {% endblock %}
+</div>
 {% endblock %}

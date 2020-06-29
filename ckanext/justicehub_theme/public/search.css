@@ -115,6 +115,11 @@
 .filters .module-footer {
     display: none;
 }
+.popover-followee .popover-header .input-group-addon {
+    border-radius: 0px;
+    border: 1px solid #f65940;
+    background-color: #f65940;
+}
 
 /* -------------------------------------- Mobile adjustments ----------------------------- */
 @media (min-width: 320px) and (orientation: portrait) {

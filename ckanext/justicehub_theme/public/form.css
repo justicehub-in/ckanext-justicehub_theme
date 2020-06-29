@@ -49,6 +49,8 @@
 .btn-xs:focus,
 .btn-xs:focus,
 .bg-clear,
+.bg-clear.active,
+.bg-clear.active:hover,
 .bg-clear:active,
 .bg-clear:focus,
 .bg-clear:hover,
