@@ -17,3 +17,18 @@
       </div>
   {% endif %}
 {% endblock %}
+
+{% block user_image %}
+    <div class="image image-box">{{ h.linked_gravatar(user.email_hash, 190) }}</div>
+{% endblock %}
+{% block user_heading %}
+<div class="image-box" style="margin-left: -50px;">
+    <h1 class="heading">{{ user.display_name }}</h1>
+</div>
+{% endblock %}
+{% block user_about %}
+<div class="image-box" style="margin-left: -50px;">
+    {{ super() }}
+</div>
+<hr style="margin-left: -40px;">
+{% endblock %}

@@ -48,7 +48,9 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ name }}<b class="caret"></b></a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
                 <li>
-                    {% link_for _('Dashboard'), named_route='dashboard' %}
+                    <a href="{{ h.url_for('/dashboard') }}" title="{{ _('Dashboard') }}">
+                        <span class="text">{{ _('Dashboard') }}</span>
+                    </a>
                 </li>
                 <li>
                     {% block header_account_log_out_link %}

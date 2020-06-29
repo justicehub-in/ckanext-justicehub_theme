@@ -8,6 +8,14 @@
 .image-box img.media-image {
     margin:auto;
 }
+.context-info .image a {
+    width: 150px;
+    height: 150px;
+    margin-left: -50px;
+}
+.context-info .image img {
+    border-radius: 50%;
+}
 
 /* ------------------------ header ------------------------ */
 /* Hide top account bar */

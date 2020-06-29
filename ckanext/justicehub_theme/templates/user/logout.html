@@ -15,7 +15,11 @@
     <div class="module-content">
       <div class="login-form">
         <div class="form-group">
-          <p>{% trans %}You are now logged out.{% endtrans %}</p>
+          <p>
+            {% trans %}You are now logged out.{% endtrans %}
+            {% link_for _('Log in'), named_route='user.login' %}
+            again?
+          </p>
         </div>
       </div>
     </div>

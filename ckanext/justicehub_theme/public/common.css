@@ -23,6 +23,7 @@ body {
 .dataset-desc,
 .rsrc-list-side > li a,
 .dropdown-menu > li > a,
+.context-info .info,
 .footer-links .input-group-btn .btn {
     font-size: 16px;
 }
@@ -139,6 +140,7 @@ h1,
 
 /* ----------------------- colors ------------------------- */
 a,
+code,
 .count,
 .media-item,
 .res-title,
