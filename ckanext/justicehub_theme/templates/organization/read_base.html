@@ -40,18 +40,20 @@
 
         <div class="row" style="margin-top: 60px;">
             {% block content_action %}
-            <div class="col col-sm-2 col-xs-6 content_action">
-                {% if h.check_access('organization_update', {'id': c.group_dict.id}) %}
+            {% if h.check_access('organization_update', {'id': c.group_dict.id}) %}
+                <div class="col col-sm-2 col-xs-6 content_action">
                     {% link_for _('EDIT'), controller='organization', action='edit', id=c.group_dict.name, class_='btn btn-default', named_route=group_type + '_edit'  %}
-                {% endif %}
-            </div>
+                </div>
+            {% endif %}
             {% endblock %}
 
-            {% block follow %}
-            <div class="col col-sm-2 col-xs-6 follow_button">
-              {{ h.follow_button('group', c.group_dict.id) }}
-            </div>
-            {% endblock %}
+            {% if not h.justicehub_theme_is_org_admin(c.userobj.name, c.group_dict) %}
+                {% block follow %}
+                <div class="col col-sm-2 col-xs-6 follow_button">
+                  {{ h.follow_button('group', c.group_dict.id) }}
+                </div>
+                {% endblock %}
+            {% endif %}
 
             <div class="col col-sm-2 col-sm-offset-2 col-xs-12 text-right" style="margin-top: 15px;">
                 <span>{{ _('Contact ') }}</span>

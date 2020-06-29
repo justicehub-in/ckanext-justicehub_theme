@@ -12,6 +12,11 @@ from ckan.common import c
 
 cached_tables = {}
 
+def is_org_admin(username, org):
+    for user in org['users']:
+        if user['name'] == username and user['capacity'] == 'admin':
+            return True
+
 def issues_vars(dataset_id, request):
     extra_vars = issues_for_dataset(dataset_id, request.GET)
     return extra_vars
