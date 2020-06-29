@@ -17,7 +17,7 @@
 
         <p class="res-meta">
                 {{ _('Updated:') }}
-                {{ h.justicehub_theme_days_ago(res.last_modified) or h.justicehub_theme_days_ago(res.Created) }}
+                {{ h.time_ago_from_timestamp(res.last_modified) or h.time_ago_from_timestamp(res.Created) }}
             {% if res.Created %}
             <br>
                 {{ _('Created:') }}

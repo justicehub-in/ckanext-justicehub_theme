@@ -35,7 +35,6 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
             'justicehub_theme_package_activity_stream': helpers.package_activity_stream,
             'justicehub_theme_parse_json': helpers.parse_json,
             'justicehub_theme_get_assignee_user': helpers.get_assignee_user,
-            'justicehub_theme_days_ago': helpers.days_ago,
             'justicehub_theme_issue_vars': helpers.issues_vars,
             'justicehub_theme_is_org_admin': helpers.is_org_admin
         }
