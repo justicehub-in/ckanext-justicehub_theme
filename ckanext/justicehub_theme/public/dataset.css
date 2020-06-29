@@ -149,11 +149,17 @@ h1+.dataset-meta {
     margin: 0;
 }
 .metadata-heading {
-    padding: 10px 0;
+    padding: 15px 0;
     width: 50%;
     display: inline-block;
     text-align: center;
-    margin-left: -30px;
+}
+.metadata-small-heading {
+    padding: 10px 0;
+    width: 270px;
+}
+.metadata-small-heading:hover {
+    background-color: #f65940;
 }
 
 /* --------------------- responsive ------------------------- */
@@ -162,7 +168,13 @@ h1+.dataset-meta {
         padding-right: 0;
     }
     .metadata-heading {
-        margin-left: 0;
+        padding: 20px 50px;
+        margin-left: 0px;
+        width: 100%;
+        text-align: left;
+    }
+    .metadata-small-heading {
+        padding: 10px 50px;
     }
     .additional-info .table {
         width: 100%;

@@ -83,8 +83,8 @@
   {%- endfor -%}
   </div>
 
-  <div style="margin-top: 25px;">
-      <span class="metadata-heading">{{ _('METADATA') }}</span>
+  <div style="margin-top: 25px; margin-left: -30px; border-bottom: 2px solid #f65940;">
+      <span class={%if form_style == 'edit' %}"metadata-heading metadata-small-heading"{% else %}"metadata-heading"{% endif %}>{{ _('METADATA') }}</span>
   </div>
 
   <div class="row">

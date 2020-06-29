@@ -59,6 +59,7 @@ h1,
 .stages li,
 .nav-tabs > li >  a,
 .module-heading,
+.metadata-heading,
 .login-sidebar-heading,
 .footer-intro {
     font-size: 25px;
@@ -117,6 +118,7 @@ h1,
 .content_action a,
 .dataset-title,
 .module-heading,
+.metadata-heading,
 .popover .popover-content,
 .intro-box span:nth-child(2),
 .footer-links .input-group-btn .btn {
@@ -451,6 +453,7 @@ img.fa-certificate.fa-lg {
     }
     .intro-box span,
     .stages .highlight,
+    .metadata-heading,
     .nav-tabs li a {
         font-size: 18px;
     }
