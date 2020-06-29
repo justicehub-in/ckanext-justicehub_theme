@@ -37,6 +37,9 @@
     display: flex;
     align-items: center;
 }
+.masthead .navigation .nav-pills > li:last-child {
+    min-width: 120px;
+}
 .masthead .navigation .nav-pills > li.active {
     border-bottom: 1.5vh solid #f65940;
     padding-top: 14px;
@@ -346,6 +349,11 @@ aside .module [class^=module] {
 }
 .btn-forgot {
     margin-top: 5px;
+}
+.alert-danger a {
+    font-weight: 600;
+    color: #f65940;
+    text-decoration: none;
 }
 
 /* ----------------------------- homepage --------------------------- */
