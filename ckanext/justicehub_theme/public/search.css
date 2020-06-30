@@ -164,7 +164,7 @@
         border-color: #f65940;
         padding: 0 5px;
     }
-    .footer-links .input-group-btn .fa {
+    .footer-links .input-group-btn button > .fa {
         text-align: center;
         font-size: 14px;
         width: 10px;

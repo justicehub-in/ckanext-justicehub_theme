@@ -1,3 +1,4 @@
+// Read More effect.
 // https://www.viralpatel.net/dynamically-shortened-text-show-more-link-jquery/
 $(document).ready(function() {
 	var showChar = 215;
@@ -33,8 +34,10 @@ $(document).ready(function() {
 });
 
 
+// tooltip enabled.
 $('[data-toggle="tooltip"]').tooltip();
 
+// counting animation for stats.
 // https://stackoverflow.com/a/23006629/3860168
 $('.stats-big').each(function () {
     var $this = $(this);
@@ -47,6 +50,7 @@ $('.stats-big').each(function () {
   });
 });
 
+// bootstrap nav-tabs.
 ckan.module('justicehub_theme_tabs', function ($) {
     return {
         initialize: function () {
@@ -74,6 +78,7 @@ ckan.module('justicehub_theme_tabs', function ($) {
     };
 });
 
+// subscribe to mailing.
 ckan.module('justicehub_theme_subscribe', function ($) {
     return {
         initialize: function () {
@@ -107,8 +112,13 @@ ckan.module('justicehub_theme_subscribe', function ($) {
                     }
 
                     console.log(msg);
-                    $('[data-toggle="popover"]').data('bs.popover').options.content=msg;
-                    $('[data-toggle="popover"]').popover('show');
+                    if ($(window).width() < 768) {
+                        $('[data-toggle="popover"][class*="visible"]').data('bs.popover').options.content=msg;
+                        $('[data-toggle="popover"][class*="visible"]').popover('show');
+                    } else {
+                        $('[data-toggle="popover"]').data('bs.popover').options.content=msg;
+                        $('[data-toggle="popover"]').popover('show');
+                    }
                 };
 
                 request.onerror = function() {
