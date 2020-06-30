@@ -82,12 +82,6 @@
 }
 
 /* -------------------- body layout ----------------------- */
-html, body {
-  overflow-x: hidden;
-}
-body {
-  position: relative
-}
 .container {
     width: 95%;
 }
