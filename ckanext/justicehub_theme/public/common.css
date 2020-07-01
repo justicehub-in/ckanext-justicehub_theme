@@ -390,8 +390,8 @@ img.fa-check.fa-lg {
     height: 28px;
 }
 img.fa.fa-certificate {
-    width: 20px;
-    height: 25px;
+    width: 21px;
+    height: 27px;
 }
 img.fa-certificate.fa-lg {
     width: 22px;
@@ -431,31 +431,58 @@ img.fa-certificate.fa-lg {
 
 /* -------------------------------------- Mobile adjustments ----------------------------- */
 @media (min-width:320px) and (orientation: portrait) {
+    .count,
+    .pkg_tags,
+    .sort-box,
     .res-meta,
-    .dataset-meta {
+    .downloads,
+    .dataset-meta,
+    .input-group-addon,
+    .package-item-row,
+    .dataset-count-box,
+    .resource-item .description,
+    .footer-links .nav-item a {
+        font-size: 11px;
+    }
+    .dataset-desc {
         font-size: 12px;
     }
+    h3,
     .btn,
     .col2 p,
     .stats-box,
     .content_action a,
-    .dataset-desc,
-    .dataset-count-box,
+    .dataset-title,
+    .dataset-org,
+    .media-heading,
+    .nav-tabs li a,
+    .nav-pills li,
+    .dl-horizontal,
+    .dropdown-menu > li > a,
+    .toolbar .breadcrumb,
     .resource-item .heading,
     .table thead tr th.table-actions .btn,
     body {
         font-size: 14px;
     }
+    h1, h2,
     .landing-desc,
+    .page-heading,
+    .control-label,
+    #field-giant-search,
     .search-form .search-input.search-giant input,
+    .login-form .checkbox,
+    .footer-intro,
     .btn.bg-clear {
-        font-size: 16px;
+        font-size: 14px;
     }
     .intro-box span,
     .stages .highlight,
-    .metadata-heading,
-    .nav-tabs li a {
+    .metadata-heading {
         font-size: 18px;
+    }
+    .stats-big {
+        font-size: 30px;
     }
     .fa.fa-circle {
         font-size: 60px;
@@ -470,10 +497,18 @@ img.fa-certificate.fa-lg {
     .subscribe-box {
         background-color: #403644;
     }
-    .footer-intro {
-        font-size: 18px;
-    }
     .page-header .nav-tabs {
         border-bottom: none;
+    }
+    img.fa.fa-certificate {
+        width: 12px;
+        height: 16px;
+    }
+    img.fa.fa-check {
+        width: 13px;
+        height: 14px;
+    }
+    .stats-big {
+        text-align: center;
     }
 }

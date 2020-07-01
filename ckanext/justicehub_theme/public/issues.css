@@ -1,15 +1,11 @@
 #issues-found,
 .issue-list-group {
-    padding-left: 15px;
+    padding-left: 10px;
     margin-left: 0;
     margin-top: 0;
 }
 .issues-home .gravatar {
     border-radius: 50%;
-}
-.issues-home .page-heading {
-    padding-bottom: 50px;
-    padding-left: 15px;
 }
 .issues-home .input-group {
     border-bottom: 1px solid #f65940;

@@ -37,7 +37,9 @@
        <!-- NOTE: disabled issue show for Alpha
        <a href="{{ h.url_for('issues_show', dataset_id=pkg.id, issue_number=issue.number) }}" {% if issue.visibility == 'hidden'%} class="issue-abuse"{% endif%}-->
        <div class="row">
-           <h2>{{ issue.title }}</h2>
+           <div class="col-sm-12">
+               <h2>{{ issue.title }}</h2>
+           </div>
        </div>
        <div class="row">
            <div class="col col-sm-8 col-xs-5">

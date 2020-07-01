@@ -49,17 +49,19 @@
 
             {% if not h.justicehub_theme_is_org_admin(c.userobj.name, c.group_dict) %}
                 {% block follow %}
+                {% if c.userobj %}
                 <div class="col col-sm-2 col-xs-6 follow_button">
                   {{ h.follow_button('group', c.group_dict.id) }}
                 </div>
+                {% endif %}
                 {% endblock %}
             {% endif %}
 
-            <div class="col col-sm-2 col-sm-offset-2 col-xs-12 text-right" style="margin-top: 15px;">
+            <div class="col col-sm-2 col-sm-offset-2 col-xs-2 text-right" style="margin-top: 15px;">
                 <span>{{ _('Contact ') }}</span>
             </div>
                 <span class="hidden-xs pull-left" style="margin-top: 15px;">{{ _('|') }}</span>
-            <div class="partner-links social-links col-sm-3 col-xs-12" style="margin-top: 15px;">
+            <div class="partner-links social-links col-sm-3 col-xs-8" style="margin-top: 15px;">
                 <ul class="list-unstyled list-inline">
                     <li>
                     {% if c.group_dict.website %}

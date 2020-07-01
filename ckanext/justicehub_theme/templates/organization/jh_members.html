@@ -12,15 +12,20 @@
 
 {% block primary_content_inner %}
     {% block package_description %}
-      <h1 class="page-heading">
-          {{ _('MEMBERS') }}
-      </h1>
+    <h2 class="page-heading">
+       <div class="col col-sm-6 col-xs-6">
+           {{ _('User') }}
+       </div>
+       <div class="col col-sm-6 col-xs-6">
+           {{ _('Role') }}
+       </div>
+    </h2>
     {% endblock %}
-    <div class="row page_primary_action">
     {% if h.check_access('organization_update', {'id': c.group_dict.id}) %}
+        <div class="row page_primary_action">
         {% link_for _('ADD MEMBER'), controller='organization', action='member_new', id=c.group_dict.id, class_='btn btn-primary pull-right', named_route=group_type + '_member_new' %}
+        </div>
     {% endif %}
-    </div>
 
 	{% block packages_list %}
         {% block member_list %}
@@ -28,15 +33,6 @@
         {% set members_count = ungettext('{count} member', '{count} members', count).format(count=count) %}
         
         <table class="table table-header table-hover members-table">
-            <thead>
-            <tr>
-                <th>{{ _('User') }}</th>
-                <th>{{ _('Role') }}</th>
-                {% if h.check_access('organization_update', {'id': c.group_dict.id}) %}
-                    <th></th>
-                {% endif %}
-            </tr>
-            </thead>
             <tbody>
             {% for user_id, user, role in c.members %}
                 <tr>

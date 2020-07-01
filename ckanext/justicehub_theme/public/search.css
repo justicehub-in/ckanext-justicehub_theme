@@ -123,6 +123,9 @@
 
 /* -------------------------------------- Mobile adjustments ----------------------------- */
 @media (min-width: 320px) and (orientation: portrait) {
+    #field-giant-search {
+        padding-left: 35px;
+    }
     .search-form .input-group-btn .btn,
     .search-form .input-group >:first-child,
     .search-form .input-group > select {

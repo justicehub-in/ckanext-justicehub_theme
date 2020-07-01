@@ -38,12 +38,10 @@
 }
 
 /* ----------------------- members --------------------------- */
-.members-table > thead > tr > th {
-    border-bottom: 2px solid #f65940;
-    padding: 25px;
-}
 .members-table > tbody > tr > td {
-    padding: 35px;
+    border-top: None;
+    padding-top: 35px;
+    vertical-align: middle;
 }
 .member_media > img {
     width: 60px;
@@ -62,16 +60,6 @@
 }
 
 /*----------------- org-edit dataset ----------------------*/
-.partner-dataset-table > tbody > tr > td {
-    border-top:None;
-}
-.partner-dataset-table > thead tr th {
-    padding-bottom: 5%;
-}
-.partner-dataset-table > thead > tr > th {
-    border-bottom:None;
-    vertical-align:middle;
-}
 .btn-icon {
     border:None;
     padding: 0;
@@ -84,4 +72,24 @@
 }
 .partner-dataset-table td.context {
     padding-left: 20px;
+}
+/* -------------------------------------- Mobile adjustments ----------------------------- */
+@media (min-width:320px) and (orientation: portrait) {
+    .media-item {
+        width: 40%;
+    }
+    .media-logo {
+        height: 80px;
+    }
+    .img-responsive {
+        max-width: 75%;
+    }
+    .member_media > img {
+        width: auto;
+        height: auto;
+    }
+    .members-table > thead > tr > th,
+    .members-table > tbody > tr > td {
+        padding: 10px;
+    }
 }

@@ -182,6 +182,10 @@ a.morelink:visited {
     margin-bottom: 10px !important;
     margin-left: -30px;
 }
+h2.page-heading {
+    padding-bottom: 50px;
+    padding-left: 20px;
+}
 .module .page-header {
     margin: 0;
     padding-bottom: 0;
@@ -455,6 +459,12 @@ aside .module [class^=module] {
     .page-header .nav-tabs {
         margin-top: 50px;
     }
+    .page-heading {
+        padding-left: 45px;
+    }
+    h2.page-heading {
+        padding-left: 35px;
+    }
     .toolbar .breadcrumb,
     .toolbar .breadcrumb a {
         color: #403644;
@@ -467,19 +477,33 @@ aside .module [class^=module] {
     }
     .masthead .navigation .nav-pills > li {
         height: auto;
-        min-height: 50px;
+        min-height: 40px;
         display: block;
+    }
+    .masthead .navigation .nav-pills > li.active {
+        border-bottom: 3px solid #f65940;
+        padding-top: 0;
+    }
+    .navigation .open {
+        border-bottom: 3px solid #f65940;
+        padding-top: 0;
     }
     .navigation .dropdown:last-child .dropdown-menu {
         position: static;
     }
     .login-heading {
-        padding-left: 20px;
+        padding-left: 65px;
         margin-bottom: 20px;
         margin-left: -10px;
     }
     .login-sidebar {
         height: 100%;
+    }
+    .btn-forgot {
+        margin-top: 15px;
+    }
+    .wrapper {
+        min-height: 400px;
     }
     .container {
         width: 100%;
