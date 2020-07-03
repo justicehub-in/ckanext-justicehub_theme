@@ -1,7 +1,10 @@
 {% ckan_extends %}
 
+{% block delete_button %}
+{% endblock %}
+
 {% block previous_button %}
-    <button class="btn btn-primary btn-default" name="save" value="go-dataset" type="submit"><i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>{{ _('Previous') }}</button>
+    <button class="btn btn-primary btn-default bg-clear" name="save" value="go-dataset" type="submit"><i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>{{ _('Previous') }}</button>
 {% endblock %}
 
 {% block again_button %}
@@ -13,5 +16,5 @@
 {% endblock %}
 
 {% block add_button %}
-    <button class="btn btn-primary" name="save" value="go-dataset-complete" type="submit">{{ _('SAVE') }}</button>
+    <button class="btn btn-primary bg-clear" name="save" value="go-dataset-complete" type="submit">{{ _('SAVE') }}</button>
 {% endblock %}

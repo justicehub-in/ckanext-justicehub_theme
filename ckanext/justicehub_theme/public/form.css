@@ -1,162 +1,87 @@
 /*----------------- form style ----------------------*/
 .search-form, .dataset-form {
     border-bottom: none;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
-.dataset-form {
-    padding-right: 50px;
-}
+/* --------------- tag remove icon ----------------- */
 .select2-container-multi .select2-search-choice-close {
     left: auto;
     margin: 5px 10px 5px 5px;
-    /* background: url('https://image.flaticon.com/icons/svg/2919/2919559.svg') right top no-repeat;*/
     background: url('https://image.flaticon.com/icons/svg/458/458595.svg');
 }
-
-/*------------------ form control borders, backgrounds fonts colors ----------------*/
-.dataset-form .form-actions .btn-primary,
-.dataset-form .form-actions .btn-primary:active,
-.dataset-form .form-actions .btn-primary:hover,
-.dataset-form .form-actions .btn-primary:focus {
-    color: #f65940;
-}
-.page_primary_action .btn.btn-default,
-.controls > a.btn,
-.js  .image-upload .btn.hover,
-.controls .btn,
-.dataset-form .form-actions .btn-finish,
-.select2-container-multi .select2-choices > li.select2-search-choice {
-    color: #ffffff;
-}
-.dataset-form .form-actions .btn-finish:active,
-.dataset-form .form-actions .btn-finish:hover,
-.dataset-form .form-actions .btn-finish:focus,
-.control-label {
-    color: #403644;
-}
-.select2-results .select2-highlighted,
-.control-label,
-.dataset-form .form-actions .btn-primary,
-.dataset-form .form-actions .btn-primary:focus,
-.select2-container-multi .select2-choices > li.select2-search-choice:nth-child(2n),
-.select2-container-multi .select2-choices > li.select2-search-choice:nth-child(2n+1) {
-    font-weight: bold;
-}
-.page_primary_action .btn.btn-default,
-.controls > input:first-child,
-.input-group > *:first-child,
-.editor .editor-info-block,
-[class^="input-group"] > *:first-child,
-[class^="form-control"],
-[class^="form-control"]:focus,
-fieldset.checkboxes > label > input,
-.select2-drop,
-.select2-container .select2-choice,
-.select2-container-multi .select2-choices {
-    border-radius: 0px;
-}
-.input-group > *:first-child,
-.editor .editor-info-block,
-[class^="input-group"] > *:first-child,
-[class^="form-control"],
-[class^="form-control"]:focus,
-.dataset-form .form-actions .btn-finish:hover,
-.dataset-form .form-actions .btn-finish:focus,
-.dataset-form .form-actions .btn-finish:active,
-.select2-drop,
-.select2-container .select2-choice,
-.select2-container-multi.form-control,
-.select2-container-multi .select2-choices {
-    border: 1px solid #f65940;
-}
-.bg-clear,
-.dataset-form .form-actions .btn-primary,
-.dataset-form .form-actions .btn-primary:focus,
-.dataset-form .form-actions .btn-finish:hover,
-.dataset-form .form-actions .btn-finish:active,
-.checkbox-other > *:first-child,
-fieldset.checkboxes > label > input,
-.controls .select2-container .select2-choice .select2-arrow,
-.select2-dropdown-open.select2-container > .select2-choices,
-.controls .select2-container > a.select2-choice {
+/* --------------- arrow icon in select dropdown --- */
+.select2-container .select2-choice .select2-arrow {
+    margin-top: 7px;
+    margin-right: 10px;
     background: transparent;
     box-shadow: none;
-}
-.page_primary_action .btn.btn-default,
-.controls > *:first-child,
-.controls > a.btn,
-.dataset-form .form-actions .btn-danger,
-.dataset-form .form-actions .btn-finish,
-.dataset-form .form-actions .btn-primary,
-.input-group > *:first-child,
-.editor .editor-info-block,
-fieldset.radios label,
-fieldset.checkboxes label,
-fieldset.checkboxes + label,
-.select2-container-multi .select2-choices > li.select2-search-choice {
-    font-size: 18px;
-}
-fieldset.radios label,
-fieldset.checkboxes label,
-fieldset.checkboxes + label {
-    font-weight: normal;
-}
-.page_primary_action .btn.btn-default,
-.controls > a.btn,
-.controls .btn,
-.dataset-form .form-actions .btn-finish,
-.select2-container-multi .select2-choices > li.select2-search-choice {
-    background-color: #403644;
-}
-.sort-box {
-    font-size: 25px;
-}
-.sort-box,
-.sort-box:focus,
-.search-form .btn,
-.controls .select2-container .select2-choice .select2-arrow {
     border-left: none;
+}
+.select2-container .select2-choice .select2-arrow b {
+    background-size: cover;
+}
+
+/*------------------ form control borders, backgrounds ----------------*/
+.square-border,
+.form-control,
+.form-control:focus,
+.controls input,
+.controls .form-control,
+.input-group-addon,
+.editor textarea,
+.editor .editor-info-block,
+.select2-drop,
+.select2-container .select2-choice,
+.select2-container .select2-choices {
+    border-radius: 0px;
+    border: 1px solid #f65940;
+}
+.btn-xs,
+.btn-xs:hover,
+.bg-clear.btn,
+.bg-clear.btn:active:hover,
+.controls .select2-container,
+.checkbox-other.select2-container {
+    border: none;
+}
+.btn-xs,
+.btn-xs:active:hover,
+.btn-xs:focus,
+.btn-xs:focus,
+.bg-clear,
+.bg-clear.active,
+.bg-clear.active:hover,
+.bg-clear:active,
+.bg-clear:focus,
+.bg-clear:hover,
+.bg-clear:active:hover,
+.bg-clear:active:focus,
+.bg-clear[disabled]:hover,
+.controls .select2-container > a.select2-choice,
+.checkbox-other.select2-container > .select2-choices {
+    background: transparent;
+    box-shadow: none;
 }
 .select2-container-active .select2-choices {
     border-color: #f65940 !important; /* important because it gets overridden by dynamic class change */
 }
-.controls > a.btn,
-.controls .btn,
-.dataset-form .form-actions .btn-primary,
-.dataset-form .form-actions .btn-danger,
-.dataset-form .form-actions .btn-finish,
+.checkbox-other.select2-container .select2-choices {
+    border: none;
+    border-bottom: 1px solid #f65940;
+}
+
+/* -------------------- tags ------------------- */
 .select2-container-multi .select2-choices > li.select2-search-choice {
     padding: 7px 25px;
     border-radius: 30px;
 }
-.select2-results .select2-highlighted,
 .select2-container-multi .select2-choices > li.select2-search-choice:nth-child(2n) {
     background-color: #f65940 !important;
     background: none;
 }
 .select2-container-multi .select2-choices > li.select2-search-choice:nth-child(2n+1) {
     background: none;
-    background-color: #403644 !important;
-}
-.control-label {
-    font-size: 21px;
-}
-#field-giant-search:focus,
-.input-group .input-group-addon {
-    border-right: none;
-}
-.select2-dropdown-open.select2-container > .select2-choices,
-.checkbox-other > *:first-child {
-    border-top: none;
-    border-left: none;
-    border-right: none;
-}
-.select2-container .select2-choice .select2-arrow {
-    margin-top: 7px;
-    margin-right: 10px;
-}
-.select2-container .select2-choice .select2-arrow b {
-    background-size: cover;
+    background-color: #403644;
 }
 
 /*------------------ form control layout ----------------*/
@@ -170,20 +95,32 @@ fieldset.checkboxes + label {
 .controls .select2-container {
     height: 50px;
 }
-.search-form .input-group > *,
-.search-form .input-group > select {
-    height: 75px;
-}
 fieldset.checkboxes label {
     display: inline-block !important;
 }
+.select2-container {
+    padding: 0;
+}
 .checkbox-other {
-    width: 200px !important;
+    width: 250px !important;
+}
+/* HACK: the logo remove button was floating right */
+.js .image-upload .btn-remove-url {
+    right: 35px;
+}
+/* HACK: since we're not updating the composite template */
+.composite-header {
+    padding-top: 15px;
+    padding-left: 15px;
 }
 
 /* ----------------- form control spacing ------------- */
-.dataset-form .form-actions {
-    margin-top: 50px;
+.form-actions {
+    margin-top: 20px;
+}
+.controls,
+.form-actions {
+    padding-right: 30px;
 }
 .controls .select2-container.select2-container-multi .select2-choices {
     padding-top: 10px;
@@ -199,10 +136,6 @@ fieldset.checkboxes label {
     padding-top: 3px;
     padding-bottom: 3px;
 }
-.dataset-form .form-actions .btn-primary,
-.controls > .select2-container .select2-choices {
-    border: none;
-}
 .controls .select2-container .select2-choices {
     padding-left: 0;
 }
@@ -213,35 +146,19 @@ fieldset.checkboxes label {
     padding-left: 30px;
     margin-bottom: 0;
 }
-.search-form .input-group .btn,
-.dataset-form .input-group .btn {
-    padding-top: 26px;
-    padding-bottom: 23px;
-}
-.select2-container {
-    padding: 0;
-}
 .select2-container .select2-choice,
 .select2-container-multi .select2-choices {
-    padding: 0 0 0 10px;
+    padding: 0 0 0 12px;
 }
 fieldset.radios label > input {
     margin-right: 5px;
-    background: white;
 }
 fieldset.radios label,
 fieldset.checkboxes label {
     padding-right: 40px;
 }
-.checkbox-other > *:first-child {
-    margin-left: 10px;
-}
 .select2-search-choice > div {
     margin-right: 15px;
-    padding-left: 5px;
-}
-.controls .checkbox-other .select2-choices {
-    padding-top :0;
 }
 input[type="date"].form-control,
 input[type="month"].form-control {
@@ -249,45 +166,18 @@ input[type="month"].form-control {
 }
 
 /* ----------------------------- login form ------------------------------ */
-.btn-register:focus,
-.btn-register:active,
-.btn-register:hover,
-.btn-register {
-    font-size: 30px;
-    font-weight: bold;
-    color: white !important;
-    border: none;
-    background-color: #f65940 !important;
-    box-shadow: none;
-    width: 100%;
-}
 #user-register-form,
 .login-form {
     padding-left: 20px;
     padding-right: 50px;
     padding-bottom: 20px;
 }
-.btn-forgot,
-.btn-forgot:hover {
-    background-color: #ffffff;
-    border: none;
-    color: #f65940;
-    font-size: 18px;
-    padding-right: 0;
-}
-.login-form .form-actions .btn-primary {
-    background-color: #403644;
-    border-radius: 30px;
-    color: #ffffff;
-    font-size: 23px;
-    padding: 6px 40px;
-    float: right;
-}
-.checkbox-inline {
-    padding: 10px 30px;
-}
 
-@media (max-device-width: 600px) and (orientation: portrait) {
+/* ----------------------------- responsive ---------------------------- */
+@media (min-width: 320px) and (orientation: portrait) {
+    .search-form {
+        margin-bottom: 0;
+    }
     .form-group {
         padding-left: 10px;
     }

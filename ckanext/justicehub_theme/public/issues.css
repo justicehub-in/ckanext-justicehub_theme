@@ -1,11 +1,14 @@
-.issues-home .search-form {
-    margin-right: -15px;
-}
 #issues-found,
 .issue-list-group {
-    padding-left: 30px;
+    padding-left: 10px;
     margin-left: 0;
     margin-top: 0;
+}
+.issues-home .gravatar {
+    border-radius: 50%;
+}
+.issues-home .input-group {
+    border-bottom: 1px solid #f65940;
 }
 .issues-home .input-group .btn {
     border-left: none;
@@ -26,7 +29,6 @@
 .issue-comment-header {
     background-color: #f65940 !important;
     color: #ffffff !important;
-    font-size: 18px;
 }
 .issue-comment-action [class^="subtle-btn"] {
     border: none;
@@ -34,7 +36,6 @@
     background: transparent;
 }
 .issue-comment-action [class^="subtle-btn"] i {
-    font-size: 24px;
     color: #ffffff;
 }
 .issues-sidebar-heading {
@@ -58,7 +59,6 @@
     font-weight: bold;
 }
 .issue-new .form-actions .btn {
-    font-size: 20px;
     color: #f65940;
 }
 .issue-new .dataset-form {
@@ -66,10 +66,6 @@
 }
 .issue-list-group .list-group-item {
     box-shadow: 0 0 10px 1px #bcb4bf;
-}
-.issue-list-group .list-group-item-name,
-.issue-list-group .list-group-item-number {
-    font-size: 18px;
 }
 .open.icon {
     padding-top: 5px;

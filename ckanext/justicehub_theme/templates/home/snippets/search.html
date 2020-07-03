@@ -3,6 +3,23 @@
 {% set stats=h.get_site_statistics() %}
 
 <div class="module module-search module-narrow module-shallow box">
+  <div class="row search-meta">
+    <div class="col col-xs-12 col-sm-5 intro-box">
+        <span class="secondary-color">{{ _('Find, Share & Co-create')}}</span>
+        <span class="primary-color">{{ _('Data for Justice') }}</span>
+    </div>
+  </div>
+
+  <div class="row search-meta">
+    <div class="col col-xs-6 col-sm-2 page_primary_action">
+      {% if not c.userobj %}
+          {% link_for _('Publish Data'), named_route='user.login', class_='btn btn-primary' %}
+      {% else %}
+          {% link_for _('Publish Data'), controller='package', action='new', named_route='dataset_new', class_='btn btn-primary' %}
+      {% endif %}
+    </div>
+  </div>
+
   <form class="module-content search-form" method="get" action="{% url_for controller='package', action='search' %}">
     <div class="search-input form-group search-giant">
       <input aria-label="{% block header_site_search_label %}{{ _('Search datasets') }}{% endblock %}" id="field-main-search" type="text" class="form-control" name="q" value="" autocomplete="off" placeholder="{% block search_placeholder %}{{ placeholder }}{% endblock %}" />
@@ -13,21 +30,23 @@
     </div>
   </form>
   <div class="row search-meta">
-      <div class="col col-sm-5">
+      <div class="col col-xs-6 col-sm-3 stats-box">
+          <a href={{ h.url_for('organization') }}>
+              <span class="primary-color stats-big">{{ stats.organization_count }}</span>
+              <span class="secondary-color">{{ _('CONTRIBUTORS') }}</span>
+          </a>
       </div>
-      <div class="col col-xs-4 col-sm-3 stats-box">
+      <div class="col col-xs-5 col-sm-1 stats-box">
+          <a href={{ h.url_for('search') }}>
+              <span class="primary-color stats-big">{{ stats.dataset_count }}</span>
+              <span class="secondary-color">{{ _('DATASETS') }}</span>
+          </a>
+      </div>
+      <div class="col col-sm-3 stats-box hidden col-xs-hidden">
           <h3>{{ _('Popular tags') }}</h3>
           {% for tag in tags %}
           <a class="tag" href="{% url_for controller='package', action='search', tags=tag.name %}">{{ h.truncate(tag.display_name, 22) }}</a>
           {% endfor %}
-      </div>
-      <div class="col col-xs-4 col-sm-2 stats-box">
-          <span class="stats">{{ stats.organization_count }}</span>
-          <span class="stats-text">{{ _('CONTRIBUTORS') }}</span>
-      </div>
-      <div class="col col-xs-4 col-sm-2 stats-box">
-          <span class="stats">{{ stats.dataset_count }}</span>
-          <span class="stats-text">{{ _('DATASETS') }}</span>
       </div>
   </div>
 </div>

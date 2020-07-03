@@ -1,5 +1,8 @@
 {% ckan_extends %}
 
+{% block page_primary_action %}
+{% endblock %}
+
 {% block primary_content_inner %}
     {% block groups_search_form %}
       {% set facets = {
@@ -18,6 +21,13 @@
       %}
       {% snippet 'snippets/search_form.html', form_id='organization-datasets-search-form', type='dataset', query=c.q, sorting=sorting, sorting_selected=c.sort_by_selected, count=c.page.item_count, facets=facets, placeholder=_('Search datasets...'), show_empty=request.params, fields=c.fields %}
     {% endblock %}
+
+    {% if h.check_access('package_create', {'owner_org': c.group_dict.id}) %}
+      <div class="page_primary_action row">
+      {% snippet 'snippets/add_dataset.html', group=c.group_dict.id %}
+      </div>
+    {% endif %}
+
   {% block packages_list %}
     {% if c.page.items %}
       {{ h.snippet('snippets/package_list.html', packages=c.page.items) }}

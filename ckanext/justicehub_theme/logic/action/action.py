@@ -1,16 +1,10 @@
 from ckanext.issues.logic import schema
+from six import string_types
 
 import ckan.lib.dictization.model_dictize as model_dictize
-import ckan.lib.plugins as lib_plugins
-import ckan.logic as logic
 import ckan.model as model
 import ckan.plugins as p
 from ckan.logic import validate
-
-try:
-    import ckan.authz as authz
-except ImportError:
-    import ckan.new_authz as authz
 
 
 @p.toolkit.side_effect_free
@@ -48,9 +42,68 @@ def get_package_owner_details(context, data_dict):
                                                include_extras=True
                                                )
 
-    group_plugin = lib_plugins.lookup_group_plugin(partner_dict['type'])
-    schema = logic.schema.default_show_group_schema()
-    partner, errors = lib_plugins.plugin_validate(
-        group_plugin, context, partner_dict, schema, 'organization_show'
-    )
-    return partner
+    # FIXME: commented becaues this validation causes solr to fail reindexing
+    # group_plugin = lib_plugins.lookup_group_plugin(partner_dict['type'])
+    # schema = logic.schema.default_show_group_schema()
+    # partner, errors = lib_plugins.plugin_validate(
+    #     group_plugin, context, partner_dict, schema, 'organization_show'
+    # )
+    for item in partner_dict['extras']:
+        if item['state'] == 'active':
+            partner_dict[item['key']] = item['value']
+
+    partner_dict.pop('extras')
+    return partner_dict
+
+
+@p.toolkit.side_effect_free
+def metadata_autocomplete(context, data_dict):
+    session = context['session']
+    field = data_dict['field']
+    is_list = data_dict.get('islist', False)
+    term = data_dict['incomplete']
+    limit = data_dict.get('limit', 10)
+    matching = []
+
+    if term and isinstance(term, string_types) and is_list:
+        results = session.execute(
+            """
+            select term
+            from (
+                select unnest(string_to_array(value, ',')) as term
+                from package_extra where key='{field}'
+            ) terms
+            where term ilike '%{term}%'
+            limit {limit};
+            """.format(field=field, term=term, limit=limit)
+        ).fetchall()
+        if results:
+            matching = [result for result in results[0]]
+
+    elif term and isinstance(term, string_types):
+        q = model.Session.query(model.PackageExtra)
+        results = q.filter(model.PackageExtra.key == field)\
+                .filter(model.PackageExtra.value.ilike('{0}%'.format(term)))\
+                .distinct()\
+                .limit(limit)
+
+        matching = [result.value for result in results]
+    return matching
+
+@p.toolkit.side_effect_free
+def resource_metadata_autocomplete(context, data_dict):
+    session = context['session']
+    field = data_dict['field']
+    term = data_dict['incomplete']
+    limit = data_dict.get('limit', 10)
+    matching = []
+
+    if term and isinstance(term, string_types):
+        results = session.execute("""select extras::json->>'{field}'
+                                  from resource
+                                  where extras::json->>'{field}' ilike '{term}%'
+                                  limit {limit};""".format(field=field, term=term, limit=limit)
+                                  ).fetchall()
+        matching = [result[0] for result in results]
+
+    return matching

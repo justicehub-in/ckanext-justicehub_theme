@@ -1,9 +1,9 @@
 {% ckan_extends %}
 
-{% block subtitle %}{{ c.group_dict.display_name }} - {{ _('Partners') }}{% endblock %}
+{% block subtitle %}{{ c.group_dict.display_name }} - {{ _('Data Contributors') }}{% endblock %}
 
 {% block breadcrumb_content %}
-  <li>{% link_for _('Partners'), controller='organization', action='index', named_route=group_type + '_index' %}</li>
+  <li>{% link_for _('Data Contributors'), controller='organization', action='index', named_route=group_type + '_index' %}</li>
   {% block breadcrumb_content_inner %}
     <li>{% link_for organization.display_name|truncate(35), controller='organization', action='read', id=organization.name, named_route=group_type + '_read' %}</li>
     <li class="active">{% link_for _('Manage'), controller='organization', action='edit', id=organization.name, named_route=group_type + '_edit' %}</li>
@@ -11,17 +11,45 @@
 {% endblock %}
 
 {% block content_action %}
-  {% if organization and h.check_access('organization_update', {'id': organization.id}) %}
-    {% link_for _('View'), controller='organization', action='read', id=organization.name, class_='btn btn-default', named_route=group_type + '_read' %}
-  {% endif %}
+{% endblock %}
+
+{% block pre_primary %}
+<div class="col-xs-12 row top-section">
+    {% block image %}
+        <div class="image dataset-org col-sm-3 col-md-3 col-xs-12">
+        <a href="{{ url }}" class="image-box partner-logo">
+            <img src="{{ c.group_dict.image_display_url or h.url_for_static('/base/images/placeholder-organization.png') }}" class="media-image" alt="{{ c.group_dict.name }}" />
+        </a>
+        </div>
+    {% endblock %}
+</div>
 {% endblock %}
 
 {% block content_primary_nav %}
   {{ h.build_nav_icon(group_type + '_edit', _('INFO'), id=c.group_dict.name) }}
   {{ h.build_nav_icon(group_type + '_bulk_process', _('DATASETS'), id=c.group_dict.name) }}
+
+  {% if organization and h.check_access('organization_update', {'id': organization.id}) %}
+
+  <div class="content_action">
+    {% link_for _('VIEW'), controller='organization', action='read', id=organization.name, class_='btn btn-default', named_route=group_type + '_read' %}
+
+    {% if h.check_access('organization_delete', {'id': organization.id})  %}
+        <a class="btn btn-danger" href="{% url_for controller='organization', action='delete', id=organization.id %}"
+           data-module="confirm-action"
+           data-module-content="{{ _('Are you sure you want to delete this Organization? Note*: Deleting cannot be performed while public or private datasets belong to this organization.') }}">
+            {% block delete_button_text %}{{ _('DELETE') }}{% endblock %}
+        </a>
+    {% endif %}
+  </div>
+
+  {% endif %}
 {% endblock %}
 
 {% block secondary_content %}
+  <div class="sidebar">
+      <h2>{{ c.group_dict.title }}</h2>
+  </div>
   {% if organization %}
     {% snippet 'snippets/organization.html', organization=organization, show_nums=true %}
   {% else %}

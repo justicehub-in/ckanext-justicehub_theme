@@ -2,33 +2,53 @@
     <div class="container">
         <div class="row">
             {% block search %}
-            {% snippet 'home/snippets/search.html' %}
+                {% snippet 'home/snippets/search.html' %}
             {% endblock %}
         </div>
-        <div class="row">
-            <div class="col col-xs-4 col-sm-2 col1 col-circle">
-                <i class="fa fa-circle fa-lg"></i>
-            </div>
-            <div class="col col-xs-8 col-sm-5 col2">
-                <p>
-                {{ _('An Open community to exchange justice related data, knowledge and other resources online and offline.') }}
-                </p>
-            </div>
-            <div class="col col-xs-12 col-md-5 col3">
-                <h2>{{ _('JUSTICE HUB') }}</h2>
-                <p>
-                {{ _('This is an intiative from CivicDataLab in collaboration with Agami.\
-                The hub initiated as part of the Agami Data for Justice Challenge 2019.') }}
-                </p>
-                <p>
-                {{ _('Justice Hub is a collobarative data platform that focuses on legal and justice related datasets and other resources.') }}
-                </p>
-                <p>
-                {{ _('Our objective is to build  a common platform for members of the legal data and tech community\
-                (Civil Society Organizations, researchers, journalists, law firms etc.) to share, build and collaborate on the common.') }}
-                </p>
+        <i class="fa fa-circle primary-color landing-quotes-top"></i>
+        <div class="row landing-desc">
+            <div class="col col-xs-12 col-sm-6 col-sm-offset-1">
+                <div class="row">
+                    <div class="col col-sm-12">
+                        {{ _('We enable organizations
+                              and individuals to create, share,
+                              manage and harness datasets for justice.') }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-sm-12">
+                        <div class="footer-intro">{{ _('GET IN TOUCH') }}</div>
+                    </div>
+                </div>
+                <div class="row social-links">
+                    <div class="col col-sm-12">
+                        <ul class="list-unstyled list-inline">
+                            <li>
+                                <a href="mailto:info@justicehub.in" aria-hidden="true" alt="Justice Hub's Email Address" role="link" title="Email Address" aria-label="Justice Hub's Email Address" target="_blank">
+                                <i class="fa fa-envelope"></i>
+                                </a>
+                            </li><!--
+                            --><li>
+                                <a href="https://twitter.com/JusticeHubIndia" aria-hidden="true" alt="Justice Hub India's Official Twitter Handle" role="link" title="Official Twitter Handle" aria-label="Justice Hub India's Official Twitter Handle" target="_blank">
+                                    <i class="fa fa-twitter fa-lg"></i>
+                                </a>
+                            </li><!--
+                            --><li>
+                                <a href="https://www.facebook.com/JusticeHubIndia" aria-hidden="true" role="link" alt="Justice Hub India's Official Facebook Page" title="Official Facebook Page" aria-label="Justice Hub India's Official Facebook Page" target="_blank">
+                                    <i class="fa fa-facebook fa-lg"></i>
+                                </a>
+                            </li><!--
+                            --><li>
+                                <a href="https://github.com/justicehub-in" alt="Justice Hub India's Official Github handle" aria-label="Justice Hub India's Official Github handle" title="Official Github Handle" aria-hidden="true" role="link" target="_blank">
+                                    <i class="fa fa-github fa-lg"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
+        <i class="fa fa-circle primary-color landing-quotes-bottom"></i>
     </div>
 </div>
 

@@ -1,100 +1,141 @@
 <footer class="site-footer">
-    {% resource "justicehub_theme/subscribe.js"%}
     <div class="container">
-        
-        {% block footer_content %}
-        <div class="row footer-links">
-            <div class="col col-md-3">
-                <div style="font-size: 30px; font-weight: bold;">{{ _('GET IN TOUCH') }}</div>
-            </div>
-        </div>
+    {% block footer_content %}
+    <div class="row">
 
-        <div class="row footer-links">
-            <div class="col col-md-6 social-links">
-                <ul class="list-unstyled list-inline">
-                    <li>
-                        <a href="mailto:info@justicehub.in" aria-hidden="true" alt="Justice Hub's Email Address" role="link" title="Email Address" aria-label="Justice Hub's Email Address" target="_blank">
-                        <i class="fa fa-envelope fa-lg"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://twitter.com/JusticeHubIndia" aria-hidden="true" alt="Justice Hub India's Official Twitter Handle" role="link" title="Official Twitter Handle" aria-label="Justice Hub India's Official Twitter Handle" target="_blank">
-                            <i class="fa fa-twitter fa-lg"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.facebook.com/JusticeHubIndia" aria-hidden="true" role="link" alt="Justice Hub India's Official Facebook Page" title="Official Facebook Page" aria-label="Justice Hub India's Official Facebook Page" target="_blank">
-                            <i class="fa fa-facebook fa-lg"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/justicehub-in" alt="Justice Hub India's Official Github handle" aria-label="Justice Hub India's Official Github handle" title="Official Github Handle" aria-hidden="true" role="link" target="_blank">
-                            <i class="fa fa-github fa-lg"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col col-md-1 social-links">
-            </div>
-
-            <div class="col col-md-5 social-links" data-module="justicehub_theme_subscribe">
-                <form id="subscribe-form" method="post" action="{{h.url_for('jhsubscribe')}}">
-                <div class="input-group">
-                    <input type="email" class="form-control input-lg" placeholder="Enter you email id" name="email">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default btn-lg" type="submit">Subscribe</button>
-                    </span>
+        <div class="col col-sm-6 footer-links">
+            <div class="row hidden-xs">
+                <div class="col col-xs-12">
+                    <i style="font-size: 16px; font-weight: 500;">{{ _('Created by:') }}</i>
                 </div>
-                </form>
             </div>
-        </div>
-
-        <div class="row footer-links">
-            <div class="col col-md-4 footer-disclaimer">
-                <div>
+            <div class="hidden-xs">
+                <div class="image-box">
+                    <a href="https://agami.in/" target="_blank">
+                    <img class="agami-logo" src="{{ h.url_for_static('/images/agami_logo.png')}}"></img>
+                    </a>
+                </div>
+                <div class="image-box">
+                    <a href="https://www.civicdatalab.in/" target="_blank">
+                    <img class="cdl-logo" src="{{ h.url_for_static('/images/cdl_logo.png')}}"></img>
+                    </a>
+                </div>
+            </div>
+            <div class="row hidden-xs">
+                <div class="col col-sm-7 footer-disclaimer">
+                    <div>
                     This is an Alpha release, we will be working to add more datasets in the coming days to the Justice Hub.
-                </div>
-                <div>
+                    </div>
+                    <div>
                     So please stay tuned.
+                    </div>
+                </div>
+            </div>
+
+            <div class="row hidden-xs">
+                <div class="col col-sm-12 col-xs-12">
+                    <ul class="list-unstyled list-inline">
+                        {% block footer_links %}
+                        <li class="nav-item">
+                            <a href="{{ h.url_for(controller='home', action='about') }}">{{ _('About {0}').format(g.site_title) }}</a></li>
+                        </li>
+                        {% endblock %}
+                        <i class="fa fa-circle fa-sm"></i>
+                        {% block footer_links_legal %}
+                        <li class="nav-item">
+                            <a href="{{ h.url_for('/pages/tos')}}">{{ _('Terms & Conditions') }}</a>
+                        </li>
+                        <i class="fa fa-circle fa-sm"></i>
+                        <li class="nav-item">
+                            <a href="{{ h.url_for('/pages/coc')}}">{{ _('Code of Conduct') }}</a>
+                        </li>
+                        {% endblock %}
+                        <i class="fa fa-circle fa-sm"></i>
+                        {% block footer_links_ckan %}
+                        {% set api_url = 'http://docs.ckan.org/en/{0}/api/'.format(g.ckan_doc_version) %}
+                        <li class="nav-item">
+                            <a href="{{ api_url }}">{{ _('CKAN API') }}</a>
+                        </li>
+                        <i class="fa fa-circle fa-sm"></i>
+                        <li class="nav-item">
+                            <a href="http://www.opendefinition.org/okd/"><img src="{{ h.url_for_static('/base/images/od_80x15_blue.png') }}" alt="Open Data"></a>
+                        </li>
+                        {% endblock %}
+                    </ul>
                 </div>
             </div>
         </div>
 
-        <div class="row footer-links">
-            <div class="col col-md-8 pull-left">
-                <ul class="list-unstyled list-inline">
-                    {% block footer_links %}
-                    <li class="nav-item">
-                        <a href="{{ h.url_for(controller='home', action='about') }}">{{ _('About {0}').format(g.site_title) }}</a></li>
-                    </li>
-                    {% endblock %}
-                    <i class="fa fa-circle fa-sm"></i>
-                    {% block footer_links_legal %}
-                    <li class="nav-item">
-                        <a href="https://justicehub.in/terms">{{ _('Terms & Conditions') }}</a>
-                    </li>
-                    <i class="fa fa-circle fa-sm"></i>
-                    <li class="nav-item">
-                        <a href="https://github.com/justicehub-in/Justice-Hub/blob/master/CODE_OF_CONDUCT.md">{{ _('Code of Conduct') }}</a>
-                    </li>
-                    {% endblock %}
-                    <i class="fa fa-circle fa-sm"></i>
-                    {% block footer_links_ckan %}
-                    {% set api_url = 'http://docs.ckan.org/en/{0}/api/'.format(g.ckan_doc_version) %}
-                    <li class="nav-item">
-                        <a href="{{ api_url }}">{{ _('CKAN API') }}</a>
-                    </li>
-                    <i class="fa fa-circle fa-sm"></i>
-                    <li class="nav-item">
-                        <a href="http://www.opendefinition.org/okd/"><img src="{{ h.url_for_static('/base/images/od_80x15_blue.png') }}" alt="Open Data"></a>
-                    </li>
-                    {% endblock %}
-                </ul>
+        <div class="col col-xs-12 col-sm-6 subscribe-box footer-links">
+            <div class="row hidden-xs">
+                <div class="col col-sm-12">
+                    <div class="footer-intro footer-intro-invert">{{ _('SUBSCRIBE') }}</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-sm-9 col-xs-12" data-module="justicehub_theme_subscribe">
+                    <form id="subscribe-form" method="post" action="{{h.url_for('jhsubscribe')}}">
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Enter you email id" name="email">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-lg hidden-xs"
+                                    type="submit"
+                                    data-toggle="popover"
+                                    data-placement="top"
+                                    data-html=true
+                                    data-trigger="focus">
+                                {{ _('SUBSCRIBE') }}
+                            </button>
+                            <button class="btn visible-xs"
+                                    type="submit"
+                                    data-toggle="popover"
+                                    data-placement="top"
+                                    data-html=true
+                                    data-trigger="focus">
+                                <i class="fa fa-bell"></i>
+                            </button>
+                        </span>
+                    </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-xs-12 col-sm-10 col-lg-10">
+                    <p class="footer-intro-invert">Be part of our mailing list, to keep up with the latest happenings and events of the Hub.</p>
+                </div>
+            </div>
+
+            <div class="row visible-xs">
+                <div class="col col-sm-12 col-xs-12">
+                    <ul class="list-unstyled">
+                        <li class="nav-item">
+                            <a href="{{ h.url_for(controller='home', action='about') }}">{{ _('About') }}</a></li>
+                        </li>
+                        <i class="fa fa-circle fa-sm"></i>
+                        <li class="nav-item">
+                            <a href="https://justicehub.in/terms">{{ _('Terms & Conditions') }}</a>
+                        </li>
+                        <i class="fa fa-circle fa-sm"></i>
+                        <li class="nav-item">
+                            <a href="https://github.com/justicehub-in/Justice-Hub/blob/master/CODE_OF_CONDUCT.md">{{ _('Code of Conduct') }}</a>
+                        </li>
+                        <i class="fa fa-circle fa-sm"></i>
+                        <li class="nav-item">
+                            <a href="{{ api_url }}">{{ _('CKAN API') }}</a>
+                        </li>
+                        <i class="fa fa-circle fa-sm"></i>
+                        <li class="nav-item">
+                            <a href="http://www.opendefinition.org/okd/"><img src="{{ h.url_for_static('/base/images/od_80x15_blue.png') }}" alt="Open Data"></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-        {% endblock %}
+    </div>
 
+    {% endblock %}
     </div>
 
     {% block footer_debug %}

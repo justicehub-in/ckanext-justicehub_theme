@@ -1,0 +1,31 @@
+{% ckan_extends %}
+
+{% block pre_primary %}
+  <div class="row">
+      <div class="col col-md-3">
+      </div>
+      <div class="col col-md-9 login-heading">
+          <h1>{% block page_heading %}{{ _('LOGGED OUT') }}{% endblock %}</h1>
+      </div>
+  </div>
+{% endblock %}
+
+{% block primary_content %}
+  <section class="module">
+    <div class="module-content">
+      <div class="login-form">
+        <div class="form-group">
+          <p>
+            {% trans %}You are now logged out.{% endtrans %}
+            {% link_for _('Log in'), named_route='user.login' %}
+            again?
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+{% block secondary_content %}
+  <section class="login-sidebar">
+  </section>
+{% endblock %}

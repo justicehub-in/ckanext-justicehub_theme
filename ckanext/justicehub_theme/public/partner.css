@@ -1,76 +1,96 @@
-.media-item {
-    color:#f65940;
-    margin:20px;
-    height:200px;
-}
-.count {
-    color:#f65940;
-}
-.media-item .media-image {
-    height: 130px;
-    width: 150px;
+/* -------------------------- org-item ----------------------- */
+.media-grid {
+    margin-top: 10px;
+    border: none;
 }
 .media-item {
-    height: 210px;
+    width:210px;
+    margin-left: 24px;
+}
+.count,
+.media-item .media-heading {
+    line-height: 1;
+    margin-bottom: 0;
+}
+.media-logo {
+    height: 150px;
 }
 
-
-/*----------------- partner editing data set page css ----------------------*/
-.partner-datset-content{
-    margin-left:15px;
+/* ------------------------- org-detail ---------------------- */
+.partner-links li {
+    margin-right: 0;
+}
+.partner-links.social-links .fa {
+    width: 31px;
+    height: 31px;
+}
+.partner-links.social-links .fa-twitter {
+    padding-left: 6px;
+}
+.partner-links.social-links .fa-facebook {
+    padding-top: 13px;
+    padding-left: 4px;
+}
+.partner-logo {
+    height: 200px;
+}
+.follow_button a {
+    margin-top: 10px;
 }
 
-.partner-dataset-table > tbody > tr > td{
-    border-top:None;
-    height:150px;
+/* ----------------------- members --------------------------- */
+.members-table > tbody > tr > td {
+    border-top: None;
+    padding-top: 35px;
+    vertical-align: middle;
+}
+.member_media > img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+.member_media > a {
+    padding-left: 10px;
+    
+}
+.member_action .delete {
+    border-radius: 25px;
+    padding: 3px 6px;
+    margin-left: 5px;
+    font-size: 16px;
 }
 
-.partner-dataset-table > tbody > tr > td  a{
-    font-size:25px;
-}
-
-.partner-dataset-table > thead > tr > th{
-    border-bottom:None;
-    height:150px;
-    vertical-align:middle;
-}
-
-.dataset-notes{
-    font-size:18px;
-}
-
-.context .content_action a {
-    padding-right:25px;
-    padding-left:25px;
-    font-size:16px;
-    font-weight:bolder;
-}
-
-.btn-icon{
-    background: white;
+/*----------------- org-edit dataset ----------------------*/
+.btn-icon {
     border:None;
-    font-size:15px;
+    padding: 0;
 }
-
-.action-fa{
-   font-size:40px;
+.table thead tr th.table-actions {
+    padding-left: 15px;
 }
-
 .btn-icon:hover{
-    background: white;
-    border:None;
+    background: #ffffff;
 }
-
-.page_primary_action {
-   padding-right:0px;
-   margin-bottom: 0;
+.partner-dataset-table td.context {
+    padding-left: 20px;
 }
-.page_primary_action .search-form {
-    margin-bottom: 10px;
+/* -------------------------------------- Mobile adjustments ----------------------------- */
+@media (min-width:320px) and (orientation: portrait) {
+    .media-item {
+        width: 40%;
+    }
+    .media-logo {
+        height: 80px;
+    }
+    .img-responsive {
+        max-width: 75%;
+    }
+    .member_media > img {
+        width: auto;
+        height: auto;
+    }
+    .members-table > thead > tr > th,
+    .members-table > tbody > tr > td {
+        padding: 10px;
+    }
 }
-
-.private-icon{
-   font-size:25px; 
-   margin-left:10px; 
-}
-

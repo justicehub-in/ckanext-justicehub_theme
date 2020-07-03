@@ -14,16 +14,30 @@
 {% endblock %} 
 
 {% block content_action %}
-  {% link_for _('All resources'), controller='package', action='resources', id=pkg.name, class_='btn btn-default rsrc-edit-actn-btn', icon='arrow-left' %}
-  {% if res %}
-    {% link_for _('View resource'), controller='package', action='resource_read', id=pkg.name, resource_id=res.id, class_='btn btn-default rsrc-edit-actn-btn' %}
-  {% endif %}
+{% endblock %}
+
+{% block pre_primary %}
+<div class="col-xs-12 row top-section"></div>
 {% endblock %}
 
 {% block content_primary_nav %}
-  {{ h.build_nav_icon('resource_edit', _('Edit resource'), id=pkg.name, resource_id=res.id) }}
+  {{ h.build_nav_icon('resource_edit', _('EDIT RESOURCE'), id=pkg.name, resource_id=res.id) }}
   {% block inner_primary_nav %}{% endblock %}
-  {{ h.build_nav_icon('views', _('Views'), id=pkg.name, resource_id=res.id) }}
+  <!--FIXME: Removing for Alpha -->
+  {#{ h.build_nav_icon('views', _('Views'), id=pkg.name, resource_id=res.id) }#}
+
+  <div class="content_action">
+      {% link_for _('ALL RESOURCES'), controller='package', action='resources', id=pkg.name, class_='btn btn-default', icon='arrow-left' %}
+      {% if res %}
+        {% link_for _('VIEW'), controller='package', action='resource_read', id=pkg.name, resource_id=res.id, class_='btn btn-default' %}
+      {% endif %}
+      {% if res.id %}
+        {% if h.check_access('resource_delete', {'id': res.id})  %}
+          <a class="btn btn-danger" href="{% url_for controller='package', action='resource_delete', resource_id=res.id, id=pkg.name %}" data-module="confirm-action" data-module-content="{{ _('Are you sure you want to delete this resource?') }}">{% block delete_button_text %}{{ _('DELETE') }}{% endblock %}</a>
+        {% endif %}
+      {% endif %}
+  </div>
+
 {% endblock %}
 
 {% block primary_content_inner %}

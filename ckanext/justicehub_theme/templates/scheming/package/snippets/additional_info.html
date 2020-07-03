@@ -1,4 +1,5 @@
-{% extends "package/snippets/additional_info.html" %}
+{%- set schema = h.scheming_get_dataset_schema(pkg_dict.type) -%}
+{% set pkg_dict = c.pkg_dict %}
 
 {%- set exclude_fields = [
     'id',
@@ -8,28 +9,65 @@
     'tag_string',
     'license_id',
     'owner_org',
-    'links'
+    'links',
+    'state',
+    'verified',
+    'start_year',
+    'end_year',
+    'states',
+    'district',
+    'village',
+    'update_frequency',
+    'maintainer',
+    'maintainer_email'
     ] -%}
 
+<div class="header">
+    <h1 class="page-heading">{{ _('METADATA') }}</h1>
+</div>
+
 {% block package_additional_info %}
-  {%- for field in schema.dataset_fields -%}
-    {%- if field.field_name not in exclude_fields
-        and field.display_snippet is not none
-        and pkg_dict[field.field_name] -%}
-      <tr>
-        <th scope="row" class="dataset-label">{{
-          h.scheming_language_text(field.label) }}</th>
-        <td class="dataset-details"{%
-          if field.display_property %} property="{{ field.display_property
-          }}"{% endif %}>{%- snippet 'scheming/snippets/display_field.html',
-          field=field, data=pkg_dict, schema=schema -%}</td>
-      </tr>
-    {%- endif -%}
-  {%- endfor -%}
-  {% if h.check_access('package_update',{'id':pkg_dict.id}) %}
-    <tr>
-      <th scope="row" class="dataset-label">{{ _("State") }}</th>
-      <td class="dataset-details">{{ _(pkg_dict.state) }}</td>
-    </tr>
-  {% endif %}
+    <dl class="dl-horizontal metadata-list">
+        <dt data-toggle="tooltip"
+            title="{{ _('Timeline of the data. Start and End dates/years.') }}">
+            {{ _('Timeline of Dataset') }}
+        </dt>
+        <dd>{{ pkg_dict['start_year'] }}-{{ pkg_dict['end_year'] }}</dd>
+    </dl>
+
+    <dl class="dl-horizontal metadata-list">
+        <dt data-toggle="tooltip"
+            title="{{ _('What is the geographical scope of this dataset (PAN India, selected states/districts, etc).') }}">
+            {{ _('Geography') }}
+        </dt>
+        <dd>{{ pkg_dict['states'] }}
+            {% if pkg_dict['district'] %} {{ pkg_dict['district'] }}{% endif %}
+            {% if pkg_dict['village'] %} {{ pkg_dict['village'] }}{% endif %}
+        </dd>
+    </dl>
+    {%- for field in schema.dataset_fields -%}
+        {%- if field.field_name not in exclude_fields
+            and field.display_snippet is not none
+            and pkg_dict[field.field_name] -%}
+
+        <dl class="dl-horizontal metadata-list">
+            <dt data-toggle="tooltip"
+                title="{{field.description}}">
+              {{ h.scheming_language_text(field.label) }}
+            </dt>
+            <dd {% if field.display_property %} property="{{ field.display_property}}"{% endif %}>
+              {%- snippet 'scheming/snippets/display_field.html', field=field, data=pkg_dict, schema=schema -%}
+            </dd>
+        </dl>
+        {%- endif -%}
+
+    {% endfor %}
+    {% if h.check_access('package_update',{'id':pkg_dict.id}) %}
+        <dl class="dl-horizontal metadata-list">
+          <dt>
+              {{ _("State") }}
+          </dt>
+          <dd class="dataset-details">{{ _(pkg_dict.state) }}</dd>
+        </dl>
+    {% endif %}
 {% endblock %}

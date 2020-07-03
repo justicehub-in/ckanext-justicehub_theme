@@ -1,9 +1,9 @@
 {% ckan_extends %}
 {% set url = h.url_for(c.group_dict.type + '_read', id=c.group_dict.name, ) %}
-{% block subtitle %}{{ c.group_dict.display_name }} - {{ _('Partners') }}{% endblock %}
+{% block subtitle %}{{ c.group_dict.display_name }} - {{ _('Data Contributor') }}{% endblock %}
 
 {% block breadcrumb_content %}
-  <li>{% link_for _('Partners'), controller='organization', action='index', named_route=group_type + '_index' %}</li>
+  <li>{% link_for _('Data Contributors'), controller='organization', action='index', named_route=group_type + '_index' %}</li>
   <li class="active">{% link_for c.group_dict.display_name|truncate(35), controller='organization', action='read', id=c.group_dict.name, named_route=group_type + '_read' %}</li>
 {% endblock %}
 
@@ -11,83 +11,109 @@
 <div class="row top-section">
     
     {% block image %}
-        <div class="image dataset-org col-sm-3 col-md-3 col-xs-12 image-box partner-logo">
-        <a href="{{ url }}">
+        <div class="image dataset-org col-sm-3 col-md-3 col-xs-12">
+        <a href="{{ url }}" class="image-box partner-logo">
             <img src="{{ c.group_dict.image_display_url or h.url_for_static('/base/images/placeholder-organization.png') }}" class="media-image" alt="{{ c.group_dict.name }}" />
         </a>
         </div>
     {% endblock %}
-    <div class="col-md-5 col-sm-5 col-xs-12">
+    <div class="col-sm-9 col-xs-12">
         <h1 class="heading">{{ c.group_dict.title or c.group_dict.name }}
             {% if c.group_dict.state == 'deleted' %}
             [{{ _('Deleted') }}]
             {% endif %}
+            {% if c.group_dict.signed_pledge %}
+                <img class="fa fa-lg fa-certificate" src="{{ h.url_for_static('/images/signed_pledge_icon.png') }}" alt="signed_pledge" title="signed_pledge"></img>
+            {% endif %}
         </h1>
         {% block description %}
-        {% if c.group_dict.description %}
-            <p>
-            {{ h.markdown_extract(c.group_dict.description) }}
-            </p>
+        <div class="row">
+        {% if c.group_dict.notes %}
+            <div class="col col-sm-8 col-xs-12 more">
+                {{ c.group_dict.notes }}
+            </div>
         {% else %}
             <p class="empty">{{ _('There is no description for this partner') }}</p>
         {% endif %}
+        </div>
         {% endblock %}
 
-        <div class="row">
+        <div class="row" style="margin-top: 60px;">
             {% block content_action %}
-            <div class="col col-md-4 col-xs-6 content_action">
-                {% if h.check_access('organization_update', {'id': c.group_dict.id}) %}
-                    {% link_for _('Edit'), controller='organization', action='edit', id=c.group_dict.name, class_='btn btn-default', named_route=group_type + '_edit'  %}
-                {% endif %}
-            </div>
+            {% if h.check_access('organization_update', {'id': c.group_dict.id}) %}
+                <div class="col col-sm-2 col-xs-6 content_action">
+                    {% link_for _('EDIT'), controller='organization', action='edit', id=c.group_dict.name, class_='btn btn-default', named_route=group_type + '_edit'  %}
+                </div>
+            {% endif %}
             {% endblock %}
 
-            {% block follow %}
-            <div class="col col-md-4 col-xs-6 follow_button">
-              {{ h.follow_button('group', c.group_dict.id) }}
+            {% if not h.justicehub_theme_is_org_admin(c.userobj.name, c.group_dict) %}
+                {% block follow %}
+                {% if c.userobj %}
+                <div class="col col-sm-2 col-xs-6 follow_button">
+                  {{ h.follow_button('group', c.group_dict.id) }}
+                </div>
+                {% endif %}
+                {% endblock %}
+            {% endif %}
+
+            <div class="col col-sm-2 col-sm-offset-2 col-xs-2 text-right" style="margin-top: 15px;">
+                <span>{{ _('Contact ') }}</span>
             </div>
-            {% endblock %}
+                <span class="hidden-xs pull-left" style="margin-top: 15px;">{{ _('|') }}</span>
+            <div class="partner-links social-links col-sm-3 col-xs-8" style="margin-top: 15px;">
+                <ul class="list-unstyled list-inline">
+                    <li>
+                    {% if c.group_dict.website %}
+                        <a href="{{ c.group_dict.website }}"
+                           data-toggle="tooltip"
+                           aria-hidden="true" alt="{{ c.group_dict.name }}'s Website"
+                           role="link" title="Official Website"
+                           aria-label="{{ c.group_dict.name }}'s Website"
+                           target="_blank">
+                            <i class="fa fa-link fa-lg"></i>
+                        </a>
+                    {% endif %}
+                    </li>
+                    <li>
+                    {% if c.group_dict.email %}
+                        <a href="mailto:{{ c.group_dict.email }}"
+                           data-toggle="tooltip"
+                           aria-hidden="true" alt="{{ c.group_dict.name }}'s Email Address"
+                           role="link" title="Email Address"
+                           aria-label="{{ c.group_dict.name }}'s Email Address"
+                           target="_blank">
+                        <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    {% endif %}
+                    </li>
+                    <li>
+                    {% if c.group_dict.twitter %}
+                        <a href="{{ c.group_dict.twitter }}"
+                           data-toggle="tooltip"
+                           aria-hidden="true" alt="{{ c.group_dict.name }}'s Twitter Handle"
+                           role="link" title="Official Twitter Handle"
+                           aria-label="{{ c.group_dict.name }}'s Twitter Handle"
+                           target="_blank">
+                            <i class="fa fa-twitter fa-lg"></i>
+                        </a>
+                    {% endif %}
+                    </li>
+                    <li>
+                    {% if c.group_dict.facebook %}
+                        <a href="{{ c.group_dict.facebook }}"
+                           data-toggle="tooltip"
+                           aria-hidden="true" alt="{{ c.group_dict.name }}'s Facebook Page"
+                           role="link" title="Official Facebook Page"
+                           aria-label="{{ c.group_dict.name }}'s Facebook Page"
+                           target="_blank">
+                            <i class="fa fa-facebook fa-lg"></i>
+                        </a>
+                    {% endif %}
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <div class="social-links col-md-4 col-sm-4 col-xs-12">
-        <ul class="list-unstyled list-inline">
-            <li>
-                <a href="{{ c.group_dict.website }}"
-                   aria-hidden="true" alt="{{ c.group_dict.name }}'s Website"
-                   role="link" title="Official Website"
-                   aria-label="{{ c.group_dict.name }}'s Website"
-                   target="_blank">
-                    <i class="fa fa-link fa-lg"></i>
-                </a>
-            </li>
-            <li>
-                <a href="{{ c.group_dict.email }}"
-                   aria-hidden="true" alt="{{ c.group_dict.name }}'s Email Address"
-                   role="link" title="Email Address"
-                   aria-label="{{ c.group_dict.name }}'s Email Address"
-                   target="_blank">
-                <i class="fa fa-envelope fa-lg"></i>
-                </a>
-            </li>
-            <li>
-                <a href="{{ c.group_dict.twitter }}"
-                   aria-hidden="true" alt="{{ c.group_dict.name }}'s Twitter Handle"
-                   role="link" title="Official Twitter Handle"
-                   aria-label="{{ c.group_dict.name }}'s Twitter Handle"
-                   target="_blank">
-                    <i class="fa fa-twitter fa-lg"></i>
-                </a>
-            </li>
-            <li>
-                <a href="{{ c.group_dict.twitter }}"
-                   aria-hidden="true" alt="{{ c.group_dict.name }}'s Facebook Page"
-                   role="link" title="Official Facebook Page"
-                   aria-label="{{ c.group_dict.name }}'s Facebook Page"
-                   target="_blank">
-                    <i class="fa fa-facebook fa-lg"></i>
-                </a>
-            </li>
-        </ul>
     </div>
 </div>
 {% endblock %}
@@ -97,13 +123,13 @@
 
 
 {% block page_header %}
-<div class="row header-tabs">
+<div class="row page-header">
     <ul class="nav nav-tabs">
         {% block content_primary_nav %}
-        {{ h.build_nav_icon(group_type + '_read', _('Datasets'), id=c.group_dict.name) }}
-        {{ h.build_nav_icon(group_type + '_activity', _('Activity'), id=c.group_dict.name, offset=0) }}
-        {{ h.build_nav_icon('jhorg' + '_stats', _('Stats'), id=c.group_dict.name) }}
-        {{ h.build_nav_icon('jhorg' + '_members', _('Members'), id=c.group_dict.name) }}
+        {{ h.build_nav_icon(group_type + '_read', _('DATASETS'), id=c.group_dict.name) }}
+        {{ h.build_nav_icon(group_type + '_activity', _('ACTIVITY'), id=c.group_dict.name, offset=0) }}
+        {{ h.build_nav_icon('jhorg' + '_stats', _('STATS'), id=c.group_dict.name) }}
+        {{ h.build_nav_icon('jhorg' + '_members', _('MEMBERS'), id=c.group_dict.name) }}
         {% endblock %}
     </ul>
 </div>

@@ -1,0 +1,514 @@
+/* ---------------------- Site Fonts ------------------- */
+.radios label,
+.popover .popover-content,
+.footer-links .input-group input,
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400; /* Regular */
+}
+.res-meta,
+.tooltip,
+.pkg_tags,
+.popover .popover-content,
+.footer-links .nav-item a {
+    font-size: 14px;
+}
+.badge,
+.count,
+.sort-box,
+.dataset-meta,
+.control-label,
+.input-group-addon,
+.package-item-row,
+.dataset-desc,
+.rsrc-list-side > li a,
+.dropdown-menu > li > a,
+.context-info .info,
+.footer-links .input-group-btn .btn {
+    font-size: 16px;
+}
+.dl-horizontal,
+.resource-item .heading,
+.resource-item .description,
+.nav-simple .nav-item a,
+.nav-facet .nav-item a,
+.filters .module-content.empty,
+.downloads,
+.nav-pills li,
+.partner-links.social-links .fa.fa-envelope {
+   font-size: 18px;
+}
+body,
+.page-heading,
+.dataset-title,
+.dataset-org,
+.action a,
+.res-actions a,
+.issues-actions a,
+.res-actions a,
+.content_action a,
+.btn,
+.login-form .checkbox,
+#field-giant-search,
+.partner-links.social-links .fa,
+.search-form .search-input.search-giant input {
+    font-size: 20px;
+}
+h1,
+.col2 p,
+.stages li,
+.nav-tabs > li >  a,
+.module-heading,
+.metadata-heading,
+.login-sidebar-heading,
+.footer-intro {
+    font-size: 25px;
+}
+.col3 h2 {
+    font-size: 30px;
+}
+.landing-desc {
+    font-size: 40px;
+}
+.intro-box span {
+    font-size: 50px;
+}
+.stats-big {
+    font-size: 60px;
+}
+.fa.fa-circle {
+    font-size: 90px;
+}
+.footer-links .nav-item a,
+#field-giant-search,
+.footer-links .input-group input::placeholder,
+.search-form .search-input.search-giant input {
+    font-weight: 300; /* Light */
+}
+.badge,
+.intro-box,
+.landing-desc,
+.resource-item .description,
+.dataset-org,
+.res-meta,
+.dataset-meta,
+.nav-pills li,
+.footer-intro-invert,
+.footer-disclaimer {
+    font-weight: 500; /* Medium */
+}
+.count,
+.activity .item a,
+.rsrc-list-side > li a,
+.media-item .media-heading,
+.footer-disclaimer div:last-child {
+    font-weight: 600; /* Semi Bold */
+}
+.stats-box,
+.pkg_tags a,
+.sort-box,
+.dataset-count-box,
+.input-group-addon,
+.col3 h2,
+.stages li,
+.nav-tabs > li >  a,
+[class^="btn btn-"],
+.action a,
+.res-actions a,
+.content_action a,
+.dataset-title,
+.module-heading,
+.metadata-heading,
+.popover .popover-content,
+.intro-box span:nth-child(2),
+.footer-links .input-group-btn .btn {
+    font-weight: 700; /* Bold */
+}
+.stats-big,
+.footer-intro {
+    font-weight: 800; /* Extra Bold */
+}
+.col2 p,
+.downloads,
+.activity .item,
+.intro-box span:nth-child(2),
+.footer-disclaimer div:last-child,
+.filters .module-content.empty,
+#field-giant-search,
+.footer-links .input-group input,
+.search-form .search-input.search-giant input {
+    font-style: italic;
+}
+
+/* ----------------------- colors ------------------------- */
+a,
+code,
+.count,
+.media-item,
+.res-title,
+.fa-check,
+.btn-xs,
+.primary-color,
+.btn-xs:active:hover,
+.bg-clear.btn,
+.bg-clear.btn:hover,
+.bg-clear.btn:active:focus,
+.fa-certificate,
+.dataset-org > a,
+.activity .item .date,
+.activity .item .actor a,
+.links-list a,
+.subscribe-error,
+.login-form .checkbox,
+.footer-links .nav-item > a:hover,
+.footer-disclaimer div:last-child {
+    color: #f65940;
+}
+.homepage .col2,
+.metadata-list dt,
+.activity .item a {
+    color: #bcb4bf;
+}
+.res-meta,
+.downloads,
+.dataset-meta {
+    color: #707070;
+}
+.subscribe-success {
+    color: #10c6a0;
+}
+body,
+.stats-box,
+.res-title a,
+.fa.fa-lock,
+.fa.fa-trash,
+.secondary-color,
+.fa.fa-unlock-alt,
+.dataset-title a,
+.resource-item .heading,
+.page-header .nav-tabs li a,
+.footer-intro-invert,
+.stages li .highlight,
+.metadata-list dd,
+.issue-list-group li a,
+.stages li.complete .highlight {
+    color: #403644;
+}
+.popover .popover-content,
+.context-info .nums dl,
+.homepage .col3,
+.secondary,
+.landing-desc,
+.site-footer,
+.pkg_tags a,
+.nav-facet,
+.nav-simple .nav-item a,
+.module-heading,
+.metadata-heading,
+.activity-item .activity .item,
+.filters .module-heading,
+.filters .module-content.empty,
+.nav-facet .nav-item > a,
+.member_action .delete,
+.footer-links .nav-item > a,
+.btn-register:hover,
+[class^="btn btn-"].disabled:hover,
+.context-info .follow_button .btn:hover,
+.dropdown-menu > li > a,
+.dropdown-menu > li > a:hover,
+.nav-tabs-plain li.active a:hover,
+.page-header .nav-tabs li a:hover,
+.nav-tabs-plain li.active a,
+.page-header .nav-tabs li.active a,
+.select2-container-multi .select2-choices > li.select2-search-choice {
+    color: #ffffff;
+}
+.media-grid,
+.members-table thead th,
+.stages li .highlight,
+.stages li.complete .highlight,
+.subscribe-box .btn.btn-default:hover,
+[role="main"], body {
+  background: none;
+  background-color: #ffffff;
+}
+.secondary,
+.masthead,
+.landing-desc,
+.site-footer,
+.account-masthead,
+.nav-facet,
+.sidebar,
+.site-footer .popover,
+.dropdown-menu,
+[class^="btn btn-"],
+[class^="btn btn-"].disabled:hover,
+.nav-tabs .content_action a,
+.stages li.active .highlight,
+.metadata-heading,
+.nav-tabs-plain li.active a,
+.page-header .nav-tabs li.active a,
+.filters .module-heading,
+.filters .module-content.empty,
+.footer-links .input-group-btn .btn,
+.btn-register:hover,
+.context-info .follow_button .btn:hover,
+.dropdown-menu > li a,
+.masthead .navigation .nav-pills > li > a:hover,
+.masthead .navigation .nav-pills > li > a:active,
+.masthead .navigation .nav-pills > li > a:focus,
+.masthead .navigation .nav-pills > li.active > a,
+.navigation .open a.dropdown-toggle,
+.landing-desc .social-links .fa:hover,
+.footer-links .social-links .fa:hover,
+.composite-control-repeating .btn-success,
+[role="main"] .container .row .col3 {
+    background: none;
+    background-color: #403644;
+    border-color: #403644;
+}
+.context-info .follow_button .btn,
+.subscribe-box,
+.action a,
+.content_action a,
+.content_action .btn.btn-danger,
+.res-actions a,
+.login-sidebar-heading,
+h2.module-heading,
+.member_action .delete,
+.nav-facet .nav-item.active,
+.nav-facet .nav-item.active a,
+.composite-control-repeating .btn-danger,
+.masthead .navigation .nav-pills .dropdown-menu > li a:hover,
+.nav-pills li.active a,
+.nav-pills li.active a:hover,
+.nav-pills li a:hover,
+.dropdown-menu > li a:hover,
+.nav-tabs-plain li.active a:hover,
+.page-header .nav-tabs li a:hover,
+.select2-results .select2-highlighted {
+    background: none;
+    background-color: #f65940;
+    border-color: #f65940;
+}
+.activity .item .fa[class*="fa"] {
+    background-color: #00abb7;
+}
+.pkg_tags {
+    background-color: #bcb4bf;
+}
+.table-striped tbody tr:nth-child(2n+1) td,
+.table-striped tbody tr:nth-child(2n+1) th {
+    background-color: #c1bbc3;
+}
+.label[data-format="doc"],
+.label[data-format*="doc"] {
+    background-color: #115abe;
+}
+.label[data-format="tsv"],
+.label[data-format*="tsv"] {
+    background-color: #7ca34c;
+}
+.label[data-format="zip"],
+.label[data-format*="zip"] {
+    background-color: #7ca34c;
+}
+.label[data-format="ods"],
+.label[data-format*="ods"] {
+    background-color: #2db55d;
+}
+.label[data-format="odb"],
+.label[data-format*="odb"] {
+    background-color: #85c12a;
+}
+.label[data-format="txt"],
+.label[data-format*="txt"] {
+    background-color: #55a4b5;
+}
+.label[data-format="odt"],
+.label[data-format*="odt"] {
+    background-color: #862112;
+}
+.module-heading {
+    border-bottom-color: #f65940;
+}
+.subscribe-box .input-group .form-control,
+.btn-register:hover,
+.context-info .follow_button .btn:hover {
+    border-color: #ffffff;
+}
+.subscribe-box .btn.btn-default:hover {
+    border-color: #f65940;
+}
+.nav-tabs-plain,
+.page-header .nav-tabs {
+    border-bottom: 2px solid #f65940;
+}
+
+/* ---------------------- social links ------------------ */
+/* https://www.w3schools.com/howto/howto_css_social_media_buttons.asp */
+.social-links a {
+    text-decoration: none;
+}
+.social-links .fa {
+    padding: 12px 5px;
+    font-size: 35px;
+    width: 50px;
+    height: 50px;
+    text-decoration: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.fa.fa-envelope {
+    font-size: 30px;
+}
+.social-links li {
+    margin-right: 12px;
+}
+.social-links li:first-of-type {
+    padding-left: 0;
+}
+.social-links .fa {
+    background-color: #403644;
+    color: #ffffff;
+}
+.social-links .fa:hover {
+  background-color: #ffffff;
+  border: 1px solid #403644;
+  color: #403644;
+}
+
+/* --------------------- icons ------------------------- */
+img.fa.fa-check {
+    width: 20px;
+    height: 20px;
+}
+img.fa-check.fa-lg {
+    width: 28px;
+    height: 28px;
+}
+img.fa.fa-certificate {
+    width: 21px;
+    height: 27px;
+}
+img.fa-certificate.fa-lg {
+    width: 22px;
+    height: 28px;
+}
+.dropdown-toggle .caret {
+    width: 10px;
+}
+.subscribe-error,
+.subscribe-success {
+    font-size: 26px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    text-align: center;
+    background-color: #ffffff;
+    padding: 3px;
+    margin-right: 10px;
+}
+
+/* --------------------- stats ------------------------- */
+.stats-box {
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+.stats-big {
+    display: block;
+    line-height: 1;
+}
+
+/* ------------------- labels ------------------------- */
+.label {
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 25px;
+}
+
+/* -------------------------------------- Mobile adjustments ----------------------------- */
+@media (min-width:320px) and (orientation: portrait) {
+    .count,
+    .pkg_tags,
+    .sort-box,
+    .res-meta,
+    .downloads,
+    .dataset-meta,
+    .input-group-addon,
+    .package-item-row,
+    .dataset-count-box,
+    .resource-item .description,
+    .footer-links .nav-item a {
+        font-size: 11px;
+    }
+    .dataset-desc {
+        font-size: 12px;
+    }
+    h3,
+    .btn,
+    .col2 p,
+    .stats-box,
+    .content_action a,
+    .dataset-title,
+    .dataset-org,
+    .media-heading,
+    .nav-tabs li a,
+    .nav-pills li,
+    .dl-horizontal,
+    .dropdown-menu > li > a,
+    .toolbar .breadcrumb,
+    .resource-item .heading,
+    .table thead tr th.table-actions .btn,
+    body {
+        font-size: 14px;
+    }
+    h1, h2,
+    .landing-desc,
+    .page-heading,
+    .control-label,
+    #field-giant-search,
+    .search-form .search-input.search-giant input,
+    .login-form .checkbox,
+    .footer-intro,
+    .btn.bg-clear {
+        font-size: 14px;
+    }
+    .intro-box span,
+    .stages .highlight,
+    .metadata-heading {
+        font-size: 18px;
+    }
+    .stats-big {
+        font-size: 30px;
+    }
+    .fa.fa-circle {
+        font-size: 60px;
+    }
+    .nav-pills li.dropdown a.dropdown-toggle:active,
+    .nav-pills li.dropdown a.dropdown-toggle:focus {
+        background-color: #f65940;
+    }
+    .footer-intro-invert {
+        color: #ffffff;
+    }
+    .subscribe-box {
+        background-color: #403644;
+    }
+    .page-header .nav-tabs {
+        border-bottom: none;
+    }
+    img.fa.fa-certificate {
+        width: 12px;
+        height: 16px;
+    }
+    img.fa.fa-check {
+        width: 13px;
+        height: 14px;
+    }
+    .stats-big {
+        text-align: center;
+    }
+}

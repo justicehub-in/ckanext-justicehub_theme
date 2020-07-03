@@ -1,0 +1,49 @@
+{% ckan_extends %}
+
+{% block pre_primary %}
+  <div class="row">
+      <div class="col col-md-3">
+      </div>
+      <div class="col col-md-9 login-heading">
+          <h1>{% block page_heading %}{{ _('RESET YOUR PASSWORD') }}{% endblock %}</h1>
+      </div>
+  </div>
+{% endblock %}
+
+{% block primary_content %}
+  <article class="module">
+    <div class="module-content">
+      {% block primary_content_inner %}
+      {% block form %}
+        <form action="" method="post" class="login-form">
+            <div class="controls">
+                <div class="form-group">
+                    <label class="control-label" for="field-username">{{ _('Username') }}</label>
+                    <input id="field-username" class="control-medium form-control" name="user" value="" type="text" />
+                </div>
+            </div>
+          <div class="form-actions">
+            {% block form_button %}
+            <button class="btn btn-primary" type="submit" name="reset">{{ _("Request Reset") }}</button>
+            {% endblock %}
+          </div>
+        </form>
+      {% endblock %}
+      {% endblock %}
+    </div>
+  </article>
+{% endblock %}
+
+{% block secondary_content %}
+  {% block help %}
+  <section class="module module-narrow module-shallow login-sidebar">
+    {% block help_inner %}
+    <h2 class="login-sidebar-heading">{{ _('How does this work?') }}</h2>
+    <div class="module-content">
+      <p>{% trans %}Enter your username into the box and we will send you
+      an email with a link to enter a new password.{% endtrans %}</p>
+    </div>
+    {% endblock %}
+  </section>
+  {% endblock %}
+{% endblock %}

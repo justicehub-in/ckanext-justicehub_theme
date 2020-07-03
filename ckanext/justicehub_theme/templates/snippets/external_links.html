@@ -1,0 +1,19 @@
+<div class="header">
+    <h1 class="page-heading">{{ _('EXTERNAL LINKS') }}</h1>
+</div>
+{% if pkg_dict.links %}
+    {% set links = h.justicehub_theme_parse_json(pkg_dict.links) %}
+    {% for item in links %}
+       <dl class="dl-horizontal links-list">
+      {% set item = h.composite_get_as_dict(item) %}
+      <dt>
+          <a href="{{ item['link'] }}">{{ item['title'] }}</a>
+      </dt>
+      <dd>
+          <p>{{ item['description'] }}</p>
+      </dd>
+      </dl>
+    {% endfor %}
+{% else %}
+    <p class="empty">{{ _('No Links') }}</p>
+{% endif %}

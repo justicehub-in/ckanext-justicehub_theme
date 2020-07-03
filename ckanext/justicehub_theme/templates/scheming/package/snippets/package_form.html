@@ -9,6 +9,7 @@
   {%- endif -%}
   {%- set schema = h.scheming_get_dataset_schema(dataset_type) -%}
 
+  {% set dataset_state = [] %}
   {% set org_fields = [] %}
   {% set geo_fields = [] %}
   {% set data_timeline_fields = [] %}
@@ -21,7 +22,10 @@
   {% set extras = [] %}
 
   {%- for field in schema.dataset_fields[4:] -%}
-      {%- if field.field_name in ['owner_org', 'license_id'] -%}
+      {%- if field.field_name in ['verified', 'state'] -%}
+          {% do dataset_state.append(field) %}
+
+      {%- elif field.field_name in ['owner_org', 'license_id'] -%}
           {% do org_fields.append(field) %}
 
       {%- elif field.field_name in ['states', 'district', 'village'] -%}
@@ -67,8 +71,20 @@
   {%- endfor -%}
   </div>
 
-  <div class="form-group">
-      <span class="metadata-heading">{{ _('METADATA') }}</span>
+  <div class="row">
+  {%- for field in dataset_state -%}
+    <div class="col col-md-6">
+    {%- if field.form_snippet is not none -%}
+      {%- snippet 'scheming/snippets/form_field.html',
+        field=field, data=data, errors=errors,
+        entity_type='dataset', object_type=dataset_type -%}
+    {%- endif -%}
+    </div>
+  {%- endfor -%}
+  </div>
+
+  <div style="margin-top: 25px; margin-left: -30px; border-bottom: 2px solid #f65940;">
+      <span class={%if form_style == 'edit' %}"metadata-heading metadata-small-heading"{% else %}"metadata-heading"{% endif %}>{{ _('METADATA') }}</span>
   </div>
 
   <div class="row">
@@ -223,12 +239,19 @@
     </p>
   {% endblock %}
   {% block delete_button %}
-    {% if h.check_access('package_delete', {'id': data.id}) and not data.state == 'deleted' %}
-      <a class="btn btn-danger pull-left" href="{% url_for controller='package', action='delete', id=data.id %}" data-module="confirm-action" data-module-content="{{ _('Are you sure you want to delete this dataset?') }}">{% block delete_button_text %}{{ _('DELETE') }}{% endblock %}</a>
-    {% endif %}
   {% endblock %}
+
   {% block save_button %}
-  <button class="btn btn-primary" type="submit" name="save">{% block save_button_text %}{{ _('NEXT: FILES UPLOAD') }}{% endblock %}<i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i></button>
+  <button class="btn btn-primary bg-clear" type="submit" name="save">
+      {% block save_button_text %}
+      {% if form_style != 'edit' %}
+          {{ _('NEXT: FILES UPLOAD') }}
+          <i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i>
+      {% else %}
+          {{ _('UPDATE DATASET') }}
+      {% endif %}
+      {% endblock %}
+  </button>
   {% endblock %}
   <p class="control-required-message">
     {{ _("Required field") }} <span class="control-required">*</span>

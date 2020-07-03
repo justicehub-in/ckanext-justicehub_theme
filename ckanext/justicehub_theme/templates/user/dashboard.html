@@ -1,0 +1,35 @@
+{% ckan_extends %}
+
+{% block pre_primary %}
+<div class="row col-sm-12 hidden-xs" style="margin-top: 100px;">
+</div>
+{% endblock %}
+
+{% block page_header %}
+  <header class="module-content page-header hug">
+    <ul class="nav nav-tabs">
+      {{ h.build_nav_icon('dashboard.index', _('MY FEED')) }}
+      {{ h.build_nav_icon('dashboard.datasets', _('DATASETS')) }}
+      {{ h.build_nav_icon('dashboard.organizations', _('DATA CONTRIBUTORS')) }}
+      {#{ h.build_nav_icon('dashboard.groups', _('SECTORS')) }#}
+
+      <div class="content_action">
+          {% link_for _('Edit settings'), named_route='user.edit', id=user.name, class_='btn btn-default' %}
+      </div>
+    </ul>
+  </header>
+{% endblock %}
+
+{% block primary_content_inner %}
+<div data-module="dashboard">
+  {% snippet 'user/snippets/followee_dropdown.html', context=dashboard_activity_stream_context, followees=followee_list %}
+  <h2 class="page-heading">
+    {% block page_heading %}
+      {{ _('MY FEED') }}
+    {% endblock %}
+  </h2>
+  {% block activity_stream %}
+    {{ dashboard_activity_stream|safe }}
+  {% endblock %}
+</div>
+{% endblock %}

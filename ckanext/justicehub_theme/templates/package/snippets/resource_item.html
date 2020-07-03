@@ -1,25 +1,45 @@
-{% set url_action = 'resource_edit' if url_is_edit and can_edit else 'resource_read' %}
-{% set url = h.url_for(controller='package', action=url_action, id=pkg.name, resource_id=res.id) %}
+{% ckan_extends %}
 
-<li class="resource-item" data-id="{{ res.id }}">
-  {% block resource_item_title %}
-  <a class="heading" href="{{ url }}" title="{{ res.name or res.description }}" style ="font-size:20px; color:#403644;">
-    {{ h.resource_display_name(res) | truncate(50) }}<span class="format-label" property="dc:format" data-format="{{ res.format.lower() or 'data' }}" style="margin-top:10px;">{{ h.get_translated(res, 'format') }}</span>
-    {{ h.popular('views', res.tracking_summary.total, min=10) }}
+{% block resource_item_title %}
+    <a class="heading" href="{{ url }}" title="{{ res.name or res.description }}">
+        {{ h.resource_display_name(res) | truncate(50) }}
+        <span class="format-label" property="dc:format" data-format="{{ res.format.lower() or 'data' }}">
+            {{ h.get_translated(res, 'format') }}
+        </span>
+        {{ h.popular('views', res.tracking_summary.total, min=10) }}
+
+        {% if res.variable_measured %}
+            <p class="res-meta">
+            {{ _('Each row represents:') }}
+            {{ res.variable_measured }}
+            </p>
+        {% endif %}
+
+        <p class="res-meta">
+                {{ _('Updated:') }}
+                {{ h.time_ago_from_timestamp(res.last_modified) or h.time_ago_from_timestamp(res.Created) }}
+            {% if res.Created %}
+            <br>
+                {{ _('Created:') }}
+                {{ h.render_datetime(res.Created) }}
+            {% endif %}
+        </p>
   </a>
-  {% endblock %}
-  {% block resource_item_description %}
-    <p class="description" style="color:#f65940; font-size:16px; font-weight:bold;">
+{% endblock %}
+
+{% block resource_item_description %}
+    <p class="description res-meta">
       {% if res.description %}
         {{ h.markdown_extract(h.get_translated(res, 'description'), extract_length=80) }}
       {% endif %}
     </p>
-  {% endblock %}
-  {% block resource_item_explore %}
-  {% if not url_is_edit %}
+{% endblock %}
+
+{% block resource_item_explore %}
+{% if not url_is_edit %}
   <div class="dropdown btn-group">
-    <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="background:#403644;">
-      {{ _('Explore') }}
+    <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      {{ _('EXPLORE') }}
       <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
@@ -60,6 +80,5 @@
       {% endblock %}
     </ul>
   </div>
-  {% endif %}
-  {% endblock %}
-</li>
+{% endif %}
+{% endblock %}

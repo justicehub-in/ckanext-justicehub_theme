@@ -1,31 +1,68 @@
-{% ckan_extends %}
+{% import "issues/common.html" as common with context %}
 
-{% block styles %}
-  {{ super() }}
-  <link rel="stylesheet" href="/ckanext-issues/style.css" />
-{% endblock %}
+{% set filters = h.get_issue_filter_types() %}
+{% set issues_per_page = h.get_issues_per_page() %}
+{% set extra_vars = h.justicehub_theme_issue_vars(pkg.id, request) %}
+{% set pagination = extra_vars.pagination %}
+{% set issues = extra_vars.issues %}
 
-{% block primary_content_inner %}
 <section class="module issues-home">
-    {% snippet 'snippets/search_form.html', type='issue', query=q, fields=(('page', pagination.page), ('per_page', pagination.per_page), ('status', status), ('visibility', visibility)), sorting=filters, sorting_selected=sort, placeholder=_('Search issues...'), no_bottom_border=true, no_title=true %}
-
-    <div class="header row">
-        <h1 class="page-heading">
-            <div class="issues-actions">
-                {{ h.nav_link(_('New Issue'), named_route='issues_new', dataset_id=pkg.name, class_='btn btn-success') }}
-            </div>
-        </h1>
-    </div>
-
-   <h2 id="issues-found">
-       {{ ungettext('{number} issue found', '{number} issues found', pagination.total_count) .format(number=pagination.total_count) }}
-   </h2>
+    <!-- FIXME: disabled for Alpha -->
+    {#% snippet 'snippets/search_form.html',
+                type='issue', query=extra_vars.q,
+                fields=(('page', pagination.page), ('per_page', pagination.per_page), ('status', extra_vars.status), ('visibility', visibility)),
+                sorting=filters,
+                sorting_selected=extra_vars.sort,
+                placeholder=_('Search issues...'),
+                no_bottom_border=true,
+                count=pagination.total_count,
+                no_title=true %#}
 
    {% if issues %}
-   <ul id="issue-list" class="issue-list-group list-group">
-       {% for issue in issues %}
-       {{ common.issue_item(issue, pkg, c.user) }}
-       {% endfor %}
+   <h2 class="page-heading">
+       <div class="col col-sm-6 col-xs-5">
+           {{ _('Issue') }}
+       </div>
+       <div class="col col-sm-2 col-sm-offset-2 col-xs-3">
+           {{ _('Replies') }}
+       </div>
+       <div class="col col-sm-2 col-xs-4">
+           {{ _('Activity') }}
+       </div>
+   </h2>
+
+   <ul id="issue-list" class="issue-list-group list-group list-unstyled">
+   {% for issue in issues %}
+       <li>
+       <!-- FIXME: disabled issue show for Alpha
+       <a href="{{ h.url_for('issues_show', dataset_id=pkg.id, issue_number=issue.number) }}" {% if issue.visibility == 'hidden'%} class="issue-abuse"{% endif%}-->
+       <div class="row">
+           <div class="col-sm-12">
+               <h2>{{ issue.title }}</h2>
+           </div>
+       </div>
+       <div class="row">
+           <div class="col col-sm-8 col-xs-5">
+               <div class="row">
+                   <div class="col col-sm-10 col-xs-12">
+                       {{ issue.description | urlize }}
+                   </div>
+                   <div class="col col-sm-2 col-xs-12">
+                   {% if issue.assignee_id %}
+                       {{ h.gravatar(h.justicehub_theme_get_assignee_user(issue.assignee_id).email_hash, size=32) }}
+                   {% endif %}
+                   </div>
+               </div>
+           </div>
+           <div class="col col-sm-2 col-xs-3">
+               {{ issue.comment_count }}
+           </div>
+           <div class="col col-sm-2 col-xs-4">
+               {{ h.time_ago_from_timestamp(issue.created) }}
+           </div>
+       <!--/a-->
+       </li>
+   {% endfor %}
    </ul>
    {% else %}
    <p class="empty">{{ _('No issues') }}</p>
@@ -33,9 +70,3 @@
 
    {{ common.page_selector(pagination, issues_per_page, url_params={'dataset_id': pkg['id']}) }}
 </section>
-{% endblock %}
-
-{% block secondary_content %}
-  {% snippet "package/snippets/info.html", pkg=pkg %}
-  {{ common.search_options_sidebar(user_can_change_visibility=h.check_access('package_update', {'id': pkg.id }), url_params={'dataset_id':pkg['id']}) }}
-{% endblock %}
