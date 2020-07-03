@@ -24,7 +24,7 @@
     border-radius: 0;
     margin-top: 0;
 }
-/* NOTE: hiding for Alpha */
+/* FIXME: hiding for Alpha */
 .res-actions ul > li a[data-module=api-info] {
     display: none;
 }

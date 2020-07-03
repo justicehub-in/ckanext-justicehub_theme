@@ -42,7 +42,7 @@ def get_package_owner_details(context, data_dict):
                                                include_extras=True
                                                )
 
-    # NOTE: commented becaues this validation causes solr to fail reindexing
+    # FIXME: commented becaues this validation causes solr to fail reindexing
     # group_plugin = lib_plugins.lookup_group_plugin(partner_dict['type'])
     # schema = logic.schema.default_show_group_schema()
     # partner, errors = lib_plugins.plugin_validate(

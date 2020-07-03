@@ -7,7 +7,7 @@
 {% set issues = extra_vars.issues %}
 
 <section class="module issues-home">
-    <!-- NOTE: disabled for Alpha -->
+    <!-- FIXME: disabled for Alpha -->
     {#% snippet 'snippets/search_form.html',
                 type='issue', query=extra_vars.q,
                 fields=(('page', pagination.page), ('per_page', pagination.per_page), ('status', extra_vars.status), ('visibility', visibility)),
@@ -34,7 +34,7 @@
    <ul id="issue-list" class="issue-list-group list-group list-unstyled">
    {% for issue in issues %}
        <li>
-       <!-- NOTE: disabled issue show for Alpha
+       <!-- FIXME: disabled issue show for Alpha
        <a href="{{ h.url_for('issues_show', dataset_id=pkg.id, issue_number=issue.number) }}" {% if issue.visibility == 'hidden'%} class="issue-abuse"{% endif%}-->
        <div class="row">
            <div class="col-sm-12">

@@ -23,7 +23,7 @@
 {% block content_primary_nav %}
   {{ h.build_nav_icon('resource_edit', _('EDIT RESOURCE'), id=pkg.name, resource_id=res.id) }}
   {% block inner_primary_nav %}{% endblock %}
-  <!--NOTE: Removing for Alpha -->
+  <!--FIXME: Removing for Alpha -->
   {#{ h.build_nav_icon('views', _('Views'), id=pkg.name, resource_id=res.id) }#}
 
   <div class="content_action">
