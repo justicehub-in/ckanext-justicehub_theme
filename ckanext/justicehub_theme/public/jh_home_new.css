@@ -1,0 +1,86 @@
+
+:root {
+  --primary-color: #f65940;
+  --primary-color-dark: #e0462f;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+}
+
+.btn-primary,
+.btn-primary:focus,
+.btn-primary:active:focus,
+.btn-primary:visited {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-color-dark);
+  border-color: var(--primary-color-dark);
+}
+
+.btn-primary-outline {
+  background-color: transparent;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.navbar {
+  height: 70px;
+  margin-bottom: 0;
+}
+
+.navbar-default {
+  background-color: white;
+}
+
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-nav > li > .btn {
+  font-weight: 500;
+}
+
+.navbar-default .navbar-nav > li > .btn {
+  margin-left: 15px;
+}
+
+.navbar-default .navbar-nav > li > a {
+  font-size: 18px;
+  color: #000000;
+}
+
+.navbar .custom-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-logo {
+  width: 150px;
+  height: auto;
+}
+
+li.dropdown:focus {
+  background-color: white;
+}
+
+.custom-container {
+  max-width: 1200px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+

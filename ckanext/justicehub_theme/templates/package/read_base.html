@@ -64,11 +64,11 @@
 
     <div class="row">
         <div class="col col-sm-6 col-xs-12 text-center">
-            <span class="col-xs-4 col-sm-3">
+            {# <span class="col-xs-4 col-sm-3">
                 {% set downloads = h.justicehub_theme_get_package_avg_downloads(pkg) %}
                 <span class="primary-color">{{ downloads }}{% if downloads %}{{ _('+') }}{% endif %}</span>
                 <span>{{ _('Downloads') }}</span>
-            </span>
+            </span> #}
             <span class="hidden-xs" style="float: left;">{{ _('|') }}</span>
             <span class="col-xs-3 col-sm-2">
                 {% set views = pkg.tracking_summary.total %}
@@ -178,7 +178,7 @@
         {% block content_primary_nav %}
 
         <li class="active">
-            <a href='#resources' data-toggle="tab">
+            <a href="/dataset/{{ pkg.name }}/#resources" data-toggle="tab">
                 {{ _('FILES') }}
             </a>
         </li>
@@ -203,6 +203,14 @@
             <div class="issues-actions">
                 {{ h.nav_link(_('New Issue'), named_route='issues_new', dataset_id=pkg.name, class_='btn btn-success pull-right') }}
             </div-->
+        {% endif %}
+        {% if c.userobj.sysadmin %}
+            {#<li>
+            <a href='#groups' data-toggle="tab">
+                {{ _('GROUPS') }}
+            </a>
+            </li>#}
+            {{ h.build_nav_icon('dataset_groups', _('Groups'), id=pkg.name) }} 
         {% endif %}
         {% endblock %}
     </ul>
@@ -232,5 +240,9 @@
         <div class="tab-pane" id="issues">
             {% snippet "issues/dataset.html", pkg=pkg %}
         </div>
+
+        {# <div class="tab-pane" id="groups">
+            {% snippet "package/snippets/group_list.html", pkg_dict=pkg, pkg=pkg, id=pkg.name %}
+        </div> #}
     </div>
 {% endblock %}

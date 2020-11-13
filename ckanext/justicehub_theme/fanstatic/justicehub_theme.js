@@ -73,7 +73,8 @@ ckan.module('justicehub_theme_tabs', function ($) {
 
         onTabClick: function () {
             // https://stackoverflow.com/a/9393768/3860168
-            window.location.hash = this.hash;
+             //window.location.hash = this.hash;
+              window.location = this;
         }
     };
 });

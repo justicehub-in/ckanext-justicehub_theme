@@ -1,3 +1,173 @@
+
+{% block header_wrapper %}
+<nav class="navbar navbar-default">
+      <div class="custom-container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">
+            <img class="navbar-logo" alt="Brand" src="/images/jh_logo.png" />
+          </a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/about">About</a></li>
+            <li class="dropdown">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                role="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Data <span class="caret"></span
+              ></a>
+              <ul class="dropdown-menu">
+                <li><a href="/dataset">Explore Data</a></li>
+                <li><a href="/dataset/new">Contribute Data</a></li>
+              </ul>
+            </li>
+
+	    {% if c.userobj.sysadmin %}
+	    	<li><a href="/group">Group</a></li>
+	    {% endif %}
+
+            <li><a href="https://justicehub.in/resources/">Resources</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+
+	   {% if not c.userobj %}
+		  {% block header_account_notlogged %}
+		  {# <li><button type="button" class="btn btn-primary navbar-btn"><a href="/user/login">Join/Login</a></button></li> #}
+		  <li>
+		      <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#signUpModal">
+		        Join/Login
+		      </button>
+		  </li>
+                  
+		  {% endblock %}
+
+	   {% else %}
+		  <li class="dropdown">
+		    {% set name = c.userobj.fullname if c.userobj.fullname else c.userobj.name %}
+		    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ name }}<b class="caret"></b></a>
+		    <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+			<li>
+			    <a href="{{ h.url_for('/dashboard') }}" title="{{ _('Dashboard') }}">
+			        <span class="text">{{ _('Dashboard') }}</span>
+			    </a>
+			</li>
+			<li>
+			    {% block header_account_log_out_link %}
+			        <a href="{{ h.url_for('/user/_logout') }}" title="{{ _('Log out') }}">
+			            <span class="text">{{ _('Log out') }}</span>
+			        </a>
+			    {% endblock %}
+			</li>
+		    </ul>
+		  </li>
+	   {% endif %}
+
+            
+          </ul>
+        </div>
+
+        <div id="side-nav" class="side-nav">
+          <div class="side-nav__header">
+            <img class="side-nav__brand" src="/assets/jh_logo.png" alt="" />
+            <a href="javascript:void(0)" class="closebtn">&times;</a>
+          </div>
+
+          <a href="#"><img src="/assets/icons/login.svg" alt="" /> Join / Login</a>
+          <a href="#"><img src="/assets/icons/home.svg" alt="" /> Home</a>
+          <a href="#"><img src="/assets/icons/about.svg" alt="" /> About</a>
+          <a href="#"><img src="/assets/icons/explore.svg" alt="" /> Explore Data</a>
+          <a href="#"><img src="/assets/icons/contribute.svg" alt="" /> Contribute Data</a>
+          <a href="#"><img src="/assets/icons/resources.svg" alt="" /> Resources</a>
+          <a href="#"><img src="/assets/icons/blog.svg" alt="" /> Blog</a>
+          <a href="#"><img src="/assets/icons/contact.svg" alt="" /> Contact</a>
+          <a href="#"><img src="/assets/icons/terms.svg" alt="" /> Terms of Service</a>
+        </div>
+      </div>
+      <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <div class="modal-header-info">
+                <img class="modal-logo" src="/assets/jh_logo_notext.png" />
+                <h4>Login</h4>
+                <p>contribute data, join groups and do more by becoming a member</p>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="input-group">
+                <label for="email">Email Address</label>
+                <input type="text" name="email" id="email" />
+              </div>
+              <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" />
+              </div>
+              <span
+                >By continuing, you agree to our <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a></span
+              >
+              <button type="button" class="btn btn-primary">Login</button>
+              <p>Not a member yet? <a href="#">Sign Up</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <div class="modal-header-info">
+                <img class="modal-logo" src="/assets/jh_logo_notext.png" />
+                <h4>Sign Up</h4>
+                <p>contribute data, join groups and do more by becoming a member</p>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="input-group">
+                <label for="fullname">Full Name</label>
+                <input type="text" name="fullname" id="fullname" />
+              </div>
+              <div class="input-group">
+                <label for="email">Email Address</label>
+                <input type="text" name="email" id="email" />
+              </div>
+              <div class="input-group">
+                <label for="password">Set Password</label>
+                <input type="password" name="password" id="password" />
+              </div>
+              <span
+                >By continuing, you agree to our <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a></span
+              >
+              <button type="button" class="btn btn-primary">Sign up</button>
+              <p>Already a member? <a href="#">Login</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+{#
+
 {% ckan_extends %}
 
 {% block header_site_navigation %}
@@ -12,7 +182,11 @@
             </ul>
         </li>
         {% block header_site_navigation_tabs %}
-            {{ h.build_nav_main( ('search', _('Datasets')), ('organizations_index', _('Data Contributors'))) }}
+            {% if c.userobj.sysadmin %}
+            	{{ h.build_nav_main( ('search', _('Datasets')), ('organizations_index', _('Data Contributors')), ('group_index', _('Groups'))) }}
+            {% else %}
+		{{ h.build_nav_main( ('search', _('Datasets')), ('organizations_index', _('Data Contributors'))) }}
+            {% endif %}
         {% endblock %}
 
         <li>
@@ -67,3 +241,6 @@
 {% endblock %}
 {% block header_site_search %}
 {% endblock %}
+
+
+#}

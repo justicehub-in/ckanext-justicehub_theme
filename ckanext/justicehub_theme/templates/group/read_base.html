@@ -1,0 +1,9 @@
+{% ckan_extends %}
+
+
+{% block pre_primary %}
+	{% block content_action %}
+	  {% link_for _('Manage'), controller='group', action='edit', id=c.group_dict.name, class_='btn btn-default', icon='wrench', named_route=group_type + '_edit' %}
+	{% endblock %}
+{% endblock %}
+

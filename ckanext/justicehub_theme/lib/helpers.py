@@ -6,6 +6,8 @@ from dateutil.parser import parse as parse_dates
 from sqlalchemy import MetaData
 from sqlalchemy.sql import select
 
+import ckan.lib.dictization.model_dictize as model_dictize
+
 import ckan.logic as logic
 import ckan.model as model
 from ckan.common import c
@@ -108,3 +110,21 @@ def get_package_visits(pkg):
         total = res.running_total
         recent = res.recent_views
     return {'total' : total, 'recent': recent}
+
+
+
+def get_popular_groups():
+
+    
+    context = {'model': model}
+
+    q = model.Session.query(model.Group) \
+        .filter(model.Group.is_organization == False) \
+        .filter(model.Group.state == 'active')
+
+
+    groups = q.all()
+
+    group_list = model_dictize.group_list_dictize(groups, context)
+    return group_list
+

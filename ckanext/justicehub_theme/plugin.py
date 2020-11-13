@@ -36,7 +36,8 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
             'justicehub_theme_parse_json': helpers.parse_json,
             'justicehub_theme_get_assignee_user': helpers.get_assignee_user,
             'justicehub_theme_issue_vars': helpers.issues_vars,
-            'justicehub_theme_is_org_admin': helpers.is_org_admin
+            'justicehub_theme_is_org_admin': helpers.is_org_admin,
+            'justicehub_theme_get_popular_groups': helpers.get_popular_groups
         }
 
     #IActions
@@ -58,8 +59,8 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         u'''Extensions will receive a dictionary with the query parameters,
         and should return a modified (or not) version of it.
         '''
-        for resource_dict in package_dict['resources']:
-            resource_dict['downloads'] = helpers.get_resource_downloads(resource_dict)
+        #for resource_dict in package_dict['resources']:
+        #    resource_dict['downloads'] = helpers.get_resource_downloads(resource_dict)
 
         package_dict['tracking_summary'] = (
             model.TrackingSummary.get_for_package(package_dict['id']))

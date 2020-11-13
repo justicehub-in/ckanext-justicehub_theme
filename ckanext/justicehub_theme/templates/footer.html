@@ -1,4 +1,62 @@
-<footer class="site-footer">
+<footer>
+<div class="custom-container">
+  <div class="row">
+    <div class="subscribe col-lg-5 col-md-5">
+      <div class="footer__branding">
+        <img class="footer__branding__jh" src="/assets/jh_logo_white.png" alt="JusticeHub Logo White" />
+        <a href="#" class="footer__branding_social">
+          <img src="/assets/icons/twitter.svg" alt="" />
+        </a>
+        <a href="#" class="footer__branding_social">
+          <img src="/assets/icons/facebook.svg" alt="" />
+        </a>
+        <a href="#" class="footer__branding_social">in</a>
+      </div>
+      <p><strong>Subscribe to our mailing list</strong></p>
+      <p>Get informed of the latest legal and justice data that make it to our platform. Enter your email:</p>
+
+      <form class="row subscribe__form">
+        <input type="text" class="col-lg-8 col-md-8 col-sm-8 col-xs-12" />
+        <button class="btn btn-primary col-lg-3 col-md-3 col-sm-3 col-xs-12">Subscribe</button>
+      </form>
+    </div>
+    <div class="links col-lg-4 col-md-4">
+      <h3>Links</h3>
+      <div class="row links-row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <ul>
+            <li><a href="/about">About</a></li>
+            <li><a href="/dataset/new">Contribute Data</a></li>
+            <li><a href="/dataset/new">Explore Data</a></li>
+            <li><a href="https://justicehub.in/resources/">Resources</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <ul>
+            <li><a href="{{ h.url_for('/pages/tos')}}">Terms of Services</a></li>
+            <li><a href="{{ h.url_for('/pages/coc')}}">Code of Conduct</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="http://docs.ckan.org/en/2.8/api/">CKAN API</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="created col-lg-3 col-md-3">
+      <h3>Created By</h3>
+      <div class="row makers-row">
+        <img src="/assets/cdl_light.svg" alt="" />
+        <img src="/assets/agami_light.svg" alt="" />
+      </div>
+      <p>Designed by <a href="#">TwistOpen UX</a></p>
+    </div>
+  </div>
+</div>
+</footer>
+
+
+{# <footer class="site-footer">
     <div class="container">
     {% block footer_content %}
     <div class="row">
@@ -144,4 +202,4 @@
         {% endif %}
     {% endblock %}
 
-</footer>
+</footer> #}

@@ -1,3 +1,189 @@
+{% set groups = h.justicehub_theme_get_popular_groups() %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+    {# <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    /> #}
+    <link rel="stylesheet" href="style.css" />
+    <title>JusticeHub</title>
+  </head>
+  <body>
+
+    <main>
+      <section class="hero-section">
+        <div class="hero-section__overlay">
+          <div class="custom-container">
+            <div class="row">
+              <div class="col-lg-5 hero-section__content">
+                <h2>Legal & Justice Data</h2>
+                <p>
+                  An open source platform for data related to the Indian law and judicial system. Crowdsourced from a
+                  community of law enthusiasts, legal experts & researchers.
+                </p>
+                <div class="explore-row">
+                  <a href="/dataset" class="btn btn-primary col-lg-5 col-xs-12">Explore Data</a>
+                  <a href="/dataset/new" class="btn btn-primary-outline col-lg-5 col-xs-12">Contribute Data</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="categories">
+          <h3>Explore Popular categories</h3>
+          <div class="categories__row row">
+		{# {% for group in groups %}
+			<div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 category-item">
+				<div class="icon-container">
+				  <img src="{{ group.image_display_url }}" alt="${category.name}" />
+				</div>
+				<p>{{ group.display_name }}</p>
+			</div>
+		{% endfor %} #}
+
+          </div>
+        </div>
+      </section>
+      <section class="datasets-section">
+        <div class="custom-container">
+          <div class="main-search">
+            <p>Search for datasets, reports, organizations, categories & more</p>
+            <div class="input-group">
+              <input type="text" class="form-control" />
+              <span class="input-group-btn">
+                <button class="btn btn-primary" type="button">
+                  <img src="/assets/icons/search.svg" style="height: 20px; width: auto" alt="" />
+                </button>
+              </span>
+            </div>
+          </div>
+          <div class="datasets-section__content row">
+            <div class="col-lg-4">
+              <img alt="file formats" src="assets/dataset_image.svg" />
+            </div>
+            <div class="col-lg-6 col-lg-offset-1">
+              <h2>Datasets</h2>
+              <p>
+                A dataset is a collection of files grouped together to give a complete understanding of a specifc topic.
+                They can contain different files, like reports, raw data in the form of csv or excel sheets, a data
+                dictionary (which describes the contents in the files) & more.
+              </p>
+              <p>
+                You can find datasets as well as stand-alone files on the platform. For more info on what truly makes a
+                dataset, click the links below.
+              </p>
+              <div class="row dataset-action-row">
+                <div class="col-lg-5 col-sm-6 col-xs-6">
+                  <a href="#"><img src="/assets/icons/movie_icon.svg" /><span>Watch Video</span></a>
+                </div>
+                <div class="col-lg-5 col-sm-6 col-xs-6">
+                  <a href="#"><img src="/assets/icons/book_icon.svg" /><span>Read more</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="review-section">
+        <div class="custom-container">
+          <h2>We Review the data</h2>
+          <div class="review-section__content row">
+            <div class="col-lg-6 col-md-6">
+              <p>
+                Moderators review every file & dataset before they’re posted on the platform. To learn more about our
+                review process, <a href="#">CLICK HERE</a>
+              </p>
+              <p>
+                <strong>WE RESPECT PRIVACY.</strong> Our moderators ensure that datasets uploaded on the hub don’t
+                contain any personally identifiable information.
+              </p>
+            </div>
+            <div class="col-lg-6 col-md-6 moderators__content">
+              <h4>Our Moderators</h4>
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 moderator-duty">
+                  <img src="/assets/icons/proofread.svg" alt="proof read" />
+                  <span>proof read files and datasets</span>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 moderator-duty">
+                  <img src="/assets/icons/completeness.svg" alt="proof read" />
+                  <span>ensure data completeness</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 moderator-duty">
+                  <img src="/assets/icons/getintouch.svg" alt="proof read" />
+                  <span>get in touch with data contributors</span>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 moderator-duty">
+                  <img src="/assets/icons/authenticity.svg" alt="proof read" />
+                  <span>check the file authenticity</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contributors-section">
+        <div class="custom-container">
+          <h3>Top Data Contributors in the Community</h3>
+          <div class="contributors-row row"></div>
+          <p>Want to see your name here? We’re looking for contributors!</p>
+          <button class="btn btn-primary"><a href="/dataset/new">Contribute Data</a></button>
+        </div>
+      </section>
+
+      <section class="quality-section">
+        <div class="custom-container">
+          <h2>How can I provide the best Quality Data?</h2>
+          <div class="quality-section__content row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <p>
+                Tim Berners-Lee, suggested a 5-star deployment scheme for Linked Open Data. The rating begins at one
+                star and data gets stars when proprietary formats are removed and links are added.
+              </p>
+              <p>
+                The file formats also play a role in the rating, with machine readable formats rating higher. Watch our
+                crisp, short video to find out more.
+              </p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 video-container">
+              <div style="width: 100%; height: 340px; background-color: #f65940"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    {# <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous"
+    ></script> #}
+    <script src="/home.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+{# 
 <div role="main">
     <div class="container">
         <div class="row">
@@ -5,6 +191,15 @@
                 {% snippet 'home/snippets/search.html' %}
             {% endblock %}
         </div>
+
+        <div style="height:100px;">
+        {% for group in groups %}
+          {% snippet "group/snippets/group_item.html", group=group, position=loop.index %}
+        {% endfor %}
+        </div>
+
+
+
         <i class="fa fa-circle primary-color landing-quotes-top"></i>
         <div class="row landing-desc">
             <div class="col col-xs-12 col-sm-6 col-sm-offset-1">
@@ -51,4 +246,6 @@
         <i class="fa fa-circle primary-color landing-quotes-bottom"></i>
     </div>
 </div>
+
+#}
 

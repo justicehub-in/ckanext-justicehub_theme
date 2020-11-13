@@ -1,0 +1,147 @@
+{% extends "package/base.html" %}
+
+{% set organization=c.group_dict %}
+
+{% block subtitle %}{{ h.dataset_display_name(pkg) }} - {{ super() }}{% endblock %}
+
+{% block head_extras -%}
+  {{ super() }}
+  {% set description = h.markdown_extract(pkg.notes, extract_length=200)|forceescape %}
+  <meta property="og:title" content="{{ h.dataset_display_name(pkg) }} - {{ g.site_title }}">
+  <meta property="og:description" content="{{ description|forceescape|trim }}">
+{% endblock -%}
+
+{% block wrapper_class %}
+	no-nav
+{% endblock %}
+
+{% block page_header %}
+       <header class="module-content" style="padding-top:10px; padding-bottom:10px; border:2px solid #f65940; border-right:0px; border-left:0px;">
+
+       <h2 style="margin-top:0px; display:inline; padding-left:15px;"> {{ h.dataset_display_name(pkg) }} </h2>
+	{% if self.content_action() | trim %}
+	  <div class="content_action pull-right" style="display:inline;">
+		{% block content_action %}
+		  {% if h.check_access('package_update', {'id':pkg.id }) %}
+		    {% link_for _('Manage'), controller='package', action='edit', id=pkg.name, class_='btn btn-default', icon='wrench' %}
+		  {% endif %}
+		{% endblock %}
+	  </div>
+	{% endif %}
+	</header>
+{% endblock %}
+
+
+{% block primary_content_inner %}
+    {% block package_revision_info %}
+      {% if c.revision_date %}
+        <div class="module info alert alert-info">
+          <p class="module-content">
+            {% set timestamp = h.render_datetime(c.revision_date, with_hours=True) %}
+            {% set url = h.url_for(controller='package', action='read', id=pkg.name) %}
+
+            {% trans timestamp=timestamp, url=url %}This is an old revision of this dataset, as edited at {{ timestamp }}. It may differ significantly from the <a href="{{ url }}">current revision</a>.{% endtrans %}
+          </p>
+        </div>
+      {% endif %}
+    {% endblock %}
+{% endblock %}
+
+
+
+{% block main_primary %}
+
+{% block pre_primary %}
+<div style="height:60vh; margin:20px;">
+<div class="col-sm-6" style="height:100%">
+	<div> 
+	  <h1>Project Name Comes Here</h1>
+          <p style="width:75%; margin-bottom:40px; font-weight:bold;">Project Description is a formally written declaration of the project and its idea and context to explain the goals and objectives to be reached, the business need and problem to be addressed, potentials pitfalls and challenges, approaches and execution methods, resource estimates, people and organizations involved, and  </p>
+        </div>
+	<div>
+	{% for tag in pkg.tags %}
+	<div style="height:40px; width:80px; border-radius:10%; background-color:#00abb7; color:white; font-weight:bold; margin-right:15px; align-items:center; display:inline-flex; justify-content:center;"   >{{ tag.display_name }}</div>
+	{% endfor %}
+        </div>
+        <div style="margin-top:40px; width:30%;"> 
+         <div style="display:inline;float:left;"> <div style="color:#f65940;font-size:50px; font-weight:bolder">200 </div> <div style="color:#403644;font-size:20px;font-weight:bold;">DOWNLOADS</div> </div>
+         <div style="display:inline;float:right;"> <div style="color:#f65940;font-size:50px; font-weight:bolder">342 </div> <div style="color:#403644;font-size:20px;font-weight:bold;">VIEWS</div> </div> 
+       </div>
+</div>
+<div class="col-sm-6" style="height:100%; align-items:center; display:inline-flex; justify-content:center;">
+	{{h.get_translated(pkg.organization, 'title') or pkg.organization.name}}
+        <img src="{{ organization.image_display_url or h.url_for_static('/base/images/placeholder-organization.png') }}" alt="{{ pkg.organization.name }}" class="img-responsive media-image">
+        {{ c.group_dict.display_name }}
+</div>
+</div>
+{% endblock %}
+
+
+
+<div class="row" style="margin:0; display:flex;">
+{% block secondary %}
+      <aside class="secondary col-sm-3" style="background:#403644;">
+	  
+	  <h2 style="color:white; font-size:20px; font-weight:bolder; width:100%; Text-align:center; margin-bottom:20px; padding-top:10px; padding-bottom:10px; margin-top:0px; border:2px solid #f65940; border-right:0px; ">ACTIVITY</h2>
+	  {% block activity_stream %}
+	    <div style="color:white; font-weight:bold;">{{ c.package_activity_stream | safe }}</div>
+	  {% endblock %}
+
+      </aside>
+{% endblock %}
+
+
+
+{% block primary %}
+  <div class="primary col-sm-9 col-xs-12" style="padding:0px;">
+  {% block primary_content %}
+        {{ super() }}
+  {% endblock %}
+  </div>
+{% endblock %}
+</div>
+
+
+<div style="height:100px;"> bottom content</div>
+
+{% endblock %}
+
+
+
+
+
+
+{#
+{% block content_primary_nav %}
+  {{ h.build_nav_icon('dataset_read', _('Dataset'), id=pkg.name) }}
+  {{ h.build_nav_icon('dataset_groups', _('Groups'), id=pkg.name) }}
+  {{ h.build_nav_icon('dataset_activity', _('Activity Stream'), id=pkg.name) }}
+{% endblock %}
+#}
+
+{#
+{% block secondary_content %}
+
+  {% block secondary_help_content %}{% endblock %}
+
+  {% block package_info %}
+    {% snippet 'package/snippets/info.html', pkg=pkg %}
+  {% endblock %}
+
+  {% block package_organization %}
+    {% if pkg.organization %}
+      {% set org = h.get_organization(pkg.organization.name) %}
+      {% snippet "snippets/organization.html", organization=org, has_context_title=true %}
+    {% endif %}
+  {% endblock %}
+
+  {% block package_social %}
+    {% snippet "snippets/social.html" %}
+  {% endblock %}
+
+  {% block package_license %}
+    {% snippet "snippets/license.html", pkg_dict=pkg %}
+  {% endblock %}
+
+{% endblock %}
+#}
