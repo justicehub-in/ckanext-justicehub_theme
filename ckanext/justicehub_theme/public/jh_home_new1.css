@@ -217,7 +217,9 @@ li.dropdown:focus {
 .modal-body {
   max-width: 400px;
   width: 100%;
-  padding: 0 36px;
+  padding-left: 36px;
+  padding-right: 36px;
+  padding-bottom: 30px;
   box-sizing: border-box;
   margin: 0 auto;
 }
