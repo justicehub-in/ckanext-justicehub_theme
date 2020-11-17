@@ -1,4 +1,11 @@
 var activeModalId = false;
+const USER_STATUSES = {
+    "platform_login": "#loginModal",
+    "platform_register": "#signupModal",
+    "platform_logout": "",
+    "platform_first_login": ""
+}
+
 
 function showModal(id, elid, val) {
     let delay = 0; // Delay for transition between different modals
@@ -12,3 +19,12 @@ function showModal(id, elid, val) {
       $(id).find("input[type!='button']:visible:first").focus();
     }, delay);
 }
+
+$(document).ready(function(){
+    const current_step = $("#current_step").attr('state');
+
+    // Show modal based on which step user is
+    if (Object.keys(USER_STATUSES).includes(current_step)) {
+        showModal(USER_STATUSES[current_step]);
+    }
+});

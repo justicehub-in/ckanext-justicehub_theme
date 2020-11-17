@@ -1,5 +1,11 @@
 
 {% block header_wrapper %}
+    {% if data %}
+      {% set step = data.current_step %}
+      {% if step %}
+        <div id="current_step" state="{{ step }}" style="display: none;"></div>
+      {% endif %}
+    {% endif %}
 <nav class="navbar navbar-default">
       <div class="custom-container">
         <div class="navbar-header">
