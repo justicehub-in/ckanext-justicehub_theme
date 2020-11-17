@@ -6,10 +6,10 @@
 
 
 {% block content %}
-<form id="login-form">
+<form id="login-form" action="/login_generic" method="post">
     <div class="input-group">
         <label for="email">Email Address</label>
-        <input type="text" name="email" id="email" />
+        <input type="text" name="login" id="email" />
     </div>
     <div class="input-group">
         <label for="password">Password</label>
@@ -19,7 +19,7 @@
     <span
     >By continuing, you agree to our <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a></span
     >
-    <button type="button" class="btn btn-primary">Login</button>
+    <button class="btn btn-primary" type="submit">Login</button>
 
     <p>Not a member yet? <a href="#" class="click-to-signup" onclick="showModal('#signupModal')">Sign Up</a></p>
 
