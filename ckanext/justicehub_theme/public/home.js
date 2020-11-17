@@ -59,14 +59,15 @@
   mobileMenu.addEventListener('click', openNav);
   closeNavButton.addEventListener('click', closeNav);
 
-  function openNav() {
+  function openNav() {	
     document.getElementById('side-nav').style.width = '280px';
+    document.getElementById('side-nav').style.marginLeft = '0';
     document.getElementById('side-nav').style.paddingLeft = '25px';
     document.body.style.backgroundColor = 'rgba(0,0,0,0.5)';
     document.body.style.overflowY = 'hidden';
   }
   function closeNav() {
-    document.getElementById('side-nav').style.width = '0';
+    document.getElementById('side-nav').style.marginLeft = '-280px';
     document.getElementById('side-nav').style.paddingLeft = '0';
     document.body.style.backgroundColor = '';
     document.body.style.overflowY = '';

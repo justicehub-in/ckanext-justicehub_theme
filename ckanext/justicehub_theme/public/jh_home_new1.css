@@ -93,7 +93,9 @@ li.dropdown:focus {
 .side-nav {
   font-family: 'Montserrat', sans-serif;
   height: 100%;
-  width: 0;
+  width: 280px;
+  padding-left: 25px;
+  margin-left: -280px;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -112,6 +114,7 @@ li.dropdown:focus {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  left: -25px;
 }
 
 .side-nav__brand {
@@ -171,7 +174,7 @@ li.dropdown:focus {
   box-sizing: border-box;
   padding-bottom: 15px;
   margin: 0 auto;
-  top: 120px;
+  top: 90px;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -341,6 +344,7 @@ li.dropdown:focus {
   align-items: center;
   margin-top: 34px;
   margin-bottom: 34px;
+  cursor: pointer;
 }
 
 .category-item p {
