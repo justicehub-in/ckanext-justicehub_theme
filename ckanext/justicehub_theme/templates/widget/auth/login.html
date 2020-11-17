@@ -1,0 +1,27 @@
+{% resource 'justicehub_theme/widget/popup/popup.css' %}
+{% resource 'justicehub_theme/widget/popup/popup.js' %}
+{% set title = "Login" %}
+{% set title_content = "contribute data, join groups and do more by becoming a member" %}
+{% extends "widget/popup/popup.html" %}
+
+
+{% block content %}
+<form id="login-form">
+    <div class="input-group">
+        <label for="email">Email Address</label>
+        <input type="text" name="email" id="email" />
+    </div>
+    <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" />
+        <a href="#" class="click-to-forgot"><span style="text-align: left; color: #338CCD">Forgot password?</span></a>
+    </div>
+    <span
+    >By continuing, you agree to our <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a></span
+    >
+    <button type="button" class="btn btn-primary">Login</button>
+
+    <p>Not a member yet? <a href="#" class="click-to-signup" onclick="showModal('#signupModal')">Sign Up</a></p>
+
+</form>
+{% endblock %}
