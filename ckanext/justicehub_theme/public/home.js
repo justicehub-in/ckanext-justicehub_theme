@@ -18,7 +18,7 @@
 
   function categoryTemplate(category) {
     return `
-      <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 category-item">
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 category-item">
         <div class="icon-container">
           <img src="${category.icon}" alt="${category.name}" />
         </div>
@@ -27,7 +27,14 @@
     `;
   }
 
-  categories.forEach((category) => (categoriesRow.innerHTML += categoryTemplate(category)));
+  categories.forEach((category, index) => {
+    if ((index + 1) % 6 === 0) {
+      categoriesRow.innerHTML =
+        categoriesRow.innerHTML + categoryTemplate(category) + `<div class="clearfix visible-xs-block"></div>`;
+    } else {
+      categoriesRow.innerHTML += categoryTemplate(category);
+    }
+  });
 
   // Code for adding contributors to the homepage
 
@@ -59,7 +66,7 @@
   mobileMenu.addEventListener('click', openNav);
   closeNavButton.addEventListener('click', closeNav);
 
-  function openNav() {	
+  function openNav() {
     document.getElementById('side-nav').style.width = '280px';
     document.getElementById('side-nav').style.marginLeft = '0';
     document.getElementById('side-nav').style.paddingLeft = '25px';
@@ -92,9 +99,4 @@
     $('#signUpModal').removeClass('fade').modal('hide');
     $('#forgotPasswordModal').addClass('fade').modal('show');
   });
-
 })();
-
-
-
-
