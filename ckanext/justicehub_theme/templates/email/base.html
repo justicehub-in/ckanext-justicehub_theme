@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <style>
+      p {
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+  <p align="center">
+    <img style="max-width:400px; width:50%" src="{{ data.logo }}" />
+  </p>
+  <div>
+    {{ data.body }}
+  </div>
+  <div>
+    <p>
+      Thank you
+    </p>
+  </div>
+  <footer>
+    {% if data.footer %}
+      <p style="font-size:10px;text-align:center;">
+        Footer content will come here
+      </p>
+    {% endif %}
+  </footer>
+
+  </body>
+</html>

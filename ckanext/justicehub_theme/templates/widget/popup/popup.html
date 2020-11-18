@@ -9,6 +9,9 @@
                     <img class="modal-logo" src="/assets/jh_logo_notext.png" />
                     <h4>{{ title }}</h4>
                     <p>{{ title_content }}</p>
+                    {% if error_message %}
+                      <p class="error-message">{{ error_message }}</p>
+                    {% endif %}
                 </div>
             </div>
             <div class="modal-body">

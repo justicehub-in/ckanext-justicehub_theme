@@ -2,6 +2,7 @@ var activeModalId = false;
 const USER_STATUSES = {
     "platform_login": "#loginModal",
     "platform_register": "#signupModal",
+    "platform_forgot_password": "#forgotPasswordModal",
     "platform_logout": "",
     "platform_first_login": ""
 }

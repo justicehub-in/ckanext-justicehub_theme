@@ -2,9 +2,12 @@
 {% block header_wrapper %}
     {% if data %}
       {% set step = data.current_step %}
+      {% set error_message = data.message %}
       {% if step %}
         <div id="current_step" state="{{ step }}" style="display: none;"></div>
       {% endif %}
+    {% else %}
+      {% set error_message = false %}
     {% endif %}
 <nav class="navbar navbar-default">
       <div class="custom-container">
@@ -42,7 +45,8 @@
             <li><a href="#">Contact</a></li>
 
               {{ h.snippet('widget/auth/signup.html', id="signupModal") }}
-              {{ h.snippet('widget/auth/login.html', id="loginModal") }}
+              {{ h.snippet('widget/auth/login.html', id="loginModal", error_message=error_message) }}
+              {{ h.snippet('widget/auth/forgot.html', id="forgotPasswordModal") }}
 	   {% if not c.userobj %}
 		  <li>
 		      <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" onclick="showModal('#signupModal');">
@@ -90,36 +94,6 @@
           <a href="#"><img src="/assets/icons/blog.svg" alt="" /> Blog</a>
           <a href="#"><img src="/assets/icons/contact.svg" alt="" /> Contact</a>
           <a href="#"><img src="/assets/icons/terms.svg" alt="" /> Terms of Service</a>
-        </div>
-      </div>
-
-
-      <div
-        class="modal fade"
-        id="forgotPasswordModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="forgotPasswordModal"
-      >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <div class="modal-header-info">
-                <img class="modal-logo" src="/assets/jh_logo_notext.png" />
-                <h4>Forgot Password</h4>
-              </div>
-            </div>
-            <div class="modal-body">
-              <div class="input-group">
-                <label for="email">Email Address</label>
-                <input type="text" name="email" id="email" />
-              </div>
-              <button type="button" class="btn btn-primary">Continue</button>
-            </div>
-          </div>
         </div>
       </div>
     </nav>
