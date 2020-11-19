@@ -20,7 +20,8 @@ body {
 }
 
 .btn-primary:hover {
-  background-color: var(--primary-color-dark);
+  background-color: white
+  color: var(--primary-color-dark);
   border-color: var(--primary-color-dark);
 }
 
@@ -31,7 +32,7 @@ body {
 }
 
 .btn-primary-outline:hover {
-  /* background-color: white; */
+  background-color: white
   color: var(--primary-color-dark);
   border-color: var(--primary-color-dark);
 }
