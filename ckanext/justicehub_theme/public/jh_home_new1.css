@@ -10,10 +10,10 @@ body {
   font-size: 18px;
 }
 
-.btn-primary,
-.btn-primary:focus,
+.btn-primary
+/* .btn-primary:focus,
 .btn-primary:active:focus,
-.btn-primary:visited {
+.btn-primary:visited */ {
   background-color: var(--primary-color);
   color: white;
   border-color: var(--primary-color);
