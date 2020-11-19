@@ -8,10 +8,11 @@
   </head>
   <body>
   <p align="center">
-    <img style="max-width:400px; width:50%" src="{{ data.logo }}" />
+    <img style="max-width:400px; width:50%" src="{{ logo }}" />
   </p>
   <div>
-    {{ data.body }}
+    <!-- TODO: Make this as base.html and move it elsewhere -->
+    Your Validation token is here: {{ token }}
   </div>
   <div>
     <p>
@@ -19,7 +20,7 @@
     </p>
   </div>
   <footer>
-    {% if data.footer %}
+    {% if footer %}
       <p style="font-size:10px;text-align:center;">
         Footer content will come here
       </p>

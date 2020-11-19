@@ -44,7 +44,7 @@
             <li><a href="#">Blog</a></li>
             <li><a href="#">Contact</a></li>
 
-              {{ h.snippet('widget/auth/signup.html', id="signupModal") }}
+              {{ h.snippet('widget/auth/signup.html', id="signupModal", error_message=error_message) }}
               {{ h.snippet('widget/auth/login.html', id="loginModal", error_message=error_message) }}
               {{ h.snippet('widget/auth/forgot.html', id="forgotPasswordModal") }}
 	   {% if not c.userobj %}
