@@ -4,7 +4,7 @@ $(document).ready(function(){
         var $this = $(this);
         var fullname = $("#signup-fullname").val();
         var email = $("#signup-email").val();
-        var username = $("#signup-username")
+        var username = $("#signup-username").val();
         var password = $("#signup-password").val();
         if (email){
             var url = "/user/register_email";
