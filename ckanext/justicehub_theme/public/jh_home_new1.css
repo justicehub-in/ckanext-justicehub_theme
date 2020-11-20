@@ -611,11 +611,11 @@ footer h3 {
   cursor: pointer;
 }
 
-.footer__branding_social.github {
+.github {
   background-color: black;
 }
 
-.footer__branding_social.github img {
+.github img {
   width: 27px;
   height: 27px;
 }
