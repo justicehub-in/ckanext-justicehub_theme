@@ -17,24 +17,23 @@ body {
   background-color: var(--primary-color);
   color: white;
   border-color: var(--primary-color);
+  transition: all 0.1s ease-in;
 }
 
 .btn-primary:hover {
-  background-color: white;
-  color: var(--primary-color-dark);
+  background-color: var(--primary-color-dark);
   border-color: var(--primary-color-dark);
 }
 
 .btn-primary-outline {
   background-color: transparent;
-  color: var(--primary-color);
-  border-color: var(--primary-color);
+  color: var(--primary-color-dark);
+  border-color: var(--primary-color-dark);
 }
 
 .btn-primary-outline:hover {
-  background-color: white;
-  color: var(--primary-color-dark);
-  border-color: var(--primary-color-dark);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 .navbar {
@@ -384,11 +383,6 @@ li.dropdown:focus {
   text-align: center;
   font-size: 24px;
   font-weight: 500;
-}
-
-.main-search button:hover {
-  color: white;
-  background-color: var(--primary-color-dark);
 }
 
 /* .main-search .input-group {} */
