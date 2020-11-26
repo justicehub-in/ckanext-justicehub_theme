@@ -685,6 +685,12 @@ footer h3 {
   margin-top: 10px;
 }
 
+.error-message {
+    background-color: rgba(255,0,0,0.4);
+    padding: 10px;
+    color: black;
+}
+
 @media (max-width: 990px) {
   .category-item {
     flex-direction: column;

@@ -1,5 +1,14 @@
 
 {% block header_wrapper %}
+    {% if data %}
+      {% set step = data.current_step %}
+      {% set error_message = data.message %}
+      {% if step %}
+        <div id="current_step" state="{{ step }}" style="display: none;"></div>
+      {% endif %}
+    {% else %}
+      {% set error_message = false %}
+    {% endif %}
 <nav class="navbar navbar-default">
       <div class="custom-container">
         <div class="navbar-header">
@@ -36,16 +45,15 @@
 	    <li><a href="/about">About</a></li>
             <li><a href="#">Contact</a></li>
 
+              {{ h.snippet('widget/auth/signup.html', id="signupModal", error_message=error_message) }}
+              {{ h.snippet('widget/auth/login.html', id="loginModal", error_message=error_message) }}
+              {{ h.snippet('widget/auth/forgot.html', id="forgotPasswordModal") }}
 	   {% if not c.userobj %}
-		  {% block header_account_notlogged %}
-		  {# <li><button type="button" class="btn btn-primary navbar-btn"><a href="/user/login">Join/Login</a></button></li> #}
 		  <li>
-		      <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#signInModal">
+		      <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" onclick="showModal('#signupModal');">
 		        Join/Login
 		      </button>
 		  </li>
-                  
-		  {% endblock %}
 
 	   {% else %}
 		  <li class="dropdown">
@@ -87,103 +95,6 @@
 	  <a href="#"><img src="/assets/icons/about.svg" alt="" /> About</a>
           <a href="#"><img src="/assets/icons/contact.svg" alt="" /> Contact</a>
           <a href="#"><img src="/assets/icons/terms.svg" alt="" /> Terms of Service</a>
-        </div>
-      </div>
-      <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModal">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <div class="modal-header-info">
-                <img class="modal-logo" src="/assets/jh_logo_notext.png" />
-                <h4>Login</h4>
-                <p>contribute data, join groups and do more by becoming a member</p>
-              </div>
-            </div>
-            <div class="modal-body">
-              <div class="input-group">
-                <label for="email">Email Address</label>
-                <input type="text" name="email" id="email" />
-              </div>
-              <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" />
-                <a href="#" class="click-to-forgot"><span style="text-align: left; color: #338CCD">Forgot password?</span></a>
-              </div>
-              <span
-                >By continuing, you agree to our <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a></span
-              >
-              <button type="button" class="btn btn-primary">Login</button>
-              <p>Not a member yet? <a href="#" class="click-to-signup">Sign Up</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModal">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <div class="modal-header-info">
-                <img class="modal-logo" src="/assets/jh_logo_notext.png" />
-                <h4>Sign Up</h4>
-                <p>contribute data, join groups and do more by becoming a member</p>
-              </div>
-            </div>
-            <div class="modal-body">
-              <div class="input-group">
-                <label for="fullname">Full Name</label>
-                <input type="text" name="fullname" id="fullname" />
-              </div>
-              <div class="input-group">
-                <label for="email">Email Address</label>
-                <input type="text" name="email" id="email" />
-              </div>
-              <div class="input-group">
-                <label for="password">Set Password</label>
-                <input type="password" name="password" id="password" />
-              </div>
-              <span
-                >By continuing, you agree to our <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a></span
-              >
-              <button type="button" class="btn btn-primary">Sign up</button>
-              <p>Already a member? <a href="#" class="click-to-login">Login</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        class="modal fade"
-        id="forgotPasswordModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="forgotPasswordModal"
-      >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <div class="modal-header-info">
-                <img class="modal-logo" src="/assets/jh_logo_notext.png" />
-                <h4>Forgot Password</h4>
-              </div>
-            </div>
-            <div class="modal-body">
-              <div class="input-group">
-                <label for="email">Email Address</label>
-                <input type="text" name="email" id="email" />
-              </div>
-              <button type="button" class="btn btn-primary">Continue</button>
-            </div>
-          </div>
         </div>
       </div>
     </nav>
