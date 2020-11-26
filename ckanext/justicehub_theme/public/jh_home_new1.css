@@ -692,6 +692,19 @@ footer h3 {
     color: black;
 }
 
+.flash-messages {
+    top: 0;
+    right: 0;
+    position: fixed;
+    margin: 50px;
+    z-index: 9999;
+}
+
+.close {
+    padding-left: 10px;
+    padding-top: 2px
+}
+
 @media (max-width: 990px) {
   .category-item {
     flex-direction: column;

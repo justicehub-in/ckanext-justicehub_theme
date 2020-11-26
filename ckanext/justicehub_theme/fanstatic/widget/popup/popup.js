@@ -4,7 +4,8 @@ const USER_STATUSES = {
     "platform_register": "#signupModal",
     "platform_forgot_password": "#forgotPasswordModal",
     "platform_logout": "",
-    "platform_first_login": ""
+    "platform_first_login": "",
+    "platform_reset": "#resetPasswordModal"
 }
 
 

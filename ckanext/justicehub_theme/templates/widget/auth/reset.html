@@ -1,0 +1,20 @@
+{% resource 'justicehub_theme/widget/popup/popup.css' %}
+{% resource 'justicehub_theme/widget/popup/popup.js' %}
+{% resource 'justicehub_theme/widget/auth/reset.js' %}
+{% set title = "Reset Password" %}
+{% set title_content = "Enter new password for your account" %}
+{% extends "widget/popup/popup.html" %}
+
+
+{% block content %}
+<form id="reset-password-form">
+    <div class="input-group">
+        <label for="reset-password-one">New Password</label>
+        <input type="password" id="reset-password-one" name="reset-password-one" />
+
+        <label for="reset-password-two">Confirm Password</label>
+        <input type="password" id="reset-password-two" name="reset-password-two" />
+    </div>
+    <button type="button" class="btn btn-primary" onclick="resetPasswordFormOnSubmit()">Update</button>
+</form>
+{% endblock %}
