@@ -99,4 +99,35 @@
     $('#signUpModal').removeClass('fade').modal('hide');
     $('#forgotPasswordModal').addClass('fade').modal('show');
   });
+
+  function debounce(func, wait, immediate) {
+    var timeout;
+    return function () {
+      var context = this,
+        args = arguments;
+      var later = function () {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  }
+
+  const passwordRegex = new RegExp(/^(?=.*?[a-z])(?=.*?[0-9]).{8,}$/);
+
+  const passwordField = document.querySelector('input[type="password"]');
+
+  const passwordValidator = debounce(function () {
+    if (!passwordRegex.test(this.value)) {
+      this.style.boxShadow = 'rgb(255, 0, 0) 0px 0px 1.5px 1px';
+    }
+    else {
+      this.style.boxShadow = 'none';
+    }
+  }, 500);
+
+  passwordField.addEventListener('keydown', passwordValidator);
 })();
