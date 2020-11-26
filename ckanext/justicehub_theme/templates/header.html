@@ -47,7 +47,8 @@
               {{ h.snippet('widget/auth/signup.html', id="signupModal", error_message=error_message) }}
               {{ h.snippet('widget/auth/login.html', id="loginModal", error_message=error_message) }}
               {{ h.snippet('widget/auth/forgot.html', id="forgotPasswordModal") }}
-	   {% if not c.userobj %}
+              {{ h.snippet('widget/auth/reset.html', id="resetPasswordModal") }}
+              {% if not c.userobj %}
 		  <li>
 		      <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" onclick="showModal('#signupModal');">
 		        Join/Login
