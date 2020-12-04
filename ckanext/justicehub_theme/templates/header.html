@@ -10,13 +10,18 @@
       {% set error_message = false %}
     {% endif %}
 <nav class="navbar navbar-default">
+    {{ h.snippet('widget/auth/signup.html', id="signupModal") }}
+    {{ h.snippet('widget/auth/login.html', id="loginModal") }}
+    {{ h.snippet('widget/auth/forgot.html', id="forgotPasswordModal") }}
+    {{ h.snippet('widget/auth/reset.html', id="resetPasswordModal") }}
+    {{ h.snippet('widget/auth/feedback.html', id="feedbackModal") }}
       <div class="custom-container">
         <div class="navbar-header">
           <img class="mobile-menu" src="/assets/icons/menu.svg" />
           <a class="navbar-brand" href="/">
             <img class="navbar-logo" alt="Brand" src="/assets/jh_logo.png" />
           </a>
-	  <button class="mobile-login" data-toggle="modal" data-target="#signInModal">Join/Login</button>
+	  <button class="mobile-login" data-toggle="modal" data-target="#signInModal" onclick="showModal('#signupModal');">Join/Login</button>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
@@ -45,10 +50,7 @@
 	    <li><a href="/about">About</a></li>
             <li><a href="#">Contact</a></li>
 
-              {{ h.snippet('widget/auth/signup.html', id="signupModal", error_message=error_message) }}
-              {{ h.snippet('widget/auth/login.html', id="loginModal", error_message=error_message) }}
-              {{ h.snippet('widget/auth/forgot.html', id="forgotPasswordModal") }}
-              {{ h.snippet('widget/auth/reset.html', id="resetPasswordModal") }}
+
               {% if not c.userobj %}
 		  <li>
 		      <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" onclick="showModal('#signupModal');">
@@ -87,8 +89,8 @@
             <a href="javascript:void(0)" class="closebtn">&times;</a>
           </div>
 
-          <a href="#"><img src="/assets/icons/login.svg" alt="" /> Join / Login</a>
-          <a href="#"><img src="/assets/icons/home.svg" alt="" /> Home</a
+          <a href="#" onclick="showModal('#signupModal');"><img src="/assets/icons/login.svg" alt="" /> Join / Login</a>
+          <a href="#"><img src="/assets/icons/home.svg" alt="" /> Home</a>
           <a href="#"><img src="/assets/icons/explore.svg" alt="" /> Explore Data</a>
           <a href="#"><img src="/assets/icons/contribute.svg" alt="" /> Contribute Data</a>
           <a href="#"><img src="/assets/icons/resources.svg" alt="" /> Resources</a>

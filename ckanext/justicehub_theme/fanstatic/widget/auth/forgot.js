@@ -6,6 +6,7 @@ $(document).ready(function(){
             console.log(result);
             if (result.success) {
                 console.log("Success");
+                showModal("#feedbackModal");
             } else {
                 console.log(result.error.message);
             }

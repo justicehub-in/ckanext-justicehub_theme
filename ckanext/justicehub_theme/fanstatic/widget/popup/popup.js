@@ -5,7 +5,8 @@ const USER_STATUSES = {
     "platform_forgot_password": "#forgotPasswordModal",
     "platform_logout": "",
     "platform_first_login": "",
-    "platform_reset": "#resetPasswordModal"
+    "platform_reset": "#resetPasswordModal",
+    "platform_feedback": "#feedbackModal"
 }
 
 
