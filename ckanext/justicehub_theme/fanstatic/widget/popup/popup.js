@@ -11,6 +11,7 @@ const USER_STATUSES = {
 
 
 function showModal(id, elid, val) {
+    $("#error-" + id.substring(1)).html("");
     let delay = 0; // Delay for transition between different modals
     if (activeModalId && activeModalId !== id) {
         $(activeModalId).modal('hide');

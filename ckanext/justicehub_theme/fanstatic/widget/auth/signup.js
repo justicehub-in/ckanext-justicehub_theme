@@ -27,6 +27,7 @@ $(document).ready(function () {
         } else {
           console.log('Error');
           console.log(result.error.message);
+          $("#error-signupModal").html(result.error.message);
         }
       });
     }

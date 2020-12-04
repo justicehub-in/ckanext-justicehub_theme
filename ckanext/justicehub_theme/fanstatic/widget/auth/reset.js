@@ -21,6 +21,7 @@ $(document).ready(function(){
                 } else {
                     console.log("Error");
                     console.log(result.error.message);
+                    $("#error-resetPasswordModal").html(result.error.message);
                 }
             });
         }

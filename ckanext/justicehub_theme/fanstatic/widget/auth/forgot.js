@@ -9,6 +9,7 @@ $(document).ready(function(){
                 showModal("#feedbackModal");
             } else {
                 console.log(result.error.message);
+                $("#error-forgotPasswordModal").html(result.error.message);
             }
         });
         return false;
