@@ -1,0 +1,424 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <link rel="stylesheet" href="/style.css" />
+    <title>Data Upload Flow</title>
+  </head>
+  <body>
+    <div class="data-upload-header">
+      <div class="custom-container">
+        <a href="#" class="exit-flow"
+          ><span class="iconify" data-icon="line-md:chevron-left" data-inline="false"></span>Exit</a
+        >
+        <h1>Upload Data</h1>
+        <h2>
+          Follow our simple 4 step process to ensure that others can understand the context and reliability of the files
+        </h2>
+        <ul class="steps-row">
+          <li class="step-indicator active" data-value="1">
+            <div class="step-indicator__icon-container">
+              <span class="iconify" data-icon="ant-design:file-text-outlined" data-inline="false"></span>
+            </div>
+            <p>Add Files</p>
+          </li>
+          <li class="step-indicator" data-value="2">
+            <div class="step-indicator__icon-container">
+              <span class="iconify" data-icon="jam:stamp-f" data-inline="false"></span>
+            </div>
+            <p>Ownership</p>
+          </li>
+          <li class="step-indicator" data-value="3">
+            <div class="step-indicator__icon-container">
+              <span class="iconify" data-icon="mdi:calendar-today" data-inline="false"></span>
+            </div>
+            <p>Data Relevancy</p>
+          </li>
+          <li class="step-indicator" data-value="4">
+            <div class="step-indicator__icon-container">
+              <span class="iconify" data-icon="carbon:data-class" data-inline="false"></span>
+            </div>
+            <p>Source of Data</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <section class="data-upload-section custom-container files-section">
+      <div class="data-upload-section__form">
+        <div class="data-upload-section__form__field">
+          <h3>What is this data about?</h3>
+          <span>eg: Death Penalties in Karnataka from Years 2000-2010</span>
+          <input type="text" class="form-control input--large" id="datasetNameField" />
+        </div>
+        <div class="data-upload-section__form__field data-upload-section__form__field--file">
+          <h3>Upload one or many related files</h3>
+          <span
+            >You can upload a single file or a collection of files on a single subject. We accept all file formats like
+            data (csv & xlsx), data dictionary, methodology or reports (pdf).</span
+          >
+
+          <div class="file-upload">
+            <div class="file-upload__name">
+              <div class="upload-box">
+                <input type="file" />
+                <span class="iconify" data-icon="fe:upload" data-inline="false"></span>
+              </div>
+              <div class="name-field">
+                <h4>Name of the file</h4>
+                <input type="text" class="form-control" />
+              </div>
+            </div>
+            <div class="file-upload__description">
+              <h4>Description</h4>
+              <textarea class="form-control" cols="25" rows="5"></textarea>
+            </div>
+          </div>
+
+          <div class="file-upload">
+            <div class="file-upload__name">
+              <div class="upload-box">
+                <input type="file" />
+                <span class="iconify" data-icon="fe:upload" data-inline="false"></span>
+              </div>
+              <div class="name-field">
+                <h4>Name of the file</h4>
+                <input type="text" class="form-control" />
+              </div>
+            </div>
+            <div class="file-upload__description">
+              <h4>Description</h4>
+              <textarea class="form-control" cols="25" rows="5"></textarea>
+            </div>
+          </div>
+        </div>
+        <a role="button" class="add-more add-more--files btn-primary-text"
+          ><span class="iconify" data-icon="mdi:add" data-inline="false"></span> <span>Add more</span></a
+        >
+        <hr />
+        <div class="data-upload-section__footer">
+          <div></div>
+          <div class="data-upload-section__footer__right">
+            <button class="previous-button btn btn-primary-outline btn-mont">Save as Draft</button>
+            <button class="next-button btn btn-primary btn-mont" id="proceedFromFilesButton">Proceed</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="data-upload-section custom-container ownership-section hide">
+      <div class="data-upload-section__form">
+        <div class="data-upload-section__form__field">
+          <h4>Select Licensing Permission</h4>
+          <select class="input--medium" id="licenseSelect">
+            <optgroup label="Can be freely shared, modified, and distributed by anyone">
+              <option value="CC0 License">CC0 License</option>
+            </optgroup>
+            <optgroup label="Can be used freely by all but must credit the source">
+              <option value="CCBY License">CCBY License</option>
+            </optgroup>
+            <optgroup label="Anyone share it but not edit the contents">
+              <option value="Public Sharing Licence">Public Sharing Licence</option>
+            </optgroup>
+            <optgroup label="Cannot be shared or modified">
+              <option value="Copyrights Licence">Copyrights Licence</option>
+            </optgroup>
+            <optgroup label="Can be used only for personal projects not seeking profit">
+              <option value="Non-Commercial Licence">Non-Commercial Licence</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="data-upload-section__form__field">
+          <h4>Set Viewing Permissions</h4>
+          <div class="radio">
+            <label>
+              <input type="radio" name="view-permissions" id="anyoneRadio" value="anyone" />
+              Anyone
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="view-permissions" id="onlyMeRadio" value="onlyme" />
+              Only me
+            </label>
+          </div>
+        </div>
+        <div class="data-upload-section__form__field data-upload-section__form__field--authors">
+          <h4>Who is the Primary Publisher or Author of the file(s)?</h4>
+          <div class="radio">
+            <label>
+              <input type="radio" name="primary-publisher" id="individualRadio" value="individual" />
+              An Individual, I know the name
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="primary-publisher" id="organizationRadio" value="organization" />
+              An Organization
+            </label>
+          </div>
+
+          <div class="item-addition item-addition--author">
+            <div class="item-addition__name-field">
+              <h5>Author's name</h5>
+              <input type="text" class="form-control" />
+            </div>
+            <div class="item-addition__email-field">
+              <h5>Email of author</h5>
+              <input type="email" class="form-control" />
+            </div>
+          </div>
+        </div>
+        <a role="button" class="add-more add-more--authors btn-primary-text"
+          ><span class="iconify" data-icon="mdi:add" data-inline="false"></span> <span>Add more</span></a
+        >
+        <hr />
+        <div class="data-upload-section__footer">
+          <div>
+            <a role="button" class="previous-button btn-primary-text"
+              ><span class="iconify" data-icon="line-md:chevron-left" data-inline="false"></span>
+              <span>Previous</span></a
+            >
+          </div>
+          <div class="data-upload-section__footer__right">
+            <button class="btn btn-primary-outline btn-mont">Save as Draft</button>
+            <button class="next-button btn btn-primary btn-mont" id="proceedFromOwnershipButton">Proceed</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="data-upload-section custom-container relevancy-section hide">
+      <div class="data-upload-section__form">
+        <div class="data-upload-section__form__field">
+          <h4>Which region does this data cover?</h4>
+          <div class="radio">
+            <label>
+              <input type="radio" name="region-options" id="allIndia" value="allindia" />
+              All India
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="region-options" id="partialIndia" value="partialindia" />
+              Specific Indian State(s)
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="region-options" id="other" value="other" />
+              Other countries
+            </label>
+          </div>
+        </div>
+
+        <div class="data-upload-section__form__field">
+          <h4>Which time period does this data cover?</h4>
+          <div class="time-period-entry">
+            <div class="period period--from">
+              <div class="period__month">
+                <h5>Month (optional)</h5>
+                <select class="months-select"></select>
+              </div>
+              <div class="period__year">
+                <h5>From year</h5>
+                <input type="text" />
+              </div>
+            </div>
+            <div class="period period--to">
+              <div class="period__month">
+                <h5>Month (optional)</h5>
+                <select class="months-select"></select>
+              </div>
+              <div class="period__year">
+                <h5>To year</h5>
+                <input type="text" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="data-upload-section__form__field">
+          <h4>Which language is the data in?</h4>
+          <div class="radio">
+            <label>
+              <input type="radio" name="language-options" id="english" value="english" />
+              English
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="language-options" id="hindi" value="hindi" />
+              Hindi
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="language-options" id="other" value="other" />
+              Other
+            </label>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="data-upload-section__footer">
+        <div>
+          <a role="button" class="previous-button btn-primary-text"
+            ><span class="iconify" data-icon="line-md:chevron-left" data-inline="false"></span> <span>Previous</span></a
+          >
+        </div>
+        <div class="data-upload-section__footer__right">
+          <button class="btn btn-primary-outline btn-mont">Save as Draft</button>
+          <button class="next-button btn btn-primary btn-mont">Proceed</button>
+        </div>
+      </div>
+    </section>
+    <section class="data-upload-section custom-container source-section hide">
+      <div class="data-upload-section__form">
+        <div class="data-upload-section__form__field">
+          <h4>Enter keywords to help people find this data:</h4>
+          <span>Use comma(,) to separate keywords</span>
+          <input type="text" class="form-control input--large" id="keywordsInput" />
+        </div>
+
+        <div class="data-upload-section__form__field">
+          <h4>Select the sources you got the data from:</h4>
+          <span>Start typing to choose from the list</span>
+          <input type="text" class="form-control input--large" id="sourcesInput" />
+        </div>
+
+        <div class="data-upload-section__form__field data-upload-section__form__field--references">
+          <h4>Reference Links (optional):</h4>
+
+          <div class="item-addition item-addition--reference">
+            <div class="item-addition__link-field">
+              <h5>Paste Link</h5>
+              <input type="text" class="form-control" />
+            </div>
+            <div class="item-addition__title-field">
+              <h5>Give your link a title</h5>
+              <input type="text" class="form-control" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <a role="button" class="add-more add-more--references btn-primary-text"
+        ><span class="iconify" data-icon="mdi:add" data-inline="false"></span> <span>Add more</span></a
+      >
+      <hr />
+      <div class="data-upload-section__footer">
+        <div>
+          <a role="button" class="previous-button btn-primary-text"
+            ><span class="iconify" data-icon="line-md:chevron-left" data-inline="false"></span> <span>Previous</span></a
+          >
+        </div>
+        <div class="data-upload-section__footer__right">
+          <button class="btn btn-primary-outline btn-mont">Save as Draft</button>
+          <button
+            id="previewButton"
+            class="btn btn-primary btn-mont"
+            data-toggle="modal"
+            data-target="#previewDatasetModal"
+          >
+            Preview & Submit
+          </button>
+        </div>
+      </div>
+      <div class="modal fade" id="previewDatasetModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <div class="modal-header-info">
+                <h3>Dataset name</h3>
+                <!-- <img class="modal-logo" src="/assets/jh_logo_notext.png" />
+                        <h4>{{ title }}</h4>
+                        <p>{{ title_content }}</p>
+                        <p class="error-message" id="error-{{ id }}">{{ error_message }}</p> -->
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="modal-body__data-section">
+                <div class="modal-body__data-section__header">
+                  <h3>Files</h3>
+                  <button class="btn-primary-text preview-edit"
+                    ><span>Edit</span><span class="iconify" data-icon="feather:edit" data-inline="false"></span></span
+                  ></button>
+                </div>
+              </div>
+              <div class="modal-body__data-section">
+                <div class="modal-body__data-section__header">
+                  <h3>Ownership</h3>
+                  <button class="btn-primary-text preview-edit"
+                    ><span>Edit</span><span class="iconify" data-icon="feather:edit" data-inline="false"></span></span
+                  ></button>
+                </div>
+                <table>
+                  <tr>
+                    <td>Licensing permissions:</td>
+                    <td>(CCBY) Can be used freely by all but must credit the source</td>
+                  </tr>
+                  <tr>
+                    <td>Viewing permissions:</td>
+                    <td>Anyone can view</td>
+                  </tr>
+                  <tr>
+                    <td>Primary Author(s):</td>
+                    <td>Arthur Bryant | arthur.b@akp.com,  Saish Jordan</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="modal-body__data-section">
+                <div class="modal-body__data-section__header">
+                  <h3>Data Relevancy</h3>
+                  <button class="btn-primary-text preview-edit"
+                    ><span>Edit</span><span class="iconify" data-icon="feather:edit" data-inline="false"></span></span
+                  ></button>
+                </div>
+                <table>
+                  <tr>
+                    <td>Region(s) covered:</td>
+                    <td>Karnataka, NCR</td>
+                  </tr>
+                  <tr>
+                    <td>Time period covered: </td>
+                    <td>Mar 2010 - Mar 2020</td>
+                  </tr>
+                  <tr>
+                    <td>Language:</td>
+                    <td>English</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="modal-body__data-section">
+                <div class="modal-body__data-section__header">
+                  <h3>Source of Data</h3>
+                  <button class="btn-primary-text preview-edit"
+                    ><span>Edit</span><span class="iconify" data-icon="feather:edit" data-inline="false"></span></span
+                  ></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="/index.js"></script>
+  </body>
+</html>

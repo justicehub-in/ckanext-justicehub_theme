@@ -1,0 +1,32 @@
+export default class Dataset {
+  constructor() {
+    this.name = '';
+    this.files = [];
+    this.license = {};
+    this.viewPermission = '';
+    this.publisher = {
+      type: '',
+      authors: []
+    };
+    this.region = {
+      country: '',
+      subRegions: []
+    };
+    this.timePeriod = {
+      from: { month: '', year: '' },
+      to: { month: '', year: '' }
+    };
+    this.language = '';
+    this.keywords = [];
+    this.sources = [];
+    this.referenceLinks = [];
+  }
+
+  updateProperty = (property, value) => {
+    this[property] = value;
+  };
+
+  addItemToListProperty = (property, item) => {
+    this[property] = [...this[property], item];
+  };
+}
