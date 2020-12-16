@@ -102,15 +102,15 @@ function autoPopulateFileName(event) {
 
 // author section handlers
 const addAuthorsButton = document.querySelector('.add-more--authors');
-function generateAuthorField(authorId) {
+function generateAuthorField(publisherType) {
   return `
-    <div class="item-addition item-addition--author" id="${authorId}">
+    <div class="item-addition item-addition--author">
       <div class="item-addition__name-field">
-        <h5>Author's name</h5>
+        <h5>${publisherType}'s name</h5>
         <input type="text" class="form-control" />
       </div>
       <div class="item-addition__email-field">
-        <h5>Email of author</h5>
+        <h5>Email of ${publisherType} (optional)</h5>
         <input type="email" class="form-control" />
       </div>
     </div>
@@ -119,8 +119,45 @@ function generateAuthorField(authorId) {
 
 addAuthorsButton.addEventListener('click', () => {
   const authorAdditionForm = document.querySelector('.data-upload-section__form__field--authors');
-  authorAdditionForm.innerHTML = authorAdditionForm.innerHTML + generateAuthorField(Math.random());
+  const publisherType = getRadioValue('primary-publisher') === 'individual' ? 'Author' : 'Organization';
+  authorAdditionForm.innerHTML = authorAdditionForm.innerHTML + generateAuthorField(publisherType);
 });
+
+// data relevancy handlers
+
+const regionRadioOptions = document.querySelectorAll(`input[name="region-options"]`);
+const otherStatesInput = document.getElementById('otherStatesInput');
+const otherCountriesInput = document.getElementById('otherCountriesInput');
+regionRadioOptions.forEach((option) =>
+  option.addEventListener('click', (event) => {
+    if (event.target.checked && event.target.value === 'Partial India') {
+      otherStatesInput.style.display = 'inline-block';
+      otherCountriesInput.style.display = 'none';
+    } else if (event.target.checked && event.target.value === 'Other countries') {
+      otherStatesInput.style.display = 'none';
+      otherCountriesInput.style.display = 'inline-block';
+    } else {
+      otherStatesInput.style.display = 'none';
+      otherCountriesInput.style.display = 'none';
+    }
+  })
+);
+
+const languageRadioOptions = document.querySelectorAll(`input[name="language-options"]`);
+languageRadioOptions.forEach((option) =>
+  option.addEventListener('click', (event) => {
+    if (event.target.checked && event.target.value === 'other') {
+      document.getElementById('otherLanguageInput').style.display = 'inline-block';
+    } else {
+      document.getElementById('otherLanguageInput').style.display = 'none';
+    }
+  })
+);
+
+// document.getElementById('other').onclick = function () {
+//   console.log('helo');
+//   document.getElementById('otherLanguageInput').style.display = 'block';
+// };
 
 // references handlers
 const addReferencesButton = document.querySelector('.add-more--references');
@@ -146,7 +183,7 @@ addReferencesButton.addEventListener('click', () => {
 
 // add months options into months dropdowns
 
-const months = [
+const MONTHS = [
   'January',
   'February',
   'March',
@@ -163,7 +200,7 @@ const months = [
 
 let monthOptions = '';
 
-months.forEach((month) => {
+MONTHS.forEach((month) => {
   monthOptions = monthOptions + `<option value="${month}">${month}</option>`;
 });
 
@@ -171,6 +208,34 @@ const monthDropdowns = document.querySelectorAll('.months-select');
 monthDropdowns.forEach((dropdown) => {
   dropdown.innerHTML = monthOptions;
 });
+
+// license options
+
+const LICENSES = [
+  { name: 'CC0 License', description: 'Can be freely shared, modified, and distributed by anyone' },
+  { name: 'CCBY License', description: 'Can be used freely by all but must credit the source' },
+  { name: 'Public Sharing Licence', description: 'Anyone share it but not edit the contents' },
+  { name: 'Copyrights Licence', description: 'Cannot be shared or modified' },
+  { name: 'Non-Commercial Licence', description: 'Can be used only for personal projects not seeking profit' }
+];
+
+function generateLicenseOptionHTML(license) {
+  return `
+    <optgroup label="${license.description}">
+      <option value="${license.name}">${license.name}</option>
+    </optgroup>
+  `;
+}
+
+const licenseSelect = document.getElementById('licenseSelect');
+
+let licenseOptions = '';
+
+LICENSES.forEach((license) => {
+  licenseOptions = licenseOptions + generateLicenseOptionHTML(license);
+});
+
+licenseSelect.innerHTML = licenseOptions;
 
 // proceed from file upload
 const proceedFromFilesButton = document.querySelector('#proceedFromFilesButton');
@@ -180,16 +245,16 @@ proceedFromFilesButton.addEventListener('click', () => {
   fileUploads.forEach((file) => {
     dataset.addItemToListProperty('files', getFileDetailsFromFileUploadElement(file));
   });
-
-  console.log(dataset);
 });
 
 // proceed from ownership
 const proceedFromOwnershipButton = document.querySelector('#proceedFromOwnershipButton');
 proceedFromOwnershipButton.addEventListener('click', () => {
+  const selectedLicense = getValueFromInputSelector('#licenseSelect');
+  const licenseDescription = LICENSES.find((license) => license.name === selectedLicense).description;
   dataset.updateProperty('license', {
-    licenseName: '1',
-    licenseDescription: getValueFromInputSelector('#licenseSelect')
+    licenseName: selectedLicense,
+    licenseDescription: licenseDescription
   });
   dataset.updateProperty('viewPermission', getRadioValue('view-permissions'));
   const authors = document.querySelectorAll('.item-addition--author');
@@ -199,8 +264,18 @@ proceedFromOwnershipButton.addEventListener('click', () => {
     publisher.authors.push(getAuthorDetailsFromAuthorAdditionElement(author));
   });
   dataset.updateProperty('publisher', publisher);
+});
 
-  console.log(dataset);
+// proceed from data relevancy
+const proceedFromRelevancyButton = document.querySelector('#proceedFromRelevancyButton');
+proceedFromRelevancyButton.addEventListener('click', () => {
+  dataset.updateProperty('language', getRadioValue('language-options'));
+  const region = { country: getRadioValue('region-options'), subRegions: [] };
+  dataset.updateProperty('region', region);
+  dataset.updateProperty('timePeriod', {
+    from: getTimePeriodDetailsFromSelector('.period--from'),
+    to: getTimePeriodDetailsFromSelector('.period--to')
+  });
 });
 
 // preview button updates the dataset info
@@ -256,14 +331,6 @@ const previewButton = document.querySelector('#previewButton');
 // break this into multiple functions and call them upon clicking proceed at each section
 
 previewButton.addEventListener('click', () => {
-  dataset.updateProperty('language', getRadioValue('language-options'));
-  const region = { country: getRadioValue('region-options'), subRegions: [] };
-  dataset.updateProperty('region', region);
-  dataset.updateProperty('timePeriod', {
-    from: getTimePeriodDetailsFromSelector('.period--from'),
-    to: getTimePeriodDetailsFromSelector('.period--to')
-  });
-
   dataset.updateProperty('keywords', getValueFromInputSelector('#keywordsInput').split(','));
   dataset.updateProperty('sources', getValueFromInputSelector('#sourcesInput').split(','));
   const references = document.querySelectorAll('.item-addition--reference');
@@ -271,5 +338,80 @@ previewButton.addEventListener('click', () => {
     dataset.addItemToListProperty('referenceLinks', getReferenceLinksFromReferenceElement(reference));
   });
 
+  const dataRelevancyPreviewTableHTML = `
+    <tr>
+      <td>Region(s) covered:</td>
+      <td>${dataset.region.country}</td>
+    </tr>
+    <tr>
+      <td>Time period covered:</td>
+      <td>${dataset.timePeriod.from.month} ${dataset.timePeriod.from.year} - ${dataset.timePeriod.to.month} ${dataset.timePeriod.to.year}</td>
+    </tr>
+    <tr>
+      <td>Language:</td>
+      <td>${dataset.language}</td>
+    </tr>
+  `;
+
+  const ownershipPreviewTableHTML = `
+    <tr>
+      <td>Licensing permissions:</td>
+      <td>(${dataset.license.licenseName}) ${dataset.license.licenseDescription}</td>
+    </tr>
+    <tr>
+      <td>Viewing Permissions:</td>
+      <td>${dataset.viewPermission}</td>
+    </tr>
+    <tr>
+      <td>Primary Author(s): </td>
+      <td>${dataset.publisher.type}</td>
+    </tr>
+  `;
+
+  const sourcePreviewTableHTML = `
+    <tr>
+      <td>Keywords:</td>
+      <td>${dataset.keywords.join(', ')}</td>
+    </tr>
+    <tr>
+      <td>Data Source(s):</td>
+      <td>${dataset.sources.join(', ')}</td>
+    </tr>
+    <tr>
+      <td>Reference Links:</td>
+      <td>${dataset.referenceLinks[0].title} - ${dataset.referenceLinks[0].link}</td>
+    </tr>
+  `;
+  // change the references links to get all the items
+
+  document.querySelector('#dataRelevancyPreviewTable').innerHTML = dataRelevancyPreviewTableHTML;
+  document.querySelector('#ownershipPreviewTable').innerHTML = ownershipPreviewTableHTML;
+  document.querySelector('#sourcePreviewTable').innerHTML = sourcePreviewTableHTML;
+
+  document.querySelector('#datasetNameOnPreviewModal').innerHTML = dataset.name;
+
   console.log(dataset);
 });
+
+const submitDatasetButton = document.getElementById('submitDatasetButton');
+submitDatasetButton.addEventListener('click', () => {
+  postDatasetRequest('http://localhost:5000');
+});
+
+function postDatasetRequest(baseUrl) {
+  fetch(`${baseUrl}/api/dataset/new`, {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: {},
+    body: {
+      title: dataset.name,
+      license_id: dataset.license.licenseName
+    }
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      // do another post request for uploading files
+    })
+    .catch((error) => console.log(error));
+}

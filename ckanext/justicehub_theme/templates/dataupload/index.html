@@ -119,35 +119,19 @@
       <div class="data-upload-section__form">
         <div class="data-upload-section__form__field">
           <h4>Select Licensing Permission</h4>
-          <select class="input--medium" id="licenseSelect">
-            <optgroup label="Can be freely shared, modified, and distributed by anyone">
-              <option value="CC0 License">CC0 License</option>
-            </optgroup>
-            <optgroup label="Can be used freely by all but must credit the source">
-              <option value="CCBY License">CCBY License</option>
-            </optgroup>
-            <optgroup label="Anyone share it but not edit the contents">
-              <option value="Public Sharing Licence">Public Sharing Licence</option>
-            </optgroup>
-            <optgroup label="Cannot be shared or modified">
-              <option value="Copyrights Licence">Copyrights Licence</option>
-            </optgroup>
-            <optgroup label="Can be used only for personal projects not seeking profit">
-              <option value="Non-Commercial Licence">Non-Commercial Licence</option>
-            </optgroup>
-          </select>
+          <select class="input--medium" id="licenseSelect"></select>
         </div>
         <div class="data-upload-section__form__field">
           <h4>Set Viewing Permissions</h4>
           <div class="radio">
             <label>
-              <input type="radio" name="view-permissions" id="anyoneRadio" value="anyone" />
+              <input type="radio" name="view-permissions" id="anyoneRadio" value="Anyone" />
               Anyone
             </label>
           </div>
           <div class="radio">
             <label>
-              <input type="radio" name="view-permissions" id="onlyMeRadio" value="onlyme" />
+              <input type="radio" name="view-permissions" id="onlyMeRadio" value="Only me" />
               Only me
             </label>
           </div>
@@ -173,7 +157,7 @@
               <input type="text" class="form-control" />
             </div>
             <div class="item-addition__email-field">
-              <h5>Email of author</h5>
+              <h5>Email of Author (optional)</h5>
               <input type="email" class="form-control" />
             </div>
           </div>
@@ -202,21 +186,23 @@
           <h4>Which region does this data cover?</h4>
           <div class="radio">
             <label>
-              <input type="radio" name="region-options" id="allIndia" value="allindia" />
+              <input type="radio" name="region-options" id="allIndia" value="All India" />
               All India
             </label>
           </div>
           <div class="radio">
             <label>
-              <input type="radio" name="region-options" id="partialIndia" value="partialindia" />
+              <input type="radio" name="region-options" id="partialIndia" value="Partial India" />
               Specific Indian State(s)
             </label>
+            <input type="text" style="display: none" id="otherStatesInput" />
           </div>
           <div class="radio">
             <label>
-              <input type="radio" name="region-options" id="other" value="other" />
+              <input type="radio" name="region-options" id="otherCountries" value="Other countries" />
               Other countries
             </label>
+            <input type="text" style="display: none" id="otherCountriesInput" />
           </div>
         </div>
 
@@ -265,6 +251,7 @@
               <input type="radio" name="language-options" id="other" value="other" />
               Other
             </label>
+            <input type="text" style="display: none" id="otherLanguageInput" />
           </div>
         </div>
       </div>
@@ -277,7 +264,7 @@
         </div>
         <div class="data-upload-section__footer__right">
           <button class="btn btn-primary-outline btn-mont">Save as Draft</button>
-          <button class="next-button btn btn-primary btn-mont">Proceed</button>
+          <button class="next-button btn btn-primary btn-mont" id="proceedFromRelevancyButton">Proceed</button>
         </div>
       </div>
     </section>
@@ -340,7 +327,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
               <div class="modal-header-info">
-                <h3>Dataset name</h3>
+                <h3 id="datasetNameOnPreviewModal"></h3>
                 <!-- <img class="modal-logo" src="/assets/jh_logo_notext.png" />
                         <h4>{{ title }}</h4>
                         <p>{{ title_content }}</p>
@@ -351,63 +338,42 @@
               <div class="modal-body__data-section">
                 <div class="modal-body__data-section__header">
                   <h3>Files</h3>
-                  <button class="btn-primary-text preview-edit"
-                    ><span>Edit</span><span class="iconify" data-icon="feather:edit" data-inline="false"></span></span
-                  ></button>
+                  <button class="btn-primary-text preview-edit">
+                    <span>Edit</span><span class="iconify" data-icon="feather:edit" data-inline="false"></span>
+                  </button>
                 </div>
               </div>
               <div class="modal-body__data-section">
                 <div class="modal-body__data-section__header">
                   <h3>Ownership</h3>
-                  <button class="btn-primary-text preview-edit"
-                    ><span>Edit</span><span class="iconify" data-icon="feather:edit" data-inline="false"></span></span
-                  ></button>
+                  <button class="btn-primary-text preview-edit">
+                    <span>Edit</span><span class="iconify" data-icon="feather:edit" data-inline="false"></span>
+                  </button>
                 </div>
-                <table>
-                  <tr>
-                    <td>Licensing permissions:</td>
-                    <td>(CCBY) Can be used freely by all but must credit the source</td>
-                  </tr>
-                  <tr>
-                    <td>Viewing permissions:</td>
-                    <td>Anyone can view</td>
-                  </tr>
-                  <tr>
-                    <td>Primary Author(s):</td>
-                    <td>Arthur Bryant | arthur.b@akp.com,  Saish Jordan</td>
-                  </tr>
-                </table>
+                <table id="ownershipPreviewTable"></table>
               </div>
               <div class="modal-body__data-section">
                 <div class="modal-body__data-section__header">
                   <h3>Data Relevancy</h3>
-                  <button class="btn-primary-text preview-edit"
-                    ><span>Edit</span><span class="iconify" data-icon="feather:edit" data-inline="false"></span></span
-                  ></button>
+                  <button class="btn-primary-text preview-edit">
+                    <span>Edit</span><span class="iconify" data-icon="feather:edit" data-inline="false"></span>
+                  </button>
                 </div>
-                <table>
-                  <tr>
-                    <td>Region(s) covered:</td>
-                    <td>Karnataka, NCR</td>
-                  </tr>
-                  <tr>
-                    <td>Time period covered: </td>
-                    <td>Mar 2010 - Mar 2020</td>
-                  </tr>
-                  <tr>
-                    <td>Language:</td>
-                    <td>English</td>
-                  </tr>
-                </table>
+                <table id="dataRelevancyPreviewTable"></table>
               </div>
               <div class="modal-body__data-section">
                 <div class="modal-body__data-section__header">
                   <h3>Source of Data</h3>
-                  <button class="btn-primary-text preview-edit"
-                    ><span>Edit</span><span class="iconify" data-icon="feather:edit" data-inline="false"></span></span
-                  ></button>
+                  <button class="btn-primary-text preview-edit">
+                    <span>Edit</span><span class="iconify" data-icon="feather:edit" data-inline="false"></span>
+                  </button>
                 </div>
+                <table id="sourcePreviewTable"></table>
               </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn-primary-text" data-dismiss="modal"><span>Cancel</span></button>
+              <button class="next-button btn btn-primary btn-mont" id="submitDatasetButton">Submit</button>
             </div>
           </div>
         </div>

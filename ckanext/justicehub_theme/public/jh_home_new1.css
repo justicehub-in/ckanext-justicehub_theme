@@ -1265,6 +1265,12 @@ footer h3 {
 
 /* preview modal */
 
+#previewDatasetModal .modal-body {
+  max-height: 700px;
+  height: 100%;
+  overflow-y: scroll;
+}
+
 .modal-body__data-section {
   border-top: 1px solid #5b575b;
   padding-top: 30px;
