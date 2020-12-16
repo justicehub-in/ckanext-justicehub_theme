@@ -402,6 +402,13 @@ submitDatasetButton.addEventListener('click', () => {
   postDatasetRequest('http://localhost:5000');
 });
 
+const saveAsDatasetButtons = document.querySelectorAll('.draft-button');
+saveAsDatasetButtons.forEach((button) =>
+  button.addEventListener('click', () => {
+    postDatasetRequest('http://localhost:5000', (state = 'draft'));
+  })
+);
+
 function getCookie(name) {
   const cookieArr = document.cookie.split(';');
   for (let i = 0; i < cookieArr.length; i++) {
