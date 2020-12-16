@@ -269,7 +269,11 @@ proceedFromOwnershipButton.addEventListener('click', () => {
 // proceed from data relevancy
 const proceedFromRelevancyButton = document.querySelector('#proceedFromRelevancyButton');
 proceedFromRelevancyButton.addEventListener('click', () => {
-  dataset.updateProperty('language', getRadioValue('language-options'));
+  const language =
+    getRadioValue('language-options') === 'other'
+      ? getValueFromInputSelector('#otherLanguageInput')
+      : getRadioValue('language-options');
+  dataset.updateProperty('language', language);
   const region = { country: getRadioValue('region-options'), subRegions: [] };
   dataset.updateProperty('region', region);
   dataset.updateProperty('timePeriod', {
@@ -398,20 +402,53 @@ submitDatasetButton.addEventListener('click', () => {
   postDatasetRequest('http://localhost:5000');
 });
 
-function postDatasetRequest(baseUrl) {
+function getCookie(name) {
+  const cookieArr = document.cookie.split(';');
+  for (let i = 0; i < cookieArr.length; i++) {
+    const cookiePair = cookieArr[i].split('=');
+    if (name == cookiePair[0].trim()) {
+      return decodeURIComponent(cookiePair[1]);
+    }
+  }
+  return null;
+}
+
+function postDatasetRequest(baseUrl, state = 'active') {
   fetch(`${baseUrl}/api/dataset/new`, {
     method: 'POST',
     credentials: 'same-origin',
-    headers: {},
+    headers: {
+      Cookie: getCookie('auth_tkn')
+    },
     body: {
       title: dataset.name,
-      license_id: dataset.license.licenseName
+      license_id: dataset.license.licenseName,
+      private: dataset.viewPermission === 'Anyone' ? false : true,
+      publisher_type: dataset.publisher.type,
+      language: dataset.language,
+      tag_string: dataset.keywords.join(','),
+      source: dataset.sources.join(','),
+      dataset_state: state
     }
   })
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      // do another post request for uploading files
+      fetch(`${baseUrl}/api/dataset/${pkg_name}/resource/new`, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          Cookie: getCookie('auth_tkn')
+        },
+        body: {
+          upload: dataset.files[0].file,
+          name: dataset.files[0].fileName,
+          description: dataset.files[0].fileDescription
+        }
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.log(error));
     })
     .catch((error) => console.log(error));
 }
