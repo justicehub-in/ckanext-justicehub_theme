@@ -54,7 +54,7 @@
         <div class="col col-sm-4 col-xs-12 text-center">
             <div class="col col-sm-8 org-box image-box">
                 <a href="{{ h.url_for(controller='organization', action='read', id=pkg.organization.id) }}">
-                {% set image_path = h.url_for_static('uploads/group/' + pkg.organization.image_url, qualified=True) %}
+{#                {% set image_path = h.url_for_static('uploads/group/' + pkg.organization.image_url, qualified=True) %} #}
                 <img src="{{ image_path or h.url_for_static('/base/images/placeholder-organization.png') }}" alt="{{ pkg.organization.name }}" class="img-responsive media-image" >
                 {{ c.group_dict.display_name }}
                 </a>
@@ -87,7 +87,7 @@
             <span class="hidden-xs" style="float: left;">{{ _('|') }}</span>
 
             <div class="col col-sm-7 col-xs-12 partner-links social-links">
-            <ul class="list-unstyled list-inline">
+ {#           <ul class="list-unstyled list-inline">
                 <li>
                 {% if pkg.partner.website %}
                     <a href="{{ pkg.partner.website }}"
@@ -136,7 +136,7 @@
                     </a>
                 {% endif %}
                 </li>
-            </ul>
+            </ul> #}
             </div>
         </div>
     </div>
