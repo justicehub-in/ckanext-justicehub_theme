@@ -456,38 +456,34 @@ import Dataset from './dataset.js';
   // api calls
 
   function postDatasetRequest(baseUrl, state = 'active') {
+
+  var formdata = new FormData();
+  formdata.append("title", dataset.name);
+  formdata.append("license_id", dataset.license.licenseName);
+  formdata.append("private", dataset.viewPermission === 'Anyone' ? false : true);
+  formdata.append("publisher_type", dataset.publisher.type);
+  formdata.append("language", dataset.language);
+  formdata.append("tag_string", dataset.keywords.join(','));
+  formdata.append("source", dataset.sources.join(','));
+  formdata.append("dataset_state", state);
+
+
     fetch(`${baseUrl}/api/dataset/new`, {
       method: 'POST',
       credentials: 'same-origin',
-      headers: {
-        Cookie: getCookie('auth_tkn')
-      },
-      body: JSON.stringify({
-        title: dataset.name,
-        license_id: dataset.license.licenseName,
-        private: dataset.viewPermission === 'Anyone' ? false : true,
-        publisher_type: dataset.publisher.type,
-        language: dataset.language,
-        tag_string: dataset.keywords.join(','),
-        source: dataset.sources.join(','),
-        dataset_state: state
-      })
+      body: formdata
     })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        var new_formdata = new FormData();
+        new_formdata.append("upload", dataset.files[0].file);
+        new_formdata.append("name", dataset.files[0].fileName);
+        new_formdata.append("description", dataset.files[0].fileDescription);
         fetch(`${baseUrl}/api/dataset/${data.pkg_name}/resource/new`, {
           method: 'POST',
           credentials: 'same-origin',
-          headers: {
-            Cookie: getCookie('auth_tkn')
-          },
-          body: JSON.stringify({
-            pkg_id: data.pkg_name,
-            upload: dataset.files[0].file,
-            name: dataset.files[0].fileName,
-            description: dataset.files[0].fileDescription
-          })
+          body: new_formdata
         })
           .then((response) => response.json())
           .then((data) => console.log(data))
