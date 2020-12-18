@@ -580,6 +580,19 @@ import Dataset from './dataset.js';
     return metaData;
   }
 
+  function postFile(packageName, fileItem, baseUrl) {
+    const filesData = new FormData();
+    filesData.append('upload', fileItem.file);
+    filesData.append('name', fileItem.fileName);
+    filesData.append('description', fileItem.fileDescription);
+
+    return fetch(`${baseUrl}/api/dataset/${packageName}/resource/new`, {
+      method: 'POST',
+      credentials: 'same-origin',
+      body: filesData
+    });
+  }
+
   function postDatasetRequest(baseUrl, state = 'active') {
     fetch(`${baseUrl}/api/dataset/new`, {
       method: 'POST',
@@ -588,19 +601,27 @@ import Dataset from './dataset.js';
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        const filesData = new FormData();
-        filesData.append('upload', dataset.files[0].file);
-        filesData.append('name', dataset.files[0].fileName);
-        filesData.append('description', dataset.files[0].fileDescription);
-        fetch(`${baseUrl}/api/dataset/${data.pkg_name}/resource/new`, {
-          method: 'POST',
-          credentials: 'same-origin',
-          body: filesData
-        })
-          .then((response) => response.json())
-          .then((data) => console.log(data))
-          .catch((error) => console.log(error));
+        Promise.all(
+          dataset.files
+            .map((fileItem) => postFile(data.pkg_name, fileItem, baseUrl))
+            .then((results) => {
+              results.forEach((result) => console.log(result));
+            })
+            .catch((error) => console.log(error))
+        );
+        // console.log(data);
+        // const filesData = new FormData();
+        // filesData.append('upload', dataset.files[0].file);
+        // filesData.append('name', dataset.files[0].fileName);
+        // filesData.append('description', dataset.files[0].fileDescription);
+        // fetch(`${baseUrl}/api/dataset/${data.pkg_name}/resource/new`, {
+        //   method: 'POST',
+        //   credentials: 'same-origin',
+        //   body: filesData
+        // })
+        //   .then((response) => response.json())
+        //   .then((data) => console.log(data))
+        //   .catch((error) => console.log(error));
       })
       .catch((error) => console.log(error));
   }
