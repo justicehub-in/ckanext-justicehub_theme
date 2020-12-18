@@ -153,6 +153,7 @@ import Dataset from './dataset.js';
   }
 
   function updateDatasetWithValuesFromFilesSection() {
+    dataset.updateProperty('files', []);
     dataset.updateProperty('name', getValueFromInputSelector('#datasetNameField'));
     const fileUploads = document.querySelectorAll('.file-upload');
     fileUploads.forEach((file) => {
@@ -221,6 +222,7 @@ import Dataset from './dataset.js';
   licenseSelect.innerHTML = licenseOptions;
 
   function updateDatasetWithValuesFromOwnershipSection() {
+    dataset.updateProperty('publisher', {});
     const selectedLicense = getValueFromInputSelector('#licenseSelect');
     const licenseDescription = LICENSES.find((license) => license.name === selectedLicense).description;
     dataset.updateProperty('license', {
@@ -513,11 +515,11 @@ import Dataset from './dataset.js';
     </tr>
   `;
     // change the references links to get all the items
-
+    document.querySelector('#filesListOnPreview').innerHTML = '';
     dataset.files.forEach((file) => {
-      document.querySelector('#filesListOnPreview').innerHTML =
-        document.querySelector('#filesListOnPreview').innerHTML +
-        generateFilePreviewHTML(file.fileName, file.fileDescription);
+      document
+        .querySelector('#filesListOnPreview')
+        .insertAdjacentHTML('beforeend', generateFilePreviewHTML(file.fileName, file.fileDescription));
     });
 
     document.querySelector('#dataRelevancyPreviewTable').innerHTML = dataRelevancyPreviewTableHTML;
@@ -601,14 +603,11 @@ import Dataset from './dataset.js';
     })
       .then((response) => response.json())
       .then((data) => {
-        Promise.all(
-          dataset.files
-            .map((fileItem) => postFile(data.pkg_name, fileItem, baseUrl))
-            .then((results) => {
-              results.forEach((result) => console.log(result));
-            })
-            .catch((error) => console.log(error))
-        );
+        Promise.all(dataset.files.map((fileItem) => postFile(data.pkg_name, fileItem, baseUrl)))
+          .then((results) => {
+            results.forEach((result) => console.log(result));
+          })
+          .catch((error) => console.log(error));
         // console.log(data);
         // const filesData = new FormData();
         // filesData.append('upload', dataset.files[0].file);
