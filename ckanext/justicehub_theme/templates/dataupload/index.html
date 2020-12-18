@@ -16,8 +16,7 @@
     <title>Data Upload Flow</title>
   </head>
   <body>
-
-  {% include "header.html" %}
+    {% include "header.html" %}
     <div class="data-upload-header">
       <div class="custom-container">
         <a href="#" class="exit-flow"
@@ -72,7 +71,7 @@
           <div class="file-upload">
             <div class="file-upload__name">
               <div class="upload-box">
-                <input type="file" />
+                <input type="file" class="datasetfile-input" />
                 <span class="iconify" data-icon="fe:upload" data-inline="false"></span>
               </div>
               <div class="name-field">
@@ -89,7 +88,7 @@
           <div class="file-upload">
             <div class="file-upload__name">
               <div class="upload-box">
-                <input type="file" />
+                <input type="file" class="datasetfile-input" />
                 <span class="iconify" data-icon="fe:upload" data-inline="false"></span>
               </div>
               <div class="name-field">
@@ -110,7 +109,9 @@
         <div class="data-upload-section__footer">
           <div></div>
           <div class="data-upload-section__footer__right">
-            <button class="btn btn-primary-outline btn-mont draft-button">Save as Draft</button>
+            <button class="btn btn-primary-outline btn-mont draft-button" id="saveOnFilesSectionButton">
+              Save as Draft
+            </button>
             <button class="next-button btn btn-primary btn-mont" id="proceedFromFilesButton">Proceed</button>
           </div>
         </div>
@@ -176,7 +177,9 @@
             >
           </div>
           <div class="data-upload-section__footer__right">
-            <button class="btn btn-primary-outline btn-mont draft-button">Save as Draft</button>
+            <button class="btn btn-primary-outline btn-mont draft-button" id="saveOnOwnershipSectionButton">
+              Save as Draft
+            </button>
             <button class="next-button btn btn-primary btn-mont" id="proceedFromOwnershipButton">Proceed</button>
           </div>
         </div>
@@ -265,7 +268,9 @@
           >
         </div>
         <div class="data-upload-section__footer__right">
-          <button class="btn btn-primary-outline btn-mont draft-button">Save as Draft</button>
+          <button class="btn btn-primary-outline btn-mont draft-button" id="saveOnRelevancySectionButton">
+            Save as Draft
+          </button>
           <button class="next-button btn btn-primary btn-mont" id="proceedFromRelevancyButton">Proceed</button>
         </div>
       </div>
@@ -314,7 +319,9 @@
           >
         </div>
         <div class="data-upload-section__footer__right">
-          <button class="btn btn-primary-outline btn-mont draft-button">Save as Draft</button>
+          <button class="btn btn-primary-outline btn-mont draft-button" id="saveOnSourcesSectionButton">
+            Save as Draft
+          </button>
           <button
             id="previewButton"
             class="btn btn-primary btn-mont"
@@ -344,15 +351,16 @@
               <div class="modal-body__data-section">
                 <div class="modal-body__data-section__header">
                   <h3>Files</h3>
-                  <button class="btn-primary-text preview-edit">
+                  <button class="btn-primary-text preview-edit" data-dismiss="modal" data-section="files-section">
                     <span>Edit</span><span class="iconify" data-icon="feather:edit" data-inline="false"></span>
                   </button>
                 </div>
+                <div id="filesListOnPreview"></div>
               </div>
               <div class="modal-body__data-section">
                 <div class="modal-body__data-section__header">
                   <h3>Ownership</h3>
-                  <button class="btn-primary-text preview-edit">
+                  <button class="btn-primary-text preview-edit" data-dismiss="modal" data-section="ownership-section">
                     <span>Edit</span><span class="iconify" data-icon="feather:edit" data-inline="false"></span>
                   </button>
                 </div>
@@ -361,7 +369,7 @@
               <div class="modal-body__data-section">
                 <div class="modal-body__data-section__header">
                   <h3>Data Relevancy</h3>
-                  <button class="btn-primary-text preview-edit">
+                  <button class="btn-primary-text preview-edit" data-dismiss="modal" data-section="relevancy-section">
                     <span>Edit</span><span class="iconify" data-icon="feather:edit" data-inline="false"></span>
                   </button>
                 </div>
@@ -370,7 +378,7 @@
               <div class="modal-body__data-section">
                 <div class="modal-body__data-section__header">
                   <h3>Source of Data</h3>
-                  <button class="btn-primary-text preview-edit">
+                  <button class="btn-primary-text preview-edit" data-dismiss="modal" data-section="source-section">
                     <span>Edit</span><span class="iconify" data-icon="feather:edit" data-inline="false"></span>
                   </button>
                 </div>
