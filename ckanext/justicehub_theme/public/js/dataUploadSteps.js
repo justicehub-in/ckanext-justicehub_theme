@@ -14,6 +14,11 @@ export default class DataUploadSteps {
     next();
   };
 
+  setActiveStepByName = (sectionName, next) => {
+    this.activeStep = this.steps.find((step) => step.section === sectionName);
+    next();
+  }
+
   goToNextStep = (next) => {
     if (this.activeStep.id < 4) {
       this.setActiveStep(this.activeStep.id + 1, next);
