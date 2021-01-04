@@ -34,6 +34,17 @@ import Dataset from './dataset.js';
     });
   }
 
+  // remove file inputs
+  function removeFileInput(event) {
+    if (!event.target.classList.contains('remove-input')) {
+      return;
+    }
+
+    const fileInputToBeRemoved = event.target.parentElement;
+    if (!fileInputToBeRemoved.parentElement) return;
+    fileInputToBeRemoved.parentElement.removeChild(fileInputToBeRemoved);
+  }
+
   // next and previous buttons' click handlers
 
   const nextButtons = document.querySelectorAll('.next-button');
@@ -94,6 +105,7 @@ import Dataset from './dataset.js';
   function generateFileUploadField(fileId) {
     return `
     <div class="file-upload" id="${fileId}">
+      <span class="iconify remove-input" data-icon="mdi:close" data-inline="false"></span>
       <div class="file-upload__name">
         <div class="upload-box">
           <input type="file" />
@@ -128,6 +140,8 @@ import Dataset from './dataset.js';
     fileInputHandler(event);
   });
 
+  fileUploadContainer.addEventListener('click', (event) => removeFileInput(event));
+
   function updateFileInputBackground(fileInputBackgroundElement, fileType) {
     fileInputBackgroundElement.style.backgroundColor = getFileUploadBoxPropertyByFileType(fileType, 'backgroundColor');
     fileInputBackgroundElement.removeChild(fileInputBackgroundElement.querySelector('svg'));
@@ -155,8 +169,8 @@ import Dataset from './dataset.js';
   function updateDatasetWithValuesFromFilesSection() {
     dataset.updateProperty('files', []);
     dataset.updateProperty('name', getValueFromInputSelector('#datasetNameField'));
-    const fileUploads = document.querySelectorAll('.file-upload');
-    fileUploads.forEach((file) => {
+    const fileUploadInputs = document.querySelectorAll('.file-upload');
+    fileUploadInputs.forEach((file) => {
       if (getFileDetailsFromFileUploadElement(file).fileName) {
         dataset.addItemToListProperty('files', getFileDetailsFromFileUploadElement(file));
       }
@@ -173,10 +187,12 @@ import Dataset from './dataset.js';
   proceedFromFilesButton.addEventListener('click', updateDatasetWithValuesFromFilesSection);
 
   // ownership section
+  let authorAdditionForm;
   const addMoreAuthorsButton = document.querySelector('.add-more--authors');
   function generateAuthorField(publisherType) {
     return `
     <div class="item-addition item-addition--author">
+      <span class="iconify remove-input" data-icon="mdi:close" data-inline="false"></span>
       <div class="item-addition__name-field">
         <h5>${publisherType}'s name</h5>
         <input type="text" class="form-control" />
@@ -190,7 +206,8 @@ import Dataset from './dataset.js';
   }
 
   addMoreAuthorsButton.addEventListener('click', () => {
-    const authorAdditionForm = document.querySelector('.data-upload-section__form__field--authors');
+    authorAdditionForm = document.querySelector('.data-upload-section__form__field--authors');
+    authorAdditionForm.addEventListener('click', (event) => removeFileInput(event));
     const publisherType = getRadioValue('primary-publisher') === 'individual' ? 'Author' : 'Organization';
     authorAdditionForm.insertAdjacentHTML('beforeend', generateAuthorField(publisherType));
   });
@@ -328,10 +345,12 @@ import Dataset from './dataset.js';
   proceedFromRelevancyButton.addEventListener('click', updateDatasetWithValuesFromRelevancySection);
 
   // sources of dataset section
+  let referenceAdditionForm;
   const addMoreReferencesButton = document.querySelector('.add-more--references');
   function generateReferenceField(referenceId) {
     return `
     <div class="item-addition item-addition--reference" id="${referenceId}">
+      <span class="iconify remove-input" data-icon="mdi:close" data-inline="false"></span>
       <div class="item-addition__link-field">
         <h5>Paste Link</h5>
         <input type="text" class="form-control" />
@@ -345,7 +364,8 @@ import Dataset from './dataset.js';
   }
 
   addMoreReferencesButton.addEventListener('click', () => {
-    const referenceAdditionForm = document.querySelector('.data-upload-section__form__field--references');
+    referenceAdditionForm = document.querySelector('.data-upload-section__form__field--references');
+    referenceAdditionForm.addEventListener('click', (event) => removeFileInput(event));
     referenceAdditionForm.insertAdjacentHTML('beforeend', generateReferenceField(Math.random()));
   });
 
@@ -582,17 +602,34 @@ import Dataset from './dataset.js';
     return metaData;
   }
 
-  function postFile(packageName, fileItem, baseUrl) {
-    const filesData = new FormData();
-    filesData.append('upload', fileItem.file);
-    filesData.append('name', fileItem.fileName);
-    filesData.append('description', fileItem.fileDescription);
+  // function postFile(packageName, fileItem, baseUrl) {
+  //   const filesData = new FormData();
+  //   filesData.append('upload', fileItem.file);
+  //   filesData.append('name', fileItem.fileName);
+  //   filesData.append('description', fileItem.fileDescription);
 
-    return fetch(`${baseUrl}/api/dataset/${packageName}/resource/new`, {
-      method: 'POST',
-      credentials: 'same-origin',
-      body: filesData
-    });
+  //   return fetch(`${baseUrl}/api/dataset/${packageName}/resource/new`, {
+  //     method: 'POST',
+  //     credentials: 'same-origin',
+  //     body: filesData
+  //   });
+  // }
+
+  function postFileSync(packageName, filesList, baseUrl) {
+    if (filesList.length === 1) {
+      const filesData = new FormData();
+      filesData.append('upload', fileItem.file);
+      filesData.append('name', fileItem.fileName);
+      filesData.append('description', fileItem.fileDescription);
+
+      return fetch(`${baseUrl}/api/dataset/${packageName}/resource/new`, {
+        method: 'POST',
+        credentials: 'same-origin',
+        body: filesData
+      });
+    }
+
+    return postFileSync(packageName, filesList(0, filesList.length - 1), baseUrl);
   }
 
   function postDatasetRequest(baseUrl, state = 'active') {
@@ -603,23 +640,11 @@ import Dataset from './dataset.js';
     })
       .then((response) => response.json())
       .then((data) => {
-        Promise.all(dataset.files.map((fileItem) => postFile(data.pkg_name, fileItem, baseUrl)))
-          .then((results) => {
-            results.forEach((result) => console.log(result));
-          })
-          .catch((error) => console.log(error));
-        // console.log(data);
-        // const filesData = new FormData();
-        // filesData.append('upload', dataset.files[0].file);
-        // filesData.append('name', dataset.files[0].fileName);
-        // filesData.append('description', dataset.files[0].fileDescription);
-        // fetch(`${baseUrl}/api/dataset/${data.pkg_name}/resource/new`, {
-        //   method: 'POST',
-        //   credentials: 'same-origin',
-        //   body: filesData
-        // })
-        //   .then((response) => response.json())
-        //   .then((data) => console.log(data))
+        dataset.files.forEach((fileItem) => postFile);
+        // Promise.all(dataset.files.map((fileItem) => postFile(data.pkg_name, fileItem, baseUrl)))
+        //   .then((results) => {
+        //     results.forEach((result) => console.log(result));
+        //   })
         //   .catch((error) => console.log(error));
       })
       .catch((error) => console.log(error));
