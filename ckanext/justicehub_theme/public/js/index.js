@@ -567,7 +567,7 @@ import Dataset from './dataset.js';
 
   const submitDatasetButton = document.getElementById('submitDatasetButton');
   submitDatasetButton.addEventListener('click', () => {
-    postDatasetRequest('http://localhost:5000');
+    postDatasetRequest('http://127.0.0.1:5000');
   });
 
   // function getCookie(name) {
@@ -608,26 +608,23 @@ import Dataset from './dataset.js';
     return metaData;
   }
 
-  async function postFile(packageName, fileItem, baseUrl) {
+  function postAllFilesSync(packageName, filesList, baseUrl) {
+    if (filesList.length === 0) return;
+
     const filesData = new FormData();
-    filesData.append('upload', fileItem.file);
-    filesData.append('name', fileItem.fileName);
-    filesData.append('description', fileItem.fileDescription);
+    filesData.append('upload', filesList[0].file);
+    filesData.append('name', filesList[0].fileName);
+    filesData.append('description', filesList[0].fileDescription);
 
     fetch(`${baseUrl}/api/dataset/${packageName}/resource/new`, {
       method: 'POST',
       credentials: 'same-origin',
       body: filesData
-    });
-  }
-
-  function postAllFilesSync(packageName, filesList, baseUrl) {
-    postFile(packageName, filesList[0], baseUrl)
+    })
       .then(() => {
-        if (filesList.length === 0) return;
         postAllFilesSync(packageName, filesList.slice(1), baseUrl);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error.message));
   }
 
   function postDatasetRequest(baseUrl, state = 'active') {
@@ -640,6 +637,7 @@ import Dataset from './dataset.js';
       .then((data) => {
         postAllFilesSync(data.pkg_name, dataset.files, baseUrl);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(() => showModal('#datasetUploadSuccessModal'));
   }
 })();

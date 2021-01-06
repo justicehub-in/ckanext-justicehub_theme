@@ -13,6 +13,7 @@
     />
     <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
     <link rel="stylesheet" href="/jh_home_new1.css" />
+    <link rel="stylesheet" href="/bootstrap-multiselect.min.css" />
     <title>Data Upload Flow</title>
   </head>
   <body>
@@ -200,7 +201,14 @@
               <input type="radio" name="region-options" id="partialIndia" value="Partial India" />
               Specific Indian State(s)
             </label>
-            <input type="text" style="display: none" id="otherStatesInput" />
+            <select id="example-getting-started" multiple="multiple">
+              <option value="cheese">Cheese</option>
+              <option value="tomatoes">Tomatoes</option>
+              <option value="mozarella">Mozzarella</option>
+              <option value="mushrooms">Mushrooms</option>
+              <option value="pepperoni">Pepperoni</option>
+              <option value="onions">Onions</option>
+            </select>
           </div>
           <div class="radio">
             <label>
@@ -392,6 +400,8 @@
           </div>
         </div>
       </div>
+
+      {{ h.snippet('widget/auth/datasetSuccess.html', id="datasetUploadSuccessModal") }}
     </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script
@@ -399,6 +409,7 @@
       integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
       crossorigin="anonymous"
     ></script>
+    <script src="/js/bootstrap-multiselect.min.js"></script>
     <script type="module" src="/js/index.js"></script>
   </body>
 </html>
