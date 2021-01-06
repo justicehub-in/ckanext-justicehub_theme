@@ -6,7 +6,8 @@ const USER_STATUSES = {
     "platform_logout": "",
     "platform_first_login": "",
     "platform_reset": "#resetPasswordModal",
-    "platform_feedback": "#feedbackModal"
+    "platform_feedback": "#feedbackModal",
+    "platform_upload_dataset_success": "#datasetUploadSuccessModal"
 }
 
 
