@@ -112,8 +112,8 @@ import Dataset from './dataset.js';
           <span class="iconify" data-icon="fe:upload" data-inline="false"></span>
         </div>
         <div class="name-field">
-          <h4>Name of the file</h4>
-          <input type="text" class="form-control" id="fileNameField" />
+          <h4>Name of the file <span>(Upload a file to edit the name)</span></h4>
+          <input type="text" class="form-control" id="fileNameField" disabled />
         </div>
       </div>
       <div class="file-upload__description">
@@ -163,6 +163,7 @@ import Dataset from './dataset.js';
       updateFileInputBackground(fileInputBackground, 'pdf');
     }
     const correspondingFileNameInput = fileInputBackground.nextSibling.nextSibling.querySelector('input');
+    correspondingFileNameInput.disabled = false;
     correspondingFileNameInput.value = file.name;
   }
 
@@ -268,6 +269,11 @@ import Dataset from './dataset.js';
   // data relevancy section
   const regionRadioOptions = document.querySelectorAll(`input[name="region-options"]`);
   const otherStatesInput = document.getElementById('otherStatesInput');
+
+  $(document).ready(function () {
+    $('#example-getting-started').multiselect();
+  });
+
   const otherCountriesInput = document.getElementById('otherCountriesInput');
   regionRadioOptions.forEach((option) =>
     option.addEventListener('click', (event) => {
@@ -602,34 +608,26 @@ import Dataset from './dataset.js';
     return metaData;
   }
 
-  // function postFile(packageName, fileItem, baseUrl) {
-  //   const filesData = new FormData();
-  //   filesData.append('upload', fileItem.file);
-  //   filesData.append('name', fileItem.fileName);
-  //   filesData.append('description', fileItem.fileDescription);
+  async function postFile(packageName, fileItem, baseUrl) {
+    const filesData = new FormData();
+    filesData.append('upload', fileItem.file);
+    filesData.append('name', fileItem.fileName);
+    filesData.append('description', fileItem.fileDescription);
 
-  //   return fetch(`${baseUrl}/api/dataset/${packageName}/resource/new`, {
-  //     method: 'POST',
-  //     credentials: 'same-origin',
-  //     body: filesData
-  //   });
-  // }
+    fetch(`${baseUrl}/api/dataset/${packageName}/resource/new`, {
+      method: 'POST',
+      credentials: 'same-origin',
+      body: filesData
+    });
+  }
 
-  function postFileSync(packageName, filesList, baseUrl) {
-    if (filesList.length === 1) {
-      const filesData = new FormData();
-      filesData.append('upload', fileItem.file);
-      filesData.append('name', fileItem.fileName);
-      filesData.append('description', fileItem.fileDescription);
-
-      return fetch(`${baseUrl}/api/dataset/${packageName}/resource/new`, {
-        method: 'POST',
-        credentials: 'same-origin',
-        body: filesData
-      });
-    }
-
-    return postFileSync(packageName, filesList(0, filesList.length - 1), baseUrl);
+  function postAllFilesSync(packageName, filesList, baseUrl) {
+    postFile(packageName, filesList[0], baseUrl)
+      .then(() => {
+        if (filesList.length === 0) return;
+        postAllFilesSync(packageName, filesList.slice(1), baseUrl);
+      })
+      .catch((error) => console.log(error));
   }
 
   function postDatasetRequest(baseUrl, state = 'active') {
@@ -640,12 +638,7 @@ import Dataset from './dataset.js';
     })
       .then((response) => response.json())
       .then((data) => {
-        dataset.files.forEach((fileItem) => postFile);
-        // Promise.all(dataset.files.map((fileItem) => postFile(data.pkg_name, fileItem, baseUrl)))
-        //   .then((results) => {
-        //     results.forEach((result) => console.log(result));
-        //   })
-        //   .catch((error) => console.log(error));
+        postAllFilesSync(data.pkg_name, dataset.files, baseUrl);
       })
       .catch((error) => console.log(error));
   }

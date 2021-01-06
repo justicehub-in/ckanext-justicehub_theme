@@ -688,20 +688,20 @@ footer h3 {
 }
 
 .error-message {
-    color: red !important;
+  color: red !important;
 }
 
 .flash-messages {
-    top: 0;
-    right: 0;
-    position: fixed;
-    margin: 50px;
-    z-index: 9999;
+  top: 0;
+  right: 0;
+  position: fixed;
+  margin: 50px;
+  z-index: 9999;
 }
 
 .close {
-    padding-left: 10px;
-    padding-top: 2px
+  padding-left: 10px;
+  padding-top: 2px;
 }
 
 @media (max-width: 990px) {
@@ -1148,11 +1148,31 @@ footer h3 {
 }
 
 .file-upload {
-  margin-top: 50px;
+  width: 100%;
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 0.5px solid #110516;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(500px, 100%), 1fr));
   grid-gap: 10rem;
   align-items: center;
+  position: relative;
+}
+
+.file-upload:first-of-type {
+  border-top: none;
+}
+
+.remove-input {
+  position: absolute;
+  padding: 2px;
+  top: 10px;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  box-sizing: content-box;
+  color: var(--primary-color);
+  cursor: pointer;
 }
 
 .file-upload__name {
@@ -1169,6 +1189,11 @@ footer h3 {
 
 .file-upload__name .name-field h4 {
   margin-top: 0;
+}
+
+.file-upload__name .name-field h4 span {
+  font-weight: 300;
+  font-size: 14px;
 }
 
 .upload-box {
@@ -1212,6 +1237,9 @@ footer h3 {
   max-width: 550px;
   width: 100%;
   justify-content: space-between;
+  margin-top: 30px;
+  padding-top: 20px;
+  position: relative;
 }
 
 .item-addition--link {
@@ -1404,4 +1432,62 @@ footer h3 {
   cursor: pointer;
 }
 
+/* multi select */
 
+.multiselect-container > * {
+  width: 100%;
+}
+
+.multiselect-option {
+  border: none;
+}
+
+.multiselect-option .form-check {
+  display: flex;
+  margin: 0;
+  padding: 4px !important;
+}
+
+@media (max-width: 768px) {
+  .data-upload-header {
+    background-color: #fef9f8;
+  }
+  .steps-row {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .step-indicator {
+    display: block;
+    text-align: left;
+    justify-content: center;
+    margin: 5px 16px;
+    padding: 10px;
+    background-color: var(--primary-background-color);
+  }
+
+  .step-indicator p {
+    margin-top: 0;
+  }
+
+  .step-indicator__icon-container {
+    display: none;
+  }
+
+  .data-upload-section {
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    margin: 0 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .file-upload {
+    grid-template-columns: 1fr;
+  }
+
+  .file-upload__name {
+    flex-direction: column;
+  }
+}
