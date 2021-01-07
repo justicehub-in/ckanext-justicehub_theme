@@ -1082,10 +1082,17 @@ footer h3 {
 }
 
 .step-indicator p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-weight: 500;
   margin-top: 20px;
   margin-bottom: 0;
   color: #5b575b;
+}
+
+.step-indicator p svg {
+  display: none;
 }
 
 .step-indicator.active > * {
@@ -1102,6 +1109,11 @@ footer h3 {
 
 .step-indicator.done .step-indicator__icon-container {
   border: 1px solid var(--primary-color);
+}
+
+.step-indicator.done p svg {
+  display: block;
+  margin-left: 4px;
 }
 
 /* data upload sections that have fields*/

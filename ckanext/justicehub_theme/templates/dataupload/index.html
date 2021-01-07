@@ -32,25 +32,25 @@
             <div class="step-indicator__icon-container">
               <span class="iconify" data-icon="ant-design:file-text-outlined" data-inline="false"></span>
             </div>
-            <p>Add Files</p>
+            <p>Add Files <span class="iconify" data-icon="mdi:check-circle" data-inline="false"></span></p>
           </li>
           <li class="step-indicator" data-value="2">
             <div class="step-indicator__icon-container">
               <span class="iconify" data-icon="jam:stamp-f" data-inline="false"></span>
             </div>
-            <p>Ownership</p>
+            <p>Ownership <span class="iconify" data-icon="mdi:check-circle" data-inline="false"></span></p>
           </li>
           <li class="step-indicator" data-value="3">
             <div class="step-indicator__icon-container">
               <span class="iconify" data-icon="mdi:calendar-today" data-inline="false"></span>
             </div>
-            <p>Data Relevancy</p>
+            <p>Data Relevancy <span class="iconify" data-icon="mdi:check-circle" data-inline="false"></span></p>
           </li>
           <li class="step-indicator" data-value="4">
             <div class="step-indicator__icon-container">
               <span class="iconify" data-icon="carbon:data-class" data-inline="false"></span>
             </div>
-            <p>Source of Data</p>
+            <p>Source of Data <span class="iconify" data-icon="mdi:check-circle" data-inline="false"></span></p>
           </li>
         </ul>
       </div>
@@ -201,14 +201,7 @@
               <input type="radio" name="region-options" id="partialIndia" value="Partial India" />
               Specific Indian State(s)
             </label>
-            <select id="example-getting-started" multiple="multiple">
-              <option value="cheese">Cheese</option>
-              <option value="tomatoes">Tomatoes</option>
-              <option value="mozarella">Mozzarella</option>
-              <option value="mushrooms">Mushrooms</option>
-              <option value="pepperoni">Pepperoni</option>
-              <option value="onions">Onions</option>
-            </select>
+            <select style="display: none" id="multi-select-states" multiple="multiple"></select>
           </div>
           <div class="radio">
             <label>

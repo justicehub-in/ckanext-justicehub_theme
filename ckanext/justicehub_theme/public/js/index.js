@@ -273,23 +273,26 @@ import Dataset from './dataset.js';
 
   // data relevancy section
   const regionRadioOptions = document.querySelectorAll(`input[name="region-options"]`);
-  const otherStatesInput = document.getElementById('otherStatesInput');
+
+  const statesMultiSelect = document.getElementById('multi-select-states');
+  const navtiveMultiSelect = document.getElementsByClassName('multiselect-native-select');
 
   $(document).ready(function () {
     $('#example-getting-started').multiselect();
   });
 
   const otherCountriesInput = document.getElementById('otherCountriesInput');
+  
   regionRadioOptions.forEach((option) =>
     option.addEventListener('click', (event) => {
       if (event.target.checked && event.target.value === 'Partial India') {
-        otherStatesInput.style.display = 'inline-block';
+        navtiveMultiSelect.style.display = 'inline-block';
         otherCountriesInput.style.display = 'none';
       } else if (event.target.checked && event.target.value === 'Other countries') {
-        otherStatesInput.style.display = 'none';
+        navtiveMultiSelect.style.display = 'none';
         otherCountriesInput.style.display = 'inline-block';
       } else {
-        otherStatesInput.style.display = 'none';
+        navtiveMultiSelect.style.display = 'none';
         otherCountriesInput.style.display = 'none';
       }
     })
@@ -321,11 +324,49 @@ import Dataset from './dataset.js';
     'December'
   ];
 
+  const INDIAN_STATES = [
+    'Andhra Pradesh',
+    'Arunachal Pradesh',
+    'Assam',
+    'Bihar',
+    'Chhattisgarh',
+    'Goa',
+    'Gujarat',
+    'Haryana',
+    'Himachal Pradesh',
+    'Jharkhand',
+    'Karnataka',
+    'Kerala',
+    'Madhya Pradesh',
+    'Maharashtra',
+    'Manipur',
+    'Meghalaya',
+    'Mizoram',
+    'Nagaland',
+    'Odisha',
+    'Punjab',
+    'Rajasthan',
+    'Sikkim',
+    'Tamil Nadu',
+    'Telangana',
+    'Tripura',
+    'Uttar Pradesh',
+    'Uttarakhand',
+    'West Bengal'
+  ];
+
   let monthOptions = '';
 
   MONTHS.forEach((month) => {
     monthOptions = monthOptions + `<option value="${month}">${month}</option>`;
   });
+
+  let stateOptions = '';
+  INDIAN_STATES.forEach((state) => {
+    stateOptions = stateOptions + `<option value="${state}">${state}</option>`;
+  });
+
+  statesMultiSelect.innerHTML = stateOptions;
 
   const monthDropdowns = document.querySelectorAll('.months-select');
   monthDropdowns.forEach((dropdown) => {
