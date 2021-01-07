@@ -20,7 +20,7 @@
     {% include "header.html" %}
     <div class="data-upload-header">
       <div class="custom-container">
-        <a href="#" class="exit-flow"
+        <a href="/" class="exit-flow"
           ><span class="iconify" data-icon="line-md:chevron-left" data-inline="false"></span>Exit</a
         >
         <h1>Upload Data</h1>
@@ -192,7 +192,7 @@
           <h4>Which region does this data cover?</h4>
           <div class="radio">
             <label>
-              <input type="radio" name="region-options" id="allIndia" value="All India" />
+              <input type="radio" name="region-options" id="allIndia" value="All India" checked />
               All India
             </label>
           </div>
@@ -242,13 +242,13 @@
           <h4>Which language is the data in?</h4>
           <div class="radio">
             <label>
-              <input type="radio" name="language-options" id="english" value="english" />
+              <input type="radio" name="language-options" id="english" value="English" />
               English
             </label>
           </div>
           <div class="radio">
             <label>
-              <input type="radio" name="language-options" id="hindi" value="hindi" />
+              <input type="radio" name="language-options" id="hindi" value="Hindi" />
               Hindi
             </label>
           </div>
@@ -257,7 +257,7 @@
               <input type="radio" name="language-options" id="other" value="other" />
               Other
             </label>
-            <input type="text" style="display: none" id="otherLanguageInput" />
+            <input type="text" style="display: none; margin-left: 14px; font-size: 14px;" id="otherLanguageInput" />
           </div>
         </div>
       </div>

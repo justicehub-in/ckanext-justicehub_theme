@@ -170,7 +170,7 @@ li.dropdown:focus {
   padding-left: 16px;
 }
 
-.modal-content {
+.modal-content.generic-modal-content {
   max-width: 450px;
   width: 100%;
   box-sizing: border-box;
@@ -219,7 +219,7 @@ li.dropdown:focus {
   line-height: 20px;
 }
 
-.modal-body {
+.modal-body.generic-modal-body {
   max-width: 400px;
   width: 100%;
   padding-left: 36px;
@@ -229,18 +229,18 @@ li.dropdown:focus {
   margin: 0 auto;
 }
 
-.modal-body .input-group {
+.modal-body.generic-modal-body .input-group {
   display: flex;
   flex-direction: column;
   margin-top: 14px;
   margin-bottom: 14px;
 }
 
-.modal-body .input-group label {
+.modal-body.generic-modal-body .input-group label {
   font-size: 12px;
 }
 
-.modal-body span {
+.modal-body.generic-modal-body span {
   display: block;
   font-size: 10px;
   text-align: center;
@@ -248,26 +248,26 @@ li.dropdown:focus {
   margin-top: 18px;
 }
 
-.modal-body span a {
+.modal-body.generic-modal-body span a {
   color: #338ccd;
   text-decoration: underline;
 }
 
-.modal-body button {
+.modal-body.generic-modal-body button {
   width: 100%;
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 500;
 }
 
-.modal-body p {
+.modal-body.generic-modal-body p {
   color: #6c666f;
   text-align: center;
   margin-top: 28px;
   margin-bottom: 28px;
 }
 
-.modal-body p a {
+.modal-body.generic-modal-body p a {
   text-transform: uppercase;
   color: #338ccd;
   font-weight: 500;
@@ -1284,6 +1284,7 @@ footer h3 {
 .period {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 46%;
 }
 
@@ -1301,6 +1302,7 @@ footer h3 {
 
 .period select {
   width: 100%;
+  padding: 2px 0;
 }
 
 .period__year input {
@@ -1317,6 +1319,12 @@ footer h3 {
   max-height: 700px;
   height: 100%;
   overflow-y: scroll;
+  padding: 0 40px;
+}
+
+#previewDatasetModal .modal-footer {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .modal-body__data-section {
@@ -1408,6 +1416,10 @@ footer h3 {
   font-weight: 25px;
 }
 
+#submitDatasetButton {
+  margin: 0 20px;
+}
+
 /* tags */
 
 .tags-container {
@@ -1458,6 +1470,15 @@ footer h3 {
   width: 100%;
 }
 
+.multiselect-native-select .btn-group {
+  margin-left: 14px;
+}
+
+.multiselect-selected-text {
+  font-family: 'Montserrat', 'sans-serif';
+  font-size: 14px;
+}
+
 .multiselect-option {
   border: none;
 }
@@ -1466,6 +1487,27 @@ footer h3 {
   display: flex;
   margin: 0;
   padding: 4px !important;
+}
+
+/* utils */
+
+.loader {
+  width: 20px;
+  height: 20px;
+  margin: 0 24px;
+  border-radius: 50%;
+  border: 3px solid #ccc;
+  border-top: 3px solid var(--primary-color);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 768px) {

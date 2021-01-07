@@ -81,16 +81,19 @@ import Dataset from './dataset.js';
     {
       format: 'xls',
       backgroundColor: '#CEE1CE',
+      icon: 'vscode-icons:file-type-excel2',
       iconTemplate: '<span class="iconify" data-icon="vscode-icons:file-type-excel2" data-inline="false"></span>'
     },
     {
       format: 'pdf',
       backgroundColor: '#F8BE67',
+      icon: 'icomoon-free:file-pdf',
       iconTemplate: '<span class="iconify" data-icon="icomoon-free:file-pdf" data-inline="false"></span>'
     },
     {
       format: 'csv',
       backgroundColor: '#F8BE67',
+      icon: 'grommet-icons:document-csv',
       iconTemplate: '<span class="iconify" data-icon="grommet-icons:document-csv" data-inline="false"></span>'
     }
   ];
@@ -273,26 +276,23 @@ import Dataset from './dataset.js';
 
   // data relevancy section
   const regionRadioOptions = document.querySelectorAll(`input[name="region-options"]`);
-
   const statesMultiSelect = document.getElementById('multi-select-states');
-  const navtiveMultiSelect = document.getElementsByClassName('multiselect-native-select');
-
-  $(document).ready(function () {
-    $('#example-getting-started').multiselect();
-  });
-
   const otherCountriesInput = document.getElementById('otherCountriesInput');
-  
+
   regionRadioOptions.forEach((option) =>
     option.addEventListener('click', (event) => {
+      $('#multi-select-states').multiselect({
+        buttonClass: 'multi-states-btn'
+      });
+      const nativeMultiSelect = document.querySelector('span.multiselect-native-select');
       if (event.target.checked && event.target.value === 'Partial India') {
-        navtiveMultiSelect.style.display = 'inline-block';
+        nativeMultiSelect.style.display = 'inline-block';
         otherCountriesInput.style.display = 'none';
       } else if (event.target.checked && event.target.value === 'Other countries') {
-        navtiveMultiSelect.style.display = 'none';
+        nativeMultiSelect.style.display = 'none';
         otherCountriesInput.style.display = 'inline-block';
       } else {
-        navtiveMultiSelect.style.display = 'none';
+        nativeMultiSelect.style.display = 'none';
         otherCountriesInput.style.display = 'none';
       }
     })
@@ -374,12 +374,22 @@ import Dataset from './dataset.js';
   });
 
   function updateDatasetWithValuesFromRelevancySection() {
+    let region = [];
+    const regionRadioValue = getRadioValue('region-options');
+    if (regionRadioValue === 'Partial India') {
+      const statesButton = document.querySelector('.multi-states-btn');
+      region = statesButton.getAttribute('title').split(', ');
+    } else if (regionRadioValue == 'Other countries') {
+      region = document.getElementById('otherCountriesInput').value.split(', ');
+    } else {
+      region = [regionRadioValue];
+    }
+
     const language =
       getRadioValue('language-options') === 'other'
         ? getValueFromInputSelector('#otherLanguageInput')
         : getRadioValue('language-options');
     dataset.updateProperty('language', language);
-    const region = [getRadioValue('region-options')];
     dataset.updateProperty('region', region);
     dataset.updateProperty('timePeriod', {
       from: getTimePeriodDetailsFromSelector('.period--from'),
@@ -518,26 +528,35 @@ import Dataset from './dataset.js';
   // break this into multiple functions and call them upon clicking proceed at each section
 
   previewButton.addEventListener('click', () => {
-    // dataset.updateProperty('keywords', getValueFromInputSelector('#keywordsInput').split(','));
-    dataset.updateProperty('sources', getValueFromInputSelector('#sourcesInput').split(','));
     const references = document.querySelectorAll('.item-addition--reference');
     references.forEach((reference) => {
       dataset.addItemToListProperty('referenceLinks', getReferenceLinksFromReferenceElement(reference));
     });
 
-    function generateFilePreviewHTML(fileName = '', fileDescription, icon = 'vscode-icons:file-type-excel2') {
+    function generateFilePreviewHTML(file) {
+      let fileIcon = '';
+
+      if (file.file.type.indexOf('csv') > -1) {
+        fileIcon = getFileUploadBoxPropertyByFileType('csv', 'icon');
+      } else if (file.file.type.indexOf('spreadsheetml') > -1) {
+        fileIcon = getFileUploadBoxPropertyByFileType('xls', 'icon');
+      } else if (file.file.type.indexOf('pdf') > -1) {
+        fileIcon = getFileUploadBoxPropertyByFileType('pdf', 'icon');
+      }
+
       return `
-        <div class="file-summary">
+        <div class="file-summary" id="${file.fileId}">
           <div class="file-summary__icon-container">
-            <span class="iconify" data-icon="${icon}" data-inline="false"></span>
+            <span class="iconify" data-icon="${fileIcon}" data-inline="false"></span>
           </div>
           <div class="file-summary__text">
-            <h4>${fileName}</h4>
+            <h4>${file.fileName}</h4>
             <div class="file-summary__text__description">
               <p>Description:</p>
-              <p>${fileDescription}</p>
+              <p>${file.fileDescription}</p>
             </div>
           </div>
+          <div class="file-error" style="display: none; color: red;"></div>
         </div>
       `;
     }
@@ -545,11 +564,13 @@ import Dataset from './dataset.js';
     const dataRelevancyPreviewTableHTML = `
     <tr>
       <td>Region(s) covered:</td>
-      <td>${dataset.region.country}</td>
+      <td>${dataset.region.map((region) => ` <span>${region}</span>`)}</td>
     </tr>
     <tr>
       <td>Time period covered:</td>
-      <td>${dataset.timePeriod.from.month} ${dataset.timePeriod.from.year} - ${dataset.timePeriod.to.month} ${dataset.timePeriod.to.year}</td>
+      <td>${dataset.timePeriod.from.month} ${dataset.timePeriod.from.year} - ${dataset.timePeriod.to.month} ${
+      dataset.timePeriod.to.year
+    }</td>
     </tr>
     <tr>
       <td>Language:</td>
@@ -568,7 +589,9 @@ import Dataset from './dataset.js';
     </tr>
     <tr>
       <td>Primary Author(s): </td>
-      <td>${dataset.publisher.type}</td>
+      <td>
+      ${dataset.publisher.authors.map((author) => ` <span>${author.authorName}</span>`)}
+      </td>
     </tr>
   `;
 
@@ -583,15 +606,20 @@ import Dataset from './dataset.js';
     </tr>
     <tr>
       <td>Reference Links:</td>
-      <td>${dataset.referenceLinks[0].title} - ${dataset.referenceLinks[0].link}</td>
+      <td>
+        ${dataset.referenceLinks.map((reference) => ` <span>${reference.title} - ${reference.link}</span>`)}
+      </td>
     </tr>
   `;
-    // change the references links to get all the items
+
+    document.getElementById('submitDatasetButton').style.display = 'block';
+    if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
+
     document.querySelector('#filesListOnPreview').innerHTML = '';
     dataset.files.forEach((file) => {
       document
         .querySelector('#filesListOnPreview')
-        .insertAdjacentHTML('beforeend', generateFilePreviewHTML(file.fileName, file.fileDescription));
+        .insertAdjacentHTML('beforeend', generateFilePreviewHTML(file));
     });
 
     document.querySelector('#dataRelevancyPreviewTable').innerHTML = dataRelevancyPreviewTableHTML;
@@ -613,19 +641,10 @@ import Dataset from './dataset.js';
 
   const submitDatasetButton = document.getElementById('submitDatasetButton');
   submitDatasetButton.addEventListener('click', () => {
+    submitDatasetButton.style.display = 'none';
+    submitDatasetButton.insertAdjacentHTML('afterend', `<div class="loader"></div>`);
     postDatasetRequest('http://127.0.0.1:5000');
   });
-
-  // function getCookie(name) {
-  //   const cookieArray = document.cookie.split(';');
-  //   for (let cookie of cookieArray) {
-  //     const cookiePair = cookie.split('=');
-  //     if (name === cookiePair[0].trim()) {
-  //       return decodeURIComponent(cookiePair[1]);
-  //     }
-  //   }
-  //   return null;
-  // }
 
   // api calls
 
@@ -670,7 +689,14 @@ import Dataset from './dataset.js';
       .then(() => {
         postAllFilesSync(packageName, filesList.slice(1), baseUrl);
       })
-      .catch((error) => console.log(error.message));
+      .catch(() => {
+        const failedFileSummary = document.getElementById(`${filesList[0].fileId}`);
+        failedFileSummary.querySelector('file-error').style.display = 'block';
+        failedFileSummary.querySelector('file-error').innerHTML = "This file couldn't not be upload";
+
+        document.getElementById('submitDatasetButton').style.display = 'block';
+        if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
+      });
   }
 
   function postDatasetRequest(baseUrl, state = 'active') {
@@ -683,7 +709,16 @@ import Dataset from './dataset.js';
       .then((data) => {
         postAllFilesSync(data.pkg_name, dataset.files, baseUrl);
       })
-      .catch((error) => console.log(error))
-      .finally(() => showModal('#datasetUploadSuccessModal'));
+      .then(() => {
+        showModal('#datasetUploadSuccessModal');
+      })
+      .catch(() => {
+        const failedFileSummary = document.getElementById(`${dataset.files[0].fileId}`);
+        failedFileSummary.querySelector('file-error').style.display = 'block';
+        failedFileSummary.querySelector('file-error').innerHTML = "This file couldn't not be upload";
+
+        document.getElementById('submitDatasetButton').style.display = 'block';
+        if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
+      });
   }
 })();
