@@ -1096,6 +1096,14 @@ footer h3 {
   border: 1px solid white;
 }
 
+.step-indicator.done > * {
+  color: var(--primary-color);
+}
+
+.step-indicator.done .step-indicator__icon-container {
+  border: 1px solid var(--primary-color);
+}
+
 /* data upload sections that have fields*/
 
 .data-upload-section {

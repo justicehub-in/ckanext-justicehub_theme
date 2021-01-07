@@ -28,9 +28,14 @@ import Dataset from './dataset.js';
     stepIndicators.forEach((step) => {
       if (parseInt(step.dataset.value) === dataUploadSteps.activeStep.id) {
         step.classList.add('active');
-        return;
+        step.classList.remove('done');
+      } else if (parseInt(step.dataset.value) < dataUploadSteps.activeStep.id) {
+        step.classList.add('done');
+        step.classList.remove('active');
+      } else {
+        step.classList.remove('active');
+        step.classList.remove('done');
       }
-      step.classList.remove('active');
     });
   }
 
