@@ -281,9 +281,7 @@ import Dataset from './dataset.js';
 
   regionRadioOptions.forEach((option) =>
     option.addEventListener('click', (event) => {
-      $('#multi-select-states').multiselect({
-        buttonClass: 'multi-states-btn'
-      });
+      
       const nativeMultiSelect = document.querySelector('span.multiselect-native-select');
       if (event.target.checked && event.target.value === 'Partial India') {
         nativeMultiSelect.style.display = 'inline-block';
@@ -690,7 +688,7 @@ import Dataset from './dataset.js';
       .catch(() => {
         const failedFileSummary = document.getElementById(`${filesList[0].fileId}`);
         failedFileSummary.querySelector('file-error').style.display = 'block';
-        failedFileSummary.querySelector('file-error').innerHTML = "This file couldn't not be upload";
+        failedFileSummary.querySelector('file-error').innerHTML = 'This file could not be uploaded';
 
         document.getElementById('submitDatasetButton').style.display = 'block';
         if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
@@ -709,18 +707,17 @@ import Dataset from './dataset.js';
         postAllFilesSync(data.pkg_name, dataset.files, baseUrl);
       })
       .then(() => {
-        showModal('#datasetUploadSuccessModal');
+        window.location = '/message/success';
       })
       .catch((error) => {
-        console.log(error);
-        window.location = '/message/success';
+        console.log(error.message);
 
-        // const failedFileSummary = document.getElementById(`${dataset.files[0].fileId}`);
-        // failedFileSummary.querySelector('file-error').style.display = 'block';
-        // failedFileSummary.querySelector('file-error').innerHTML = "This file couldn't not be upload";
+        const failedFileSummary = document.getElementById(`${dataset.files[0].fileId}`);
+        failedFileSummary.querySelector('file-error').style.display = 'block';
+        failedFileSummary.querySelector('file-error').innerHTML = 'This file couldn not be uploaded';
 
-        // document.getElementById('submitDatasetButton').style.display = 'block';
-        // if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
+        document.getElementById('submitDatasetButton').style.display = 'block';
+        if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
       });
   }
 })();

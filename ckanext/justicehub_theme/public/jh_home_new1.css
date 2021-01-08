@@ -1479,6 +1479,10 @@ footer h3 {
   font-size: 14px;
 }
 
+.multiselect.dropdown-toggle {
+  width: 220px;
+}
+
 .multiselect-option {
   border: none;
 }
