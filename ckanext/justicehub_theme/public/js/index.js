@@ -673,7 +673,10 @@ import Dataset from './dataset.js';
   }
 
   function postAllFilesSync(packageName, filesList, baseUrl) {
-    if (filesList.length === 0) return;
+    if (filesList.length === 0) {
+      window.location = '/message/success';
+      return;
+    }
 
     const filesData = new FormData();
     filesData.append('upload', filesList[0].file);
@@ -709,12 +712,8 @@ import Dataset from './dataset.js';
         window.location = '/message/success';
         postAllFilesSync(data.pkg_name, dataset.files, baseUrl);
       })
-      .then(() => {
-        window.location = '/message/success';
-      })
       .catch((error) => {
         console.log(error.message);
-
         const failedFileSummary = document.getElementById(`${dataset.files[0].fileId}`);
         failedFileSummary.querySelector('file-error').style.display = 'block';
         failedFileSummary.querySelector('file-error').innerHTML = 'This file couldn not be uploaded';
