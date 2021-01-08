@@ -617,9 +617,7 @@ import Dataset from './dataset.js';
 
     document.querySelector('#filesListOnPreview').innerHTML = '';
     dataset.files.forEach((file) => {
-      document
-        .querySelector('#filesListOnPreview')
-        .insertAdjacentHTML('beforeend', generateFilePreviewHTML(file));
+      document.querySelector('#filesListOnPreview').insertAdjacentHTML('beforeend', generateFilePreviewHTML(file));
     });
 
     document.querySelector('#dataRelevancyPreviewTable').innerHTML = dataRelevancyPreviewTableHTML;
@@ -707,18 +705,22 @@ import Dataset from './dataset.js';
     })
       .then((response) => response.json())
       .then((data) => {
+        window.location = '/message/success';
         postAllFilesSync(data.pkg_name, dataset.files, baseUrl);
       })
       .then(() => {
         showModal('#datasetUploadSuccessModal');
       })
-      .catch(() => {
-        const failedFileSummary = document.getElementById(`${dataset.files[0].fileId}`);
-        failedFileSummary.querySelector('file-error').style.display = 'block';
-        failedFileSummary.querySelector('file-error').innerHTML = "This file couldn't not be upload";
+      .catch((error) => {
+        console.log(error);
+        window.location = '/message/success';
 
-        document.getElementById('submitDatasetButton').style.display = 'block';
-        if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
+        // const failedFileSummary = document.getElementById(`${dataset.files[0].fileId}`);
+        // failedFileSummary.querySelector('file-error').style.display = 'block';
+        // failedFileSummary.querySelector('file-error').innerHTML = "This file couldn't not be upload";
+
+        // document.getElementById('submitDatasetButton').style.display = 'block';
+        // if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
       });
   }
 })();
