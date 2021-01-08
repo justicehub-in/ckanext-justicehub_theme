@@ -281,16 +281,19 @@ import Dataset from './dataset.js';
 
   regionRadioOptions.forEach((option) =>
     option.addEventListener('click', (event) => {
-      
       const nativeMultiSelect = document.querySelector('span.multiselect-native-select');
+      const multiSelectToggle = document.querySelector('.multiselect.dropdown-toggle');
       if (event.target.checked && event.target.value === 'Partial India') {
         nativeMultiSelect.style.display = 'inline-block';
+        multiSelectToggle.style.display = 'inline-block';
         otherCountriesInput.style.display = 'none';
       } else if (event.target.checked && event.target.value === 'Other countries') {
         nativeMultiSelect.style.display = 'none';
+        multiSelectToggle.style.display = 'none';
         otherCountriesInput.style.display = 'inline-block';
       } else {
         nativeMultiSelect.style.display = 'none';
+        multiSelectToggle.style.display = 'none';
         otherCountriesInput.style.display = 'none';
       }
     })

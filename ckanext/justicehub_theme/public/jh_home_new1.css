@@ -1481,6 +1481,7 @@ footer h3 {
 
 .multiselect.dropdown-toggle {
   width: 220px;
+  display: none;
 }
 
 .multiselect-option {
