@@ -709,7 +709,6 @@ import Dataset from './dataset.js';
     })
       .then((response) => response.json())
       .then((data) => {
-        window.location = '/message/success';
         postAllFilesSync(data.pkg_name, dataset.files, baseUrl);
       })
       .catch((error) => {
