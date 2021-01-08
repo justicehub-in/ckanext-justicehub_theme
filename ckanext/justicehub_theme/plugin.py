@@ -65,14 +65,15 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         package_dict['tracking_summary'] = (
             model.TrackingSummary.get_for_package(package_dict['id']))
 
-        context = {'model': model, 'session': model.Session,
-                   'user': c.user, 'for_view': True,
-                   'auth_user_obj': c.userobj}
-        partner = toolkit.get_action('get_package_owner_details')(
-                context,
-                data_dict={'org_id': package_dict['owner_org']}
-        )
-        package_dict['partner'] = partner
+        # context = {'model': model, 'session': model.Session,
+        #            'user': c.user, 'for_view': True,
+        #            'auth_user_obj': c.userobj}
+        # print(package_dict)
+        # partner = toolkit.get_action('get_package_owner_details')(
+        #         context,
+        #         data_dict={'org_id': package_dict['owner_org']}
+        # )
+        # package_dict['partner'] = partner
         return package_dict
 
     def after_search(self, search_results, search_params):
@@ -100,11 +101,12 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         pass
 
     def after_show(self, context, pkg_dict):
-        partner = toolkit.get_action('get_package_owner_details')(
-                context,
-                data_dict={'org_id': pkg_dict['owner_org']}
-        )
-        pkg_dict['partner'] = partner
+        pass
+        # partner = toolkit.get_action('get_package_owner_details')(
+        #         context,
+        #         data_dict={'org_id': pkg_dict['owner_org']}
+        # )
+        # pkg_dict['partner'] = partner
 
     def before_index(self, pkg_dict):
         return pkg_dict
@@ -120,10 +122,16 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         map.connect('jhsubscribe', '/subscribe',
                     controller='ckanext.justicehub_theme.controllers:SubscribeController',
                     action='subscribe')
+        map.connect('jhupload', '/upload',
+                    controller='ckanext.justicehub_theme.controllers:SubscribeController',
+                    action='upload')
 
         return map
     
     def before_map(self, map):
+        map.connect('jhupload', '/upload',
+                    controller='ckanext.justicehub_theme.controllers:SubscribeController',
+                    action='upload')
         map.connect('jhorg_members', '/organization/members/{id}',
                     controller='ckanext.justicehub_theme.controllers:JHOrgController',
                     action='members')

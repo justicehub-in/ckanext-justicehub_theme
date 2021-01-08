@@ -15,6 +15,7 @@
     {{ h.snippet('widget/auth/forgot.html', id="forgotPasswordModal") }}
     {{ h.snippet('widget/auth/reset.html', id="resetPasswordModal") }}
     {{ h.snippet('widget/auth/feedback.html', id="feedbackModal") }}
+    {{ h.snippet('widget/auth/dataset_feedback.html', id="datasetFeedbackModal") }}
       <div class="custom-container">
         <div class="navbar-header">
           <img class="mobile-menu" src="/assets/icons/menu.svg" />
@@ -58,7 +59,7 @@
               ></a>
               <ul class="dropdown-menu">
                 <li><a href="/dataset">Explore Data</a></li>
-                <li><a href="/dataset/new">Contribute Data</a></li>
+                <li><a href="/upload">Contribute Data</a></li>
               </ul>
             </li>
 

@@ -103,3 +103,6 @@ class SubscribeController(base.BaseController):
         tag_response = requests.request("POST", tag_url, headers=headers, data = json.dumps(payload))
 
         return response.text.encode('utf8')
+
+    def upload(self):
+        return plugins.toolkit.render('dataupload/index.html')
