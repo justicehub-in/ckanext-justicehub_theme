@@ -642,7 +642,7 @@ import Dataset from './dataset.js';
   submitDatasetButton.addEventListener('click', () => {
     submitDatasetButton.style.display = 'none';
     submitDatasetButton.insertAdjacentHTML('afterend', `<div class="loader"></div>`);
-    postDatasetRequest('http://127.0.0.1:5000');
+    postDatasetRequest('https://staging.justicehub.in');
   });
 
   // api calls
