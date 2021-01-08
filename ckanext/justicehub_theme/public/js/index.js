@@ -281,18 +281,19 @@ import Dataset from './dataset.js';
 
   regionRadioOptions.forEach((option) =>
     option.addEventListener('click', (event) => {
-      $('#multi-select-states').multiselect({
-        buttonClass: 'multi-states-btn'
-      });
       const nativeMultiSelect = document.querySelector('span.multiselect-native-select');
+      const multiSelectToggle = document.querySelector('.multiselect.dropdown-toggle');
       if (event.target.checked && event.target.value === 'Partial India') {
         nativeMultiSelect.style.display = 'inline-block';
+        multiSelectToggle.style.display = 'inline-block';
         otherCountriesInput.style.display = 'none';
       } else if (event.target.checked && event.target.value === 'Other countries') {
         nativeMultiSelect.style.display = 'none';
+        multiSelectToggle.style.display = 'none';
         otherCountriesInput.style.display = 'inline-block';
       } else {
         nativeMultiSelect.style.display = 'none';
+        multiSelectToggle.style.display = 'none';
         otherCountriesInput.style.display = 'none';
       }
     })
@@ -672,7 +673,10 @@ import Dataset from './dataset.js';
   }
 
   function postAllFilesSync(packageName, filesList, baseUrl) {
-    if (filesList.length === 0) return;
+    if (filesList.length === 0) {
+      window.location = '/message/success';
+      return;
+    }
 
     const filesData = new FormData();
     filesData.append('upload', filesList[0].file);
@@ -690,7 +694,7 @@ import Dataset from './dataset.js';
       .catch(() => {
         const failedFileSummary = document.getElementById(`${filesList[0].fileId}`);
         failedFileSummary.querySelector('file-error').style.display = 'block';
-        failedFileSummary.querySelector('file-error').innerHTML = "This file couldn't not be upload";
+        failedFileSummary.querySelector('file-error').innerHTML = 'This file could not be uploaded';
 
         document.getElementById('submitDatasetButton').style.display = 'block';
         if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
@@ -708,19 +712,14 @@ import Dataset from './dataset.js';
         window.location = '/message/success';
         postAllFilesSync(data.pkg_name, dataset.files, baseUrl);
       })
-      .then(() => {
-        showModal('#datasetUploadSuccessModal');
-      })
       .catch((error) => {
-        console.log(error);
-        window.location = '/message/success';
+        console.log(error.message);
+        const failedFileSummary = document.getElementById(`${dataset.files[0].fileId}`);
+        failedFileSummary.querySelector('file-error').style.display = 'block';
+        failedFileSummary.querySelector('file-error').innerHTML = 'This file couldn not be uploaded';
 
-        // const failedFileSummary = document.getElementById(`${dataset.files[0].fileId}`);
-        // failedFileSummary.querySelector('file-error').style.display = 'block';
-        // failedFileSummary.querySelector('file-error').innerHTML = "This file couldn't not be upload";
-
-        // document.getElementById('submitDatasetButton').style.display = 'block';
-        // if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
+        document.getElementById('submitDatasetButton').style.display = 'block';
+        if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
       });
   }
 })();

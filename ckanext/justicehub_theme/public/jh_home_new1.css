@@ -1466,6 +1466,11 @@ footer h3 {
 
 /* multi select */
 
+.multiselect-container {
+  overflow-y: scroll;
+  height: 300px;
+}
+
 .multiselect-container > * {
   width: 100%;
 }
@@ -1477,6 +1482,11 @@ footer h3 {
 .multiselect-selected-text {
   font-family: 'Montserrat', 'sans-serif';
   font-size: 14px;
+}
+
+.multiselect.dropdown-toggle {
+  width: 220px;
+  display: none;
 }
 
 .multiselect-option {
