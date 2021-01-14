@@ -11,6 +11,7 @@ import ckan.lib.plugins as plugins
 import ckan.logic as logic
 import ckan.model as model
 from ckan.common import c, request
+import ckan.lib.helpers as h
 
 clean_dict = logic.clean_dict
 parse_params = logic.parse_params
@@ -105,4 +106,7 @@ class SubscribeController(base.BaseController):
         return response.text.encode('utf8')
 
     def upload(self):
-        return plugins.toolkit.render('dataupload/index.html')
+        if c.user:
+            return plugins.toolkit.render('dataupload/index.html')
+        else:
+            h.redirect_to('/login')
