@@ -71,11 +71,11 @@ import Dataset from './dataset.js';
 
   // step indicator click handlers
 
-  stepIndicators.forEach((step) => {
-    step.addEventListener('click', () => {
-      dataUploadSteps.setActiveStep(parseInt(step.dataset.value), updateActiveSectionDOM);
-    });
-  });
+  // stepIndicators.forEach((step) => {
+  //   step.addEventListener('click', () => {
+  //     dataUploadSteps.setActiveStep(parseInt(step.dataset.value), updateActiveSectionDOM);
+  //   });
+  // });
 
   // file upload section
 
@@ -532,44 +532,43 @@ import Dataset from './dataset.js';
 
   // break this into multiple functions and call them upon clicking proceed at each section
 
-  previewButton.addEventListener('click', () => {
-    const references = document.querySelectorAll('.item-addition--reference');
-    references.forEach((reference) => {
-      dataset.addItemToListProperty('referenceLinks', getReferenceLinksFromReferenceElement(reference));
-    });
+  function generateFilePreviewHTML(file) {
+    let fileIcon = '';
 
-    function generateFilePreviewHTML(file) {
-      let fileIcon = '';
-
-      if (file.file.type.indexOf('csv') > -1) {
-        fileIcon = getFileUploadBoxPropertyByFileType('csv', 'icon');
-      } else if (file.file.type.indexOf('spreadsheetml') > -1) {
-        fileIcon = getFileUploadBoxPropertyByFileType('xls', 'icon');
-      } else if (file.file.type.indexOf('pdf') > -1) {
-        fileIcon = getFileUploadBoxPropertyByFileType('pdf', 'icon');
-      }
-
-      return `
-        <div class="file-summary" id="${file.fileId}">
-          <div class="file-summary__icon-container">
-            <span class="iconify" data-icon="${fileIcon}" data-inline="false"></span>
-          </div>
-          <div class="file-summary__text">
-            <h4>${file.fileName}</h4>
-            <div class="file-summary__text__description">
-              <p>Description:</p>
-              <p>${file.fileDescription}</p>
-              <div class="file-error" style="color: red;"></div>
-            </div>
-          </div>
-        </div>
-      `;
+    if (file.file.type.indexOf('csv') > -1) {
+      fileIcon = getFileUploadBoxPropertyByFileType('csv', 'icon');
+    } else if (file.file.type.indexOf('spreadsheetml') > -1) {
+      fileIcon = getFileUploadBoxPropertyByFileType('xls', 'icon');
+    } else if (file.file.type.indexOf('pdf') > -1) {
+      fileIcon = getFileUploadBoxPropertyByFileType('pdf', 'icon');
     }
 
-    const dataRelevancyPreviewTableHTML = `
+    return `
+      <div class="file-summary" id="${file.fileId}">
+        <div class="file-summary__icon-container">
+          <span class="iconify" data-icon="${fileIcon}" data-inline="false"></span>
+        </div>
+        <div class="file-summary__text">
+          <h4>${file.fileName}</h4>
+          <div class="file-summary__text__description">
+            <p>Description:</p>
+            <p>${file.fileDescription}</p>
+            <div class="file-error" style="color: red;"></div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function generateDataRelevancyPreviewTableHTML(dataset) {
+    return `
     <tr>
       <td>Region(s) covered:</td>
-      <td>${dataset.region?.map((region) => ` <span>${region}</span>`)}</td>
+      <td>${
+        dataset.region
+          ? dataset.region.map((region) => ` <span>${region}</span>`)
+          : `<span style="color:red;">No regions selected</span>`
+      }</td>
     </tr>
     <tr>
       <td>Time period covered:</td>
@@ -582,32 +581,21 @@ import Dataset from './dataset.js';
       <td>${dataset.language}</td>
     </tr>
   `;
+  }
 
-    const ownershipPreviewTableHTML = `
-    <tr>
-      <td>Licensing permissions:</td>
-      <td>(${dataset.license.licenseName}) ${dataset.license.licenseDescription}</td>
-    </tr>
-    <tr>
-      <td>Viewing Permissions:</td>
-      <td>${dataset.viewPermission}</td>
-    </tr>
-    <tr>
-      <td>Primary Author(s): </td>
-      <td>
-      ${dataset.publisher.authors.map((author) => ` <span>${author.authorName}</span>`)}
-      </td>
-    </tr>
-  `;
-
-    const sourcePreviewTableHTML = `
+  function generateSourcePreviewTableHTML(dataset) {
+    return `
     <tr>
       <td>Keywords:</td>
-      <td>${dataset.keywords.join(', ')}</td>
+      <td>${
+        dataset.keywords.length ? dataset.keywords.join(', ') : `<span style="color:red;">No keywords entered</span>`
+      }</td>
     </tr>
     <tr>
       <td>Data Source(s):</td>
-      <td>${dataset.sources.join(', ')}</td>
+      <td>${
+        dataset.sources.length ? dataset.sources.join(', ') : `<span style="color:red;">No sources entered</span>`
+      }</td>
     </tr>
     <tr>
       <td>Reference Links:</td>
@@ -616,6 +604,40 @@ import Dataset from './dataset.js';
       </td>
     </tr>
   `;
+  }
+
+  function generateOwnershipPreviewTableHTML(dataset) {
+    return `
+  <tr>
+    <td>Licensing permissions:</td>
+    <td>(${dataset.license.licenseName}) ${dataset.license.licenseDescription}</td>
+  </tr>
+  <tr>
+    <td>Viewing Permissions:</td>
+    <td>${dataset.viewPermission}</td>
+  </tr>
+  <tr>
+    <td>Primary Author(s): </td>
+    <td>
+    ${
+      dataset.publisher.authors[0].authorName
+        ? dataset.publisher.authors.map((author) => ` <span>${author.authorName}</span>`)
+        : `<span style="color:red;">No publishers entered</span>`
+    }
+    </td>
+  </tr>
+`;
+  }
+
+  previewButton.addEventListener('click', () => {
+    const references = document.querySelectorAll('.item-addition--reference');
+
+    let referenceList = [];
+    references.forEach((reference) => {
+      referenceList.push(getReferenceLinksFromReferenceElement(reference));
+    });
+
+    dataset.updateProperty('referenceLinks', referenceList);
 
     document.getElementById('submitDatasetButton').style.display = 'block';
     if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
@@ -625,9 +647,9 @@ import Dataset from './dataset.js';
       document.querySelector('#filesListOnPreview').insertAdjacentHTML('beforeend', generateFilePreviewHTML(file));
     });
 
-    document.querySelector('#dataRelevancyPreviewTable').innerHTML = dataRelevancyPreviewTableHTML;
-    document.querySelector('#ownershipPreviewTable').innerHTML = ownershipPreviewTableHTML;
-    document.querySelector('#sourcePreviewTable').innerHTML = sourcePreviewTableHTML;
+    document.querySelector('#dataRelevancyPreviewTable').innerHTML = generateDataRelevancyPreviewTableHTML(dataset);
+    document.querySelector('#ownershipPreviewTable').innerHTML = generateOwnershipPreviewTableHTML(dataset);
+    document.querySelector('#sourcePreviewTable').innerHTML = generateSourcePreviewTableHTML(dataset);
     document.querySelector('#datasetNameOnPreviewModal').innerHTML = dataset.name;
 
     console.log(dataset);
@@ -648,6 +670,15 @@ import Dataset from './dataset.js';
     submitDatasetButton.insertAdjacentHTML('afterend', `<div class="loader"></div>`);
     postDatasetRequest();
   });
+
+  function areMandatoryFieldsEmpty() {
+    return (
+      !dataset.name ||
+      !dataset.publisher.authors[0].authorName ||
+      !dataset.keywords.length ||
+      !dataset.sources.length
+    );
+  }
 
   // api calls
 
@@ -707,6 +738,19 @@ import Dataset from './dataset.js';
   }
 
   function postDatasetRequest(state = 'active') {
+    const modalBody = document.querySelector('#previewDatasetModal .modal-body');
+    const existingErrorMessageElement = modalBody.querySelector('.dataset-fail');
+    if (existingErrorMessageElement) {
+      existingErrorMessageElement.remove();
+    }
+    console.log(areMandatoryFieldsEmpty());
+    if (areMandatoryFieldsEmpty()) {
+      modalBody.insertAdjacentHTML(
+        'afterbegin',
+        `<p class="dataset-fail" style="color:red;">Some fields are empty. Please populate them.</p>`
+      );
+      return;
+    }
     fetch(`${BASE_URL}/api/dataset/new`, {
       method: 'POST',
       credentials: 'same-origin',
@@ -720,14 +764,10 @@ import Dataset from './dataset.js';
       })
       .catch((error) => {
         console.log(error.message);
-        const modalBody = document.querySelector('#previewDatasetModal .modal-body');
         modalBody.insertAdjacentHTML(
           'afterbegin',
-          `<p style="color:red;">${error.message} - Couldn't upload dataset. Please try again.</p>`
+          `<p class="dataset-fail" style="color:red;">${error.message} - Couldn't upload dataset. Please try again.</p>`
         );
-        // const failedFileSummary = document.getElementById(`${dataset.files[0].fileId}`);
-        // failedFileSummary.querySelector('file-error').style.display = 'block';
-        // failedFileSummary.querySelector('file-error').innerHTML = 'This file couldn not be uploaded';
 
         document.getElementById('submitDatasetButton').style.display = 'block';
         if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
