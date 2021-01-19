@@ -8,6 +8,8 @@ import Dataset from './dataset.js';
   const dataUploadSections = document.querySelectorAll('.data-upload-section');
   const stepIndicators = document.querySelectorAll('.step-indicator');
 
+  const BASE_URL = 'http://65.0.108.18';
+
   // functions to update DOM
 
   function scrollToTop() {
@@ -136,6 +138,8 @@ import Dataset from './dataset.js';
   const addMoreFilesButton = document.querySelector('.add-more--files');
 
   addMoreFilesButton.addEventListener('click', () => {
+    const numberOfFileInputs = document.querySelectorAll('.file-upload');
+    if (numberOfFileInputs.length >= 5) return;
     const fileUploadForm = document.querySelector('.data-upload-section__form__field--file');
     fileUploadForm.insertAdjacentHTML('beforeend', generateFileUploadField(Math.random()));
   });
@@ -555,9 +559,9 @@ import Dataset from './dataset.js';
             <div class="file-summary__text__description">
               <p>Description:</p>
               <p>${file.fileDescription}</p>
+              <div class="file-error" style="color: red;"></div>
             </div>
           </div>
-          <div class="file-error" style="display: none; color: red;"></div>
         </div>
       `;
     }
@@ -565,7 +569,7 @@ import Dataset from './dataset.js';
     const dataRelevancyPreviewTableHTML = `
     <tr>
       <td>Region(s) covered:</td>
-      <td>${dataset.region.map((region) => ` <span>${region}</span>`)}</td>
+      <td>${dataset.region?.map((region) => ` <span>${region}</span>`)}</td>
     </tr>
     <tr>
       <td>Time period covered:</td>
@@ -642,7 +646,7 @@ import Dataset from './dataset.js';
   submitDatasetButton.addEventListener('click', () => {
     submitDatasetButton.style.display = 'none';
     submitDatasetButton.insertAdjacentHTML('afterend', `<div class="loader"></div>`);
-    postDatasetRequest('https://staging.justicehub.in');
+    postDatasetRequest();
   });
 
   // api calls
@@ -672,7 +676,7 @@ import Dataset from './dataset.js';
     return metaData;
   }
 
-  function postAllFilesSync(packageName, filesList, baseUrl) {
+  function postAllFilesSync(packageName, filesList) {
     if (filesList.length === 0) {
       window.location = '/message/success';
       return;
@@ -683,13 +687,13 @@ import Dataset from './dataset.js';
     filesData.append('name', filesList[0].fileName);
     filesData.append('description', filesList[0].fileDescription);
 
-    fetch(`${baseUrl}/api/dataset/${packageName}/resource/new`, {
+    fetch(`${BASE_URL}/api/dataset/${packageName}/resource/new`, {
       method: 'POST',
       credentials: 'same-origin',
       body: filesData
     })
       .then(() => {
-        postAllFilesSync(packageName, filesList.slice(1), baseUrl);
+        postAllFilesSync(packageName, filesList.slice(1));
       })
       .catch(() => {
         const failedFileSummary = document.getElementById(`${filesList[0].fileId}`);
@@ -698,24 +702,32 @@ import Dataset from './dataset.js';
 
         document.getElementById('submitDatasetButton').style.display = 'block';
         if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
+        postAllFilesSync(packageName, filesList.slice(1));
       });
   }
 
-  function postDatasetRequest(baseUrl, state = 'active') {
-    fetch(`${baseUrl}/api/dataset/new`, {
+  function postDatasetRequest(state = 'active') {
+    fetch(`${BASE_URL}/api/dataset/new`, {
       method: 'POST',
       credentials: 'same-origin',
       body: generateFormDataForPostingMetaData(state)
     })
       .then((response) => response.json())
       .then((data) => {
-        postAllFilesSync(data.pkg_name, dataset.files, baseUrl);
+        if (dataset.files) {
+          postAllFilesSync(data.pkg_name, dataset.files, BASE_URL);
+        }
       })
       .catch((error) => {
         console.log(error.message);
-        const failedFileSummary = document.getElementById(`${dataset.files[0].fileId}`);
-        failedFileSummary.querySelector('file-error').style.display = 'block';
-        failedFileSummary.querySelector('file-error').innerHTML = 'This file couldn not be uploaded';
+        const modalBody = document.querySelector('#previewDatasetModal .modal-body');
+        modalBody.insertAdjacentHTML(
+          'afterbegin',
+          `<p style="color:red;">${error.message} - Couldn't upload dataset. Please try again.</p>`
+        );
+        // const failedFileSummary = document.getElementById(`${dataset.files[0].fileId}`);
+        // failedFileSummary.querySelector('file-error').style.display = 'block';
+        // failedFileSummary.querySelector('file-error').innerHTML = 'This file couldn not be uploaded';
 
         document.getElementById('submitDatasetButton').style.display = 'block';
         if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
