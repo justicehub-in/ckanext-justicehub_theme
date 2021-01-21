@@ -177,6 +177,11 @@ import Dataset from './dataset.js';
   function updateDatasetWithValuesFromFilesSection() {
     dataset.updateProperty('files', []);
     dataset.updateProperty('name', getValueFromInputSelector('#datasetNameField'));
+
+    if (!getValueFromInputSelector('#datasetNameField')) {
+      document.querySelector(".step-indicator[data-value='1']").classList.remove('done');
+    }
+
     const fileUploadInputs = document.querySelectorAll('.file-upload');
     fileUploadInputs.forEach((file) => {
       if (getFileDetailsFromFileUploadElement(file).fileName) {
@@ -261,6 +266,9 @@ import Dataset from './dataset.js';
     authors.forEach((author) => {
       publisher.authors.push(getAuthorDetailsFromAuthorAdditionElement(author));
     });
+    if (!publisher.authors) {
+      document.querySelector(".step-indicator[data-value='2']").classList.remove('done');
+    }
     dataset.updateProperty('publisher', publisher);
   }
 
@@ -395,6 +403,10 @@ import Dataset from './dataset.js';
       from: getTimePeriodDetailsFromSelector('.period--from'),
       to: getTimePeriodDetailsFromSelector('.period--to')
     });
+
+    if (!dataset.timePeriod.from.year && !dataset.timePeriod.to.year && !dataset.language) {
+      document.querySelector(".step-indicator[data-value='3']").classList.remove('done');
+    }
   }
 
   // const saveOnRelevancySectionButton = document.getElementById('saveOnRelevancySectionButton');
@@ -684,7 +696,13 @@ import Dataset from './dataset.js';
 
   function areMandatoryFieldsEmpty() {
     return (
-      !dataset.name || !dataset.publisher.authors[0].authorName || !dataset.keywords.length || !dataset.sources.length
+      !dataset.name ||
+      !dataset.publisher.authors[0].authorName ||
+      !dataset.keywords.length ||
+      !dataset.sources.length ||
+      !dataset.timePeriod.from.year ||
+      !dataset.timePeriod.to.year ||
+      !dataset.language
     );
   }
 
