@@ -54,8 +54,6 @@ import Dataset from './dataset.js';
 
   // remove file inputs
   function removeFileInput(event) {
-    console.log('file upload section is clicked');
-    console.log(event.target.classList);
     if (event.target.classList.contains('reset-input')) {
       console.log('reset button is clicked');
       resetInput(event);

@@ -109,4 +109,5 @@ class SubscribeController(base.BaseController):
         if c.user:
             return plugins.toolkit.render('dataupload/index.html')
         else:
-            h.redirect_to('/login')
+            #TO DO: change hardcoded value "/upload" to directly pick from requester url
+            h.redirect_to('/login?came_from=/upload')
