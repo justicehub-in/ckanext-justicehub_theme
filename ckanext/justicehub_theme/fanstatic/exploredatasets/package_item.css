@@ -1,0 +1,7 @@
+.dataset-title-container {
+  background-color: var(--primary-background-color);
+}
+
+.dataset-title a {
+  color: var(--primary-color);
+}
