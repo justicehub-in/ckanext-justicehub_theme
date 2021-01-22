@@ -41,28 +41,28 @@ import Dataset from './dataset.js';
     });
   }
 
-  // reset file inputs
-  const resetButtons = document.querySelectorAll('.reset-input');
-  resetButtons.forEach((button) => {
-    button.addEventListener('click', (event) => {
-      const fileInputToBeReset = event.target.parentElement;
-      const textArea = fileInputToBeReset.querySelector('textarea');
+  function resetInput(event) {
+    const fileInputToBeReset = event.target.parentElement;
+    const textArea = fileInputToBeReset.querySelector('textarea');
+    if (textArea) {
       textArea.value = '';
-      const allFields = fileInputToBeReset.querySelectorAll('input');
-      allFields.forEach((field) => (field.value = ''));
-      updateFileInputBackground(fileInputToBeReset.querySelector('.upload-box'), 'none');
-    });
-  });
+    }
+    const allFields = fileInputToBeReset.querySelectorAll('input');
+    allFields.forEach((field) => (field.value = ''));
+    updateFileInputBackground(fileInputToBeReset.querySelector('.upload-box'), 'none');
+  }
 
   // remove file inputs
   function removeFileInput(event) {
-    if (!event.target.classList.contains('remove-input')) {
+    if (event.target.classList.contains('reset-input')) {
+      console.log('reset button is clicked');
+      resetInput(event);
       return;
+    } else if (event.target.classList.contains('remove-input')) {
+      const fileInputToBeRemoved = event.target.parentElement;
+      if (!fileInputToBeRemoved.parentElement) return;
+      fileInputToBeRemoved.parentElement.removeChild(fileInputToBeRemoved);
     }
-
-    const fileInputToBeRemoved = event.target.parentElement;
-    if (!fileInputToBeRemoved.parentElement) return;
-    fileInputToBeRemoved.parentElement.removeChild(fileInputToBeRemoved);
   }
 
   // next and previous buttons' click handlers
@@ -166,7 +166,7 @@ import Dataset from './dataset.js';
   fileUploadContainer.addEventListener('click', (event) => removeFileInput(event));
 
   function updateFileInputBackground(fileInputBackgroundElement, fileType) {
-    if (fileType === 'none') {
+    if (fileType === 'none' && fileInputBackgroundElement) {
       fileInputBackgroundElement.style.border = '1px dashed #F65940';
     }
     fileInputBackgroundElement.style.backgroundColor = getFileUploadBoxPropertyByFileType(fileType, 'backgroundColor');
