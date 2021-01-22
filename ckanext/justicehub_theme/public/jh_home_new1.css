@@ -1183,7 +1183,8 @@ footer h3 {
   border-top: none;
 }
 
-.remove-input {
+.remove-input,
+.reset-input {
   position: absolute;
   padding: 2px;
   top: 10px;
