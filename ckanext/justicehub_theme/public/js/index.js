@@ -8,7 +8,10 @@ import Dataset from './dataset.js';
   const dataUploadSections = document.querySelectorAll('.data-upload-section');
   const stepIndicators = document.querySelectorAll('.step-indicator');
 
-  const BASE_URL = 'http://65.0.108.18';
+  const fullURL = window.location.href;
+  const splitURL = fullURL.split('/');
+
+  const BASE_URL = `${splitURL[0]}//${splitURL[2]}`;
 
   // functions to update DOM
 
@@ -104,14 +107,6 @@ import Dataset from './dataset.js';
     return FILEINPUT_ICONS.find((file) => file.format === fileType)[property];
   }
 
-  // function generateFileIconNode(iconName) {
-  //   return document
-  //     .createElement('span')
-  //     .setAttribute('class', 'iconify')
-  //     .setAttribute('data-icon', iconName)
-  //     .setAttribute('data-inline', 'false');
-  // }
-
   function generateFileUploadField(fileId) {
     return `
     <div class="file-upload" id="${fileId}">
@@ -182,6 +177,11 @@ import Dataset from './dataset.js';
   function updateDatasetWithValuesFromFilesSection() {
     dataset.updateProperty('files', []);
     dataset.updateProperty('name', getValueFromInputSelector('#datasetNameField'));
+
+    if (!getValueFromInputSelector('#datasetNameField')) {
+      document.querySelector(".step-indicator[data-value='1']").classList.remove('done');
+    }
+
     const fileUploadInputs = document.querySelectorAll('.file-upload');
     fileUploadInputs.forEach((file) => {
       if (getFileDetailsFromFileUploadElement(file).fileName) {
@@ -190,11 +190,11 @@ import Dataset from './dataset.js';
     });
   }
 
-  const saveOnFilesSectionButton = document.getElementById('saveOnFilesSectionButton');
-  saveOnFilesSectionButton.addEventListener('click', () => {
-    updateDatasetWithValuesFromFilesSection();
-    postDatasetRequest('http://localhost:5000', 'draft');
-  });
+  // const saveOnFilesSectionButton = document.getElementById('saveOnFilesSectionButton');
+  // saveOnFilesSectionButton.addEventListener('click', () => {
+  //   updateDatasetWithValuesFromFilesSection();
+  //   postDatasetRequest('http://localhost:5000', 'draft');
+  // });
 
   const proceedFromFilesButton = document.querySelector('#proceedFromFilesButton');
   proceedFromFilesButton.addEventListener('click', updateDatasetWithValuesFromFilesSection);
@@ -266,14 +266,17 @@ import Dataset from './dataset.js';
     authors.forEach((author) => {
       publisher.authors.push(getAuthorDetailsFromAuthorAdditionElement(author));
     });
+    if (!publisher.authors) {
+      document.querySelector(".step-indicator[data-value='2']").classList.remove('done');
+    }
     dataset.updateProperty('publisher', publisher);
   }
 
-  const saveOnOwnershipSectionButton = document.getElementById('saveOnOwnershipSectionButton');
-  saveOnOwnershipSectionButton.addEventListener('click', () => {
-    updateDatasetWithValuesFromOwnershipSection();
-    postDatasetRequest('http://localhost:5000', 'draft');
-  });
+  // const saveOnOwnershipSectionButton = document.getElementById('saveOnOwnershipSectionButton');
+  // saveOnOwnershipSectionButton.addEventListener('click', () => {
+  //   updateDatasetWithValuesFromOwnershipSection();
+  //   postDatasetRequest('http://localhost:5000', 'draft');
+  // });
 
   const proceedFromOwnershipButton = document.getElementById('proceedFromOwnershipButton');
   proceedFromOwnershipButton.addEventListener('click', updateDatasetWithValuesFromOwnershipSection);
@@ -400,13 +403,17 @@ import Dataset from './dataset.js';
       from: getTimePeriodDetailsFromSelector('.period--from'),
       to: getTimePeriodDetailsFromSelector('.period--to')
     });
+
+    if (!dataset.timePeriod.from.year && !dataset.timePeriod.to.year && !dataset.language) {
+      document.querySelector(".step-indicator[data-value='3']").classList.remove('done');
+    }
   }
 
-  const saveOnRelevancySectionButton = document.getElementById('saveOnRelevancySectionButton');
-  saveOnRelevancySectionButton.addEventListener('click', () => {
-    updateDatasetWithValuesFromRelevancySection();
-    postDatasetRequest('http://localhost:5000', 'draft');
-  });
+  // const saveOnRelevancySectionButton = document.getElementById('saveOnRelevancySectionButton');
+  // saveOnRelevancySectionButton.addEventListener('click', () => {
+  //   updateDatasetWithValuesFromRelevancySection();
+  //   postDatasetRequest('http://localhost:5000', 'draft');
+  // });
 
   const proceedFromRelevancyButton = document.getElementById('proceedFromRelevancyButton');
   proceedFromRelevancyButton.addEventListener('click', updateDatasetWithValuesFromRelevancySection);
@@ -435,6 +442,17 @@ import Dataset from './dataset.js';
     referenceAdditionForm.addEventListener('click', (event) => removeFileInput(event));
     referenceAdditionForm.insertAdjacentHTML('beforeend', generateReferenceField(Math.random()));
   });
+
+  function updateDatasetWithReferences() {
+    const references = document.querySelectorAll('.item-addition--reference');
+
+    let referenceList = [];
+    references.forEach((reference) => {
+      referenceList.push(getReferenceLinksFromReferenceElement(reference));
+    });
+
+    dataset.updateProperty('referenceLinks', referenceList);
+  }
 
   function generateTagElement(tagName) {
     const tagElement = document.createElement('span');
@@ -527,6 +545,18 @@ import Dataset from './dataset.js';
       year: getValueFromInputSelector(`${timePeriodSelector} input`)
     };
   }
+
+  // save as draft
+  const saveAsDraftButtons = document.querySelectorAll('.draft-button');
+  saveAsDraftButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      updateDatasetWithValuesFromFilesSection();
+      updateDatasetWithValuesFromOwnershipSection();
+      updateDatasetWithValuesFromRelevancySection();
+      updateDatasetWithReferences();
+      postDatasetRequest('draft');
+    });
+  });
 
   const previewButton = document.querySelector('#previewButton');
 
@@ -630,14 +660,7 @@ import Dataset from './dataset.js';
   }
 
   previewButton.addEventListener('click', () => {
-    const references = document.querySelectorAll('.item-addition--reference');
-
-    let referenceList = [];
-    references.forEach((reference) => {
-      referenceList.push(getReferenceLinksFromReferenceElement(reference));
-    });
-
-    dataset.updateProperty('referenceLinks', referenceList);
+    updateDatasetWithReferences();
 
     document.getElementById('submitDatasetButton').style.display = 'block';
     if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
@@ -676,9 +699,14 @@ import Dataset from './dataset.js';
       !dataset.name ||
       !dataset.publisher.authors[0].authorName ||
       !dataset.keywords.length ||
-      !dataset.sources.length
+      !dataset.sources.length ||
+      !dataset.timePeriod.from.year ||
+      !dataset.timePeriod.to.year ||
+      !dataset.language
     );
   }
+
+  // don't check when it is draft
 
   // api calls
 
@@ -743,14 +771,25 @@ import Dataset from './dataset.js';
     if (existingErrorMessageElement) {
       existingErrorMessageElement.remove();
     }
-    console.log(areMandatoryFieldsEmpty());
-    if (areMandatoryFieldsEmpty()) {
+
+    if (state === 'active' && areMandatoryFieldsEmpty()) {
       modalBody.insertAdjacentHTML(
         'afterbegin',
         `<p class="dataset-fail" style="color:red;">Some fields are empty. Please populate them.</p>`
       );
       return;
     }
+
+    if (state === 'draft' && !dataset.name) {
+      document.getElementById('datasetNameField').setAttribute('placeholder', 'Enter a name for the dataset');
+      document.getElementById('datasetNameField').style.border = '1px solid red';
+      dataUploadSteps.setActiveStep(1, updateActiveSectionDOM);
+      setTimeout(() => {
+        document.getElementById('datasetNameField').style.border = '1px solid #ccc';
+      }, 2000);
+      return;
+    }
+
     fetch(`${BASE_URL}/api/dataset/new`, {
       method: 'POST',
       credentials: 'same-origin',
