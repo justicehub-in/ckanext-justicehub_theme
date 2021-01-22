@@ -33,16 +33,26 @@ import Dataset from './dataset.js';
     stepIndicators.forEach((step) => {
       if (parseInt(step.dataset.value) === dataUploadSteps.activeStep.id) {
         step.classList.add('active');
-        step.classList.remove('done');
       } else if (parseInt(step.dataset.value) < dataUploadSteps.activeStep.id) {
-        step.classList.add('done');
         step.classList.remove('active');
       } else {
         step.classList.remove('active');
-        step.classList.remove('done');
       }
     });
   }
+
+  // reset file inputs
+  const resetButtons = document.querySelectorAll('.reset-input');
+  resetButtons.forEach((button) => {
+    button.addEventListener('click', (event) => {
+      const fileInputToBeReset = event.target.parentElement;
+      const textArea = fileInputToBeReset.querySelector('textarea');
+      textArea?.value = '';
+      const allFields = fileInputToBeReset.querySelectorAll('input');
+      allFields.forEach((field) => (field.value = ''));
+      updateFileInputBackground(fileInputToBeReset.querySelector('.upload-box'), 'none');
+    });
+  });
 
   // remove file inputs
   function removeFileInput(event) {
@@ -100,6 +110,12 @@ import Dataset from './dataset.js';
       backgroundColor: '#F8BE67',
       icon: 'grommet-icons:document-csv',
       iconTemplate: '<span class="iconify" data-icon="grommet-icons:document-csv" data-inline="false"></span>'
+    },
+    {
+      format: 'none',
+      backgroundColor: 'transparent',
+      icon: 'fe:upload',
+      iconTemplate: '<span class="iconify" data-icon="fe:upload" data-inline="false"></span>'
     }
   ];
 
@@ -150,6 +166,9 @@ import Dataset from './dataset.js';
   fileUploadContainer.addEventListener('click', (event) => removeFileInput(event));
 
   function updateFileInputBackground(fileInputBackgroundElement, fileType) {
+    if (fileType === 'none') {
+      fileInputBackgroundElement.style.border = '1px dashed #F65940';
+    }
     fileInputBackgroundElement.style.backgroundColor = getFileUploadBoxPropertyByFileType(fileType, 'backgroundColor');
     fileInputBackgroundElement.removeChild(fileInputBackgroundElement.querySelector('svg'));
     fileInputBackgroundElement.insertAdjacentHTML(
@@ -178,8 +197,8 @@ import Dataset from './dataset.js';
     dataset.updateProperty('files', []);
     dataset.updateProperty('name', getValueFromInputSelector('#datasetNameField'));
 
-    if (!getValueFromInputSelector('#datasetNameField')) {
-      document.querySelector(".step-indicator[data-value='1']").classList.remove('done');
+    if (!!getValueFromInputSelector('#datasetNameField')) {
+      document.querySelector(".step-indicator[data-value='1']").classList.add('done');
     }
 
     const fileUploadInputs = document.querySelectorAll('.file-upload');
@@ -266,8 +285,8 @@ import Dataset from './dataset.js';
     authors.forEach((author) => {
       publisher.authors.push(getAuthorDetailsFromAuthorAdditionElement(author));
     });
-    if (!publisher.authors) {
-      document.querySelector(".step-indicator[data-value='2']").classList.remove('done');
+    if (!!publisher.authors) {
+      document.querySelector(".step-indicator[data-value='2']").classList.add('done');
     }
     dataset.updateProperty('publisher', publisher);
   }
@@ -404,8 +423,8 @@ import Dataset from './dataset.js';
       to: getTimePeriodDetailsFromSelector('.period--to')
     });
 
-    if (!dataset.timePeriod.from.year && !dataset.timePeriod.to.year && !dataset.language) {
-      document.querySelector(".step-indicator[data-value='3']").classList.remove('done');
+    if (!!dataset.timePeriod.from.year && !!dataset.timePeriod.to.year && !!dataset.language) {
+      document.querySelector(".step-indicator[data-value='3']").classList.add('done');
     }
   }
 
