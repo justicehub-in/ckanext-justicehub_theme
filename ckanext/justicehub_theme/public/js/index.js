@@ -47,7 +47,7 @@ import Dataset from './dataset.js';
     button.addEventListener('click', (event) => {
       const fileInputToBeReset = event.target.parentElement;
       const textArea = fileInputToBeReset.querySelector('textarea');
-      textArea?.value = '';
+      textArea.value = '';
       const allFields = fileInputToBeReset.querySelectorAll('input');
       allFields.forEach((field) => (field.value = ''));
       updateFileInputBackground(fileInputToBeReset.querySelector('.upload-box'), 'none');
