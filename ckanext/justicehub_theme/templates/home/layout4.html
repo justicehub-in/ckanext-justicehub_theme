@@ -28,14 +28,14 @@
         <div class="categories">
           <h3>Explore Popular categories</h3>
           <div class="categories__row row">
-		{# {% for group in groups %}
-			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 category-item">
+		{% for group in groups %}
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 category-item"  onclick="window.location='/dataset?groups={{group.name}}';">
 				<div class="icon-container">
 				  <img src="{{ group.image_display_url }}" alt="${category.name}" />
 				</div>
 				<p>{{ group.display_name }}</p>
 			</div>
-		{% endfor %} #}
+		{% endfor %} 
 
           </div>
         </div>
@@ -44,14 +44,16 @@
         <div class="custom-container">
           <div class="main-search">
             <p>Search for datasets, reports, organizations, categories & more</p>
-            <div class="input-group">
-              <input type="text" class="form-control" />
-              <span class="input-group-btn">
-                <button class="btn btn-primary" type="button">
-                  <img src="/assets/icons/search.svg" style="height: 19.25px; width: auto" alt="" />
-                </button>
-              </span>
-            </div>
+            <form class="" method="get" action="{% url_for controller='package', action='search' %}">
+		    <div class="input-group">
+		      <input aria-label="{% block header_site_search_label %}{{ _('Search datasets') }}{% endblock %}" id="field-main-search" type="text" class="form-control" name="q" value="" autocomplete="off"/>
+		      <span class="input-group-btn">
+		        <button class="btn btn-primary" type="submit">
+		          <img src="/assets/icons/search.svg" style="height: 19.25px; width: auto" alt="" />
+		        </button>
+		      </span>
+		    </div>
+           </form>
           </div>
           <div class="datasets-section__content row">
             <div class="col-lg-4" style="text-align: center;">
