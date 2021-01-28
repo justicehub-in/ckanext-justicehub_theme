@@ -273,6 +273,10 @@ li.dropdown:focus {
   font-weight: 500;
 }
 
+.toolbar {
+  display: none;
+}
+
 /* hero section */
 
 .hero-section {

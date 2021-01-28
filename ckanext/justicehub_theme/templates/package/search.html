@@ -1,12 +1,34 @@
 {% ckan_extends %}
 
+{% resource 'justicehub_theme/exploredatasets/search.css' %}
+{% set groups = h.justicehub_theme_get_popular_groups() %}
 
 {% block pre_primary %}
 
   {% block page_primary_action %}
     {% if h.check_access('package_create') %}
       <div class="page_primary_action row">
-        {{ h.snippet ('snippets/add_dataset.html', dataset_type=dataset_type) }}
+        <section class="search-landing">
+          <div class="custom-container">
+            <h2>Find the data you are looking for</h2>
+            <div class="search-landing__content row">
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <p>
+                  With uploads from professionals and organisations in the field of legal and justice, you have a whole repository of data at your fingertips. Use the filter panel to find data specific to your needs. Use the popular keywords option below, or the search bar if you know exactly what you want to find. 
+                </p>
+                <div class="search-categories">
+                  <h4>Popular Categories</h4>
+                  <div class="search-categories__row">
+                  {% for group in groups %}
+                    <a href="/dataset?groups={{group.name}}">{{ group.display_name }}</a>
+                  {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        {# {{ h.snippet ('snippets/add_dataset.html', dataset_type=dataset_type) }} #}
       </div>
     {% endif %}
   {% endblock %}
@@ -44,4 +66,16 @@
     {% endblock %}
   </section>
 
+{% endblock %}
+
+{% block secondary_content %}
+{% resource 'justicehub_theme/exploredatasets/search.css' %}
+<div class="filters search-filters">
+  <div>
+    {% for facet in c.facet_titles %}
+      {{ h.snippet('snippets/facet_list.html', title=c.facet_titles[facet], name=facet) }}
+    {% endfor %}
+  </div>
+  <a class="close no-text hide-filters"><i class="fa fa-times-circle"></i><span class="text">close</span></a>
+</div>
 {% endblock %}
