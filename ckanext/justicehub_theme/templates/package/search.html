@@ -7,7 +7,7 @@
 
   {% block page_primary_action %}
     {% if h.check_access('package_create') %}
-      <div class="page_primary_action row">
+      <div class="page_primary_action row" style="margin: 0">
         <section class="search-landing">
           <div class="custom-container">
             <h2>Find the data you are looking for</h2>
@@ -32,7 +32,8 @@
       </div>
     {% endif %}
   {% endblock %}
-
+  
+  <div class="custom-container">
   {% block form %}
         {% set facets = {
           'fields': c.fields_grouped,
@@ -50,6 +51,7 @@
         %}
         {% snippet 'snippets/search_form.html', form_id='dataset-search-form', type=dataset_type, query=c.q, sorting=sorting, sorting_selected=c.sort_by_selected, count=c.page.item_count, placeholder=_('Search ' + dataset_type + 's') + '...', facets=facets, show_empty=request.params, error=c.query_error, fields=c.fields %}
   {% endblock %}
+</div>
 
 {% endblock %}
 
