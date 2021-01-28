@@ -16,13 +16,13 @@
             {% if package.private %}
                 <i class="fa fa-lock" data-toggle="tooltip" title="Private Dataset"></i>
             {% endif %}
-            {% if package.verified %}
+            {#{% if package.verified %}
                 <img class="fa fa-check"
                      src="{{ h.url_for_static('/images/verified_icon.png') }}"
                      data-toggle="tooltip"
                      alt="Verified"
                      title="Verified"></img>
-            {% endif %}
+            {% endif %}#}
           {% endblock %}
 
           {% block heading_meta %}
