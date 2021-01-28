@@ -42,9 +42,10 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
 
     #IActions
     def get_actions(self):
-        return dict((name, function) for name, function
+        temp = dict((name, function) for name, function
                     in jh_action.__dict__.items()
                     if callable(function))
+        return temp
 
 
     # IPackageController
@@ -125,6 +126,9 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         map.connect('jhupload', '/upload',
                     controller='ckanext.justicehub_theme.controllers:SubscribeController',
                     action='upload')
+        map.connect('jhdataset', '/dataset',
+                    controller='ckanext.justicehub_theme.controllers.dataset:PackageNewController',
+                    action='search')
 
         return map
     
@@ -141,4 +145,7 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         map.connect('jhsubscribe', '/subscribe',
                     controller='ckanext.justicehub_theme.controllers:SubscribeController',
                     action='subscribe')
+        map.connect('jhdataset', '/dataset',
+                    controller='ckanext.justicehub_theme.controllers.dataset:PackageNewController',
+                    action='search')
         return map
