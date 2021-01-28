@@ -1,6 +1,8 @@
 {% ckan_extends %}
 
+
 {% block facet_list_heading %}
+{% resource 'justicehub_theme/exploredatasets/filter_box.css' %}
 <h1 class="module-heading">
   {% set title = title or h.get_facet_title(name) %}
   {{ title | upper }}
@@ -8,6 +10,7 @@
 {% endblock %}
 
 {% block facet_list_items %}
+{% resource 'justicehub_theme/exploredatasets/filter_box.css' %}
     {% with items = items or h.get_facet_items_dict(name) %}
     {% if items %}
     <nav>
