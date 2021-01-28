@@ -16,16 +16,11 @@
                 <p>
                   With uploads from professionals and organisations in the field of legal and justice, you have a whole repository of data at your fingertips. Use the filter panel to find data specific to your needs. Use the popular keywords option below, or the search bar if you know exactly what you want to find. 
                 </p>
-                <div class="categories">
+                <div class="search-categories">
                   <h4>Popular Categories</h4>
-                  <div class="categories__row row">
+                  <div class="search-categories__row">
                   {% for group in groups %}
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 category-item">
-                      <div class="icon-container">
-                        <img src="{{ group.image_display_url }}" alt="${category.name}" />
-                      </div>
-                    <p>{{ group.display_name }}</p>
-                  </div>
+                    <a href="/dataset?groups={{group.name}}">{{ group.display_name }}</a>
                   {% endfor %}
                   </div>
                 </div>
