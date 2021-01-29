@@ -68,7 +68,7 @@
                 {% if res.url and h.is_url(res.url) %}
                 <div class="file-info__stats">
                     {% if res.size %}
-                    	<p>{{ h.format_resource_items([("size",res.size)])[0][1] }} - y Downloads</p>
+                    	<p>{{ h.format_resource_items([("size",res.size)])[0][1] }}</p>
                     {% endif %}
                     <a href="{{ res.url }}" class="resource-url-analytics btn-primary-text" target="_blank">
                         {% if res.has_views or res.url_type == 'upload' %}
@@ -88,7 +88,13 @@
             </div>
           {% endfor %}
           <div class="col col-md-12 view-more-files">
-            <button class="btn-primary-text">View all x files in this dataset</button>
+            {#<select id="dataset-status-change">
+                <option value="under review">Under review</option>
+                <option value="resubmission requested">Resubmission requested</option>
+                <option value="rejected">Rejected</option>
+                <option value="active">Active</option>
+            </select>#}
+            <button class="btn-primary-text">View all files in this dataset</button>
         </div>
     </div>
 
