@@ -182,14 +182,12 @@ def package_search(context, data_dict):
 
         # Remove before these hit solr FIXME: whitelist instead
         include_private = asbool(data_dict.pop('include_private', False))
-        # include_drafts = asbool(data_dict.pop('include_drafts', False))
-        include_drafts = True
+        include_drafts = asbool(data_dict.pop('include_drafts', False))
         data_dict.setdefault('fq', '')
         if not include_private:
             data_dict['fq'] = '+capacity:public ' + data_dict['fq']
         if include_drafts:
-            data_dict['fq'] += ' +state:(active OR draft OR pending-review OR under-review OR resubmission-requested ' \
-                               'OR rejected OR active OR deleted)'
+            data_dict['fq'] += ' +state:(active OR draft)'
 
         # Pop these ones as Solr does not need them
         extras = data_dict.pop('extras', None)
@@ -202,7 +200,11 @@ def package_search(context, data_dict):
             ).get_user_dataset_labels(context['auth_user_obj'])
 
         query = search.query_for(model.Package)
-        # data_dict['fq'] = u'+state:(draft OR pending or active)'
+        state_query = u'state:(draft OR pending-review OR under-review OR resubmission-required OR rejected OR active)'
+        if data_dict['fq']:
+            data_dict['fq'] = u'({0}) AND {1}'.format(data_dict['fq'], state_query)
+        else:
+            data_dict['fq'] = state_query
         query.run(data_dict, permission_labels=labels)
 
         # Add them back so extensions can use them on after_search
