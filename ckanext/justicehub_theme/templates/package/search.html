@@ -1,6 +1,6 @@
 {% ckan_extends %} {% resource 'justicehub_theme/exploredatasets/search.css' %} {% set groups =
 h.justicehub_theme_get_popular_groups() %} {% block pre_primary %} {% block page_primary_action %} {% if
-h.check_access('package_create') %}
+h.check_access('package_create') %} {% endif %}
 <div class="page_primary_action row" style="margin: 0">
   <section class="search-landing">
     <div class="custom-container">
@@ -46,7 +46,7 @@ h.check_access('package_create') %}
   </section>
   {# {{ h.snippet ('snippets/add_dataset.html', dataset_type=dataset_type) }} #}
 </div>
-{% endif %} {% endblock %}
+{% endblock %}
 
 <div class="custom-container">
   {% block form %} {% set facets = { 'fields': c.fields_grouped, 'search': c.search_facets, 'titles': c.facet_titles,
