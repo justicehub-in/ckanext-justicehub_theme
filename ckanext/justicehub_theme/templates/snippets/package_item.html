@@ -16,13 +16,13 @@
             {% if package.private %}
                 <i class="fa fa-lock" data-toggle="tooltip" title="Private Dataset"></i>
             {% endif %}
-            {% if package.verified %}
+            {#{% if package.verified %}
                 <img class="fa fa-check"
                      src="{{ h.url_for_static('/images/verified_icon.png') }}"
                      data-toggle="tooltip"
                      alt="Verified"
                      title="Verified"></img>
-            {% endif %}
+            {% endif %}#}
           {% endblock %}
 
           {% block heading_meta %}
@@ -67,7 +67,9 @@
         
                 {% if res.url and h.is_url(res.url) %}
                 <div class="file-info__stats">
-                    <p>{{ h.format_resource_items([("size",res.size)])[0][1] }} - y Downloads</p>
+                    {% if res.size %}
+                    	<p>{{ h.format_resource_items([("size",res.size)])[0][1] }} - y Downloads</p>
+                    {% endif %}
                     <a href="{{ res.url }}" class="resource-url-analytics btn-primary-text" target="_blank">
                         {% if res.has_views or res.url_type == 'upload' %}
                           <i class="fa fa-arrow-circle-o-down"></i>
