@@ -188,7 +188,8 @@ def package_search(context, data_dict):
         if not include_private:
             data_dict['fq'] = '+capacity:public ' + data_dict['fq']
         if include_drafts:
-            data_dict['fq'] += ' +state:(active OR draft or pending)'
+            data_dict['fq'] += ' +state:(active OR draft OR pending-review OR under-review OR resubmission-requested ' \
+                               'OR rejected OR active OR deleted)'
 
         # Pop these ones as Solr does not need them
         extras = data_dict.pop('extras', None)
