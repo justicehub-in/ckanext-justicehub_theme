@@ -200,9 +200,9 @@ def package_search(context, data_dict):
             ).get_user_dataset_labels(context['auth_user_obj'])
 
         query = search.query_for(model.Package)
-        state_query = u'state:(draft OR pending-review OR under-review OR resubmission-required OR rejected OR active)'
+        state_query = ' +state:(draft OR pending-review OR under-review OR resubmission-required OR rejected OR active)'
         if data_dict['fq']:
-            data_dict['fq'] = u'({0}) AND {1}'.format(data_dict['fq'], state_query)
+            data_dict['fq'] = '({0}) AND {1}'.format(data_dict['fq'], state_query)
         else:
             data_dict['fq'] = state_query
         query.run(data_dict, permission_labels=labels)
