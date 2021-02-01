@@ -13,23 +13,27 @@ datasetStatusChangeDropdowns.forEach((dropdown) => {
 
     const BASE_URL = `${splitURL[0]}//${splitURL[2]}`;
 
-    fetch(`${BASE_URL}/dataset/status`, {
+    fetch(`${BASE_URL}/api/dataset/status`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
       },
       body: JSON.stringify(requestBody)
-    }).then((response) => {
-      response
-        .json()
-        .then(() => {
-          if (confirm(`Status updated successfully! Please click OK.`)) {
-            window.location.reload();
-          }
-        })
-        .catch(() => {
-          alert('Sorry, that did not work. Please try again.');
-        });
-    });
+    })
+      .then((response) => {
+        response
+          .json()
+          .then(() => {
+            if (confirm(`Status updated successfully! Please click OK.`)) {
+              window.location.reload();
+            }
+          })
+          .catch(() => {
+            alert('Sorry, that did not work. Please try again.');
+          });
+      })
+      .catch(() => {
+        alert('Sorry, that did not work. Please try again.');
+      });
   });
 });
