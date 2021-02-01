@@ -96,6 +96,7 @@
             <div class="dataset-status">
                 <p>Change dataset status</p>
                 <select class="dataset-status-change">
+                    <option value="{{ package.name + _(',pending-review')}}">Pending review</option>
                     <option value="{{ package.name + _(',under-review')}}">Under review</option>
                     <option value="{{ package.name + _(',resubmission-requested')}}">Resubmission requested</option>
                     <option value="{{ package.name + _(',rejected')}}">Rejected</option>
