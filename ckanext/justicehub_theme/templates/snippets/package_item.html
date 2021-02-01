@@ -2,6 +2,7 @@
 
 {% block content %}
 {% resource 'justicehub_theme/exploredatasets/package_item.css' %}
+{% resource 'justicehub_theme/package_item.js' %}
 <div class="dataset-content">
 
     <div class="row package-item-row">
@@ -26,8 +27,14 @@
           {% endblock %}
 
           {% block heading_meta %}
-              {% if not package.get('state', '').startswith('active') %}
-              <span class="label label-info">{{ package.state }}</span>
+              {% if package.get('state', '').startswith('draft') %}
+              <span class="label label-info">{{ _('Draft') }}</span>
+              {% elif package.get('state', '').startswith('deleted') %}
+              <span class="label label-danger">{{ _('Deleted') }}</span>
+              {% elif package.get('state', '').startswith('active') %}
+              <span class="label label-success">{{ _('Active') }}</span>
+              {% else %}
+              <span class="label label-warning">{{ package.state }}</span>
               {% endif %}
               {{ h.popular('recent views', package.tracking_summary.recent, min=10) if package.tracking_summary }}
           {% endblock %}
@@ -58,15 +65,14 @@
                     </span>
                     <div>
                         <h5>{{ h.resource_display_name(res) | truncate(50) }}</h5>
-                        <p>File description goes here.</p>
-                        <!-- <p>{{ res.description }}</p> -->
+                        <p>{{ res.description }}</p>
                     </div>
                 </div>
         
                 {% if res.url and h.is_url(res.url) %}
                 <div class="file-info__stats">
                     {% if res.size %}
-                    	<p>{{ h.format_resource_items([("size",res.size)])[0][1] }} - y Downloads</p>
+                    	<p>{{ h.format_resource_items([("size",res.size)])[0][1] }}</p>
                     {% endif %}
                     <a href="{{ res.url }}" class="resource-url-analytics btn-primary-text" target="_blank">
                         {% if res.has_views or res.url_type == 'upload' %}
@@ -86,7 +92,18 @@
             </div>
           {% endfor %}
           <div class="col col-md-12 view-more-files">
-            <button class="btn-primary-text">View all x files in this dataset</button>
+            {% if c.userobj.sysadmin and package.state != ('active') %}
+            <div class="dataset-status">
+                <p>Change dataset status</p>
+                <select class="dataset-status-change">
+                    <option value="{{ package.name + _(',under review')}}">Under review</option>
+                    <option value="{{ package.name + _(',resubmission requested')}}">Resubmission requested</option>
+                    <option value="{{ package.name + _(',rejected')}}">Rejected</option>
+                    <option value="{{ package.name + _(',active')}}">Active</option>
+                </select>
+            </div>
+            {% endif %}
+            <button class="btn-primary-text">View all files in this dataset</button>
         </div>
     </div>
 

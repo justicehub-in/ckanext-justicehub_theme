@@ -23,6 +23,7 @@ h.check_access('package_create') %} {% endif %}
         </div>
       </div>
       {% block search_input %}
+      <form class="" method="get" action="{% url_for controller='package', action='search' %}">
       <div class="col col-md-4 col-xs-12 input-group explore-search">
         <input
           aria-label="{% block header_site_search_label %}{{ _('Search datasets') }}{% endblock %}"
@@ -41,6 +42,7 @@ h.check_access('package_create') %} {% endif %}
         </span>
         {% endblock %}
       </div>
+    </form>
       {% endblock %}
     </div>
   </section>
