@@ -484,7 +484,7 @@ import Dataset from './dataset.js';
   }
 
   function addTag(event, property) {
-    if (event.code === 'Comma' && event.target.value.length > 4) {
+    if (event.code === 'Comma' && event.target.value.length >= 3) {
       // remove the comma at the end
       const tagName = event.target.value.substring(0, event.target.value.length - 1);
       // add tag to the dataset

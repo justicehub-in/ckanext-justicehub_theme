@@ -132,9 +132,15 @@
   font-size: 16px;
 }
 
-#dataset-status-change {
-  background-color: transparent;
-  border: none;
+.dataset-status {
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+}
+
+.dataset-status p {
+  margin-bottom: 0;
+  margin-right: 12px;
 }
 
 @media (max-width: 768px) {
