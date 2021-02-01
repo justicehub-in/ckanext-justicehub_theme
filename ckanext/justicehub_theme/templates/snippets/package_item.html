@@ -92,12 +92,12 @@
             </div>
           {% endfor %}
           <div class="col col-md-12 view-more-files">
-            {% if c.userobj.sysadmin and package.state != ('active') %}
+            {% if c.userobj.sysadmin and package.state != ('active') and package.state != ('draft') %}
             <div class="dataset-status">
                 <p>Change dataset status</p>
                 <select class="dataset-status-change">
-                    <option value="{{ package.name + _(',under review')}}">Under review</option>
-                    <option value="{{ package.name + _(',resubmission requested')}}">Resubmission requested</option>
+                    <option value="{{ package.name + _(',under-review')}}">Under review</option>
+                    <option value="{{ package.name + _(',resubmission-requested')}}">Resubmission requested</option>
                     <option value="{{ package.name + _(',rejected')}}">Rejected</option>
                     <option value="{{ package.name + _(',active')}}">Active</option>
                 </select>
