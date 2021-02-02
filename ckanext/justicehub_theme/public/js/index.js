@@ -84,11 +84,11 @@ import Dataset from './dataset.js';
 
   // step indicator click handlers
 
-  // stepIndicators.forEach((step) => {
-  //   step.addEventListener('click', () => {
-  //     dataUploadSteps.setActiveStep(parseInt(step.dataset.value), updateActiveSectionDOM);
-  //   });
-  // });
+  stepIndicators.forEach((step) => {
+    step.addEventListener('click', () => {
+      dataUploadSteps.setActiveStep(parseInt(step.dataset.value), updateActiveSectionDOM);
+    });
+  });
 
   // file upload section
 
@@ -219,11 +219,32 @@ import Dataset from './dataset.js';
   proceedFromFilesButton.addEventListener('click', updateDatasetWithValuesFromFilesSection);
 
   // ownership section
-  let authorAdditionForm;
+  let authorAdditionForm = document.querySelector('.data-upload-section__form__field--authors');
+  authorAdditionForm.addEventListener('click', (event) => {
+    if (event.target.id === 'organizationRadio') {
+      removeAllInputsOfAPublisherType('individual');
+      authorAdditionForm.insertAdjacentHTML('beforeend', generateAuthorField('Organization'));
+    } else if (event.target.id === 'individualRadio') {
+      removeAllInputsOfAPublisherType('organization');
+      authorAdditionForm.insertAdjacentHTML('beforeend', generateAuthorField('Author'));
+    } else {
+      removeFileInput(event);
+    }
+  });
+
+  function removeAllInputsOfAPublisherType(type) {
+    const targetInputs = document.querySelectorAll(`.item-addition--${type}`);
+    targetInputs.forEach((input) => {
+      input.parentNode.removeChild(input);
+    });
+  }
+
   const addMoreAuthorsButton = document.querySelector('.add-more--authors');
   function generateAuthorField(publisherType) {
     return `
-    <div class="item-addition item-addition--author">
+    <div class="item-addition item-addition--author item-addition--${
+      publisherType === 'Author' ? 'individual' : 'organization'
+    }">
       <span class="iconify remove-input" data-icon="mdi:close" data-inline="false"></span>
       <div class="item-addition__name-field">
         <h5>${publisherType}'s name</h5>
@@ -238,8 +259,6 @@ import Dataset from './dataset.js';
   }
 
   addMoreAuthorsButton.addEventListener('click', () => {
-    authorAdditionForm = document.querySelector('.data-upload-section__form__field--authors');
-    authorAdditionForm.addEventListener('click', (event) => removeFileInput(event));
     const publisherType = getRadioValue('primary-publisher') === 'individual' ? 'Author' : 'Organization';
     authorAdditionForm.insertAdjacentHTML('beforeend', generateAuthorField(publisherType));
   });
@@ -382,7 +401,7 @@ import Dataset from './dataset.js';
     'West Bengal'
   ];
 
-  let monthOptions = '';
+  let monthOptions = '<option value="">--</option>';
 
   MONTHS.forEach((month) => {
     monthOptions = monthOptions + `<option value="${month}">${month}</option>`;
