@@ -1,0 +1,22 @@
+.dataset-container > * {
+  margin-top: 40px;
+  margin-bottom: 90px;
+}
+
+.dataset-sidebar-module {
+  background-color: white;
+  border: 1px solid #898989;
+  border-radius: 5px;
+}
+
+.dataset-sidebar-module .header {
+  background-color: #e5e5e5;
+  padding: 6px 8px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.dataset-sidebar-module .header h3 {
+  margin: 0;
+  font-weight: 500;
+}
