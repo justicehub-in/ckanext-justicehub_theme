@@ -1279,6 +1279,23 @@ footer h3 {
   width: 48%;
 }
 
+.date-of-publication-entry {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.date-of-publication-entry > * {
+  margin-right: 12px;
+}
+
+#pubDate input {
+  width: 40px;
+}
+
+#pubYear input {
+  width: 80px;
+}
+
 .time-period-entry {
   display: flex;
   justify-content: space-between;
