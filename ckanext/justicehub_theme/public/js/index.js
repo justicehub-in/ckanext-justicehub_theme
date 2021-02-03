@@ -150,7 +150,7 @@ import Dataset from './dataset.js';
 
   addMoreFilesButton.addEventListener('click', () => {
     const numberOfFileInputs = document.querySelectorAll('.file-upload');
-    if (numberOfFileInputs.length >= 5) return;
+    if (numberOfFileInputs.length >= 30) return;
     const fileUploadForm = document.querySelector('.data-upload-section__form__field--file');
     fileUploadForm.insertAdjacentHTML('beforeend', generateFileUploadField(Math.random()));
   });
