@@ -1,0 +1,38 @@
+.dataset-sidebar-module {
+  background-color: white;
+  border: 1px solid #898989;
+  border-radius: 5px;
+  margin-bottom: 8px;
+}
+
+.dataset-sidebar-module > * {
+  padding: 6px 8px;
+}
+
+.dataset-sidebar-module .header {
+  background-color: #e5e5e5;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  color: #6c666f;
+}
+
+.dataset-sidebar-module .header h3 {
+  margin: 0;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.dataset-sidebar-module .body,
+.dataset-sidebar-module .footer {
+  font-size: 14px;
+}
+
+.dataset-main {
+  border: 0.75px solid #898989;
+  padding: 24px;
+  border-radius: 4px;
+}
+
+.dataset-main .license-description {
+  font-size: 12px;
+}

@@ -431,12 +431,19 @@ import Dataset from './dataset.js';
       region = [regionRadioValue];
     }
 
+    const dateOfPublication = getValueFromInputSelector('#pubDate input');
+    const monthOfPublication = getValueFromInputSelector('#pubMonth select');
+    const yearOfPublication = getValueFromInputSelector('#pubYear input');
+
     const language =
       getRadioValue('language-options') === 'other'
         ? getValueFromInputSelector('#otherLanguageInput')
         : getRadioValue('language-options');
     dataset.updateProperty('language', language);
     dataset.updateProperty('region', region);
+    dataset.updateProperty('date', dateOfPublication);
+    dataset.updateProperty('month', monthOfPublication);
+    dataset.updateProperty('year', yearOfPublication);
     dataset.updateProperty('timePeriod', {
       from: getTimePeriodDetailsFromSelector('.period--from'),
       to: getTimePeriodDetailsFromSelector('.period--to')
@@ -639,6 +646,10 @@ import Dataset from './dataset.js';
       }</td>
     </tr>
     <tr>
+      <td>Date of Publication:</td>
+      <td>${dataset.date} ${dataset.month} ${dataset.year}</td>
+    </tr>
+    <tr>
       <td>Time period covered:</td>
       <td>${dataset.timePeriod.from.month} ${dataset.timePeriod.from.year} - ${dataset.timePeriod.to.month} ${
       dataset.timePeriod.to.year
@@ -754,6 +765,7 @@ import Dataset from './dataset.js';
     metaData.append('license_id', dataset.license.licenseName);
     metaData.append('private', dataset.viewPermission === 'Anyone' ? false : true);
     metaData.append('publisher_type', dataset.publisher.type);
+    metaData.append('publication_date', `${dataset.date}/${dataset.month}/${dataset.year}`);
     metaData.append('start_month', `${dataset.timePeriod.from.year}-${dataset.timePeriod.from.month}`);
     metaData.append('end_month', `${dataset.timePeriod.to.year}-${dataset.timePeriod.to.month}`);
     metaData.append('region', [dataset.region]);
