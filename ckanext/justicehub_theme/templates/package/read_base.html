@@ -9,89 +9,88 @@
 
 {% block pre_primary %}
 {% resource 'justicehub_theme/dataset/dataset.css' %}
-<div class="custom-container dataset-container">
-    <div class="col-xs-12 row">
-        {% block secondary %}
-        <aside class="secondary col-sm-3 col-xs-12 sidebar">
-            <div class="module module-narrow module-shallow context-info dataset-sidebar-module">
-                <div class="header">
-                    <h3>Uploaded by</h3>
-                </div>
-                <div class="body">
-                    Uploader profile picture here
-                </div>
-                <div class="footer">
-                    Uploader name here
-                </div>
-            </div>
-            <div class="module module-narrow module-shallow context-info dataset-sidebar-module">
-                <div class="header">
-                    <h3>Ownership</h3>
-                </div>
-                <div class="body">
-                    <p>1. Owner 1</p>
-                    <p>2. Owner 2</p>
-                </div>
-            </div>
-            <div class="module module-narrow module-shallow context-info dataset-sidebar-module">
-                <div class="header">
-                    <h3>Data Source(s)</h3>
-                </div>
-                <div class="body">
-                    <p>Source 1</p>
-                    <p>Source 2</p>
-                </div>
-            </div>
-            <div class="module module-narrow module-shallow context-info dataset-sidebar-module">
-                <div class="header">
-                    <h3>Reference Links</h3>
-                </div>
-                <div class="body">
-                    <p>Link 1</p>
-                    <p>Link 2</p>
-                </div>
-            </div>
-        </aside>
-        {% endblock %}
+{% endblock %}
 
-        <div class="primary col-sm-9 col-xs-12">
-            {% block primary_content %}
-            {#{{ super() }}#}
-            <div class="dataset-main">
-                <h1>{{h.dataset_display_name(pkg)}}
-                    {% if pkg.private %}
-                    <i style="margin-left: 10px;"
-                        class="fa fa-lock fa-lg"
-                        data-toggle="tooltip"
-                        alt="Private Dataset"
-                        title="Private Dataset">
-                    </i>
-                    {% endif %}
-                    {% if pkg.verified %}
-                    <img class="fa fa-check fa-lg"
-                        src="{{ h.url_for_static('/images/verified_icon.png') }}"
-                        data-toggle="tooltip"
-                        alt="Verified"
-                        title="Verified">
-                    </img>
-                    {% endif %}
-                </h1>
-                <p class="license-description">{{('This data collection can be used by anyone for all purpose')}}</p>
-            </div>
-            {% set resources = package.resources or [] %}
-                {% for res in resources %}
-                    <div class="dataset-file-info__text">
-                        <span class="format-label" property="dc:format" data-format="{{ res.format.lower() or 'data' }}">
-                            {{ h.get_translated(res, 'format') }}
-                        </span>
-                        <div>
-                            <h5>{{ h.resource_display_name(res) | truncate(50) }}</h5>
-                            <p>{{ res.description }}</p>
-                        </div>
-                    </div>
-                {% endfor %}
-            {% endblock %}
+
+{% block secondary %}
+<aside class="secondary col-sm-3 col-xs-12 sidebar">
+    <div class="module module-narrow module-shallow context-info dataset-sidebar-module">
+        <div class="header">
+            <h3>Uploaded by</h3>
+        </div>
+        <div class="body">
+            Uploader profile picture here
+        </div>
+        <div class="footer">
+            Uploader name here
         </div>
     </div>
+    <div class="module module-narrow module-shallow context-info dataset-sidebar-module">
+        <div class="header">
+            <h3>Ownership</h3>
+        </div>
+        <div class="body">
+            <p>1. Owner 1</p>
+            <p>2. Owner 2</p>
+        </div>
+    </div>
+    <div class="module module-narrow module-shallow context-info dataset-sidebar-module">
+        <div class="header">
+            <h3>Data Source(s)</h3>
+        </div>
+        <div class="body">
+            <p>Source 1</p>
+            <p>Source 2</p>
+        </div>
+    </div>
+    <div class="module module-narrow module-shallow context-info dataset-sidebar-module">
+        <div class="header">
+            <h3>Reference Links</h3>
+        </div>
+        <div class="body">
+            <p>Link 1</p>
+            <p>Link 2</p>
+        </div>
+    </div>
+</aside>
+{% endblock %}
+
+
+{% block primary_content %}
+<div class="primary col-sm-9 col-xs-12">
+{#{{ super() }}#}
+<div class="dataset-main">
+    <h1>{{h.dataset_display_name(pkg)}}
+        {% if pkg.private %}
+        <i style="margin-left: 10px;"
+            class="fa fa-lock fa-lg"
+            data-toggle="tooltip"
+            alt="Private Dataset"
+            title="Private Dataset">
+        </i>
+        {% endif %}
+        {% if pkg.verified %}
+        <img class="fa fa-check fa-lg"
+            src="{{ h.url_for_static('/images/verified_icon.png') }}"
+            data-toggle="tooltip"
+            alt="Verified"
+            title="Verified">
+        </img>
+        {% endif %}
+    </h1>
+    <p class="license-description">{{('This data collection can be used by anyone for all purpose')}}</p>
+</div>
+{% set resources = pkg.resources or [] %}
+    {% for res in resources %}
+        <div class="dataset-file-info__text">
+            <span class="format-label" property="dc:format" data-format="{{ res.format.lower() or 'data' }}">
+                {{ h.get_translated(res, 'format') }}
+            </span>
+            <div>
+                <h5>{{ h.resource_display_name(res) | truncate(50) }}</h5>
+                <p>{{ res.description }}</p>
+            </div>
+        </div>
+    {% endfor %}
 </div>
 {% endblock %}
