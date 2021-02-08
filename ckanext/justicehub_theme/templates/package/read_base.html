@@ -3,7 +3,7 @@
 {% set organization=c.group_dict %}
 
 {% block wrapper_class %}
-	no-nav
+	no-nav dataset-page
 {% endblock %}
 
 
@@ -48,49 +48,62 @@
             <h3>Reference Links</h3>
         </div>
         <div class="body">
-            <p>Link 1</p>
-            <p>Link 2</p>
+            {% set links = h.justicehub_theme_parse_json(pkg.links or '[]') %}
+            {% for link in links %}
+            <a href="{{ link['link'] }}" >{{ link['title'] }}</a>
+            {% endfor %}
+            <!-- <p>{{ links }}</p> -->
         </div>
     </div>
 </aside>
 {% endblock %}
 
 
-{% block primary_content %}
-<div class="primary col-sm-9 col-xs-12">
-{#{{ super() }}#}
-<div class="dataset-main">
-    <h1>{{h.dataset_display_name(pkg)}}
-        {% if pkg.private %}
-        <i style="margin-left: 10px;"
-            class="fa fa-lock fa-lg"
-            data-toggle="tooltip"
-            alt="Private Dataset"
-            title="Private Dataset">
-        </i>
-        {% endif %}
-        {% if pkg.verified %}
-        <img class="fa fa-check fa-lg"
-            src="{{ h.url_for_static('/images/verified_icon.png') }}"
-            data-toggle="tooltip"
-            alt="Verified"
-            title="Verified">
-        </img>
-        {% endif %}
-    </h1>
-    <p class="license-description">{{('This data collection can be used by anyone for all purpose')}}</p>
-</div>
-{% set resources = pkg.resources or [] %}
-    {% for res in resources %}
-        <div class="dataset-file-info__text">
-            <span class="format-label" property="dc:format" data-format="{{ res.format.lower() or 'data' }}">
-                {{ h.get_translated(res, 'format') }}
-            </span>
-            <div>
-                <h5>{{ h.resource_display_name(res) | truncate(50) }}</h5>
-                <p>{{ res.description }}</p>
+{% block primary %}
+<div class="primary col-sm-9 col-xs-12 dataset-primary">
+    {% block primary_content %}
+    {#{{ super() }}#}
+    <div class="dataset-main">
+        <div class="dataset-main__header">
+            <h1>{{h.dataset_display_name(pkg)}}</h1>
+            <div class="relevancy-info">
+                <p><i class="fa fa-map-marker" aria-hidden="true"></i> {{ pkg.region }}</p>
+                <p><i class="fa fa-calendar-o" aria-hidden="true"></i> {{('2001-2011')}}</p>
+                <p><i class="fa fa-language" aria-hidden="true"></i> {{ pkg.language }}</p>
             </div>
+            <p class="license-description">{{ pkg.license_id }}</p>
         </div>
-    {% endfor %}
+
+        {% set resources = pkg.resources or [] %}
+        {% for res in resources %}
+            <div class="dataset-file-info">
+                <div class="dataset-file-info__body">
+                    <span class="format-label" property="dc:format" data-format="{{ res.format.lower() or 'data' }}">
+                        {{ h.get_translated(res, 'format') }}
+                    </span>
+                    <div>
+                        <h4 class="dataset-file-info__title">{{ h.resource_display_name(res) | truncate(50) }}</h4>
+                        <p class="dataset-file-info__description" >{{ res.description }}</p>
+                    </div>
+                </div>
+                <div class="dataset-file-info__footer">
+                    {% if res.size %}
+                    	<p>{{ h.format_resource_items([("size",res.size)])[0][1] }}</p>
+                    {% endif %}
+                    <a href="{{ h.url_for(controller='pkg', action='resource_read', id=pkg.name, resource_id=res.id) }}" class="resource-url-analytics btn btn-primary-text" target="_blank">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                        {{ _('View File') }}
+                    </a>
+                    <a href="{{ res.url }}" class="resource-url-analytics btn btn-primary-outline" target="_blank">
+                        {% if res.has_views or res.url_type == 'upload' %}
+                          <i class="fa fa-arrow-circle-o-down"></i>
+                          {{ _('Download') }}
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% endblock %}
 </div>
 {% endblock %}
