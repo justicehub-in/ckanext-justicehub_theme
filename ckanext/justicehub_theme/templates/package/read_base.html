@@ -90,7 +90,7 @@
                     {% if res.size %}
                     	<p>{{ h.format_resource_items([("size",res.size)])[0][1] }}</p>
                     {% endif %}
-                    <a href="{{ h.url_for(controller='pkg', action='resource_read', id=pkg.name, resource_id=res.id) }}" class="resource-url-analytics btn btn-primary-text" target="_blank">
+                    <a href="{{ h.url_for(controller='package', action='resource_read', id=pkg.name, resource_id=res.id) }}" class="resource-url-analytics btn btn-primary-text" target="_blank">
                         <i class="fa fa-eye" aria-hidden="true"></i>
                         {{ _('View File') }}
                     </a>
