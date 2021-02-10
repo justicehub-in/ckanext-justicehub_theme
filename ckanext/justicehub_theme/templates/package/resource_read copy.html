@@ -1,0 +1,132 @@
+{% ckan_extends %}
+
+{% block resource_inner %}
+    <div class="top-section">
+
+    {% block resource_content %}
+
+    <div class="row">
+        <div class="col col-sm-6 col-xs-12">
+        {% block resource_read_title %}
+            <h1>{{ h.resource_display_name(res) | truncate(50) }}</h1>
+        {% endblock %}
+
+        <div class="dataset-meta">
+            {{ _('Updated') }}
+            {{ h.time_ago_from_timestamp(res.last_modified) or h.time_ago_from_timestamp(res.created) or _('unknown') }}
+        </div>
+
+        <div class="dataset-meta">
+            <a href="{{ pkg.license_url }}">{{ pkg.license_title }}</a>
+        </div>
+
+        <div class="prose notes resource-desc" property="rdfs:label">
+            {% if res.description %}
+              {{ h.render_markdown(res.description) }}
+            {% endif %}
+            {% if not res.description and c.package.notes %}
+              <h3>{{ _('From the dataset abstract') }}</h3>
+              <blockquote>
+                  {{ h.markdown_extract(h.get_translated(c.package, 'notes')) }}
+                  <p class="res-title">
+                  {% trans dataset=c.package.title, url=h.url_for(controller='package', action='read', id=c.package['name']) %}
+                  Source: <a href="{{ url }}">{{ dataset }}</a>
+                  {% endtrans %}
+                  </p>
+              </blockquote>
+            {% endif %}
+        </div>
+
+        {% block resource_read_url %}
+            {% if res.url and h.is_url(res.url) %}
+              <p class="text-muted ellipsis res-title dataset-meta">
+                  <strong>{{ _('URL:') }}</strong><br>
+                  <a class="resource-url-analytics" href="{{ res.url }}" title="{{ res.url }}">{{ res.url | truncate(100) }}</a>
+              </p>
+            {% elif res.url %}
+              <p class="text-muted break-word res-title dataset-meta">
+                  <strong>{{ _('URL:') }}</strong><br>
+                  {{ res.url | truncate(100) }}
+              </p>
+            {% endif %}
+        {% endblock %}
+
+        {% if res.variable_measured %}
+        <div class="dataset-desc">
+            {{ _('Resource captures: ') }}
+            {{ res.variable_measured }}
+        </div>
+        {% endif %}
+
+        </div>
+
+    </div>
+    <div class="row">
+		<div class="res-actions col-sm-6 col-xs-12">
+		  {% block resource_actions %}
+		  <ul class="list-unstyled list-inline">
+		  {% block resource_actions_inner %}
+		    {% if h.check_access('package_update', {'id':pkg.id }) %}
+		        {% link_for _('EDIT'), controller='package', action='resource_edit', id=pkg.name, resource_id=res.id, class_='btn btn-default btn-action' %}
+		    {% endif %}
+
+		    {% if res.url and h.is_url(res.url) %}
+		      <li>
+		        <div class="btn-group">
+		        <a class="btn btn-primary btn-action resource-url-analytics resource-type-{{ res.resource_type }}" href="{{ res.url }}">
+		          {% if res.resource_type in ('listing', 'service') %}
+                      {{ _('VIEW') }}
+		          {% elif  res.resource_type == 'api' %}
+                      {{ _('API ENDPOINT') }}
+		          {% elif (not res.has_views or not res.can_be_previewed) and not res.url_type == 'upload' %}
+                      {{ _('Go to resource') }}
+		          {% else %}
+                      {{ _('DOWNLOAD') }}
+		          {% endif %}
+
+		        </a>
+                {%if res.datastore_active %}
+                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="{{ h.url_for(controller='ckanext.datastore.controller:DatastoreController', action='dump', resource_id=res.id, bom=True) }}"
+                                 target="_blank"><span>CSV</span></a>
+                             <a href="{{ h.url_for(controller='ckanext.datastore.controller:DatastoreController', action='dump', resource_id=res.id, format='tsv', bom=True) }}"
+                                 target="_blank"><span>TSV</span></a>
+                             <a href="{{ h.url_for(controller='ckanext.datastore.controller:DatastoreController', action='dump', resource_id=res.id, format='json') }}"
+                                 target="_blank"><span>JSON</span></a>
+                             <a href="{{ h.url_for(controller='ckanext.datastore.controller:DatastoreController', action='dump', resource_id=res.id, format='xml') }}"
+                                 target="_blank"><span>XML</span></a>
+                         </li>
+                     </ul>
+                {%endif%}
+
+		        {% block download_resource_button %}
+                {% endblock %}
+		        </div>
+		      </li>
+		    {% endif %}
+		  {% endblock %}
+		  </ul>
+		  {% endblock %}
+		</div>
+        <div class="col col-sm-3 col-sm-offset-3 col-xs-12 res-social">
+            {% snippet "snippets/social.html" %}
+        </div>
+    </div>
+    {% endblock %}
+
+    {% if res.format == 'CSV' %}
+        {% block data_preview %}
+        {{ super() }}
+        {% endblock %}
+    {% endif %}
+{% endblock %}
+
+{% block primary_content %}
+{% endblock %}
+
+{% block secondary_content %}
+{% endblock %}
