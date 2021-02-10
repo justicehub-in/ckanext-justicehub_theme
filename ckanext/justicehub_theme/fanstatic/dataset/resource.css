@@ -1,0 +1,10 @@
+.file-description {
+  margin-top: 20px;
+}
+
+.file-actions .btn {
+  font-size: 16px !important;
+  font-weight: 400;
+  font-family: Roboto !important;
+  text-transform: uppercase;
+}
