@@ -30,8 +30,19 @@
             <h3>Ownership</h3>
         </div>
         <div class="body">
-            <p>1. Owner 1</p>
-            <p>2. Owner 2</p>
+            {% set owners = h.justicehub_theme_parse_json(pkg.publisher_contacts or '[]') %}
+            {% for owner in owners %}
+                {% if owner['name'] %}
+                <div>
+                    <p>{{owner['name']}}</p>
+                    {% if owner['email'] %}
+                    <p>{{owner['email']}}</p>
+                    {% endif %}
+                </div>
+                {% else %}
+                <p style="color: #898989; font-style: italic;">No owners added</p>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
     <div class="module module-narrow module-shallow context-info dataset-sidebar-module">
