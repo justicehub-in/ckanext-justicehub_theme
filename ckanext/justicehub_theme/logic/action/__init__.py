@@ -3,5 +3,6 @@ from action import (
     get_package_owner_details,
     metadata_autocomplete,
     resource_metadata_autocomplete,
-    package_search
+    package_search,
+    package_show
 )
