@@ -1,5 +1,28 @@
 {% ckan_extends %}
 
+{% block meta %}
+    {{ super() }}
+       
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Justice Hub">
+    <meta name="description" content="A platform to enable better participation and collaboration within the legal and justice ecosystem">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://justicehub.in/">
+    <meta property="og:title" content="Justice Hub">
+    <meta property="og:description" content="A platform to enable better participation and collaboration within the legal and justice ecosystem">
+    <meta property="og:image" content="">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://justicehub.in/">
+    <meta property="twitter:title" content="Justice Hub">
+    <meta property="twitter:description" content="A platform to enable better participation and collaboration within the legal and justice ecosystem">
+    <meta property="twitter:image" content="">
+
+{% endblock %}
+
 {% block meta_viewport %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 {% endblock %}
