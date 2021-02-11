@@ -50,8 +50,10 @@
             <h3>Data Source(s)</h3>
         </div>
         <div class="body">
-            <p>Source 1</p>
-            <p>Source 2</p>
+            {% set sources = pkg.source.split(',') %}
+            {% for source in sources %}
+                <p>{{ source }}</p>
+            {% endfor %}
         </div>
     </div>
     <div class="module module-narrow module-shallow context-info dataset-sidebar-module">
