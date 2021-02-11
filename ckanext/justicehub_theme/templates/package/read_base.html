@@ -63,7 +63,7 @@
         <div class="body">
             {% set links = h.justicehub_theme_parse_json(pkg.links or '[]') %}
             {% for link in links %}
-            <a href="{{ link['link'] }}" >{{ link['title'] }}</a>
+            <a href="{{('https://')}}{{ link['link'] }}" >{{ link['title'] }}</a>
             {% endfor %}
             <!-- <p>{{ links }}</p> -->
         </div>
@@ -77,7 +77,6 @@
     {% block primary_content %}
     {#{{ super() }}#}
     <div class="dataset-main">
-        {{pkg}}
         <div class="dataset-main__header">
             <h1>{{h.dataset_display_name(pkg)}} <span>{{ ('Uploaded on: ')}} {{ h.time_ago_from_timestamp(pkg.metadata_created) }}</span></h1>
             <div class="relevancy-info">
@@ -91,7 +90,11 @@
                         {{pkg.region}}
                     {% endif %}
                 </p>
-                <p><i class="fa fa-calendar-o" aria-hidden="true"></i> {{('2001-2011')}}</p>
+                <p><i class="fa fa-calendar-o" aria-hidden="true"></i>
+                    {% set start_period = pkg.start_month.split('-') %}
+                    {% set end_period = pkg.end_month.split('-') %}
+                    {{ start_period[1]}} {{ start_period[0]}}{{(' - ')}}{{ end_period[1]}} {{ end_period[0]}}
+                </p>
                 <p><i class="fa fa-language" aria-hidden="true"></i> {{ pkg.language }}</p>
             </div>
             <p class="license-description">{{ pkg.license_id }}</p>
