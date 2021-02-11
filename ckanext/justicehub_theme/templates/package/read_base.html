@@ -65,7 +65,7 @@
     {#{{ super() }}#}
     <div class="dataset-main">
         <div class="dataset-main__header">
-            <h1>{{h.dataset_display_name(pkg)}}</h1>
+            <h1>{{h.dataset_display_name(pkg)}} <span>{{ ('Uploaded on: ')}} {{ h.time_ago_from_timestamp(pkg.metadata_created) }}</span></h1>
             <div class="relevancy-info">
                 <p><i class="fa fa-map-marker" aria-hidden="true"></i> {{ pkg.region }}</p>
                 <p><i class="fa fa-calendar-o" aria-hidden="true"></i> {{('2001-2011')}}</p>
@@ -90,7 +90,7 @@
                     {% if res.size %}
                     	<p>{{ h.format_resource_items([("size",res.size)])[0][1] }}</p>
                     {% endif %}
-                    <a href="{{ h.url_for(controller='pkg', action='resource_read', id=pkg.name, resource_id=res.id) }}" class="resource-url-analytics btn btn-primary-text" target="_blank">
+                    <a href="{{ h.url_for(controller='package', action='resource_read', id=pkg.name, resource_id=res.id) }}" class="resource-url-analytics btn btn-primary-text" target="_blank">
                         <i class="fa fa-eye" aria-hidden="true"></i>
                         {{ _('View File') }}
                     </a>
