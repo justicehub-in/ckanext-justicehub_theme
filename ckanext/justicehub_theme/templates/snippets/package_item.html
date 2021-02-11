@@ -104,7 +104,7 @@
                 </select>
             </div>
             {% endif %}
-            <button class="btn-primary-text">View all files in this dataset</button>
+            <a class="btn-primary-text" style="font-family: Roboto; font-size: 14px;" href="{{ h.url_for(package.type + '_read', controller='package', action='read', id=package.name) }}">View all files in this dataset</a>
         </div>
     </div>
 
