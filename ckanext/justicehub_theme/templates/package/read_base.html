@@ -77,10 +77,20 @@
     {% block primary_content %}
     {#{{ super() }}#}
     <div class="dataset-main">
+        {{pkg}}
         <div class="dataset-main__header">
             <h1>{{h.dataset_display_name(pkg)}} <span>{{ ('Uploaded on: ')}} {{ h.time_ago_from_timestamp(pkg.metadata_created) }}</span></h1>
             <div class="relevancy-info">
-                <p><i class="fa fa-map-marker" aria-hidden="true"></i> {{ pkg.region }}</p>
+                <p><i class="fa fa-map-marker" aria-hidden="true"></i> 
+                    {% set regions = pkg.region.split(',') %}
+                    {% if regions| length > 1 %}
+                    {% for region in regions %}
+                        <span>{{ region }}{{(',')}}</span>
+                    {% endfor %}
+                    {% else %}
+                        {{pkg.region}}
+                    {% endif %}
+                </p>
                 <p><i class="fa fa-calendar-o" aria-hidden="true"></i> {{('2001-2011')}}</p>
                 <p><i class="fa fa-language" aria-hidden="true"></i> {{ pkg.language }}</p>
             </div>
