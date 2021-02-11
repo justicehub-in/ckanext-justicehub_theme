@@ -1,6 +1,8 @@
 {% ckan_extends %}
 
-{% resource 'justicehub_theme/dataset/dataset.css' %}
+{% block wrapper_class %}
+	no-nav dataset-page
+{% endblock %}
 
 {% block resource_inner %}
 {% resource 'justicehub_theme/dataset/dataset.css' %}
