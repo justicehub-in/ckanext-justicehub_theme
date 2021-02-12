@@ -50,10 +50,12 @@
             <h3>Data Source(s)</h3>
         </div>
         <div class="body">
-            {% set sources = pkg.source.split(',') %}
-            {% for source in sources %}
-                <p>{{ source }}</p>
-            {% endfor %}
+	    {% if pkg['source'] %}
+	    	{% set sources = pkg.source.split(',') %}
+            	{% for source in sources %}
+               		 <p>{{ source }}</p>
+            	{% endfor %}
+	    {% endif %}
         </div>
     </div>
     <div class="module module-narrow module-shallow context-info dataset-sidebar-module">
@@ -90,7 +92,8 @@
             <h1>{{h.dataset_display_name(pkg)}} <span>{{ ('Uploaded on: ')}} {{ h.time_ago_from_timestamp(pkg.metadata_created) }}</span></h1>
             <div class="relevancy-info">
                 <p><i class="fa fa-map-marker" aria-hidden="true"></i> 
-                    {% set regions = pkg.region.split(',') %}
+                  {% if pkg['region'] %}
+		    {% set regions = pkg.region.split(',') %}
                     {% if regions| length > 1 %}
                     {% for region in regions %}
                         <span>{{ region }}{{(',')}}</span>
@@ -98,11 +101,14 @@
                     {% else %}
                         {{pkg.region}}
                     {% endif %}
+		   {% endif %}
                 </p>
                 <p><i class="fa fa-calendar-o" aria-hidden="true"></i>
+		  {% if pkg['start_month'] %}
                     {% set start_period = pkg.start_month.split('-') %}
                     {% set end_period = pkg.end_month.split('-') %}
                     {{ start_period[1]}} {{ start_period[0]}}{{(' - ')}}{{ end_period[1]}} {{ end_period[0]}}
+		  {% endif %}
                 </p>
                 <p><i class="fa fa-language" aria-hidden="true"></i> {{ pkg.language }}</p>
             </div>
