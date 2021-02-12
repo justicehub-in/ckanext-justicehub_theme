@@ -1,6 +1,8 @@
 {% ckan_extends %}
 
-{% resource 'justicehub_theme/dataset/dataset.css' %}
+{% block wrapper_class %}
+	no-nav dataset-page
+{% endblock %}
 
 {% block resource_inner %}
 {% resource 'justicehub_theme/dataset/dataset.css' %}
@@ -15,19 +17,30 @@
                 <h3>Uploaded by</h3>
             </div>
             <div class="body">
-                Uploader profile picture here
+                {{pkg.creator_name}}
             </div>
-            <div class="footer">
-                Uploader name here
-            </div>
+            <!-- <div class="footer">
+                
+            </div> -->
         </div>
         <div class="module module-narrow module-shallow context-info dataset-sidebar-module">
             <div class="header">
                 <h3>Ownership</h3>
             </div>
             <div class="body">
-                <p>1. Owner 1</p>
-                <p>2. Owner 2</p>
+                {% set owners = h.justicehub_theme_parse_json(pkg.publisher_contacts or '[]') %}
+                {% for owner in owners %}
+                    {% if owner['name'] %}
+                    <div>
+                        <p>{{owner['name']}}</p>
+                        {% if owner['email'] %}
+                        <p>{{owner['email']}}</p>
+                        {% endif %}
+                    </div>
+                    {% else %}
+                    <p style="color: #898989; font-style: italic;">No owners added</p>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
         <div class="module module-narrow module-shallow context-info dataset-sidebar-module">
@@ -35,8 +48,10 @@
                 <h3>Data Source(s)</h3>
             </div>
             <div class="body">
-                <p>Source 1</p>
-                <p>Source 2</p>
+                {% set sources = pkg.source.split(',') %}
+                {% for source in sources %}
+                    <p>{{ source }}</p>
+                {% endfor %}
             </div>
         </div>
         <div class="module module-narrow module-shallow context-info dataset-sidebar-module">
@@ -44,7 +59,11 @@
                 <h3>Reference Links</h3>
             </div>
             <div class="body">
-                <p>Reference link 1</p>
+                {% set links = h.justicehub_theme_parse_json(pkg.links or '[]') %}
+                {% for link in links %}
+                <a href="{{('https://')}}{{ link['link'] }}" >{{ link['title'] }}</a>
+                {% endfor %}
+                <!-- <p>{{ links }}</p> -->
             </div>
         </div>
     </aside>
@@ -58,7 +77,7 @@
                 <p class="file-description">{{ res.description }}</p>
 
                 <div class="file-actions">
-                    <a href="#" class="btn btn-primary-text"><i class="fa fa-flag-o" aria-hidden="true"></i>
+                    <a href="mailto:info@justicehub.in" class="btn btn-primary-text"><i class="fa fa-flag-o" aria-hidden="true"></i>
                          Report Issue</a>
                     <a href="{{ res.url }}" class="resource-url-analytics btn btn-primary" target="_blank">
                         {% if res.has_views or res.url_type == 'upload' %}
@@ -69,7 +88,7 @@
                 </div>
             </div>
 
-            {% if res.format == 'CSV' or res.format == 'PDF'  %}
+            {% if res.format == 'CSV' or res.format == 'PDF' %}
                 {% block data_preview %}
                     {% block resource_view %}
                         {% block resource_view_content %}

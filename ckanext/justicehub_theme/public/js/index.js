@@ -771,7 +771,7 @@ import Dataset from './dataset.js';
     metaData.append('region', [dataset.region]);
     dataset.publisher.authors.forEach((author, index) => {
       metaData.append(`publisher_contacts-${index + 1}-name`, author.authorName);
-      metaData.append(`publisher_email-${index + 1}-name`, author.authorEmail);
+      metaData.append(`publisher_contacts-${index + 1}-email`, author.authorEmail);
     });
     dataset.referenceLinks.forEach((referenceLink, index) => {
       metaData.append(`links-${index + 1}-link`, referenceLink.link);
