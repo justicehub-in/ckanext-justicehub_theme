@@ -75,7 +75,7 @@
         <div class="dataset-main">
             <div class="dataset-main__header">
                 <h1>{{ h.resource_display_name(res) | truncate(50) }}</h1>
-                <p class="license-description">{{ ('Updated: ')}} {{h.time_ago_from_timestamp(res.created) or _('unknown') }} | {{ res.format }}</p>
+                <p class="license-description">{{ ('Uploaded: ')}} {{h.time_ago_from_timestamp(res.created) or _('unknown') }} | {{ res.format }}</p>
                 <p class="file-description">{{ res.description }}</p>
 
                 <div class="file-actions">
