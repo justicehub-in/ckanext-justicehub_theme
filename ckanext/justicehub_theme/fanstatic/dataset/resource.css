@@ -12,3 +12,7 @@
 .module-resource {
   border: none !important;
 }
+
+a[data-module="resource-view-embed"] {
+  display: none !important;
+}
