@@ -63,7 +63,7 @@
                     <span class="format-label" property="dc:format" data-format="{{ res.format.lower() or 'data' }}">
                         {{ h.get_translated(res, 'format') }}
                     </span>
-                    <div>
+                    <div style="width: 90%;">
                         <h5>{{ h.resource_display_name(res) | truncate(50) }}</h5>
                         <p>{{ res.description }}</p>
                     </div>

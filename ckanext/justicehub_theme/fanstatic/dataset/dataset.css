@@ -90,6 +90,7 @@
 
 .dataset-file-info__body {
   display: flex;
+  justify-content: space-between;
 }
 
 .dataset-file-info .format-label {

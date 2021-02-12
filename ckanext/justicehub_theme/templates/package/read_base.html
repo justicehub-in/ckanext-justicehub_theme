@@ -63,7 +63,7 @@
         <div class="body">
             {% set links = h.justicehub_theme_parse_json(pkg.links or '[]') %}
             {% for link in links %}
-            <a href="{{('https://')}}{{ link['link'] }}" >{{ link['title'] }}</a>
+            <a style="display: block; margin: 4px 0;" href="{{('https://')}}{{ link['link'] }}" >{{ link['title'] }}</a>
             {% endfor %}
             <!-- <p>{{ links }}</p> -->
         </div>
@@ -116,7 +116,7 @@
                     <span class="format-label" property="dc:format" data-format="{{ res.format.lower() or 'data' }}">
                         {{ h.get_translated(res, 'format') }}
                     </span>
-                    <div>
+                    <div style="width: 90%">
                         <h4 class="dataset-file-info__title">{{ h.resource_display_name(res) | truncate(50) }}</h4>
                         <p class="dataset-file-info__description" >{{ res.description }}</p>
                     </div>
