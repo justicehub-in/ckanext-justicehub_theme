@@ -88,12 +88,19 @@
     <div class="dataset-main">
         <div class="dataset-main__header">
             <h1>{{h.dataset_display_name(pkg)}} <span>{{ ('Uploaded: ')}} {{ h.time_ago_from_timestamp(pkg.metadata_created) }}</span></h1>
+            {% if pkg.publication_date| length > 3 %}
+                    <p style="color: #898989; font-size: 14px; margin-top: 8px">Date of Publication: {{ pkg.publication_date }}</p>
+            {% endif %}
             <div class="relevancy-info">
                 <p><i class="fa fa-map-marker" aria-hidden="true"></i> 
                     {% set regions = pkg.region.split(',') %}
                     {% if regions| length > 1 %}
                     {% for region in regions %}
-                        <span>{{ region }}{{(',')}}</span>
+                        {% if region == regions[regions| length - 1]%}
+                            <span>{{ region }}</span>
+                        {% else %}
+                            <span>{{ region }}{{(',')}}</span>
+                        {% endif %}
                     {% endfor %}
                     {% else %}
                         {{pkg.region}}
