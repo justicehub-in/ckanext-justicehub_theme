@@ -96,7 +96,11 @@
                     {% set regions = pkg.region.split(',') %}
                     {% if regions| length > 1 %}
                     {% for region in regions %}
-                        <span>{{ region }}{{(',')}}</span>
+                        {% if region == regions[regions| length - 1]%}
+                            <span>{{ region }}</span>
+                        {% else %}
+                            <span>{{ region }}{{(',')}}</span>
+                        {% endif %}
                     {% endfor %}
                     {% else %}
                         {{pkg.region}}
