@@ -2,16 +2,16 @@ import DataUploadSteps from './dataUploadSteps.js';
 import Dataset from './dataset.js';
 
 (function () {
+  const fullURL = window.location.href;
+  const splitURL = fullURL.split('/');
+
+  const BASE_URL = `${splitURL[0]}//${splitURL[2]}`;
+
   const dataUploadSteps = new DataUploadSteps();
   const dataset = new Dataset();
 
   const dataUploadSections = document.querySelectorAll('.data-upload-section');
   const stepIndicators = document.querySelectorAll('.step-indicator');
-
-  const fullURL = window.location.href;
-  const splitURL = fullURL.split('/');
-
-  const BASE_URL = `${splitURL[0]}//${splitURL[2]}`;
 
   // functions to update DOM
 
@@ -861,5 +861,27 @@ import Dataset from './dataset.js';
         document.getElementById('submitDatasetButton').style.display = 'block';
         if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
       });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (splitURL.indexOf('edit') > 0) {
+      const datasetName = splitURL[splitURL.length - 2];
+      fetch(`${BASE_URL}/api/dataset/${datasetName}`, {
+        method: 'GET',
+        credentials: 'same-origin'
+      })
+        .then((response) => response.json())
+        .then((data) => fillFieldsWithData(data))
+        .catch((error) => console.log(error.message));
+    }
+  });
+
+  function fillFieldsWithData(data) {
+    console.log(data);
+    document.getElementById('datasetNameField').value = data.title;
+    document.getElementById('licenseSelect').value = data.license_id;
+    document.querySelector(`input[name="view-permissions"]`).value = data.public === 'false' ? 'Only me' : 'Anyone';
+    document.querySelector(`input[name="primary-publisher"]`).value = data.publisher_type;
+    document.querySelector(``)
   }
 })();
