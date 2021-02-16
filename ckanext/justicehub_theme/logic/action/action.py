@@ -233,9 +233,9 @@ def package_show(context, data_dict):
 
     new_dict = {'id': package_dict['creator_user_id']}
     user_dict = get_action('user_show')(context, new_dict)
-    package_dict['creator_name'] = user_dict['display_name']
-    package_dict['creator_username'] = user_dict['name']
-    package_dict['creator_email'] = user_dict['email']
+    package_dict['creator_name'] = user_dict.get('display_name')
+    package_dict['creator_username'] = user_dict.get('name')
+    package_dict['creator_email'] = user_dict.get('email')
 
     return package_dict
 
