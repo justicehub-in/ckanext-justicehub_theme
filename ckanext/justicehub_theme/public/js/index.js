@@ -10,6 +10,14 @@ import Dataset from './dataset.js';
   const dataUploadSteps = new DataUploadSteps();
   const dataset = new Dataset();
 
+  function isEditMode() {
+    return splitURL.indexOf('edit') > 0;
+  }
+
+  let receivedResources = [];
+  let receivedResourcesIds = [];
+  let resourcesByType = { added: [], deleted: [], updated: [] };
+
   const dataUploadSections = document.querySelectorAll('.data-upload-section');
   const stepIndicators = document.querySelectorAll('.step-indicator');
 
@@ -55,12 +63,14 @@ import Dataset from './dataset.js';
   // remove file inputs
   function removeFileInput(event) {
     if (event.target.classList.contains('reset-input')) {
-      console.log('reset button is clicked');
       resetInput(event);
       return;
     } else if (event.target.classList.contains('remove-input')) {
       const fileInputToBeRemoved = event.target.parentElement;
       if (!fileInputToBeRemoved.parentElement) return;
+      if (receivedResourcesIds.indexOf(fileInputToBeRemoved.id) > -1) {
+        resourcesByType.deleted.push(fileInputToBeRemoved.id);
+      }
       fileInputToBeRemoved.parentElement.removeChild(fileInputToBeRemoved);
     }
   }
@@ -123,7 +133,7 @@ import Dataset from './dataset.js';
     return FILEINPUT_ICONS.find((file) => file.format === fileType)[property];
   }
 
-  function generateFileUploadField(fileId) {
+  function generateFileUploadField(fileId, fileName = '', fileDescription = '') {
     return `
     <div class="file-upload" id="${fileId}">
       <span class="iconify remove-input" data-icon="mdi:close" data-inline="false"></span>
@@ -134,12 +144,14 @@ import Dataset from './dataset.js';
         </div>
         <div class="name-field">
           <h4>Name of the file <span>(Upload a file to edit the name)</span></h4>
-          <input type="text" class="form-control" id="fileNameField" disabled />
+          <input type="text" class="form-control file-name" id="fileNameField" value="${fileName}" ${
+      fileName ? '' : 'disabled'
+    } />
         </div>
       </div>
       <div class="file-upload__description">
         <h4>Description</h4>
-        <textarea class="form-control" cols="25" rows="5"></textarea>
+        <textarea class="form-control file-description" cols="25" rows="5">${fileDescription}</textarea>
       </div>
     </div>
   `;
@@ -151,8 +163,7 @@ import Dataset from './dataset.js';
   addMoreFilesButton.addEventListener('click', () => {
     const numberOfFileInputs = document.querySelectorAll('.file-upload');
     if (numberOfFileInputs.length >= 30) return;
-    const fileUploadForm = document.querySelector('.data-upload-section__form__field--file');
-    fileUploadForm.insertAdjacentHTML('beforeend', generateFileUploadField(Math.random()));
+    fileUploadContainer.insertAdjacentHTML('beforeend', generateFileUploadField(`added-${Math.random()}`));
   });
 
   fileUploadContainer.addEventListener('change', (event) => {
@@ -169,8 +180,9 @@ import Dataset from './dataset.js';
     if (fileType === 'none' && fileInputBackgroundElement) {
       fileInputBackgroundElement.style.border = '1px dashed #F65940';
     }
+    fileInputBackgroundElement.style.border = '1px solid #524F4F';
     fileInputBackgroundElement.style.backgroundColor = getFileUploadBoxPropertyByFileType(fileType, 'backgroundColor');
-    fileInputBackgroundElement.removeChild(fileInputBackgroundElement.querySelector('svg'));
+    fileInputBackgroundElement.removeChild(fileInputBackgroundElement.querySelector('.iconify'));
     fileInputBackgroundElement.insertAdjacentHTML(
       'beforeend',
       getFileUploadBoxPropertyByFileType(fileType, 'iconTemplate')
@@ -180,7 +192,6 @@ import Dataset from './dataset.js';
   function fileInputHandler(event) {
     const file = event.target.files[0];
     const fileInputBackground = event.target.parentElement;
-    fileInputBackground.style.border = '1px solid #524F4F';
     if (file.type.indexOf('csv') > -1) {
       updateFileInputBackground(fileInputBackground, 'csv');
     } else if (file.type.indexOf('spreadsheetml') > -1) {
@@ -203,9 +214,24 @@ import Dataset from './dataset.js';
 
     const fileUploadInputs = document.querySelectorAll('.file-upload');
     fileUploadInputs.forEach((file) => {
-      if (getFileDetailsFromFileUploadElement(file).fileName) {
-        dataset.addItemToListProperty('files', getFileDetailsFromFileUploadElement(file));
+      if (file.id.indexOf('added') > -1 && resourcesByType.added.indexOf(file.id) < 0) {
+        resourcesByType.added.push(file.id);
+        if (getFileDetailsFromFileUploadElement(file).fileName) {
+          dataset.addItemToListProperty('files', getFileDetailsFromFileUploadElement(file));
+        }
+      } else if (receivedResourcesIds.indexOf(file.id) > -1) {
+        const existingResourceDetails = receivedResources.find((resource) => resource.id === file.id);
+        const currentFileDetails = getFileDetailsFromFileUploadElement(file);
+        if (
+          existingResourceDetails.name !== currentFileDetails.fileName ||
+          existingResourceDetails.description !== currentFileDetails.fileDescription ||
+          (currentFileDetails.file && resourcesByType.updated.indexOf(file.id) < 0)
+        ) {
+          resourcesByType.updated.push(file.id);
+        }
       }
+
+      console.log(resourcesByType);
     });
   }
 
@@ -240,7 +266,7 @@ import Dataset from './dataset.js';
   }
 
   const addMoreAuthorsButton = document.querySelector('.add-more--authors');
-  function generateAuthorField(publisherType) {
+  function generateAuthorField(publisherType, name = '', email = '') {
     return `
     <div class="item-addition item-addition--author item-addition--${
       publisherType === 'Author' ? 'individual' : 'organization'
@@ -248,11 +274,11 @@ import Dataset from './dataset.js';
       <span class="iconify remove-input" data-icon="mdi:close" data-inline="false"></span>
       <div class="item-addition__name-field">
         <h5>${publisherType}'s name</h5>
-        <input type="text" class="form-control" />
+        <input type="text" class="form-control" value="${name}" />
       </div>
       <div class="item-addition__email-field">
         <h5>Email of ${publisherType} (optional)</h5>
-        <input type="email" class="form-control" />
+        <input type="email" class="form-control" value="${email}" />
       </div>
     </div>
   `;
@@ -466,17 +492,17 @@ import Dataset from './dataset.js';
   // sources of dataset section
   let referenceAdditionForm;
   const addMoreReferencesButton = document.querySelector('.add-more--references');
-  function generateReferenceField(referenceId) {
+  function generateReferenceField(referenceId, title = '', link = '') {
     return `
     <div class="item-addition item-addition--reference" id="${referenceId}">
       <span class="iconify remove-input" data-icon="mdi:close" data-inline="false"></span>
       <div class="item-addition__link-field">
         <h5>Paste Link</h5>
-        <input type="text" class="form-control" />
+        <input type="text" class="form-control" value="${link}" />
       </div>
       <div class="item-addition__title-field">
         <h5>Give your link a title</h5>
-        <input type="text" class="form-control" />
+        <input type="text" class="form-control" value="${title}" />
       </div>
     </div>
   `;
@@ -566,7 +592,7 @@ import Dataset from './dataset.js';
       file: fileUploadElement.querySelector('input[type="file"]').files[0],
       fileName: getValueFromInputSelector('.name-field input', fileUploadElement),
       fileDescription: getValueFromInputSelector('.file-upload__description textarea', fileUploadElement),
-      fileId: `${Math.random()}`
+      fileId: fileUploadElement.id
     };
   }
 
@@ -815,6 +841,53 @@ import Dataset from './dataset.js';
       });
   }
 
+  // function to delete a single resource
+  function deleteAResource(resourceId, packageName) {
+    fetch(`${BASE_URL}/api/dataset/${packageName}/resource/${resourceId}/delete`, {
+      method: 'DELETE'
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error.message));
+  }
+
+  function updateAResource(resourceId, packageName) {
+    const resource = getFileDetailsFromFileUploadElement(resoureId);
+
+    const fileData = new FormData();
+    if (resource.file) {
+      fileData.append('upload', resource.file);
+    }
+    fileData.append('name', resource.fileName);
+    fileData.append('description', resource.fileDescription);
+
+    fetch(`${BASE_URL}/api/dataset/${packageName}/resource/${resourceId}/edit`, {
+      method: 'POST',
+      credentials: 'same-origin',
+      body: fileData
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error.message));
+  }
+
+  // function to update a single resource
+
+  function updateAllResources(packageName) {
+    // first - send request to delete resources (async)
+    Promise.all[resourcesByType.deleted.map((resoureId) => deleteAResource(resoureId, dataset.name))].then((response) =>
+      console.log(response)
+    );
+    // second - send request to update resources (async)
+    Promise.all[resourcesByType.updated.map((resoureId) => updateAResource(resoureId, dataset.name))].then((response) =>
+      console.log(response)
+    );
+    // third - send request to add resources (sync)
+
+    const filesList = resourcesByType.added.map((resourceId) => getFileDetailsFromFileUploadElement(resourceId));
+    postAllFilesSync(dataset.name, filesList);
+  }
+
   function postDatasetRequest(state = 'active') {
     const modalBody = document.querySelector('#previewDatasetModal .modal-body');
     const existingErrorMessageElement = modalBody.querySelector('.dataset-fail');
@@ -840,31 +913,55 @@ import Dataset from './dataset.js';
       return;
     }
 
-    fetch(`${BASE_URL}/api/dataset/new`, {
-      method: 'POST',
-      credentials: 'same-origin',
-      body: generateFormDataForPostingMetaData(state)
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (dataset.files) {
-          postAllFilesSync(data.pkg_name, dataset.files, BASE_URL);
-        }
+    if (isEditMode()) {
+      console.log('sending update request');
+      fetch(`${BASE_URL}/api/dataset/${dataset.name}`, {
+        method: 'POST',
+        credentials: 'same-origin',
+        body: generateFormDataForPostingMetaData(state)
       })
-      .catch((error) => {
-        console.log(error.message);
-        modalBody.insertAdjacentHTML(
-          'afterbegin',
-          `<p class="dataset-fail" style="color:red;">${error.message} - Couldn't upload dataset. Please try again.</p>`
-        );
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          updateAllResources();
+        })
+        .catch((error) => {
+          console.log(error.message);
+          modalBody.insertAdjacentHTML(
+            'afterbegin',
+            `<p class="dataset-fail" style="color:red;">${error.message} - Couldn't update dataset. Please try again.</p>`
+          );
 
-        document.getElementById('submitDatasetButton').style.display = 'block';
-        if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
-      });
+          document.getElementById('submitDatasetButton').style.display = 'block';
+          if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
+        });
+    } else {
+      fetch(`${BASE_URL}/api/dataset/new`, {
+        method: 'POST',
+        credentials: 'same-origin',
+        body: generateFormDataForPostingMetaData(state)
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (dataset.files) {
+            postAllFilesSync(data.pkg_name, dataset.files, BASE_URL);
+          }
+        })
+        .catch((error) => {
+          console.log(error.message);
+          modalBody.insertAdjacentHTML(
+            'afterbegin',
+            `<p class="dataset-fail" style="color:red;">${error.message} - Couldn't upload dataset. Please try again.</p>`
+          );
+
+          document.getElementById('submitDatasetButton').style.display = 'block';
+          if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
+        });
+    }
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    if (splitURL.indexOf('edit') > 0) {
+    if (isEditMode()) {
       const datasetName = splitURL[splitURL.length - 2];
       fetch(`${BASE_URL}/api/dataset/${datasetName}`, {
         method: 'GET',
@@ -878,10 +975,94 @@ import Dataset from './dataset.js';
 
   function fillFieldsWithData(data) {
     console.log(data);
+
+    const fileUploadSections = document.querySelectorAll('.file-upload');
+    fileUploadSections.forEach((section) => {
+      section.parentElement.removeChild(section);
+    });
+
+    // file section
     document.getElementById('datasetNameField').value = data.title;
+    receivedResources = data.resources;
+    receivedResourcesIds = receivedResources.map((resource) => resource.id);
+    receivedResources.forEach((resource) => {
+      fileUploadContainer.insertAdjacentHTML(
+        'beforeend',
+        generateFileUploadField(resource.id, resource.name, resource.description)
+      );
+      const uploadBox = document.getElementById(resource.id).querySelector('.upload-box');
+      updateFileInputBackground(uploadBox, resource.format.toLowerCase());
+    });
+
+    // ownership section
     document.getElementById('licenseSelect').value = data.license_id;
     document.querySelector(`input[name="view-permissions"]`).value = data.public === 'false' ? 'Only me' : 'Anyone';
     document.querySelector(`input[name="primary-publisher"]`).value = data.publisher_type;
-    document.querySelector(``)
+
+    const publisherAdditionInputs = document.querySelectorAll('.item-addition--author');
+    publisherAdditionInputs.forEach((input) => {
+      input.parentElement.removeChild(input);
+    });
+
+    data.publisher_contacts.forEach((publisher) => {
+      authorAdditionForm.insertAdjacentHTML(
+        'beforeend',
+        generateAuthorField(
+          data.publisher_type === 'individual' ? 'Author' : 'Organization',
+          publisher.name,
+          publisher.email ? publisher.email : ''
+        )
+      );
+    });
+
+    // relevancy section
+    const [fromYear, fromMonth] = data.start_month.split('-');
+    const [toYear, toMonth] = data.end_month.split('-');
+    const [pubDate, pubMonth, pubYear] = data.publication_date.split('/');
+
+    // regions WIP
+
+    document.getElementById('fromYear').value = fromYear;
+    document.getElementById('toYear').value = toYear;
+    document.getElementById('fromMonth').value = fromMonth ? fromMonth : '--';
+    document.getElementById('toMonth').value = toMonth ? toMonth : '--';
+
+    document.getElementById('pubDateInput').value = pubDate;
+    document.getElementById('pubMonthInput').value = pubMonth ? pubMonth : '--';
+    document.getElementById('pubYearInput').value = pubYear;
+
+    if (data.language === 'English' || data.language === 'Hindi') {
+      document.querySelector(`input[name="language-options"]`).value = data.language;
+    } else {
+      document.querySelector(`input[name="language-options"]`).value = 'other';
+      document.getElementById('otherLanguageInput').style.display = 'inline-block';
+      document.getElementById('otherLanguageInput').value = data.language;
+    }
+
+    // sources section
+
+    data.tags.forEach((tag) => {
+      insertTag(keywordsInput.parentElement, tag.display_name);
+      dataset.addItemToListProperty('keywords', tag.display_name);
+    });
+    data.source.forEach((s) => {
+      insertTag(sourcesInput.parentElement, s);
+      dataset.addItemToListProperty('sources', s);
+    });
+
+    const referenceInputs = document.querySelectorAll('.item-addition--reference');
+    console.log(referenceInputs);
+
+    referenceInputs.forEach((input) => {
+      input.parentElement.removeChild(input);
+    });
+
+    data.links.forEach((link) => {
+      const referenceAdditionForm = document.querySelector('.data-upload-section__form__field--references');
+      referenceAdditionForm.insertAdjacentHTML(
+        'beforeend',
+        generateReferenceField(Math.random(), link.title, link.link)
+      );
+    });
   }
 })();
