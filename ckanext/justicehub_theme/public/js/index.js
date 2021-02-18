@@ -215,7 +215,10 @@ import Dataset from './dataset.js';
 
     const fileUploadInputs = document.querySelectorAll('.file-upload');
     fileUploadInputs.forEach((file) => {
-      if (file.id.indexOf('added') > -1 && resourcesByType.added.indexOf(file.id) < 0) {
+      if (
+        file.id.indexOf('added') > -1 ||
+        (file.id.indexOf('file') > -1 && resourcesByType.added.indexOf(file.id) < 0)
+      ) {
         resourcesByType.added.push(file.id);
         if (getFileDetailsFromFileUploadElement(file).fileName) {
           dataset.addItemToListProperty('files', getFileDetailsFromFileUploadElement(file));
@@ -231,8 +234,6 @@ import Dataset from './dataset.js';
           resourcesByType.updated.push(file.id);
         }
       }
-
-      console.log(resourcesByType);
     });
   }
 
@@ -638,7 +639,7 @@ import Dataset from './dataset.js';
     if (file.file.type.indexOf('csv') > -1) {
       fileIcon = getFileUploadBoxPropertyByFileType('csv', 'icon');
     } else if (file.file.type.indexOf('spreadsheetml') > -1) {
-      fileIcon = getFileUploadBoxPropertyByFileType('xls', 'icon');
+      fileIcon = getFileUploadBoxPropertyByFileType('xlsx', 'icon');
     } else if (file.file.type.indexOf('pdf') > -1) {
       fileIcon = getFileUploadBoxPropertyByFileType('pdf', 'icon');
     }
@@ -950,9 +951,10 @@ import Dataset from './dataset.js';
       })
         .then((response) => response.json())
         .then((data) => {
-          if (dataset.files) {
-            postAllFilesSync(data.pkg_name, dataset.files, BASE_URL);
-          }
+          const filesList = resourcesByType.added.map((resourceId) =>
+            getFileDetailsFromFileUploadElement(document.getElementById(resourceId))
+          );
+          postAllFilesSync(data.pkg_name, filesList);
         })
         .catch((error) => {
           console.log(error.message);
@@ -1061,7 +1063,6 @@ import Dataset from './dataset.js';
     });
 
     const referenceInputs = document.querySelectorAll('.item-addition--reference');
-    console.log(referenceInputs);
 
     referenceInputs.forEach((input) => {
       input.parentElement.removeChild(input);
