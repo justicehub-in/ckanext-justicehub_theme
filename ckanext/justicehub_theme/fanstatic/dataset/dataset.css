@@ -22,14 +22,20 @@
   color: #6c666f;
 }
 
-.dataset-main__header > div {
+.dataset-main__header .relevancy-info {
   display: flex;
   color: #898989;
   font-size: 14px;
 }
 
-.dataset-main__header > div p {
+.dataset-main__header .relevancy-info p {
   margin-right: 40px;
+}
+
+.dataset-main__header .title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .dataset-sidebar-module .header h3 {

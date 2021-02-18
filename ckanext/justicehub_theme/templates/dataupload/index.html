@@ -78,12 +78,12 @@
               </div>
               <div class="name-field">
                 <h4>Name of the file <span>(Upload a file to edit the name)</span></h4>
-                <input type="text" class="form-control" disabled />
+                <input type="text" class="form-control file-name" disabled />
               </div>
             </div>
             <div class="file-upload__description">
               <h4>Description</h4>
-              <textarea class="form-control" cols="25" rows="5"></textarea>
+              <textarea class="form-control file-description" cols="25" rows="5"></textarea>
             </div>
           </div>
 
@@ -96,12 +96,12 @@
               </div>
               <div class="name-field">
                 <h4>Name of the file <span>(Upload a file to edit the name)</span></h4>
-                <input type="text" class="form-control" disabled />
+                <input type="text" class="form-control file-name" disabled />
               </div>
             </div>
             <div class="file-upload__description">
               <h4>Description</h4>
-              <textarea class="form-control" cols="25" rows="5"></textarea>
+              <textarea class="form-control file-description" cols="25" rows="5"></textarea>
             </div>
           </div>
         </div>
@@ -256,15 +256,15 @@
           <div class="date-of-publication-entry">
             <div id="pubDate">
               <h5>Date</h5>
-              <input type="number" min="1" max="31" />
+              <input id="pubDateInput" type="number" min="1" max="31" />
             </div>
             <div id="pubMonth">
               <h5>Month</h5>
-              <select class="months-select"></select>
+              <select id="pubMonthInput" class="months-select"></select>
             </div>
             <div id="pubYear">
               <h5>Year</h5>
-              <input type="number" min="1971" max="2021" />
+              <input id="pubYearInput" type="number" min="1971" max="2021" />
             </div>
           </div>
         </div>
@@ -275,21 +275,21 @@
             <div class="period period--from">
               <div class="period__month">
                 <h5>Month (optional)</h5>
-                <select class="months-select"></select>
+                <select id="fromMonth" class="months-select"></select>
               </div>
               <div class="period__year">
                 <h5>From year</h5>
-                <input type="text" />
+                <input id="fromYear" type="text" />
               </div>
             </div>
             <div class="period period--to">
               <div class="period__month">
                 <h5>Month (optional)</h5>
-                <select class="months-select"></select>
+                <select id="toMonth" class="months-select"></select>
               </div>
               <div class="period__year">
                 <h5>To year</h5>
-                <input type="text" />
+                <input id="toYear" type="text" />
               </div>
             </div>
           </div>
