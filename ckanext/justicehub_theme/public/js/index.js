@@ -815,7 +815,7 @@ import Dataset from './dataset.js';
 
   function postAllFilesSync(packageName, filesList) {
     if (filesList.length === 0) {
-      // window.location = '/message/success';
+      window.location = '/message/success';
       return;
     }
 
