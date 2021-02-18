@@ -17,6 +17,7 @@ import Dataset from './dataset.js';
   let receivedResources = [];
   let receivedResourcesIds = [];
   let resourcesByType = { added: [], deleted: [], updated: [] };
+  let datasetIdName = '';
 
   const dataUploadSections = document.querySelectorAll('.data-upload-section');
   const stepIndicators = document.querySelectorAll('.step-indicator');
@@ -631,8 +632,6 @@ import Dataset from './dataset.js';
 
   const previewButton = document.querySelector('#previewButton');
 
-  // break this into multiple functions and call them upon clicking proceed at each section
-
   function generateFilePreviewHTML(file) {
     let fileIcon = '';
 
@@ -788,7 +787,7 @@ import Dataset from './dataset.js';
   function generateFormDataForPostingMetaData(state) {
     let metaData = new FormData();
     if (isEditMode()) {
-      metaData.append('pkg_name', dataset.name);
+      metaData.append('pkg_name', datasetIdName);
     }
     metaData.append('title', dataset.name);
     metaData.append('license_id', dataset.license.licenseName);
@@ -816,7 +815,7 @@ import Dataset from './dataset.js';
 
   function postAllFilesSync(packageName, filesList) {
     if (filesList.length === 0) {
-      window.location = '/message/success';
+      // window.location = '/message/success';
       return;
     }
 
@@ -983,6 +982,8 @@ import Dataset from './dataset.js';
 
   function fillFieldsWithData(data) {
     console.log(data);
+
+    datasetIdName = data.name;
 
     const fileUploadSections = document.querySelectorAll('.file-upload');
     fileUploadSections.forEach((section) => {
