@@ -1007,7 +1007,7 @@ footer h3 {
 }
 
 .data-upload-header .custom-container {
-  padding: 0;
+  padding: 0 16px;
 }
 
 .exit-flow {

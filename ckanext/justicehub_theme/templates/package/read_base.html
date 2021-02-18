@@ -33,10 +33,10 @@
             {% set owners = h.justicehub_theme_parse_json(pkg.publisher_contacts or '[]') %}
             {% for owner in owners %}
                 {% if owner['name'] %}
-                <div>
-                    <p>{{owner['name']}}</p>
+                <div style="margin-bottom: 10px;">
+                    <p style="margin-bottom: 2px;">{{owner['name']}}</p>
                     {% if owner['email'] %}
-                    <p>{{owner['email']}}</p>
+                    <p style="color: #898989; font-size: 12px">{{owner['email']}}</p>
                     {% endif %}
                 </div>
                 {% else %}
@@ -89,7 +89,12 @@
     {#{{ super() }}#}
     <div class="dataset-main">
         <div class="dataset-main__header">
-            <h1>{{h.dataset_display_name(pkg)}} <span>{{ ('Uploaded: ')}} {{ h.time_ago_from_timestamp(pkg.metadata_created) }}</span></h1>
+            <div class="title-row">
+                <h1>{{h.dataset_display_name(pkg)}} <span>{{ ('Uploaded: ')}} {{ h.time_ago_from_timestamp(pkg.metadata_created) }}</span></h1>
+                {% if h.check_access('package_update', {'id':pkg.id }) %}
+                <a class="btn btn-primary" style="text-transform: uppercase; font-family: Roboto;" href="/dataset/{{pkg.name}}/edit" >Edit dataset</a>
+                {% endif %}
+            </div>
             {% if pkg.publication_date| length > 3 %}
                     <p style="color: #898989; font-size: 14px; margin-top: 8px">Date of Publication: {{ pkg.publication_date }}</p>
             {% endif %}
