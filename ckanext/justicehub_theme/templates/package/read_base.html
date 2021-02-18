@@ -33,10 +33,10 @@
             {% set owners = h.justicehub_theme_parse_json(pkg.publisher_contacts or '[]') %}
             {% for owner in owners %}
                 {% if owner['name'] %}
-                <div>
-                    <p>{{owner['name']}}</p>
+                <div style="margin-bottom: 10px;">
+                    <p style="margin-bottom: 2px;">{{owner['name']}}</p>
                     {% if owner['email'] %}
-                    <p>{{owner['email']}}</p>
+                    <p style="color: #898989; font-size: 12px">{{owner['email']}}</p>
                     {% endif %}
                 </div>
                 {% else %}

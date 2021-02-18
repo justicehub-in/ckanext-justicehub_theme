@@ -104,7 +104,7 @@ import Dataset from './dataset.js';
 
   const FILEINPUT_ICONS = [
     {
-      format: 'xls',
+      format: 'xlsx',
       backgroundColor: '#CEE1CE',
       icon: 'vscode-icons:file-type-excel2',
       iconTemplate: '<span class="iconify" data-icon="vscode-icons:file-type-excel2" data-inline="false"></span>'
@@ -195,7 +195,7 @@ import Dataset from './dataset.js';
     if (file.type.indexOf('csv') > -1) {
       updateFileInputBackground(fileInputBackground, 'csv');
     } else if (file.type.indexOf('spreadsheetml') > -1) {
-      updateFileInputBackground(fileInputBackground, 'xls');
+      updateFileInputBackground(fileInputBackground, 'xlsx');
     } else if (file.type.indexOf('pdf') > -1) {
       updateFileInputBackground(fileInputBackground, 'pdf');
     }
@@ -787,6 +787,9 @@ import Dataset from './dataset.js';
 
   function generateFormDataForPostingMetaData(state) {
     let metaData = new FormData();
+    if (isEditMode()) {
+      metaData.append('pkg_name', dataset.name);
+    }
     metaData.append('title', dataset.name);
     metaData.append('license_id', dataset.license.licenseName);
     metaData.append('private', dataset.viewPermission === 'Anyone' ? false : true);
@@ -842,17 +845,26 @@ import Dataset from './dataset.js';
   }
 
   // function to delete a single resource
-  function deleteAResource(resourceId, packageName) {
-    fetch(`${BASE_URL}/api/dataset/${packageName}/resource/${resourceId}/delete`, {
-      method: 'DELETE'
+  function deleteAllResouces(resourceList, packageName) {
+    if (!resourceList.length) {
+      return;
+    }
+
+    const resourceToBeDeleted = resourceList[0];
+
+    fetch(`${BASE_URL}/api/dataset/${packageName}/resource/${resourceToBeDeleted}/delete`, {
+      method: 'POST'
     })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then(() => deleteAllResouces(resourceList.slice(1)))
       .catch((error) => console.log(error.message));
   }
 
-  function updateAResource(resourceId, packageName) {
-    const resource = getFileDetailsFromFileUploadElement(resoureId);
+  function updateResources(resourcesList, packageName) {
+    if (!resourcesList.length) {
+      return;
+    }
+
+    const resource = getFileDetailsFromFileUploadElement(document.getElementById(resourcesList[0]));
 
     const fileData = new FormData();
     if (resource.file) {
@@ -861,7 +873,7 @@ import Dataset from './dataset.js';
     fileData.append('name', resource.fileName);
     fileData.append('description', resource.fileDescription);
 
-    fetch(`${BASE_URL}/api/dataset/${packageName}/resource/${resourceId}/edit`, {
+    fetch(`${BASE_URL}/api/dataset/${packageName}/resource/${resourcesList[0]}/edit`, {
       method: 'POST',
       credentials: 'same-origin',
       body: fileData
@@ -873,19 +885,16 @@ import Dataset from './dataset.js';
 
   // function to update a single resource
 
-  function updateAllResources(packageName) {
-    // first - send request to delete resources (async)
-    Promise.all[resourcesByType.deleted.map((resoureId) => deleteAResource(resoureId, dataset.name))].then((response) =>
-      console.log(response)
-    );
-    // second - send request to update resources (async)
-    Promise.all[resourcesByType.updated.map((resoureId) => updateAResource(resoureId, dataset.name))].then((response) =>
-      console.log(response)
-    );
+  function updateAllResources(packageName = dataset.name) {
+    // first - send request to delete resources (sync)
+    deleteAllResouces(resourcesByType.deleted, packageName);
+    // second - send request to update resources (sync)
+    updateResources(resourcesByType.updated, packageName);
     // third - send request to add resources (sync)
-
-    const filesList = resourcesByType.added.map((resourceId) => getFileDetailsFromFileUploadElement(resourceId));
-    postAllFilesSync(dataset.name, filesList);
+    const filesList = resourcesByType.added.map((resourceId) =>
+      getFileDetailsFromFileUploadElement(document.getElementById(resourceId))
+    );
+    setTimeout(() => postAllFilesSync(packageName, filesList), 0);
   }
 
   function postDatasetRequest(state = 'active') {
@@ -915,14 +924,13 @@ import Dataset from './dataset.js';
 
     if (isEditMode()) {
       console.log('sending update request');
-      fetch(`${BASE_URL}/api/dataset/${dataset.name}`, {
+      fetch(`${BASE_URL}/api/dataset/new`, {
         method: 'POST',
         credentials: 'same-origin',
         body: generateFormDataForPostingMetaData(state)
       })
         .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
+        .then(() => {
           updateAllResources();
         })
         .catch((error) => {
@@ -992,6 +1000,7 @@ import Dataset from './dataset.js';
       );
       const uploadBox = document.getElementById(resource.id).querySelector('.upload-box');
       updateFileInputBackground(uploadBox, resource.format.toLowerCase());
+      // WIP - fix upload box not getting icons
     });
 
     // ownership section
