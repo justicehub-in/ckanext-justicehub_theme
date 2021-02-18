@@ -884,7 +884,7 @@ import Dataset from './dataset.js';
 
   // function to update a single resource
 
-  function updateAllResources(packageName = dataset.name) {
+  function updateAllResources(packageName = datasetIdName) {
     // first - send request to delete resources (sync)
     deleteAllResouces(resourcesByType.deleted, packageName);
     // second - send request to update resources (sync)
