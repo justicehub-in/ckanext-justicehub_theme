@@ -144,9 +144,9 @@ import Dataset from './dataset.js';
     return FILEINPUT_ICONS.find((file) => file.format === 'unknown')[property];
   }
 
-  function generateFileUploadField(fileId, fileName = '', fileDescription = '') {
+  function generateFileUploadField(fileId, fileName = '', fileDescription = '', fileFormat = '') {
     return `
-    <div class="file-upload" id="${fileId}">
+    <div class="file-upload" id="${fileId}" data-format="${fileFormat}">
       <span class="iconify remove-input" data-icon="mdi:close" data-inline="false"></span>
       <div class="file-upload__name">
         <div class="upload-box">
@@ -604,11 +604,18 @@ import Dataset from './dataset.js';
   }
 
   function getFileDetailsFromFileUploadElement(fileUploadElement) {
+    const uploadedFile = fileUploadElement.querySelector('input[type="file"]').files
+      ? fileUploadElement.querySelector('input[type="file"]').files[0]
+      : null;
+
+    const fileFormat = fileUploadElement.dataset.format;
+
     return {
-      file: fileUploadElement.querySelector('input[type="file"]').files[0],
+      file: uploadedFile,
       fileName: getValueFromInputSelector('.name-field input', fileUploadElement),
       fileDescription: getValueFromInputSelector('.file-upload__description textarea', fileUploadElement),
-      fileId: fileUploadElement.id
+      fileId: fileUploadElement.id,
+      fileFormat: fileFormat
     };
   }
 
@@ -650,7 +657,9 @@ import Dataset from './dataset.js';
   function generateFilePreviewHTML(file) {
     let fileIcon = '';
 
-    if (file.file.type.indexOf('csv') > -1) {
+    if (isEditMode()) {
+      fileIcon = getFileUploadBoxPropertyByFileType(file.fileFormat.toLowerCase(), 'icon');
+    } else if (file.file.type.indexOf('csv') > -1) {
       fileIcon = getFileUploadBoxPropertyByFileType('csv', 'icon');
     } else if (file.file.type.indexOf('spreadsheetml') > -1) {
       fileIcon = getFileUploadBoxPropertyByFileType('xlsx', 'icon');
@@ -755,9 +764,52 @@ import Dataset from './dataset.js';
     if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
 
     document.querySelector('#filesListOnPreview').innerHTML = '';
-    dataset.files.forEach((file) => {
-      document.querySelector('#filesListOnPreview').insertAdjacentHTML('beforeend', generateFilePreviewHTML(file));
-    });
+    if (!isEditMode()) {
+      dataset.files.forEach((file) => {
+        document.querySelector('#filesListOnPreview').insertAdjacentHTML('beforeend', generateFilePreviewHTML(file));
+      });
+    } else {
+      const updatedFiles = resourcesByType.updated.map((resourceId) => document.getElementById(resourceId));
+
+      updatedFiles.forEach((fileUploadElement) =>
+        document
+          .querySelector('#filesListOnPreview')
+          .insertAdjacentHTML(
+            'beforeend',
+            generateFilePreviewHTML(getFileDetailsFromFileUploadElement(fileUploadElement))
+          )
+      );
+
+      const addedFiles = resourcesByType.added.map((resourceId) => document.getElementById(resourceId));
+
+      addedFiles.forEach((fileUploadElement) =>
+        document
+          .querySelector('#filesListOnPreview')
+          .insertAdjacentHTML(
+            'beforeend',
+            generateFilePreviewHTML(getFileDetailsFromFileUploadElement(fileUploadElement))
+          )
+      );
+
+      const untouchedFiles = receivedResources
+        .filter(
+          (resource) => resourcesByType.updated.indexOf(resource.id) < 0 && resourcesByType.deleted.indexOf(resource.id)
+        )
+        .map((resource) => document.getElementById(resource.id));
+
+      console.log(untouchedFiles);
+
+      if (untouchedFiles) {
+        untouchedFiles.forEach((fileUploadElement) =>
+          document
+            .querySelector('#filesListOnPreview')
+            .insertAdjacentHTML(
+              'beforeend',
+              generateFilePreviewHTML(getFileDetailsFromFileUploadElement(fileUploadElement))
+            )
+        );
+      }
+    }
 
     document.querySelector('#dataRelevancyPreviewTable').innerHTML = generateDataRelevancyPreviewTableHTML(dataset);
     document.querySelector('#ownershipPreviewTable').innerHTML = generateOwnershipPreviewTableHTML(dataset);
@@ -861,39 +913,48 @@ import Dataset from './dataset.js';
   // function to delete a single resource
   function deleteAllResources(resourceList, packageName) {
     if (!resourceList.length) {
-      return;
+      updateResources(resourcesByType.updated, packageName);
+    } else {
+      const resourceToBeDeleted = resourceList[0];
+
+      fetch(`${BASE_URL}/api/dataset/${packageName}/resource/${resourceToBeDeleted}/delete`, {
+        method: 'POST'
+      })
+        .then(() => deleteAllResources(resourceList.slice(1)))
+        .catch((error) => {
+          deleteAllResources(resourceList.slice(1));
+          console.log(error.message);
+        });
     }
-
-    const resourceToBeDeleted = resourceList[0];
-
-    fetch(`${BASE_URL}/api/dataset/${packageName}/resource/${resourceToBeDeleted}/delete`, {
-      method: 'POST'
-    })
-      .then(() => deleteAllResources(resourceList.slice(1)))
-      .catch((error) => console.log(error.message));
   }
 
   function updateResources(resourcesList, packageName) {
     if (!resourcesList.length) {
-      return;
+      const filesList = resourcesByType.added.map((resourceId) =>
+        getFileDetailsFromFileUploadElement(document.getElementById(resourceId))
+      );
+      postAllFilesSync(packageName, filesList);
+    } else {
+      const resource = getFileDetailsFromFileUploadElement(document.getElementById(resourcesList[0]));
+
+      const fileData = new FormData();
+      if (resource.file) {
+        fileData.append('upload', resource.file);
+      }
+      fileData.append('name', resource.fileName);
+      fileData.append('description', resource.fileDescription);
+
+      fetch(`${BASE_URL}/api/dataset/${packageName}/resource/${resourcesList[0]}/edit`, {
+        method: 'POST',
+        credentials: 'same-origin',
+        body: fileData
+      })
+        .then(() => updateResources(resourcesList.slice(1)))
+        .catch((error) => {
+          console.log(error.message);
+          updateResources(resourcesList.slice(1));
+        });
     }
-
-    const resource = getFileDetailsFromFileUploadElement(document.getElementById(resourcesList[0]));
-
-    const fileData = new FormData();
-    if (resource.file) {
-      fileData.append('upload', resource.file);
-    }
-    fileData.append('name', resource.fileName);
-    fileData.append('description', resource.fileDescription);
-
-    fetch(`${BASE_URL}/api/dataset/${packageName}/resource/${resourcesList[0]}/edit`, {
-      method: 'POST',
-      credentials: 'same-origin',
-      body: fileData
-    })
-      .then(() => updateResources(resourcesList.slice(1)))
-      .catch((error) => console.log(error.message));
   }
 
   // function to update a single resource
@@ -1012,7 +1073,7 @@ import Dataset from './dataset.js';
     receivedResources.forEach((resource) => {
       fileUploadContainer.insertAdjacentHTML(
         'beforeend',
-        generateFileUploadField(resource.id, resource.name, resource.description.replace('\n', '\r\n'))
+        generateFileUploadField(resource.id, resource.name, resource.description.replace('\n', '\r\n'), resource.format)
       );
       const uploadBox = document.getElementById(resource.id).querySelector('.upload-box');
       updateFileInputBackground(uploadBox, resource.format.toLowerCase());
