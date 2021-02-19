@@ -229,12 +229,16 @@ import Dataset from './dataset.js';
         if (
           existingResourceDetails.name !== currentFileDetails.fileName ||
           existingResourceDetails.description !== currentFileDetails.fileDescription ||
-          (currentFileDetails.file && resourcesByType.updated.indexOf(file.id) < 0)
+          currentFileDetails.file
         ) {
-          resourcesByType.updated.push(file.id);
+          if (resourcesByType.updated.indexOf(file.id) < 0) {
+            resourcesByType.updated.push(file.id);
+          }
         }
       }
     });
+
+    console.log(resourcesByType);
   }
 
   // const saveOnFilesSectionButton = document.getElementById('saveOnFilesSectionButton');
@@ -845,7 +849,7 @@ import Dataset from './dataset.js';
   }
 
   // function to delete a single resource
-  function deleteAllResouces(resourceList, packageName) {
+  function deleteAllResources(resourceList, packageName) {
     if (!resourceList.length) {
       return;
     }
@@ -855,7 +859,7 @@ import Dataset from './dataset.js';
     fetch(`${BASE_URL}/api/dataset/${packageName}/resource/${resourceToBeDeleted}/delete`, {
       method: 'POST'
     })
-      .then(() => deleteAllResouces(resourceList.slice(1)))
+      .then(() => deleteAllResources(resourceList.slice(1)))
       .catch((error) => console.log(error.message));
   }
 
@@ -878,8 +882,7 @@ import Dataset from './dataset.js';
       credentials: 'same-origin',
       body: fileData
     })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then(() => updateResources(resourcesList.slice(1)))
       .catch((error) => console.log(error.message));
   }
 
@@ -887,7 +890,7 @@ import Dataset from './dataset.js';
 
   function updateAllResources(packageName = datasetIdName) {
     // first - send request to delete resources (sync)
-    deleteAllResouces(resourcesByType.deleted, packageName);
+    deleteAllResources(resourcesByType.deleted, packageName);
     // second - send request to update resources (sync)
     updateResources(resourcesByType.updated, packageName);
     // third - send request to add resources (sync)
@@ -999,7 +1002,7 @@ import Dataset from './dataset.js';
     receivedResources.forEach((resource) => {
       fileUploadContainer.insertAdjacentHTML(
         'beforeend',
-        generateFileUploadField(resource.id, resource.name, resource.description)
+        generateFileUploadField(resource.id, resource.name, resource.description.replace('\n', '\r\n'))
       );
       const uploadBox = document.getElementById(resource.id).querySelector('.upload-box');
       updateFileInputBackground(uploadBox, resource.format.toLowerCase());
