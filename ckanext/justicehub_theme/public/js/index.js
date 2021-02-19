@@ -209,6 +209,8 @@ import Dataset from './dataset.js';
       updateFileInputBackground(fileInputBackground, 'xlsx');
     } else if (file.type.indexOf('pdf') > -1) {
       updateFileInputBackground(fileInputBackground, 'pdf');
+    } else {
+      updateFileInputBackground(fileInputBackground, 'unknown');
     }
     const correspondingFileNameInput = fileInputBackground.nextSibling.nextSibling.querySelector('input');
     correspondingFileNameInput.disabled = false;
