@@ -963,12 +963,12 @@ import Dataset from './dataset.js';
     // first - send request to delete resources (sync)
     deleteAllResources(resourcesByType.deleted, packageName);
     // second - send request to update resources (sync)
-    updateResources(resourcesByType.updated, packageName);
-    // third - send request to add resources (sync)
-    const filesList = resourcesByType.added.map((resourceId) =>
-      getFileDetailsFromFileUploadElement(document.getElementById(resourceId))
-    );
-    setTimeout(() => postAllFilesSync(packageName, filesList), 0);
+    // updateResources(resourcesByType.updated, packageName);
+    // // third - send request to add resources (sync)
+    // const filesList = resourcesByType.added.map((resourceId) =>
+    //   getFileDetailsFromFileUploadElement(document.getElementById(resourceId))
+    // );
+    // setTimeout(() => postAllFilesSync(packageName, filesList), 0);
   }
 
   function postDatasetRequest(state = 'active') {
