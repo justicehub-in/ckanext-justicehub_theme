@@ -159,4 +159,9 @@
     </div>
     {% endblock %}
 </div>
+<script>
+	document.querySelector('meta[name="title"]').setAttribute("content", "{{pkg.title}}");
+        document.querySelector('meta[property="og:title"]').setAttribute("content", "{{pkg.title}}");
+        document.querySelector('meta[property="twitter:title"]').setAttribute("content", "{{pkg.title}}");
+</script>
 {% endblock %}
