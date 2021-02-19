@@ -127,11 +127,21 @@ import Dataset from './dataset.js';
       backgroundColor: 'transparent',
       icon: 'fe:upload',
       iconTemplate: '<span class="iconify" data-icon="fe:upload" data-inline="false"></span>'
+    },
+    {
+      format: 'unknown',
+      backgroundColor: 'trasparent',
+      icon: 'akar-icons:file',
+      iconTemplate: '<span class="iconify" data-icon="akar-icons:file" data-inline="false"></span>'
     }
   ];
 
   function getFileUploadBoxPropertyByFileType(fileType, property) {
-    return FILEINPUT_ICONS.find((file) => file.format === fileType)[property];
+    if (FILEINPUT_ICONS.find((file) => file.format === fileType)) {
+      return FILEINPUT_ICONS.find((file) => file.format === fileType)[property];
+    }
+
+    return FILEINPUT_ICONS.find((file) => file.format === 'unknown')[property];
   }
 
   function generateFileUploadField(fileId, fileName = '', fileDescription = '') {
