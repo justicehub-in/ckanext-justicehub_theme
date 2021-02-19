@@ -935,7 +935,7 @@ import Dataset from './dataset.js';
       const filesList = resourcesByType.added.map((resourceId) =>
         getFileDetailsFromFileUploadElement(document.getElementById(resourceId))
       );
-      postAllFilesSync(packageName, filesList);
+      postAllFilesSync(datasetIdName, filesList);
     } else {
       const resource = getFileDetailsFromFileUploadElement(document.getElementById(resourcesList[0]));
 

@@ -31,10 +31,10 @@
                 {% set owners = h.justicehub_theme_parse_json(pkg.publisher_contacts or '[]') %}
                 {% for owner in owners %}
                     {% if owner['name'] %}
-                    <div>
-                        <p>{{owner['name']}}</p>
+                    <div style="margin-bottom: 10px;">
+                        <p style="margin-bottom: 2px;">{{owner['name']}}</p>
                         {% if owner['email'] %}
-                        <p>{{owner['email']}}</p>
+                        <p style="color: #898989; font-size: 12px">{{owner['email']}}</p>
                         {% endif %}
                     </div>
                     {% else %}
@@ -75,7 +75,7 @@
         <div class="dataset-main">
             <div class="dataset-main__header">
                 <h1>{{ h.resource_display_name(res) | truncate(50) }}</h1>
-                <p class="license-description">{{ ('Uploaded: ')}} {{h.time_ago_from_timestamp(res.created) or _('unknown') }} | {{ res.format }}</p>
+                <p class="license-description">{{ ('Updated: ')}} {{h.time_ago_from_timestamp(res.last_modified) or _('unknown') }} | {{ res.format }}</p>
                 <p class="file-description">{{ res.description }}</p>
 
                 <div class="file-actions">
