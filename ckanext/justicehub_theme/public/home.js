@@ -1,40 +1,4 @@
 (function () {
-  const categoriesRow = document.querySelector('.categories__row');
-
-  const categories = [
-    { name: 'Courts', icon: '/assets/icons/courts.svg' },
-    { name: 'Policing', icon: '/assets/icons/policing.svg' },
-    { name: 'Corporate', icon: '/assets/icons/corporate.svg' },
-    { name: 'Child Rights', icon: '/assets/icons/childrights.svg' },
-    { name: 'Land Rights', icon: '/assets/icons/landrights.svg' },
-    { name: 'Education', icon: '/assets/icons/education.svg' },
-    { name: 'Health', icon: '/assets/icons/health.svg' },
-    { name: 'Economy', icon: '/assets/icons/economy.svg' },
-    { name: 'Migration', icon: '/assets/icons/migration.svg' },
-    { name: 'Legal Aid', icon: '/assets/icons/legalaid.svg' },
-    { name: 'Human Rights', icon: '/assets/icons/humanrights.svg' },
-    { name: 'Consititution', icon: '/assets/icons/constitution.svg' }
-  ];
-
-  function categoryTemplate(category) {
-    return `
-      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 category-item">
-        <div class="icon-container">
-          <img src="${category.icon}" alt="${category.name}" />
-        </div>
-        <p>${category.name}</p>
-      </div>
-    `;
-  }
-
-  categories.forEach((category, index) => {
-    if ((index + 1) % 6 === 0) {
-      categoriesRow.innerHTML =
-        categoriesRow.innerHTML + categoryTemplate(category) + `<div class="clearfix visible-xs-block"></div>`;
-    } else {
-      categoriesRow.innerHTML += categoryTemplate(category);
-    }
-  });
 
   // Code for adding contributors to the homepage
 

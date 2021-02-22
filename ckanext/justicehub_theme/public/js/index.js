@@ -2,16 +2,25 @@ import DataUploadSteps from './dataUploadSteps.js';
 import Dataset from './dataset.js';
 
 (function () {
-  const dataUploadSteps = new DataUploadSteps();
-  const dataset = new Dataset();
-
-  const dataUploadSections = document.querySelectorAll('.data-upload-section');
-  const stepIndicators = document.querySelectorAll('.step-indicator');
-
   const fullURL = window.location.href;
   const splitURL = fullURL.split('/');
 
   const BASE_URL = `${splitURL[0]}//${splitURL[2]}`;
+
+  const dataUploadSteps = new DataUploadSteps();
+  const dataset = new Dataset();
+
+  function isEditMode() {
+    return splitURL.indexOf('edit') > 0;
+  }
+
+  let receivedResources = [];
+  let receivedResourcesIds = [];
+  let resourcesByType = { added: [], deleted: [], updated: [] };
+  let datasetIdName = '';
+
+  const dataUploadSections = document.querySelectorAll('.data-upload-section');
+  const stepIndicators = document.querySelectorAll('.step-indicator');
 
   // functions to update DOM
 
@@ -41,28 +50,30 @@ import Dataset from './dataset.js';
     });
   }
 
-  // reset file inputs
-  const resetButtons = document.querySelectorAll('.reset-input');
-  resetButtons.forEach((button) => {
-    button.addEventListener('click', (event) => {
-      const fileInputToBeReset = event.target.parentElement;
-      const textArea = fileInputToBeReset.querySelector('textarea');
+  function resetInput(event) {
+    const fileInputToBeReset = event.target.parentElement;
+    const textArea = fileInputToBeReset.querySelector('textarea');
+    if (textArea) {
       textArea.value = '';
-      const allFields = fileInputToBeReset.querySelectorAll('input');
-      allFields.forEach((field) => (field.value = ''));
-      updateFileInputBackground(fileInputToBeReset.querySelector('.upload-box'), 'none');
-    });
-  });
+    }
+    const allFields = fileInputToBeReset.querySelectorAll('input');
+    allFields.forEach((field) => (field.value = ''));
+    updateFileInputBackground(fileInputToBeReset.querySelector('.upload-box'), 'none');
+  }
 
   // remove file inputs
   function removeFileInput(event) {
-    if (!event.target.classList.contains('remove-input')) {
+    if (event.target.classList.contains('reset-input')) {
+      resetInput(event);
       return;
+    } else if (event.target.classList.contains('remove-input')) {
+      const fileInputToBeRemoved = event.target.parentElement;
+      if (!fileInputToBeRemoved.parentElement) return;
+      if (receivedResourcesIds.indexOf(fileInputToBeRemoved.id) > -1) {
+        resourcesByType.deleted.push(fileInputToBeRemoved.id);
+      }
+      fileInputToBeRemoved.parentElement.removeChild(fileInputToBeRemoved);
     }
-
-    const fileInputToBeRemoved = event.target.parentElement;
-    if (!fileInputToBeRemoved.parentElement) return;
-    fileInputToBeRemoved.parentElement.removeChild(fileInputToBeRemoved);
   }
 
   // next and previous buttons' click handlers
@@ -84,17 +95,17 @@ import Dataset from './dataset.js';
 
   // step indicator click handlers
 
-  // stepIndicators.forEach((step) => {
-  //   step.addEventListener('click', () => {
-  //     dataUploadSteps.setActiveStep(parseInt(step.dataset.value), updateActiveSectionDOM);
-  //   });
-  // });
+  stepIndicators.forEach((step) => {
+    step.addEventListener('click', () => {
+      dataUploadSteps.setActiveStep(parseInt(step.dataset.value), updateActiveSectionDOM);
+    });
+  });
 
   // file upload section
 
   const FILEINPUT_ICONS = [
     {
-      format: 'xls',
+      format: 'xlsx',
       backgroundColor: '#CEE1CE',
       icon: 'vscode-icons:file-type-excel2',
       iconTemplate: '<span class="iconify" data-icon="vscode-icons:file-type-excel2" data-inline="false"></span>'
@@ -116,16 +127,26 @@ import Dataset from './dataset.js';
       backgroundColor: 'transparent',
       icon: 'fe:upload',
       iconTemplate: '<span class="iconify" data-icon="fe:upload" data-inline="false"></span>'
+    },
+    {
+      format: 'unknown',
+      backgroundColor: 'trasparent',
+      icon: 'akar-icons:file',
+      iconTemplate: '<span class="iconify" data-icon="akar-icons:file" data-inline="false"></span>'
     }
   ];
 
   function getFileUploadBoxPropertyByFileType(fileType, property) {
-    return FILEINPUT_ICONS.find((file) => file.format === fileType)[property];
+    if (FILEINPUT_ICONS.find((file) => file.format === fileType)) {
+      return FILEINPUT_ICONS.find((file) => file.format === fileType)[property];
+    }
+
+    return FILEINPUT_ICONS.find((file) => file.format === 'unknown')[property];
   }
 
-  function generateFileUploadField(fileId) {
+  function generateFileUploadField(fileId, fileName = '', fileDescription = '', fileFormat = '') {
     return `
-    <div class="file-upload" id="${fileId}">
+    <div class="file-upload" id="${fileId}" data-format="${fileFormat}">
       <span class="iconify remove-input" data-icon="mdi:close" data-inline="false"></span>
       <div class="file-upload__name">
         <div class="upload-box">
@@ -134,12 +155,14 @@ import Dataset from './dataset.js';
         </div>
         <div class="name-field">
           <h4>Name of the file <span>(Upload a file to edit the name)</span></h4>
-          <input type="text" class="form-control" id="fileNameField" disabled />
+          <input type="text" class="form-control file-name" id="fileNameField" value="${fileName}" ${
+      fileName ? '' : 'disabled'
+    } />
         </div>
       </div>
       <div class="file-upload__description">
         <h4>Description</h4>
-        <textarea class="form-control" cols="25" rows="5"></textarea>
+        <textarea class="form-control file-description" cols="25" rows="5">${fileDescription}</textarea>
       </div>
     </div>
   `;
@@ -150,9 +173,8 @@ import Dataset from './dataset.js';
 
   addMoreFilesButton.addEventListener('click', () => {
     const numberOfFileInputs = document.querySelectorAll('.file-upload');
-    if (numberOfFileInputs.length >= 5) return;
-    const fileUploadForm = document.querySelector('.data-upload-section__form__field--file');
-    fileUploadForm.insertAdjacentHTML('beforeend', generateFileUploadField(Math.random()));
+    if (numberOfFileInputs.length >= 30) return;
+    fileUploadContainer.insertAdjacentHTML('beforeend', generateFileUploadField(`added-${Math.random()}`));
   });
 
   fileUploadContainer.addEventListener('change', (event) => {
@@ -166,11 +188,12 @@ import Dataset from './dataset.js';
   fileUploadContainer.addEventListener('click', (event) => removeFileInput(event));
 
   function updateFileInputBackground(fileInputBackgroundElement, fileType) {
-    if (fileType === 'none') {
+    if (fileType === 'none' && fileInputBackgroundElement) {
       fileInputBackgroundElement.style.border = '1px dashed #F65940';
     }
+    fileInputBackgroundElement.style.border = '1px solid #524F4F';
     fileInputBackgroundElement.style.backgroundColor = getFileUploadBoxPropertyByFileType(fileType, 'backgroundColor');
-    fileInputBackgroundElement.removeChild(fileInputBackgroundElement.querySelector('svg'));
+    fileInputBackgroundElement.removeChild(fileInputBackgroundElement.querySelector('.iconify'));
     fileInputBackgroundElement.insertAdjacentHTML(
       'beforeend',
       getFileUploadBoxPropertyByFileType(fileType, 'iconTemplate')
@@ -180,13 +203,14 @@ import Dataset from './dataset.js';
   function fileInputHandler(event) {
     const file = event.target.files[0];
     const fileInputBackground = event.target.parentElement;
-    fileInputBackground.style.border = '1px solid #524F4F';
     if (file.type.indexOf('csv') > -1) {
       updateFileInputBackground(fileInputBackground, 'csv');
     } else if (file.type.indexOf('spreadsheetml') > -1) {
-      updateFileInputBackground(fileInputBackground, 'xls');
+      updateFileInputBackground(fileInputBackground, 'xlsx');
     } else if (file.type.indexOf('pdf') > -1) {
       updateFileInputBackground(fileInputBackground, 'pdf');
+    } else {
+      updateFileInputBackground(fileInputBackground, 'unknown');
     }
     const correspondingFileNameInput = fileInputBackground.nextSibling.nextSibling.querySelector('input');
     correspondingFileNameInput.disabled = false;
@@ -203,10 +227,30 @@ import Dataset from './dataset.js';
 
     const fileUploadInputs = document.querySelectorAll('.file-upload');
     fileUploadInputs.forEach((file) => {
-      if (getFileDetailsFromFileUploadElement(file).fileName) {
-        dataset.addItemToListProperty('files', getFileDetailsFromFileUploadElement(file));
+      if (
+        file.id.indexOf('added') > -1 ||
+        (file.id.indexOf('file') > -1 && resourcesByType.added.indexOf(file.id) < 0)
+      ) {
+        resourcesByType.added.push(file.id);
+        if (getFileDetailsFromFileUploadElement(file).fileName) {
+          dataset.addItemToListProperty('files', getFileDetailsFromFileUploadElement(file));
+        }
+      } else if (receivedResourcesIds.indexOf(file.id) > -1) {
+        const existingResourceDetails = receivedResources.find((resource) => resource.id === file.id);
+        const currentFileDetails = getFileDetailsFromFileUploadElement(file);
+        if (
+          existingResourceDetails.name !== currentFileDetails.fileName ||
+          existingResourceDetails.description !== currentFileDetails.fileDescription ||
+          currentFileDetails.file
+        ) {
+          if (resourcesByType.updated.indexOf(file.id) < 0) {
+            resourcesByType.updated.push(file.id);
+          }
+        }
       }
     });
+
+    console.log(resourcesByType);
   }
 
   // const saveOnFilesSectionButton = document.getElementById('saveOnFilesSectionButton');
@@ -219,27 +263,46 @@ import Dataset from './dataset.js';
   proceedFromFilesButton.addEventListener('click', updateDatasetWithValuesFromFilesSection);
 
   // ownership section
-  let authorAdditionForm;
+  let authorAdditionForm = document.querySelector('.data-upload-section__form__field--authors');
+  authorAdditionForm.addEventListener('click', (event) => {
+    if (event.target.id === 'organizationRadio') {
+      removeAllInputsOfAPublisherType('individual');
+      authorAdditionForm.insertAdjacentHTML('beforeend', generateAuthorField('Organization'));
+    } else if (event.target.id === 'individualRadio') {
+      removeAllInputsOfAPublisherType('organization');
+      authorAdditionForm.insertAdjacentHTML('beforeend', generateAuthorField('Author'));
+    } else {
+      removeFileInput(event);
+    }
+  });
+
+  function removeAllInputsOfAPublisherType(type) {
+    const targetInputs = document.querySelectorAll(`.item-addition--${type}`);
+    targetInputs.forEach((input) => {
+      input.parentNode.removeChild(input);
+    });
+  }
+
   const addMoreAuthorsButton = document.querySelector('.add-more--authors');
-  function generateAuthorField(publisherType) {
+  function generateAuthorField(publisherType, name = '', email = '') {
     return `
-    <div class="item-addition item-addition--author">
+    <div class="item-addition item-addition--author item-addition--${
+      publisherType === 'Author' ? 'individual' : 'organization'
+    }">
       <span class="iconify remove-input" data-icon="mdi:close" data-inline="false"></span>
       <div class="item-addition__name-field">
         <h5>${publisherType}'s name</h5>
-        <input type="text" class="form-control" />
+        <input type="text" class="form-control" value="${name}" />
       </div>
       <div class="item-addition__email-field">
         <h5>Email of ${publisherType} (optional)</h5>
-        <input type="email" class="form-control" />
+        <input type="email" class="form-control" value="${email}" />
       </div>
     </div>
   `;
   }
 
   addMoreAuthorsButton.addEventListener('click', () => {
-    authorAdditionForm = document.querySelector('.data-upload-section__form__field--authors');
-    authorAdditionForm.addEventListener('click', (event) => removeFileInput(event));
     const publisherType = getRadioValue('primary-publisher') === 'individual' ? 'Author' : 'Organization';
     authorAdditionForm.insertAdjacentHTML('beforeend', generateAuthorField(publisherType));
   });
@@ -382,7 +445,7 @@ import Dataset from './dataset.js';
     'West Bengal'
   ];
 
-  let monthOptions = '';
+  let monthOptions = '<option value="">--</option>';
 
   MONTHS.forEach((month) => {
     monthOptions = monthOptions + `<option value="${month}">${month}</option>`;
@@ -412,12 +475,19 @@ import Dataset from './dataset.js';
       region = [regionRadioValue];
     }
 
+    const dateOfPublication = getValueFromInputSelector('#pubDate input');
+    const monthOfPublication = getValueFromInputSelector('#pubMonth select');
+    const yearOfPublication = getValueFromInputSelector('#pubYear input');
+
     const language =
       getRadioValue('language-options') === 'other'
         ? getValueFromInputSelector('#otherLanguageInput')
         : getRadioValue('language-options');
     dataset.updateProperty('language', language);
     dataset.updateProperty('region', region);
+    dataset.updateProperty('date', dateOfPublication);
+    dataset.updateProperty('month', monthOfPublication);
+    dataset.updateProperty('year', yearOfPublication);
     dataset.updateProperty('timePeriod', {
       from: getTimePeriodDetailsFromSelector('.period--from'),
       to: getTimePeriodDetailsFromSelector('.period--to')
@@ -440,17 +510,17 @@ import Dataset from './dataset.js';
   // sources of dataset section
   let referenceAdditionForm;
   const addMoreReferencesButton = document.querySelector('.add-more--references');
-  function generateReferenceField(referenceId) {
+  function generateReferenceField(referenceId, title = '', link = '') {
     return `
     <div class="item-addition item-addition--reference" id="${referenceId}">
       <span class="iconify remove-input" data-icon="mdi:close" data-inline="false"></span>
       <div class="item-addition__link-field">
         <h5>Paste Link</h5>
-        <input type="text" class="form-control" />
+        <input type="text" class="form-control" value="${link}" />
       </div>
       <div class="item-addition__title-field">
         <h5>Give your link a title</h5>
-        <input type="text" class="form-control" />
+        <input type="text" class="form-control" value="${title}" />
       </div>
     </div>
   `;
@@ -484,7 +554,7 @@ import Dataset from './dataset.js';
   }
 
   function addTag(event, property) {
-    if (event.code === 'Comma') {
+    if (event.code === 'Comma' && event.target.value.length >= 3) {
       // remove the comma at the end
       const tagName = event.target.value.substring(0, event.target.value.length - 1);
       // add tag to the dataset
@@ -536,11 +606,18 @@ import Dataset from './dataset.js';
   }
 
   function getFileDetailsFromFileUploadElement(fileUploadElement) {
+    const uploadedFile = fileUploadElement.querySelector('input[type="file"]').files
+      ? fileUploadElement.querySelector('input[type="file"]').files[0]
+      : null;
+
+    const fileFormat = fileUploadElement.dataset.format;
+
     return {
-      file: fileUploadElement.querySelector('input[type="file"]').files[0],
+      file: uploadedFile,
       fileName: getValueFromInputSelector('.name-field input', fileUploadElement),
       fileDescription: getValueFromInputSelector('.file-upload__description textarea', fileUploadElement),
-      fileId: `${Math.random()}`
+      fileId: fileUploadElement.id,
+      fileFormat: fileFormat
     };
   }
 
@@ -579,15 +656,15 @@ import Dataset from './dataset.js';
 
   const previewButton = document.querySelector('#previewButton');
 
-  // break this into multiple functions and call them upon clicking proceed at each section
-
   function generateFilePreviewHTML(file) {
     let fileIcon = '';
 
-    if (file.file.type.indexOf('csv') > -1) {
+    if (isEditMode()) {
+      fileIcon = getFileUploadBoxPropertyByFileType(file.fileFormat.toLowerCase(), 'icon');
+    } else if (file.file.type.indexOf('csv') > -1) {
       fileIcon = getFileUploadBoxPropertyByFileType('csv', 'icon');
     } else if (file.file.type.indexOf('spreadsheetml') > -1) {
-      fileIcon = getFileUploadBoxPropertyByFileType('xls', 'icon');
+      fileIcon = getFileUploadBoxPropertyByFileType('xlsx', 'icon');
     } else if (file.file.type.indexOf('pdf') > -1) {
       fileIcon = getFileUploadBoxPropertyByFileType('pdf', 'icon');
     }
@@ -618,6 +695,10 @@ import Dataset from './dataset.js';
           ? dataset.region.map((region) => ` <span>${region}</span>`)
           : `<span style="color:red;">No regions selected</span>`
       }</td>
+    </tr>
+    <tr>
+      <td>Date of Publication:</td>
+      <td>${dataset.date} ${dataset.month} ${dataset.year}</td>
     </tr>
     <tr>
       <td>Time period covered:</td>
@@ -685,9 +766,52 @@ import Dataset from './dataset.js';
     if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
 
     document.querySelector('#filesListOnPreview').innerHTML = '';
-    dataset.files.forEach((file) => {
-      document.querySelector('#filesListOnPreview').insertAdjacentHTML('beforeend', generateFilePreviewHTML(file));
-    });
+    if (!isEditMode()) {
+      dataset.files.forEach((file) => {
+        document.querySelector('#filesListOnPreview').insertAdjacentHTML('beforeend', generateFilePreviewHTML(file));
+      });
+    } else {
+      const updatedFiles = resourcesByType.updated.map((resourceId) => document.getElementById(resourceId));
+
+      updatedFiles.forEach((fileUploadElement) =>
+        document
+          .querySelector('#filesListOnPreview')
+          .insertAdjacentHTML(
+            'beforeend',
+            generateFilePreviewHTML(getFileDetailsFromFileUploadElement(fileUploadElement))
+          )
+      );
+
+      const addedFiles = resourcesByType.added.map((resourceId) => document.getElementById(resourceId));
+
+      addedFiles.forEach((fileUploadElement) =>
+        document
+          .querySelector('#filesListOnPreview')
+          .insertAdjacentHTML(
+            'beforeend',
+            generateFilePreviewHTML(getFileDetailsFromFileUploadElement(fileUploadElement))
+          )
+      );
+
+      const untouchedFiles = receivedResources
+        .filter(
+          (resource) => resourcesByType.updated.indexOf(resource.id) < 0 && resourcesByType.deleted.indexOf(resource.id)
+        )
+        .map((resource) => document.getElementById(resource.id));
+
+      console.log(untouchedFiles);
+
+      if (untouchedFiles) {
+        untouchedFiles.forEach((fileUploadElement) =>
+          document
+            .querySelector('#filesListOnPreview')
+            .insertAdjacentHTML(
+              'beforeend',
+              generateFilePreviewHTML(getFileDetailsFromFileUploadElement(fileUploadElement))
+            )
+        );
+      }
+    }
 
     document.querySelector('#dataRelevancyPreviewTable').innerHTML = generateDataRelevancyPreviewTableHTML(dataset);
     document.querySelector('#ownershipPreviewTable').innerHTML = generateOwnershipPreviewTableHTML(dataset);
@@ -731,16 +855,20 @@ import Dataset from './dataset.js';
 
   function generateFormDataForPostingMetaData(state) {
     let metaData = new FormData();
+    if (isEditMode()) {
+      metaData.append('pkg_name', datasetIdName);
+    }
     metaData.append('title', dataset.name);
     metaData.append('license_id', dataset.license.licenseName);
     metaData.append('private', dataset.viewPermission === 'Anyone' ? false : true);
     metaData.append('publisher_type', dataset.publisher.type);
+    metaData.append('publication_date', `${dataset.date}/${dataset.month}/${dataset.year}`);
     metaData.append('start_month', `${dataset.timePeriod.from.year}-${dataset.timePeriod.from.month}`);
     metaData.append('end_month', `${dataset.timePeriod.to.year}-${dataset.timePeriod.to.month}`);
     metaData.append('region', [dataset.region]);
     dataset.publisher.authors.forEach((author, index) => {
       metaData.append(`publisher_contacts-${index + 1}-name`, author.authorName);
-      metaData.append(`publisher_email-${index + 1}-name`, author.authorEmail);
+      metaData.append(`publisher_contacts-${index + 1}-email`, author.authorEmail);
     });
     dataset.referenceLinks.forEach((referenceLink, index) => {
       metaData.append(`links-${index + 1}-link`, referenceLink.link);
@@ -784,6 +912,67 @@ import Dataset from './dataset.js';
       });
   }
 
+  // function to delete a single resource
+  function deleteAllResources(resourceList, packageName) {
+    if (!resourceList.length) {
+      updateResources(resourcesByType.updated, packageName);
+    } else {
+      const resourceToBeDeleted = resourceList[0];
+
+      fetch(`${BASE_URL}/api/dataset/${packageName}/resource/${resourceToBeDeleted}/delete`, {
+        method: 'POST'
+      })
+        .then(() => deleteAllResources(resourceList.slice(1)))
+        .catch((error) => {
+          deleteAllResources(resourceList.slice(1));
+          console.log(error.message);
+        });
+    }
+  }
+
+  function updateResources(resourcesList, packageName) {
+    if (!resourcesList.length) {
+      const filesList = resourcesByType.added.map((resourceId) =>
+        getFileDetailsFromFileUploadElement(document.getElementById(resourceId))
+      );
+      postAllFilesSync(datasetIdName, filesList);
+    } else {
+      const resource = getFileDetailsFromFileUploadElement(document.getElementById(resourcesList[0]));
+
+      const fileData = new FormData();
+      if (resource.file) {
+        fileData.append('upload', resource.file);
+      }
+      fileData.append('name', resource.fileName);
+      fileData.append('description', resource.fileDescription);
+
+      fetch(`${BASE_URL}/api/dataset/${packageName}/resource/${resourcesList[0]}/edit`, {
+        method: 'POST',
+        credentials: 'same-origin',
+        body: fileData
+      })
+        .then(() => updateResources(resourcesList.slice(1)))
+        .catch((error) => {
+          console.log(error.message);
+          updateResources(resourcesList.slice(1));
+        });
+    }
+  }
+
+  // function to update a single resource
+
+  function updateAllResources(packageName = datasetIdName) {
+    // first - send request to delete resources (sync)
+    deleteAllResources(resourcesByType.deleted, packageName);
+    // second - send request to update resources (sync)
+    // updateResources(resourcesByType.updated, packageName);
+    // // third - send request to add resources (sync)
+    // const filesList = resourcesByType.added.map((resourceId) =>
+    //   getFileDetailsFromFileUploadElement(document.getElementById(resourceId))
+    // );
+    // setTimeout(() => postAllFilesSync(packageName, filesList), 0);
+  }
+
   function postDatasetRequest(state = 'active') {
     const modalBody = document.querySelector('#previewDatasetModal .modal-body');
     const existingErrorMessageElement = modalBody.querySelector('.dataset-fail');
@@ -809,26 +998,158 @@ import Dataset from './dataset.js';
       return;
     }
 
-    fetch(`${BASE_URL}/api/dataset/new`, {
-      method: 'POST',
-      credentials: 'same-origin',
-      body: generateFormDataForPostingMetaData(state)
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (dataset.files) {
-          postAllFilesSync(data.pkg_name, dataset.files, BASE_URL);
-        }
+    if (isEditMode()) {
+      console.log('sending update request');
+      fetch(`${BASE_URL}/api/dataset/new`, {
+        method: 'POST',
+        credentials: 'same-origin',
+        body: generateFormDataForPostingMetaData(state)
       })
-      .catch((error) => {
-        console.log(error.message);
-        modalBody.insertAdjacentHTML(
-          'afterbegin',
-          `<p class="dataset-fail" style="color:red;">${error.message} - Couldn't upload dataset. Please try again.</p>`
-        );
+        .then((response) => response.json())
+        .then(() => {
+          updateAllResources();
+        })
+        .catch((error) => {
+          console.log(error.message);
+          modalBody.insertAdjacentHTML(
+            'afterbegin',
+            `<p class="dataset-fail" style="color:red;">${error.message} - Couldn't update dataset. Please try again.</p>`
+          );
 
-        document.getElementById('submitDatasetButton').style.display = 'block';
-        if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
-      });
+          document.getElementById('submitDatasetButton').style.display = 'block';
+          if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
+        });
+    } else {
+      fetch(`${BASE_URL}/api/dataset/new`, {
+        method: 'POST',
+        credentials: 'same-origin',
+        body: generateFormDataForPostingMetaData(state)
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          const filesList = resourcesByType.added.map((resourceId) =>
+            getFileDetailsFromFileUploadElement(document.getElementById(resourceId))
+          );
+          postAllFilesSync(data.pkg_name, filesList);
+        })
+        .catch((error) => {
+          console.log(error.message);
+          modalBody.insertAdjacentHTML(
+            'afterbegin',
+            `<p class="dataset-fail" style="color:red;">${error.message} - Couldn't upload dataset. Please try again.</p>`
+          );
+
+          document.getElementById('submitDatasetButton').style.display = 'block';
+          if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
+        });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (isEditMode()) {
+      const datasetName = splitURL[splitURL.length - 2];
+      fetch(`${BASE_URL}/api/dataset/${datasetName}`, {
+        method: 'GET',
+        credentials: 'same-origin'
+      })
+        .then((response) => response.json())
+        .then((data) => fillFieldsWithData(data))
+        .catch((error) => console.log(error.message));
+    }
+  });
+
+  function fillFieldsWithData(data) {
+    console.log(data);
+
+    datasetIdName = data.name;
+
+    const fileUploadSections = document.querySelectorAll('.file-upload');
+    fileUploadSections.forEach((section) => {
+      section.parentElement.removeChild(section);
+    });
+
+    // file section
+    document.getElementById('datasetNameField').value = data.title;
+    receivedResources = data.resources;
+    receivedResourcesIds = receivedResources.map((resource) => resource.id);
+    receivedResources.forEach((resource) => {
+      fileUploadContainer.insertAdjacentHTML(
+        'beforeend',
+        generateFileUploadField(resource.id, resource.name, resource.description.replace('\n', '\r\n'), resource.format)
+      );
+      const uploadBox = document.getElementById(resource.id).querySelector('.upload-box');
+      updateFileInputBackground(uploadBox, resource.format.toLowerCase());
+      // WIP - fix upload box not getting icons
+    });
+
+    // ownership section
+    document.getElementById('licenseSelect').value = data.license_id;
+    document.querySelector(`input[name="view-permissions"]`).value = data.public === 'false' ? 'Only me' : 'Anyone';
+    document.querySelector(`input[name="primary-publisher"]`).value = data.publisher_type;
+
+    const publisherAdditionInputs = document.querySelectorAll('.item-addition--author');
+    publisherAdditionInputs.forEach((input) => {
+      input.parentElement.removeChild(input);
+    });
+
+    data.publisher_contacts.forEach((publisher) => {
+      authorAdditionForm.insertAdjacentHTML(
+        'beforeend',
+        generateAuthorField(
+          data.publisher_type === 'individual' ? 'Author' : 'Organization',
+          publisher.name,
+          publisher.email ? publisher.email : ''
+        )
+      );
+    });
+
+    // relevancy section
+    const [fromYear, fromMonth] = data.start_month.split('-');
+    const [toYear, toMonth] = data.end_month.split('-');
+    const [pubDate, pubMonth, pubYear] = data.publication_date.split('/');
+
+    // regions WIP
+
+    document.getElementById('fromYear').value = fromYear;
+    document.getElementById('toYear').value = toYear;
+    document.getElementById('fromMonth').value = fromMonth ? fromMonth : '--';
+    document.getElementById('toMonth').value = toMonth ? toMonth : '--';
+
+    document.getElementById('pubDateInput').value = pubDate;
+    document.getElementById('pubMonthInput').value = pubMonth ? pubMonth : '--';
+    document.getElementById('pubYearInput').value = pubYear;
+
+    if (data.language === 'English' || data.language === 'Hindi') {
+      document.querySelector(`input[name="language-options"]`).value = data.language;
+    } else {
+      document.querySelector(`input[name="language-options"]`).value = 'other';
+      document.getElementById('otherLanguageInput').style.display = 'inline-block';
+      document.getElementById('otherLanguageInput').value = data.language;
+    }
+
+    // sources section
+
+    data.tags.forEach((tag) => {
+      insertTag(keywordsInput.parentElement, tag.display_name);
+      dataset.addItemToListProperty('keywords', tag.display_name);
+    });
+    data.source.forEach((s) => {
+      insertTag(sourcesInput.parentElement, s);
+      dataset.addItemToListProperty('sources', s);
+    });
+
+    const referenceInputs = document.querySelectorAll('.item-addition--reference');
+
+    referenceInputs.forEach((input) => {
+      input.parentElement.removeChild(input);
+    });
+
+    data.links.forEach((link) => {
+      const referenceAdditionForm = document.querySelector('.data-upload-section__form__field--references');
+      referenceAdditionForm.insertAdjacentHTML(
+        'beforeend',
+        generateReferenceField(Math.random(), link.title, link.link)
+      );
+    });
   }
 })();

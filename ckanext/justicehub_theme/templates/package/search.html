@@ -1,47 +1,81 @@
-{% ckan_extends %}
-
-
-{% block pre_primary %}
-
-  {% block page_primary_action %}
-    {% if h.check_access('package_create') %}
-      <div class="page_primary_action row">
-        {{ h.snippet ('snippets/add_dataset.html', dataset_type=dataset_type) }}
+{% ckan_extends %} {% resource 'justicehub_theme/exploredatasets/search.css' %} {% set groups =
+h.justicehub_theme_get_popular_groups() %} {% block pre_primary %} {% block page_primary_action %} {% if
+h.check_access('package_create') %} {% endif %}
+<div class="page_primary_action row" style="margin: 0">
+  <section class="search-landing">
+    <div class="custom-container">
+      <h2>Find the data you are looking for</h2>
+      <div class="search-landing__content row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <p>
+            With uploads from professionals and organisations in the field of legal and justice, you have a whole
+            repository of data at your fingertips. Use the filter panel to find data specific to your needs. Use the
+            popular keywords option below, or the search bar if you know exactly what you want to find.
+          </p>
+          <div class="search-categories">
+            <h4>Popular Categories</h4>
+            <div class="search-categories__row">
+              {% for group in groups %}
+              <a href="/dataset?groups={{group.name}}">{{ group.display_name }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
       </div>
-    {% endif %}
-  {% endblock %}
-
-  {% block form %}
-        {% set facets = {
-          'fields': c.fields_grouped,
-          'search': c.search_facets,
-          'titles': c.facet_titles,
-          'translated_fields': c.translated_fields,
-          'remove_field': c.remove_field }
-        %}
-        {% set sorting = [
-          (_('Relevance'), 'score desc, metadata_modified desc'),
-          (_('Name (A-Z)'), 'title_string asc'),
-          (_('Name (Z-A)'), 'title_string desc'),
-          (_('Last Modified'), 'metadata_modified desc'),
-          (_('Popular'), 'views_recent desc') if g.tracking_enabled else (false, false) ]
-        %}
-        {% snippet 'snippets/search_form.html', form_id='dataset-search-form', type=dataset_type, query=c.q, sorting=sorting, sorting_selected=c.sort_by_selected, count=c.page.item_count, placeholder=_('Search ' + dataset_type + 's') + '...', facets=facets, show_empty=request.params, error=c.query_error, fields=c.fields %}
-  {% endblock %}
-
-{% endblock %}
-
-{% block primary_content %}
-  <section class="module">
-    <div class="module-content">
-      {% block package_search_results_list %}
-        {{ h.snippet('snippets/package_list.html', packages=c.page.items) }}
+      {% block search_input %}
+      <form class="" method="get" action="{% url_for controller='package', action='search' %}">
+      <div class="col col-md-4 col-xs-12 input-group explore-search">
+        <input
+          aria-label="{% block header_site_search_label %}{{ _('Search datasets') }}{% endblock %}"
+          id="field-main-search"
+          type="text"
+          class="form-control"
+          name="q"
+          value=""
+          autocomplete="off"
+        />
+        {% block search_input_button %}
+        <span class="input-group-btn">
+          <button class="btn btn-primary" type="submit">
+            <i class="fa fa-search fa-flip-horizontal fa-lg"></i>
+          </button>
+        </span>
+        {% endblock %}
+      </div>
+    </form>
       {% endblock %}
     </div>
-
-    {% block page_pagination %}
-      {{ c.page.pager(q=c.q) }}
-    {% endblock %}
   </section>
+  {# {{ h.snippet ('snippets/add_dataset.html', dataset_type=dataset_type) }} #}
+</div>
+{% endblock %}
 
+<div class="custom-container">
+  {% block form %} {% set facets = { 'fields': c.fields_grouped, 'search': c.search_facets, 'titles': c.facet_titles,
+  'translated_fields': c.translated_fields, 'remove_field': c.remove_field } %} {% set sorting = [ (_('Relevance'),
+  'score desc, metadata_modified desc'), (_('Name (A-Z)'), 'title_string asc'), (_('Name (Z-A)'), 'title_string desc'),
+  (_('Last Modified'), 'metadata_modified desc'), (_('Popular'), 'views_recent desc') if g.tracking_enabled else (false,
+  false) ] %} {% snippet 'snippets/search_form.html', form_id='dataset-search-form', type=dataset_type, query=c.q,
+  sorting=sorting, sorting_selected=c.sort_by_selected, count=c.page.item_count, placeholder=_('Search ' + dataset_type
+  + 's') + '...', facets=facets, show_empty=request.params, error=c.query_error, fields=c.fields %} {% endblock %}
+</div>
+
+{% endblock %} {% block primary_content %}
+<section class="module">
+  <div class="module-content">
+    {% block package_search_results_list %} {{ h.snippet('snippets/package_list.html', packages=c.page.items) }} {%
+    endblock %}
+  </div>
+
+  {% block page_pagination %} {{ c.page.pager(q=c.q) }} {% endblock %}
+</section>
+
+{% endblock %} {% block secondary_content %} {% resource 'justicehub_theme/exploredatasets/search.css' %}
+<div class="filters search-filters">
+  <div>
+    {% for facet in c.facet_titles %} {{ h.snippet('snippets/facet_list.html', title=c.facet_titles[facet], name=facet)
+    }} {% endfor %}
+  </div>
+  <a class="close no-text hide-filters"><i class="fa fa-times-circle"></i><span class="text">close</span></a>
+</div>
 {% endblock %}

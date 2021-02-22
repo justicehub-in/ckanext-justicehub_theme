@@ -1,10 +1,12 @@
 {% ckan_extends %}
 
 {% block content %}
+{% resource 'justicehub_theme/exploredatasets/package_item.css' %}
+{% resource 'justicehub_theme/package_item.js' %}
 <div class="dataset-content">
 
     <div class="row package-item-row">
-        <div class="col col-md-5">
+        <div class="col col-md-12 dataset-title-container">
           {% block heading %}
           <h3 class="dataset-title">
           {% block heading_title %}
@@ -15,13 +17,13 @@
             {% if package.private %}
                 <i class="fa fa-lock" data-toggle="tooltip" title="Private Dataset"></i>
             {% endif %}
-            {% if package.verified %}
+            {#{% if package.verified %}
                 <img class="fa fa-check"
                      src="{{ h.url_for_static('/images/verified_icon.png') }}"
                      data-toggle="tooltip"
                      alt="Verified"
                      title="Verified"></img>
-            {% endif %}
+            {% endif %}#}
           {% endblock %}
 
           {% block heading_meta %}
@@ -29,6 +31,10 @@
               <span class="label label-info">{{ _('Draft') }}</span>
               {% elif package.get('state', '').startswith('deleted') %}
               <span class="label label-danger">{{ _('Deleted') }}</span>
+              {% elif package.get('state', '').startswith('active') %}
+              <span class="label label-success">{{ _('Active') }}</span>
+              {% else %}
+              <span class="label label-warning">{{ package.state }}</span>
               {% endif %}
               {{ h.popular('recent views', package.tracking_summary.recent, min=10) if package.tracking_summary }}
           {% endblock %}
@@ -37,7 +43,8 @@
 
           {% block organization %}
           <div class="dataset-org">
-              {{ h.link_to(h.truncate(package.organization.title, truncate_title), h.url_for(controller='organization', action='read', id=package.organization.name)) }}
+              <span>uploaded by {{ h.link_to(h.truncate(package.organization.title, truncate_title), h.url_for(controller='organization', action='read', id=package.organization.name)) }}</span>
+              {# {{ h.link_to(h.truncate(package.organization.title, truncate_title), h.url_for(controller='organization', action='read', id=package.organization.name)) }} #}
 {#              {% if package.partner.signed_pledge %}
                 <img class="fa fa-certificate"
                      src="{{ h.url_for_static('/images/signed_pledge_icon.png') }}"
@@ -48,17 +55,56 @@
           </div>
           {% endblock %}
         </div>
-    
-        <div class="col col-md-1">
-        </div>
-        <div class="col col-md-6">
-            {% block notes %}
-                {% if notes %}
-                <div class="dataset-desc">{{ notes|urlize }}</div>
-                {% else %}
-                <div class="empty">{{ _("This dataset has no description") }}</div>
+       
+        {% set resources = package.resources or [] %}
+          {% for res in resources[0:3] %}
+            <div class="col col-md-12 file-info">
+                <div class="file-info__text">
+                    <span class="format-label" property="dc:format" data-format="{{ res.format.lower() or 'data' }}">
+                        {{ h.get_translated(res, 'format') }}
+                    </span>
+                    <div style="width: 90%;">
+                        <h5>{{ h.resource_display_name(res) | truncate(50) }}</h5>
+                        <p>{{ res.description }}</p>
+                    </div>
+                </div>
+        
+                {% if res.url and h.is_url(res.url) %}
+                <div class="file-info__stats">
+                    {% if res.size %}
+                    	<p>{{ h.format_resource_items([("size",res.size)])[0][1] }}</p>
+                    {% endif %}
+                    <a href="{{ res.url }}" class="resource-url-analytics btn-primary-text" target="_blank">
+                        {% if res.has_views or res.url_type == 'upload' %}
+                          <i class="fa fa-arrow-circle-o-down"></i>
+                          {{ _('Download') }}
+                        {% endif %}
+                    </a>
+                </div>
                 {% endif %}
-            {% endblock %}
+                <div class="file-info__link">
+
+                    <a href="{{ h.url_for(controller='package', action='resource_read', id=package.name, resource_id=res.id) }}">
+                        {{ _('>') }}
+                    </a>
+                </div>
+                
+            </div>
+          {% endfor %}
+          <div class="col col-md-12 view-more-files">
+            {% if c.userobj.sysadmin and package.state != ('active') and package.state != ('draft') %}
+            <div class="dataset-status">
+                <p>Change dataset status</p>
+                <select class="dataset-status-change">
+                    <option value="{{ package.name + _(',pending-review')}}">Pending review</option>
+                    <option value="{{ package.name + _(',under-review')}}">Under review</option>
+                    <option value="{{ package.name + _(',resubmission-required')}}">Resubmission requested</option>
+                    <option value="{{ package.name + _(',rejected')}}">Rejected</option>
+                    <option value="{{ package.name + _(',active')}}">Active</option>
+                </select>
+            </div>
+            {% endif %}
+            <a class="btn-primary-text" style="font-family: Roboto; font-size: 14px;" href="{{ h.url_for(package.type + '_read', controller='package', action='read', id=package.name) }}">View all {{ resources|length }} files in this dataset</a>
         </div>
     </div>
 
@@ -77,17 +123,9 @@
     <div class="row package-item-row">
         <div class="col col-md-5">
             {% block package_meta %}
-            <div class="dataset-meta">
-                <!--span>{#{ package.update_frequency or _('Not updated') #}}</span>
-                <span>{#{ _('|') }#}</span-->
-                <span>{{ _('Data Timeline:') }} {% if package.start_year %}{{ package.start_year }}-{{ package.end_year }} {% else %}{{ _('Not Available')}} {% endif %}</span>
-            </div>
             {% endblock %}
         </div>
-
-        <div class="col col-md-1">
-        </div>
-        <div class="col col-md-6">
+        {#<div class="col col-md-6">
             {% block resources %}
             <div>
                 {% if package.resources and not hide_resources %}
@@ -107,7 +145,7 @@
                 {% endif %}
             </div>
             {% endblock %}
-        </div>
+        </div> #}
     </div>
 
 </div>

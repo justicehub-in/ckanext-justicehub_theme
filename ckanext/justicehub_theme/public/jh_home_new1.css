@@ -273,6 +273,10 @@ li.dropdown:focus {
   font-weight: 500;
 }
 
+.toolbar {
+  display: none;
+}
+
 /* hero section */
 
 .hero-section {
@@ -369,7 +373,7 @@ li.dropdown:focus {
 .datasets-section {
   background-color: #2a242d;
   padding-top: 360px;
-  padding-bottom: 120px;
+  padding-bottom: 20px;
   color: white;
 }
 
@@ -533,8 +537,8 @@ li.dropdown:focus {
 /* quality section */
 
 .quality-section {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 80px;
+  padding-bottom: 80px;
   background-color: #2a242d;
   color: white;
 }
@@ -1003,7 +1007,7 @@ footer h3 {
 }
 
 .data-upload-header .custom-container {
-  padding: 0;
+  padding: 0 16px;
 }
 
 .exit-flow {
@@ -1186,7 +1190,7 @@ footer h3 {
 .remove-input,
 .reset-input {
   position: absolute;
-  padding: 2px;
+  padding: 4px;
   top: 10px;
   right: 0;
   width: 20px;
@@ -1273,6 +1277,23 @@ footer h3 {
 
 .item-addition__email-field {
   width: 48%;
+}
+
+.date-of-publication-entry {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.date-of-publication-entry > * {
+  margin-right: 12px;
+}
+
+#pubDate input {
+  width: 60px;
+}
+
+#pubYear input {
+  width: 84px;
 }
 
 .time-period-entry {

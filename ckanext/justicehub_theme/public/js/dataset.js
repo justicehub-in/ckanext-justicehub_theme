@@ -12,6 +12,9 @@ export default class Dataset {
       country: '',
       subRegions: []
     };
+    this.date = '';
+    this.month = '';
+    this.year = '';
     this.timePeriod = {
       from: { month: '', year: '' },
       to: { month: '', year: '' }

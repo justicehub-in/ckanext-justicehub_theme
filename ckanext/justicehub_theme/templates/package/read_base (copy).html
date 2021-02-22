@@ -1,0 +1,248 @@
+{% ckan_extends %}
+
+{% set organization=c.group_dict %}
+
+{% block wrapper_class %}
+	no-nav
+{% endblock %}
+
+{% block pre_primary %}
+<div class="top-section">
+    <div class="row">
+        <div class="col col-sm-8 col-xs-12">
+            <div class="row">
+                <h1>{{h.dataset_display_name(pkg)}}
+                {% if pkg.private %}
+                    <i style="margin-left: 10px;"
+                       class="fa fa-lock fa-lg"
+                       data-toggle="tooltip"
+                       alt="Private Dataset"
+                       title="Private Dataset"></i>
+                {% endif %}
+                {% if pkg.verified %}
+                    <img class="fa fa-check fa-lg"
+                         src="{{ h.url_for_static('/images/verified_icon.png') }}"
+                         data-toggle="tooltip"
+                         alt="Verified"
+                         title="Verified"></img>
+                {% endif %}
+                </h1>
+                <div class="dataset-meta">
+                    <span>{{ _('Maintained by ') }}
+                        <span style="color: #f65940; font-weight: 600;">{{ pkg.maintainer }}</span>
+                    </span>
+                </div>
+                <div class="dataset-meta">
+                    <a href="{{ pkg.license_url }}">{{ pkg.license_title }}</a>
+                </div>
+                <div class="row col col-sm-10 col-xs-12">
+                    <div class="dataset-desc"> {{h.render_markdown(h.get_translated(pkg, 'notes'))}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row col col-sm-8 col-xs-12">
+                {% for tag in pkg.tags %}
+                    <div class="pkg_tags">
+                        <a href="{% url_for controller='package', action='search', tags=tag.name %}">{{ h.truncate(tag.display_name, 22) }}</a>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+            <div class="row" style="height: 40px;"></div>
+        </div>
+
+        <div class="col col-sm-4 col-xs-12 text-center">
+            <div class="col col-sm-8 org-box image-box">
+                <a href="{{ h.url_for(controller='organization', action='read', id=pkg.organization.id) }}">
+{#                {% set image_path = h.url_for_static('uploads/group/' + pkg.organization.image_url, qualified=True) %} #}
+                <img src="{{ image_path or h.url_for_static('/base/images/placeholder-organization.png') }}" alt="{{ pkg.organization.name }}" class="img-responsive media-image" >
+                {{ c.group_dict.display_name }}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-sm-6 col-xs-12 text-center">
+            {# <span class="col-xs-4 col-sm-3">
+                {% set downloads = h.justicehub_theme_get_package_avg_downloads(pkg) %}
+                <span class="primary-color">{{ downloads }}{% if downloads %}{{ _('+') }}{% endif %}</span>
+                <span>{{ _('Downloads') }}</span>
+            </span> #}
+            <span class="hidden-xs" style="float: left;">{{ _('|') }}</span>
+            <span class="col-xs-3 col-sm-2">
+                {% set views = pkg.tracking_summary.total %}
+                <span class="primary-color">{{ views }}{% if views %}{{ _('+') }}{% endif %}</span>
+                <span>{{ _('Views') }}</span>
+            </span>
+            <span class="hidden-xs" style="float: left;">{{ _('|') }}</span>
+            <span class="col-xs-5 col-sm-5">
+                <span>{{ _('Updated ') }}{{ h.time_ago_from_timestamp(pkg.last_updated) }}</span>
+            </span>
+        </div>
+        <div class="col col-sm-5 col-sm-offset-1 col-xs-12 text-center">
+            <div class="col col-sm-5 col-xs-12">
+                <a href={% if c.userobj %}"mailto:{{ pkg.maintainer_email }}"{% else %}{{h.url_for('user.login', came_from=h.full_current_url())}}{% endif %}>Contact Maintainer</a>
+            </div>
+            <span class="hidden-xs" style="float: left;">{{ _('|') }}</span>
+
+            <div class="col col-sm-7 col-xs-12 partner-links social-links">
+ {#           <ul class="list-unstyled list-inline">
+                <li>
+                {% if pkg.partner.website %}
+                    <a href="{{ pkg.partner.website }}"
+                       data-toggle="tooltip"
+                       aria-hidden="true" alt="{{ pkg.organization.name }}'s Website"
+                       role="link" title="Official Website"
+                       aria-label="{{ pkg.organization.name }}'s Website"
+                       target="_blank">
+                        <i class="fa fa-link fa-lg"></i>
+                    </a>
+                {% endif %}
+                </li>
+                <li>
+                {% if pkg.partner.email %}
+                    <a href="mailto:{{ pkg.partner.email }}"
+                       data-toggle="tooltip"
+                       aria-hidden="true" alt="{{ pkg.organization.name }}'s Email Address"
+                       role="link" title="Organization Email Address"
+                       aria-label="{{ pkg.organization.name }}'s Email Address"
+                       target="_blank">
+                    <i class="fa fa-envelope fa-lg"></i>
+                    </a>
+                {% endif %}
+                </li>
+                <li>
+                {% if pkg.partner.twitter %}
+                    <a href="{{ pkg.partner.twitter }}"
+                       data-toggle="tooltip"
+                       aria-hidden="true" alt="{{ pkg.organization.name }}'s Twitter Handle"
+                       role="link" title="Official Twitter Handle"
+                       aria-label="{{ pkg.organization.name }}'s Twitter Handle"
+                       target="_blank">
+                        <i class="fa fa-twitter fa-lg"></i>
+                    </a>
+                {% endif %}
+                </li>
+                <li>
+                {% if pkg.partner.facebook %}
+                    <a href="{{ pkg.partner.facebook }}"
+                       data-toggle="tooltip"
+                       aria-hidden="true" alt="{{ pkg.organization.name }}'s Facebook Page"
+                       role="link" title="Official Facebook Page"
+                       aria-label="{{ pkg.organization.name }}'s Facebook Page"
+                       target="_blank">
+                        <i class="fa fa-facebook fa-lg"></i>
+                    </a>
+                {% endif %}
+                </li>
+            </ul> #}
+            </div>
+        </div>
+    </div>
+
+    {% if self.content_action() | trim %}
+        <div class="row content_action pull-left">
+            {% block content_action %}
+            {% if h.check_access('package_update', {'id':pkg.id }) %}
+            {% link_for _('EDIT'), controller='package', action='edit', id=pkg.name, class_='btn btn-default' %}
+            {% endif %}
+            {% endblock %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+<div class="col-xs-12 row">
+    {% block secondary %}
+    <aside class="secondary col-sm-3 col-xs-12 sidebar">
+        <h2>ACTIVITY</h2>
+        {% block activity_stream %}
+        <div class="activity-item">{{ h.justicehub_theme_package_activity_stream(pkg.id) }}</div>
+        {% endblock %}
+    </aside>
+    {% endblock %}
+
+    {% block primary %}
+    <div class="primary col-sm-9 col-xs-12">
+        {% block primary_content %}
+        {{ super() }}
+        {% endblock %}
+    </div>
+    {% endblock %}
+</div>
+
+{% block page_header %}
+<div class="row page-header">
+    <ul class="nav nav-tabs" data-module="justicehub_theme_tabs">
+        {% block content_primary_nav %}
+
+        <li class="active">
+            <a href="/dataset/{{ pkg.name }}/#resources" data-toggle="tab">
+                {{ _('FILES') }}
+            </a>
+        </li>
+        <li>
+            <a href='#metadata' data-toggle="tab">
+                {{ _('METADATA') }}
+            </a>
+        </li>
+        <li>
+            <a href='#links' data-toggle="tab">
+                {{ _('EXTERNAL LINKS') }}
+            </a>
+        </li>
+        {% if h.issues_enabled(pkg) %}
+            <li>
+            <a href='#issues' data-toggle="tab">
+                {{ _('ISSUES') }}
+            </a>
+            </li>
+
+            <!-- FIXME: need to figure out how to conditionally show, disabling for Alpha
+            <div class="issues-actions">
+                {{ h.nav_link(_('New Issue'), named_route='issues_new', dataset_id=pkg.name, class_='btn btn-success pull-right') }}
+            </div-->
+        {% endif %}
+        {% if c.userobj.sysadmin %}
+            {#<li>
+            <a href='#groups' data-toggle="tab">
+                {{ _('GROUPS') }}
+            </a>
+            </li>#}
+            {{ h.build_nav_icon('dataset_groups', _('Groups'), id=pkg.name) }} 
+        {% endif %}
+        {% endblock %}
+    </ul>
+</div>
+{% endblock %}
+{% block primary_content_inner %}
+    <div class="tab-content">
+        <div class="tab-pane active" id="resources">
+        {% block package_resources %}
+            <h1 class="page-heading">
+                {{ _('FILES') }}
+            </h1>
+            {% snippet "package/snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
+        {% endblock %}
+        </div>
+
+        <div class="tab-pane" id="metadata">
+        {% block indicator_additional_info %}
+            {% snippet "scheming/package/snippets/additional_info.html", pkg_dict=pkg %}
+        {% endblock %}
+        </div>
+
+        <div class="tab-pane" id="links">
+            {% snippet "snippets/external_links.html", pkg_dict=pkg %}
+        </div>
+
+        <div class="tab-pane" id="issues">
+            {% snippet "issues/dataset.html", pkg=pkg %}
+        </div>
+
+        {# <div class="tab-pane" id="groups">
+            {% snippet "package/snippets/group_list.html", pkg_dict=pkg, pkg=pkg, id=pkg.name %}
+        </div> #}
+    </div>
+{% endblock %}
