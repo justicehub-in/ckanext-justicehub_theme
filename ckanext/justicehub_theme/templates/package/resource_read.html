@@ -74,8 +74,20 @@
         {#{{ super() }}#}
         <div class="dataset-main">
             <div class="dataset-main__header">
+                <p style="font-size: 12px;"><a href="" style="font-family: Roboto; font-size: 12px; padding: 0 2px 0 0;" class="btn btn-primary-text">View all files</a> in "{{pkg.name}}"</p>
                 <h1>{{ h.resource_display_name(res) | truncate(50) }}</h1>
                 <p class="license-description">{{ ('Updated: ')}} {{h.time_ago_from_timestamp(res.last_modified) or _('unknown') }} | {{ res.format }}</p>
+                {% if res.format == 'CSV' or res.format == 'PDF' %}
+                {% block data_preview %}
+                    {% block resource_view %}
+                        {% block resource_view_content %}
+                        {{ super() }}
+                        {% endblock %}
+                    {% endblock %}
+                {% endblock %}
+                {% else %}
+                <p style="font-style: italic; color: #898989; margin-left: 28px;">This file cannot be previewed. Please download it.</p>
+                {% endif %}
                 <p class="file-description">{{ res.description }}</p>
 
                 <div class="file-actions">
@@ -89,18 +101,6 @@
                     </a>
                 </div>
             </div>
-
-            {% if res.format == 'CSV' or res.format == 'PDF' %}
-                {% block data_preview %}
-                    {% block resource_view %}
-                        {% block resource_view_content %}
-                        {{ super() }}
-                        {% endblock %}
-                    {% endblock %}
-                {% endblock %}
-                {% else %}
-                <p style="font-style: italic; color: #898989; margin-left: 28px;">This file cannot be previewed. Please download it.</p>
-            {% endif %}
         </div>
     </div>
     {% endblock %}
