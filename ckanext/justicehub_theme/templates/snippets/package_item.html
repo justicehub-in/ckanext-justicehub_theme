@@ -65,7 +65,11 @@
                     </span>
                     <div style="width: 90%;">
                         <h5>{{ h.resource_display_name(res) | truncate(50) }}</h5>
+                        {% if res.description | length > 125 %}
+                        <p>{{ res.description[0:122] }}...</p>
+                        {% else %}
                         <p>{{ res.description }}</p>
+                        {% endif %}
                     </div>
                 </div>
         
