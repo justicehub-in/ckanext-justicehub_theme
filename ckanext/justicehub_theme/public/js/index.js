@@ -646,6 +646,16 @@ import Dataset from './dataset.js';
   const saveAsDraftButtons = document.querySelectorAll('.draft-button');
   saveAsDraftButtons.forEach((button) => {
     button.addEventListener('click', () => {
+      if (!getValueFromInputSelector('#datasetNameField').length) {
+        return;
+      }
+      const loader = document.querySelector('.loader');
+      if (loader) {
+        loader.style.display = 'none';
+      }
+
+      button.style.display = 'none';
+      button.insertAdjacentHTML('afterend', `<div class="loader"></div>`);
       updateDatasetWithValuesFromFilesSection();
       updateDatasetWithValuesFromOwnershipSection();
       updateDatasetWithValuesFromRelevancySection();
@@ -761,36 +771,40 @@ import Dataset from './dataset.js';
 
   previewButton.addEventListener('click', () => {
     updateDatasetWithReferences();
+    const filesListPreviewSection = document.querySelector('#filesListOnPreview');
 
-    document.getElementById('submitDatasetButton').style.display = 'block';
-    if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
+    if(areMandatoryFieldsEmpty()) {
+      submitDatasetButton.disabled = true;
+    }
 
-    document.querySelector('#filesListOnPreview').innerHTML = '';
+    submitDatasetButton.style.display = 'block';
+    const loader = document.querySelector('.loader');
+    if (loader) {
+      loader.style.display = 'none';
+    }
+
+    filesListPreviewSection.innerHTML = '';
     if (!isEditMode()) {
       dataset.files.forEach((file) => {
-        document.querySelector('#filesListOnPreview').insertAdjacentHTML('beforeend', generateFilePreviewHTML(file));
+        filesListPreviewSection.insertAdjacentHTML('beforeend', generateFilePreviewHTML(file));
       });
     } else {
       const updatedFiles = resourcesByType.updated.map((resourceId) => document.getElementById(resourceId));
 
       updatedFiles.forEach((fileUploadElement) =>
-        document
-          .querySelector('#filesListOnPreview')
-          .insertAdjacentHTML(
-            'beforeend',
-            generateFilePreviewHTML(getFileDetailsFromFileUploadElement(fileUploadElement))
-          )
+        filesListPreviewSection.insertAdjacentHTML(
+          'beforeend',
+          generateFilePreviewHTML(getFileDetailsFromFileUploadElement(fileUploadElement))
+        )
       );
 
       const addedFiles = resourcesByType.added.map((resourceId) => document.getElementById(resourceId));
 
       addedFiles.forEach((fileUploadElement) =>
-        document
-          .querySelector('#filesListOnPreview')
-          .insertAdjacentHTML(
-            'beforeend',
-            generateFilePreviewHTML(getFileDetailsFromFileUploadElement(fileUploadElement))
-          )
+        filesListPreviewSection.insertAdjacentHTML(
+          'beforeend',
+          generateFilePreviewHTML(getFileDetailsFromFileUploadElement(fileUploadElement))
+        )
       );
 
       const untouchedFiles = receivedResources
@@ -803,12 +817,10 @@ import Dataset from './dataset.js';
 
       if (untouchedFiles) {
         untouchedFiles.forEach((fileUploadElement) =>
-          document
-            .querySelector('#filesListOnPreview')
-            .insertAdjacentHTML(
-              'beforeend',
-              generateFilePreviewHTML(getFileDetailsFromFileUploadElement(fileUploadElement))
-            )
+          filesListPreviewSection.insertAdjacentHTML(
+            'beforeend',
+            generateFilePreviewHTML(getFileDetailsFromFileUploadElement(fileUploadElement))
+          )
         );
       }
     }
@@ -906,8 +918,10 @@ import Dataset from './dataset.js';
         failedFileSummary.querySelector('file-error').style.display = 'block';
         failedFileSummary.querySelector('file-error').innerHTML = 'This file could not be uploaded';
 
-        document.getElementById('submitDatasetButton').style.display = 'block';
-        if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
+        submitDatasetButton.style.display = 'block';
+        if (loader) {
+          loader.style.display = 'none';
+        }
         postAllFilesSync(packageName, filesList.slice(1));
       });
   }
@@ -1016,8 +1030,18 @@ import Dataset from './dataset.js';
             `<p class="dataset-fail" style="color:red;">${error.message} - Couldn't update dataset. Please try again.</p>`
           );
 
-          document.getElementById('submitDatasetButton').style.display = 'block';
-          if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
+          submitDatasetButton.style.display = 'block';
+
+          if (state == 'draft') {
+            saveAsDraftButtons.forEach((button) => {
+              button.addEventListener('click', () => {
+                button.style.display = 'block';
+              });
+            });
+          }
+          if (loader) {
+            loader.style.display = 'none';
+          }
         });
     } else {
       fetch(`${BASE_URL}/api/dataset/new`, {
@@ -1039,8 +1063,19 @@ import Dataset from './dataset.js';
             `<p class="dataset-fail" style="color:red;">${error.message} - Couldn't upload dataset. Please try again.</p>`
           );
 
-          document.getElementById('submitDatasetButton').style.display = 'block';
-          if (document.querySelector('.loader')) document.querySelector('.loader').style.display = 'none';
+          submitDatasetButton.style.display = 'block';
+
+          if (state == 'draft') {
+            saveAsDraftButtons.forEach((button) => {
+              button.addEventListener('click', () => {
+                button.style.display = 'block';
+              });
+            });
+          }
+
+          if (loader) {
+            loader.style.display = 'none';
+          }
         });
     }
   }

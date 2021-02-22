@@ -1299,6 +1299,11 @@ footer h3 {
   margin-top: 2em;
 }
 
+.data-upload-section__footer__right {
+  display: flex;
+  align-items: center;
+}
+
 .data-upload-section__footer__right > :first-child {
   margin-right: 22px;
 }
