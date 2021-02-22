@@ -52,7 +52,9 @@
               {% endblock %}
             </div>
           </div>
-          {% link_for _('Edit Details'), named_route='user.edit', id=user.name, class_='btn btn-primary-outline' %}
+          {% if h.check_access('user_update', user) %}
+          	{% link_for _('Edit Details'), named_route='user.edit', id=user.name, class_='btn btn-primary-outline' %}
+          {% endif %}
         </div>
         {% block user_nums %}
         {#<div class="nums">
