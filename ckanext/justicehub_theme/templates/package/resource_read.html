@@ -63,7 +63,7 @@
             <div class="body">
                 {% set links = h.justicehub_theme_parse_json(pkg.links or '[]') %}
                 {% for link in links %}
-                <a style="display: block; margin: 4px 0;" href="{{('https://')}}{{ link['link'] }}" >{{ link['title'] }}</a>
+                <a style="display: block; margin: 4px 0;" href="{{ link['link'] }}" >{{ link['title'] }}</a>
                 {% endfor %}
                 <!-- <p>{{ links }}</p> -->
             </div>
