@@ -57,7 +57,7 @@
         </div>
        
         {% set resources = package.resources or [] %}
-          {% for res in resources %}
+          {% for res in resources[0:3] %}
             <div class="col col-md-12 file-info">
                 <div class="file-info__text">
                     <span class="format-label" property="dc:format" data-format="{{ res.format.lower() or 'data' }}">
@@ -104,7 +104,7 @@
                 </select>
             </div>
             {% endif %}
-            <a class="btn-primary-text" style="font-family: Roboto; font-size: 14px;" href="{{ h.url_for(package.type + '_read', controller='package', action='read', id=package.name) }}">View all files in this dataset</a>
+            <a class="btn-primary-text" style="font-family: Roboto; font-size: 14px;" href="{{ h.url_for(package.type + '_read', controller='package', action='read', id=package.name) }}">View all {{ resources|length }} files in this dataset</a>
         </div>
     </div>
 
