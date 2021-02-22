@@ -26,7 +26,7 @@
           </div>
         </div>
         <div class="categories">
-          <h3>Explore Popular categories</h3>
+          <h3>Explore Popular Categories</h3>
           <div class="categories__row row">
 		{% for group in groups %}
 			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 category-item"  onclick="window.location='/dataset?groups={{group.name}}';">
@@ -62,18 +62,14 @@
         <div class="custom-container">
           <h2>Highlights</h2>
           <div class="review-section__content row">
-            <div class="col-lg-6 col-md-6 col-sm-12">
-              <p>
-                Tim Berners-Lee, suggested a 5-star deployment scheme for Linked Open Data. The rating begins at one
-                star and data gets stars when proprietary formats are removed and links are added.
-              </p>
-              <p>
-                The file formats also play a role in the rating, with machine readable formats rating higher. Watch our
-                crisp, short video to find out more.
-              </p>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 video-container">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-md-push-6 video-container">
               <div style="width: 100%; height: 340px; background-color: #f65940"></div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-md-pull-6 highlights-info">
+              <p>
+                Keep abreast with the latest datasets, collaborative opportunities, stories and more!
+              </p>
+              <a href="https://dataforjustice.substack.com" target="_blank" rel="noreferrer noopener" class="btn btn-primary">Join us on Substack</a>
             </div>
           </div>
         </div>
@@ -116,15 +112,73 @@
               <div style="width: 100%; height: 340px; background-color: #f65940"></div>
             </div>
             <div class="col-lg-6 col-md-6">
-              <p>Testimonials go here.</p>
-              <p>
-                Moderators review every file & dataset before they’re posted on the platform. To learn more about our
-                review process, <a href="#">CLICK HERE</a>.
-              </p>
-              <p>
-                <strong>WE RESPECT PRIVACY.</strong> Our moderators ensure that datasets uploaded on the hub don’t
-                contain any personally identifiable information.
-              </p>
+              <div id="carousel-testimonials" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                  <li data-target="#carousel-testimonials" data-slide-to="0" class="active"></li>
+                  <li data-target="#carousel-testimonials" data-slide-to="1"></li>
+                  <li data-target="#carousel-testimonials" data-slide-to="2"></li>
+                  <li data-target="#carousel-testimonials" data-slide-to="3"></li>
+                  <li data-target="#carousel-testimonials" data-slide-to="4"></li>
+                  <li data-target="#carousel-testimonials" data-slide-to="5"></li>
+                </ol>
+              
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                  <div class="item active">
+                    <p>“Data is power. Open data is public power. When government and researchers allow their data to be made public, it improves our understanding of the world and makes for better policy.”</p>
+                    <div>
+                      <h3>Nick Robinson</h3>
+                      <p>Legal Researcher</p>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <p>"The use of large data sets will, in the next few years, completely change the way government and civil society looks at the judicial system in India. It has the potential to completely transform our understanding of how the judiciary works and continuing our efforts to help bring about judicial reforms in India, Vidhi is thrilled to take the open data pledge."</p>
+                    <div>
+                      <h3>Alok Prasanna</h3>
+                      <p>Co-Founder, Vidhi</p>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <p>“Why do I believe that we should have open data? At the heart of the scientific process in any domain or on any question, is that there should be multiple, rival analyses based on the identical data. And the starting point for this is the public goods of high quality, standardised, accessible data.”</p>
+                    <div>
+                      <h3>Susan Thomas</h3>
+                      <p>IGIDR</p>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <p>"The potential of a platform like Jusitice Hub, is that it moves the conversation on very difficult questions in our society towards a more evidence based understanding. Many of the questions require moving away from intuition and passion and that kind of analysis. And we really need to see what is happening on the ground and unless we bring all of these things together, collaboratively, understanding all problems in all its complexity becomes difficult."</p>
+                    <div>
+                      <h3>Dr. Anup Surendranath</h3>
+                      <p>Executive Director, Project 39A</p>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <p>"We chose to share our data openly on the Justice Hub, as a matter of scientific research principle i.e. allow verification of the quantitative analysis. But the other motivation to do it was the availability of data itself for research. Original research in judicial studies is so low, that there is value in publishing it because somebody else might come and do some research on it that we hadn't thought of."</p>
+                    <div>
+                      <h3>Devendra Damle</h3>
+                      <p>Research fellow, NIPFP</p>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <p>“Sharing the data set on an open access platform fosters research. We want our data set to be used by as many people as possible and let a thousand ideas bloom with what can be done with this data and how it can feed into a meaningful feedback loop for policymakers, litigants and court administration.”</p>
+                    <div>
+                      <h3>Bhargavi</h3>
+                      <p>Haq</p>
+                    </div>
+                  </div>
+                </div>
+              
+                <!-- Controls -->
+                <!-- <a class="left carousel-control" href="#carousel-testimonials" role="button" data-slide="prev">
+                  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-testimonials" role="button" data-slide="next">
+                  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a> -->
+              </div>
             </div>
             <!-- <div class="col-lg-6 col-md-6 moderators__content">
               <h4>Our Moderators</h4>
@@ -157,8 +211,8 @@
         <div class="custom-container">
           <h3>Top Data Contributors in the Community</h3>
           <div class="contributors-row row"></div>
-          <p>Want to see your name here? We’re looking for contributors!</p>
-          <a href="/dataset/new" class="btn btn-primary">Contribute Data</a>
+          <p>Can’t find what you are looking for?</p>
+          <a href="/contact" class="btn btn-primary">Let us know!</a>
         </div>
       </section>
 
@@ -167,14 +221,6 @@
     <script src="/home.js"></script>
   </body>
 </html>
-
-
-
-
-
-
-
-
 
 
 {# 
