@@ -12,6 +12,34 @@
 {% endblock %}
 
 
+{% block meta %}
+
+    <meta charset="utf-8" />
+    {% block meta_generator %}<meta name="generator" content="ckan {{ h.ckan_version() }}" />{% endblock %}
+    {% block meta_viewport %}<meta name="viewport" content="width=device-width, initial-scale=1.0">{% endblock %}
+       
+    <!-- Primary Meta Tags -->
+    <meta name="robots" content="noindex">
+    <meta name="title" content="{{pkg.title}}">
+    <meta name="description" content="A platform to enable better participation and collaboration within the legal and justice ecosystem">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://justicehub.in/">
+    <meta property="og:title" content="{{pkg.title}}">
+    <meta property="og:description" content="A platform to enable better participation and collaboration within the legal and justice ecosystem">
+    <meta property="og:image" content="">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://justicehub.in/">
+    <meta property="twitter:title" content="{{pkg.title}}">
+    <meta property="twitter:description" content="A platform to enable better participation and collaboration within the legal and justice ecosystem">
+    <meta property="twitter:image" content="">
+
+{% endblock %}
+
+
 {% block secondary %}
 <aside class="secondary col-sm-3 col-xs-12 sidebar">
     <div class="module module-narrow module-shallow context-info dataset-sidebar-module">
@@ -159,9 +187,4 @@
     </div>
     {% endblock %}
 </div>
-<script>
-	document.querySelector('meta[name="title"]').setAttribute("content", "{{pkg.title}}");
-        document.querySelector('meta[property="og:title"]').setAttribute("content", "{{pkg.title}}");
-        document.querySelector('meta[property="twitter:title"]').setAttribute("content", "{{pkg.title}}");
-</script>
 {% endblock %}
