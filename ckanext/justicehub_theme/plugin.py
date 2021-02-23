@@ -37,7 +37,8 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
             'justicehub_theme_get_assignee_user': helpers.get_assignee_user,
             'justicehub_theme_issue_vars': helpers.issues_vars,
             'justicehub_theme_is_org_admin': helpers.is_org_admin,
-            'justicehub_theme_get_popular_groups': helpers.get_popular_groups
+            'justicehub_theme_get_popular_groups': helpers.get_popular_groups,
+            'justicehub_theme_pop_zip_resource': helpers.pop_zip_resource
         }
 
     #IActions
