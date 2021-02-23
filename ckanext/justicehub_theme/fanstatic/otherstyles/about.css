@@ -1,0 +1,11 @@
+.about-block {
+  margin-bottom: 32px;
+}
+
+.about-block .logos-container {
+  display: flex;
+}
+
+.about-block .logos-container a {
+  display: block;
+}
