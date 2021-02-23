@@ -332,7 +332,7 @@ li.dropdown:focus {
   width: 100%;
   top: 100%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -40%);
   border-radius: 5px;
 }
 
@@ -375,7 +375,7 @@ li.dropdown:focus {
 
 .datasets-section {
   background-color: #2a242d;
-  padding-top: 360px;
+  padding-top: 480px;
   padding-bottom: 20px;
   color: white;
 }
@@ -460,6 +460,11 @@ li.dropdown:focus {
   border-left: 3px solid #6c666f;
   margin-bottom: 36px;
   letter-spacing: 1px;
+}
+
+.review-section__content.row {
+  margin: auto;
+  text-align: center;
 }
 
 .review-section__content h4 {
