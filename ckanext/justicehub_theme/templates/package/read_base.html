@@ -127,7 +127,16 @@
                 {% endif %}
             </div>
             {% if pkg.publication_date| length > 3 %}
-                    <p style="color: #898989; font-size: 14px; margin-top: 8px">Date of Publication: {{ pkg.publication_date }}</p>
+                {% set split_date = pkg.publication_date.split('/') %}
+                <p style="color: #898989; font-size: 14px; margin-top: 8px">Date of Publication: 
+                    {% for item in split_date%}
+                        {% if item|length > 0 and item != split_date[-1] %}
+                            {{item}}{{_('-')}}
+                        {% elif item|length > 0 and item == split_date[-1] %}
+                         {{item}}
+                        {% endif %}
+                    {% endfor %}
+                </p>
             {% endif %}
             <div class="relevancy-info">
                 <p><i class="fa fa-map-marker" aria-hidden="true"></i> 
