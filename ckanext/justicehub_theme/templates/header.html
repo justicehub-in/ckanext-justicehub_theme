@@ -3,10 +3,11 @@ step %}
 <div id="current_step" state="{{ step }}" style="display: none"></div>
 {% endif %} {% else %} {% set error_message = false %} {% endif %}
 <nav class="navbar navbar-default">
+
   {{ h.snippet('widget/auth/signup.html', id="signupModal") }} {{ h.snippet('widget/auth/login.html', id="loginModal")
   }} {{ h.snippet('widget/auth/forgot.html', id="forgotPasswordModal") }} {{ h.snippet('widget/auth/reset.html',
   id="resetPasswordModal") }} {{ h.snippet('widget/auth/feedback.html', id="feedbackModal") }} {{
-  h.snippet('widget/auth/dataset_feedback.html', id="datasetFeedbackModal") }}
+  h.snippet('widget/auth/dataset_feedback.html', id="datasetFeedbackModal", data = data if data else '') }}
   <div class="custom-container">
     <div class="navbar-header">
       <img class="mobile-menu" src="/assets/icons/menu.svg" />
