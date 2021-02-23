@@ -896,7 +896,12 @@ import Dataset from './dataset.js';
 
   function postAllFilesSync(packageName, filesList) {
     if (filesList.length === 0) {
-      window.location = '/message/success';
+       if (!isEditMode()) {
+      	window.location = '/message/success?message= Datset created successfully';	
+       }
+       else {
+        window.location = '/message/success?message= Datset updated successfully';
+       }
       return;
     }
 

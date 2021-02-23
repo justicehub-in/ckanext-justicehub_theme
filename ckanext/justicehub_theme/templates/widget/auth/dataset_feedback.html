@@ -1,9 +1,12 @@
 {% resource 'justicehub_theme/widget/popup/popup.css' %}
 {% resource 'justicehub_theme/widget/popup/popup.js' %}
 {% set title = "Dataset" %}
-{% set title_content = "Dataset created successfully" %}
+{% set title_content = data.message %}
 {% extends "widget/popup/popup.html" %}
 
 
 {% block content %}
+<script>
+ window.history.pushState('', '', '/');
+</script>
 {% endblock %}
