@@ -31,7 +31,7 @@
 		{% for group in groups %}
 			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 category-item"  onclick="window.location='/dataset?groups={{group.name}}';">
 				<div class="icon-container">
-				  <img src="{{ group.image_display_url }}" alt="${category.name}" />
+				  <img src="{{ group.image_display_url }}" alt="" />
 				</div>
 				<p>{{ group.display_name }}</p>
 			</div>
