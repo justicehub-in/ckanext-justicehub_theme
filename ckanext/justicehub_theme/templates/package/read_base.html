@@ -79,9 +79,11 @@
         <div class="body">
 	    {% if pkg['source'] %}
 	    	{% set sources = pkg.source.split(',') %}
-            	{% for source in sources %}
-               		 <p>{{ source }}</p>
-            	{% endfor %}
+            	<ol>
+                {% for source in sources %}
+                    <li>{{ source }}</li>
+                {% endfor %}
+                </ol>
 	    {% endif %}
         </div>
     </div>
@@ -91,9 +93,11 @@
         </div>
         <div class="body">
             {% set links = h.justicehub_theme_parse_json(pkg.links or '[]') %}
+            <ol>
             {% for link in links %}
-            <a style="display: block; margin: 4px 0;" href="{{ link['link'] }}" >{{ link['title'] }}</a>
+                <li><a style="display: block;" href="{{ link['link'] }}" >{{ link['title'] }}</a></li>
             {% endfor %}
+            </ol>
             <!-- <p>{{ links }}</p> -->
         </div>
     </div>
@@ -123,7 +127,16 @@
                 {% endif %}
             </div>
             {% if pkg.publication_date| length > 3 %}
-                    <p style="color: #898989; font-size: 14px; margin-top: 8px">Date of Publication: {{ pkg.publication_date }}</p>
+                {% set split_date = pkg.publication_date.split('/') %}
+                <p style="color: #898989; font-size: 14px; margin-top: 8px">Date of Publication: 
+                    {% for item in split_date%}
+                        {% if item|length > 0 and item != split_date[-1] %}
+                            {{item}}{{_('-')}}
+                        {% elif item|length > 0 and item == split_date[-1] %}
+                         {{item}}
+                        {% endif %}
+                    {% endfor %}
+                </p>
             {% endif %}
             <div class="relevancy-info">
                 <p><i class="fa fa-map-marker" aria-hidden="true"></i> 
