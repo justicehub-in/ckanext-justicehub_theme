@@ -117,10 +117,12 @@ def get_popular_groups():
 
     
     context = {'model': model}
-
+    
+    #TODO: short the groups by number of datasets in it
     q = model.Session.query(model.Group) \
         .filter(model.Group.is_organization == False) \
-        .filter(model.Group.state == 'active')
+        .filter(model.Group.state == 'active') \
+        .limit(12)
 
 
     groups = q.all()
