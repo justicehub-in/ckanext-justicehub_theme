@@ -896,10 +896,14 @@ import Dataset from './dataset.js';
 
   function postAllFilesSync(packageName, filesList) {
     if (filesList.length === 0) {
-      if (!isEditMode()) {
-        window.location = '/message/success?message= Datset created successfully';
-      } else {
+      if (window.global_state === 'draft') {
+        window.location = '/message/success?message= Datset saved as draft successfully';
+      }
+      else if (isEditMode()) {
         window.location = '/message/success?message= Datset updated successfully';
+      } 
+      else {
+        window.location = '/message/success?message= Datset created successfully';
       }
       return;
     }
@@ -992,6 +996,9 @@ import Dataset from './dataset.js';
   }
 
   function postDatasetRequest(state = 'active') {
+
+    window.global_state = state;
+
     const modalBody = document.querySelector('#previewDatasetModal .modal-body');
     const existingErrorMessageElement = modalBody.querySelector('.dataset-fail');
     if (existingErrorMessageElement) {
