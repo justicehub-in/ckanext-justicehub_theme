@@ -614,6 +614,17 @@ import Dataset from './dataset.js';
   const keywordsInput = document.getElementById('keywordsInput');
   const sourcesInput = document.getElementById('sourcesInput');
   keywordsInput.addEventListener('keyup', (event) => addTag(event, 'keywords'));
+
+  keywordsInput.addEventListener('paste', (event) => {
+    event.preventDefault();
+    const pastedText = (event.clipboardData || window.clipboardData).getData('text');
+    const tagsListFromPastedText = pastedText.split(',').map((text) => text.trim());
+    dataset.updateProperty('keywords', dataset.keywords.concat(tagsListFromPastedText));
+    tagsListFromPastedText.forEach((tag) => {
+      insertTag(event.target.parentElement, tag);
+    });
+  });
+
   sourcesInput.addEventListener('keyup', (event) => addTag(event, 'sources'));
 
   // functions for getting all values and updating dataset object
