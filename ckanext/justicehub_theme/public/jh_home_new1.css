@@ -732,6 +732,17 @@ footer h3 {
 
 .makers-row {
   margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.makers-row a {
+  display: block;
+  margin-right: 32px;
+}
+
+.makers-row img {
+  transform: scale(1.4);
 }
 
 .error-message {
