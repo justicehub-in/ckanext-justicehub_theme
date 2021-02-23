@@ -97,7 +97,32 @@ import Dataset from './dataset.js';
 
   stepIndicators.forEach((step) => {
     step.addEventListener('click', () => {
-      dataUploadSteps.setActiveStep(parseInt(step.dataset.value), updateActiveSectionDOM);
+      const parsedStepId = parseInt(step.dataset.value);
+
+      switch (parsedStepId) {
+        case 1:
+          updateDatasetWithValuesFromFilesSection();
+          break;
+        case 2:
+          updateDatasetWithValuesFromFilesSection();
+          updateDatasetWithValuesFromOwnershipSection();
+          break;
+        case 3:
+          updateDatasetWithValuesFromFilesSection();
+          updateDatasetWithValuesFromOwnershipSection();
+          updateDatasetWithValuesFromRelevancySection();
+          break;
+        case 4:
+          updateDatasetWithValuesFromFilesSection();
+          updateDatasetWithValuesFromOwnershipSection();
+          updateDatasetWithValuesFromRelevancySection();
+          updateDatasetWithReferences();
+          break;
+        default:
+          return;
+      }
+
+      dataUploadSteps.setActiveStep(parsedStepId, updateActiveSectionDOM);
     });
   });
 
@@ -202,7 +227,7 @@ import Dataset from './dataset.js';
 
   function fileInputHandler(event) {
     const file = event.target.files[0];
-    if(file.size > 104857600) {
+    if (file.size > 104857600) {
       alert('File size has to be less than 100 MB');
       return;
     }
@@ -352,7 +377,7 @@ import Dataset from './dataset.js';
     authors.forEach((author) => {
       publisher.authors.push(getAuthorDetailsFromAuthorAdditionElement(author));
     });
-    if (!!publisher.authors) {
+    if (publisher.authors[0].authorName) {
       document.querySelector(".step-indicator[data-value='2']").classList.add('done');
     }
     dataset.updateProperty('publisher', publisher);
@@ -705,7 +730,7 @@ import Dataset from './dataset.js';
     <tr>
       <td>Region(s) covered:</td>
       <td>${
-        dataset.region
+        Array.isArray(dataset.region)
           ? dataset.region.map((region) => ` <span>${region}</span>`)
           : `<span style="color:red;">No regions selected</span>`
       }</td>
@@ -902,11 +927,9 @@ import Dataset from './dataset.js';
     if (filesList.length === 0) {
       if (window.global_state === 'draft') {
         window.location = '/message/success?message= Datset saved as draft successfully';
-      }
-      else if (isEditMode()) {
+      } else if (isEditMode()) {
         window.location = '/message/success?message= Datset updated successfully';
-      } 
-      else {
+      } else {
         window.location = '/message/success?message= Datset created successfully';
       }
       return;
@@ -1000,7 +1023,6 @@ import Dataset from './dataset.js';
   }
 
   function postDatasetRequest(state = 'active') {
-
     window.global_state = state;
 
     const modalBody = document.querySelector('#previewDatasetModal .modal-body');
