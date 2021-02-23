@@ -7,6 +7,8 @@
 
 {% block content %}
 <script>
- window.history.pushState('', '', '/');
+  if (window.location.href.indexOf("success") > -1)  {
+ 	window.history.pushState('', '', '/');
+  }
 </script>
 {% endblock %}
