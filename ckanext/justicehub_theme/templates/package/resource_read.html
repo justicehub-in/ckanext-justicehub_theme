@@ -48,12 +48,14 @@
                 <h3>Data Source(s)</h3>
             </div>
             <div class="body">
-	      {% if pkg['source'] %}	    
-                {% set sources = pkg.source.split(',') %}
-                {% for source in sources %}
-                    <p>{{ source }}</p>
-                {% endfor %}
-	      {% endif %}
+                {% if pkg['source'] %}
+                    {% set sources = pkg.source.split(',') %}
+                        <ol>
+                        {% for source in sources %}
+                            <li>{{ source }}</li>
+                        {% endfor %}
+                        </ol>
+                {% endif %}
             </div>
         </div>
         <div class="module module-narrow module-shallow context-info dataset-sidebar-module">
@@ -62,9 +64,11 @@
             </div>
             <div class="body">
                 {% set links = h.justicehub_theme_parse_json(pkg.links or '[]') %}
+                <ol>
                 {% for link in links %}
-                <a style="display: block; margin: 4px 0;" href="{{ link['link'] }}" >{{ link['title'] }}</a>
+                    <li><a style="display: block;" href="{{ link['link'] }}" >{{ link['title'] }}</a></li>
                 {% endfor %}
+                </ol>
                 <!-- <p>{{ links }}</p> -->
             </div>
         </div>
