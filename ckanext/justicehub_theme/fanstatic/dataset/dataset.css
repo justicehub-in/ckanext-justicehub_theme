@@ -54,6 +54,14 @@
   padding-bottom: 14px;
 }
 
+.dataset-sidebar-module .body ol {
+  padding-left: 12px;
+}
+
+.dataset-sidebar-module .body li {
+  margin: 4px 0;
+}
+
 .dataset-sidebar-module .body a {
   text-decoration: none;
 }
