@@ -773,7 +773,7 @@ import Dataset from './dataset.js';
     updateDatasetWithReferences();
     const filesListPreviewSection = document.querySelector('#filesListOnPreview');
 
-    if(areMandatoryFieldsEmpty()) {
+    if (areMandatoryFieldsEmpty()) {
       submitDatasetButton.disabled = true;
     }
 
@@ -896,12 +896,11 @@ import Dataset from './dataset.js';
 
   function postAllFilesSync(packageName, filesList) {
     if (filesList.length === 0) {
-       if (!isEditMode()) {
-      	window.location = '/message/success?message= Datset created successfully';	
-       }
-       else {
+      if (!isEditMode()) {
+        window.location = '/message/success?message= Datset created successfully';
+      } else {
         window.location = '/message/success?message= Datset updated successfully';
-       }
+      }
       return;
     }
 
@@ -1147,6 +1146,30 @@ import Dataset from './dataset.js';
     const [fromYear, fromMonth] = data.start_month.split('-');
     const [toYear, toMonth] = data.end_month.split('-');
     const [pubDate, pubMonth, pubYear] = data.publication_date.split('/');
+    const regions = data.region.split(',');
+    console.log(regions);
+
+    if (regions[0] === 'All India') {
+      const allIndiaInput = document.getElementById('allIndia');
+      allIndiaInput.checked = true;
+    } else {
+      const partialIndiaInput = document.getElementById('partialIndia');
+      partialIndiaInput.checked = true;
+      const nativeMultiSelect = document.querySelector('span.multiselect-native-select');
+      const multiSelectToggle = document.querySelector('.multiselect.dropdown-toggle');
+      nativeMultiSelect.style.display = 'inline-block';
+      multiSelectToggle.style.display = 'inline-block';
+      const statesButton = document.querySelector('.multi-states-btn');
+      statesButton.setAttribute('title', regions.join(', '));
+      if (regions.length < 3) {
+        statesButton.querySelector('.multiselect-selected-text').innerHTML = regions.join(', ');
+      } else {
+        statesButton.querySelector('.multiselect-selected-text').innerHTML = `${regions.length} selected`;
+      }
+      regions.forEach((region) => {
+        document.querySelector(`input[value="${region}"]`).checked = true;
+      });
+    }
 
     // regions WIP
 
@@ -1184,7 +1207,9 @@ import Dataset from './dataset.js';
       input.parentElement.removeChild(input);
     });
 
-    data.links.forEach((link) => {
+    const referenceLinks = data.links ? data.link : [];
+
+    referenceLinks.forEach((link) => {
       const referenceAdditionForm = document.querySelector('.data-upload-section__form__field--references');
       referenceAdditionForm.insertAdjacentHTML(
         'beforeend',
