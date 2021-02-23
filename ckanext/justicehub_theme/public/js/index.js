@@ -202,6 +202,10 @@ import Dataset from './dataset.js';
 
   function fileInputHandler(event) {
     const file = event.target.files[0];
+    if(file.size > 104857600) {
+      alert('File size has to be less than 100 MB');
+      return;
+    }
     const fileInputBackground = event.target.parentElement;
     if (file.type.indexOf('csv') > -1) {
       updateFileInputBackground(fileInputBackground, 'csv');
