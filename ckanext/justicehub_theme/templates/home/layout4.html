@@ -28,15 +28,14 @@
         <div class="categories">
           <h3>Explore Popular Categories</h3>
           <div class="categories__row row">
-		{% for group in groups %}
-			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 category-item"  onclick="window.location='/dataset?groups={{group.name}}';">
-				<div class="icon-container">
-				  <img src="{{ group.image_display_url }}" alt="" />
-				</div>
-				<p>{{ group.display_name }}</p>
-			</div>
-		{% endfor %} 
-
+            {% for group in groups %}
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 category-item"  onclick="window.location='/dataset?groups={{group.name}}';">
+                <div class="icon-container">
+                  <img src="{{ group.image_display_url }}" alt="" />
+                </div>
+                <p>{{ group.display_name }}</p>
+              </div>
+            {% endfor %} 
           </div>
         </div>
       </section>
@@ -109,8 +108,7 @@
                       <h4 class="modal-title">How to upload a dataset?</h4>
                     </div>
                     <div class="modal-body">
-                      <iframe width="800" height="450"
-                        src="https://www.youtube.com/embed/uO5ttrFZyJw">
+                      <iframe class="responsive-item"                        src="https://www.youtube.com/embed/7wrBtB_coJc">
                       </iframe>
                     </div>
                   </div>
