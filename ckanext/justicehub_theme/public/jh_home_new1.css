@@ -1484,6 +1484,13 @@ footer h3 {
 
 .modal-body__data-section__header .preview-edit {
   font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.modal-body__data-section__header .preview-edit span {
+  display: inline-block;
+  margin-right: 4px;
 }
 
 .modal-body__data-section table {
@@ -1530,7 +1537,7 @@ footer h3 {
 
 .file-summary__text h4 {
   margin-bottom: 0;
-  margin-top: 8px;
+  margin-top: 0;
   font-weight: 400;
   font-size: 18px;
 }
