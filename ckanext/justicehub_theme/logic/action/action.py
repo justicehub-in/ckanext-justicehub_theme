@@ -408,6 +408,7 @@ def package_search(context, data_dict):
             search_results['search_facets'][facet]['items'],
             key=lambda facet: facet['display_name'], reverse=True)
 
+    #TODO: move this inside query isntead of adding separately
     for package in search_results['results']:
 	    new_dict = {'id': package['creator_user_id']}
 	    user_dict = get_action('user_show')(context, new_dict)
