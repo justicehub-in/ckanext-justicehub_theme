@@ -138,8 +138,8 @@ import Dataset from './dataset.js';
     {
       format: 'pdf',
       backgroundColor: '#F8BE67',
-      icon: 'icomoon-free:file-pdf',
-      iconTemplate: '<span class="iconify" data-icon="icomoon-free:file-pdf" data-inline="false"></span>'
+      icon: 'vscode-icons:file-type-pdf',
+      iconTemplate: '<span class="iconify" data-icon="vscode-icons:file-type-pdf" data-inline="false"></span>'
     },
     {
       format: 'csv',
@@ -717,6 +717,8 @@ import Dataset from './dataset.js';
       fileIcon = getFileUploadBoxPropertyByFileType('xlsx', 'icon');
     } else if (file.file.type.indexOf('pdf') > -1) {
       fileIcon = getFileUploadBoxPropertyByFileType('pdf', 'icon');
+    } else {
+      fileIcon = getFileUploadBoxPropertyByFileType('unknown', 'icon');
     }
 
     return `
@@ -760,7 +762,7 @@ import Dataset from './dataset.js';
     </tr>
     <tr>
       <td>Language:</td>
-      <td>${dataset.language}</td>
+      <td>${dataset.language ? dataset.language : '<span style="color:red;">No language added</span>'}</td>
     </tr>
   `;
   }
@@ -796,7 +798,7 @@ import Dataset from './dataset.js';
   </tr>
   <tr>
     <td>Viewing Permissions:</td>
-    <td>${dataset.viewPermission}</td>
+    <td>${dataset.viewPermission ? dataset.viewPermission : `<span style="color:red;">No permission selected</span>`}</td>
   </tr>
   <tr>
     <td>Primary Author(s): </td>
@@ -872,7 +874,7 @@ import Dataset from './dataset.js';
     document.querySelector('#dataRelevancyPreviewTable').innerHTML = generateDataRelevancyPreviewTableHTML(dataset);
     document.querySelector('#ownershipPreviewTable').innerHTML = generateOwnershipPreviewTableHTML(dataset);
     document.querySelector('#sourcePreviewTable').innerHTML = generateSourcePreviewTableHTML(dataset);
-    document.querySelector('#datasetNameOnPreviewModal').innerHTML = dataset.name;
+    document.querySelector('#datasetNameOnPreviewModal').innerHTML = dataset.name ? dataset.name : '<span style="color: red;">No title entered</span>';
 
     console.log(dataset);
   });
