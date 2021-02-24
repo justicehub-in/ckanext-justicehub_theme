@@ -16,7 +16,7 @@ h.check_access('package_create') %} {% endif %}
             <h4>Popular Categories</h4>
             <div class="search-categories__row">
               {% for group in groups %}
-              <a href="/dataset?groups={{group.name}}">{{ group.display_name }}</a>
+              <a class="category-link" href="/dataset?groups={{group.name}}">{{ group.display_name }}</a>
               {% endfor %}
             </div>
           </div>
@@ -85,4 +85,5 @@ h.check_access('package_create') %} {% endif %}
   </div>
   {% endblock %}
 </aside>
+{% resource 'justicehub_theme/exploredatasets/search.js' %}
 {% endblock %}
