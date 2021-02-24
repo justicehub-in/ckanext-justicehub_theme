@@ -94,10 +94,26 @@
               </p>
               <div class="row dataset-action-row">
                 <div class="col-lg-5 col-sm-6 col-xs-6">
-                  <a href="#"><img style="margin-right: 8px;" src="/assets/icons/movie_icon.svg" /><span>Watch Video</span></a>
+                  <a data-toggle="modal"
+                  style="cursor: pointer;" data-target="#howToUploadVideoContainer"><img style="margin-right: 8px;" src="/assets/icons/movie_icon.svg" /><span>Watch Video</span></a>
                 </div>
                 <div class="col-lg-5 col-sm-6 col-xs-6">
                   <a href="https://docs.justicehub.in/resources/"><img style="margin-right: 8px;" src="/assets/icons/book_icon.svg" /><span>Read more</span></a>
+                </div>
+              </div>
+              <div class="modal fade" id="howToUploadVideoContainer" tabindex="-1" role="dialog" aria-labelledby="how-to-upload">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">How to upload a dataset?</h4>
+                    </div>
+                    <div class="modal-body">
+                      <iframe width="800" height="450"
+                        src="https://www.youtube.com/embed/uO5ttrFZyJw">
+                      </iframe>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -109,7 +125,11 @@
         <div class="custom-container">
           <div class="quality-section__content row">
             <div class="col-lg-6 col-md-6 col-sm-12 video-container">
-              <div style="width: 100%; height: 340px; background-color: #f65940"></div>
+              <div style="width: 100%; height: 340px; background-color: #f65940">
+                <iframe width="100%" height="100%"
+                src="https://www.youtube.com/embed/LZKBY3V2ppE">
+                </iframe>
+              </div>
             </div>
             <div class="col-lg-6 col-md-6">
               <div id="carousel-testimonials" class="carousel slide" data-ride="carousel">
@@ -168,16 +188,6 @@
                     </div>
                   </div>
                 </div>
-              
-                <!-- Controls -->
-                <!-- <a class="left carousel-control" href="#carousel-testimonials" role="button" data-slide="prev">
-                  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                  <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#carousel-testimonials" role="button" data-slide="next">
-                  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                  <span class="sr-only">Next</span>
-                </a> -->
               </div>
             </div>
             <!-- <div class="col-lg-6 col-md-6 moderators__content">
@@ -210,7 +220,7 @@
       <section class="contributors-section">
         <div class="custom-container">
           <h3>Top Data Contributors in the Community</h3>
-          <div class="contributors-row row"></div>
+          <div class="contributors-row"></div>
           <p>Can’t find what you are looking for?</p>
           <a href="/contact" class="btn btn-primary">Let us know!</a>
         </div>
