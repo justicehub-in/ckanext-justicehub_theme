@@ -444,6 +444,16 @@ li.dropdown:focus {
   margin-right: 8px;
 }
 
+#howToUploadVideoContainer .modal-dialog {
+  width: 90%;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 #howToUploadVideoContainer .modal-body {
   position: relative;
   overflow: hidden;
@@ -457,8 +467,8 @@ li.dropdown:focus {
   left: 0;
   bottom: 0;
   right: 0;
-  width: 100%;
-  height: 100%;
+  width: 75%;
+  height: 75%;
 }
 
 /* review section */
@@ -1172,7 +1182,7 @@ footer h3 {
 
 .upload-video-container button {
   margin: auto;
-  font-family: Roboto, "sans-serif";
+  font-family: Roboto, 'sans-serif';
 }
 
 .steps-row {
