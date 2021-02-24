@@ -256,14 +256,16 @@ import Dataset from './dataset.js';
 
     const fileUploadInputs = document.querySelectorAll('.file-upload');
     fileUploadInputs.forEach((file) => {
+      if (getFileDetailsFromFileUploadElement(file).fileName) {
+        dataset.addItemToListProperty('files', getFileDetailsFromFileUploadElement(file));
+      }
       if (
         file.id.indexOf('added') > -1 ||
-        (file.id.indexOf('file') > -1 && resourcesByType.added.indexOf(file.id) < 0)
+        (file.id.indexOf('file') > -1 &&
+          resourcesByType.added.indexOf(file.id) < 0 &&
+          getFileDetailsFromFileUploadElement(file).fileName)
       ) {
         resourcesByType.added.push(file.id);
-        if (getFileDetailsFromFileUploadElement(file).fileName) {
-          dataset.addItemToListProperty('files', getFileDetailsFromFileUploadElement(file));
-        }
       } else if (receivedResourcesIds.indexOf(file.id) > -1) {
         const existingResourceDetails = receivedResources.find((resource) => resource.id === file.id);
         const currentFileDetails = getFileDetailsFromFileUploadElement(file);
@@ -278,8 +280,6 @@ import Dataset from './dataset.js';
         }
       }
     });
-
-    console.log(resourcesByType);
   }
 
   // const saveOnFilesSectionButton = document.getElementById('saveOnFilesSectionButton');
@@ -752,9 +752,11 @@ import Dataset from './dataset.js';
     </tr>
     <tr>
       <td>Time period covered:</td>
-      <td>${dataset.timePeriod.from.month} ${dataset.timePeriod.from.year} - ${dataset.timePeriod.to.month} ${
-      dataset.timePeriod.to.year
-    }</td>
+      <td>${
+        dataset.timePeriod.from.year && dataset.timePeriod.to.year
+          ? `${dataset.timePeriod.from.month} ${dataset.timePeriod.from.year} - ${dataset.timePeriod.to.month} ${dataset.timePeriod.to.year}`
+          : '<span style="color:red;">From and To years are not entered</span>'
+      }</td>
     </tr>
     <tr>
       <td>Language:</td>
@@ -815,6 +817,8 @@ import Dataset from './dataset.js';
 
     if (areMandatoryFieldsEmpty()) {
       submitDatasetButton.disabled = true;
+    } else {
+      submitDatasetButton.disabled = false;
     }
 
     submitDatasetButton.style.display = 'block';
@@ -1042,13 +1046,13 @@ import Dataset from './dataset.js';
       existingErrorMessageElement.remove();
     }
 
-    if (state === 'active' && areMandatoryFieldsEmpty()) {
-      modalBody.insertAdjacentHTML(
-        'afterbegin',
-        `<p class="dataset-fail" style="color:red;">Some fields are empty. Please populate them.</p>`
-      );
-      return;
-    }
+    // if (state === 'active' && areMandatoryFieldsEmpty()) {
+    //   modalBody.insertAdjacentHTML(
+    //     'afterbegin',
+    //     `<p class="dataset-fail" style="color:red;">Some fields are empty. Please populate them.</p>`
+    //   );
+    //   return;
+    // }
 
     if (state === 'draft' && !dataset.name) {
       document.getElementById('datasetNameField').setAttribute('placeholder', 'Enter a name for the dataset');
