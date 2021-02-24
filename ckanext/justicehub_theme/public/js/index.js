@@ -316,7 +316,7 @@ import Dataset from './dataset.js';
   }
 
   const addMoreAuthorsButton = document.querySelector('.add-more--authors');
-  function generateAuthorField(publisherType, name = '', email = '') {
+  function generateAuthorField(publisherType, name = '', email = '', website = '') {
     return `
     <div class="item-addition item-addition--author item-addition--${
       publisherType === 'Author' ? 'individual' : 'organization'
@@ -329,6 +329,10 @@ import Dataset from './dataset.js';
       <div class="item-addition__email-field">
         <h5>Email of ${publisherType} (optional)</h5>
         <input type="email" class="form-control" value="${email}" />
+      </div>
+      <div class="item-addition__website-field">
+        <h5>Website of ${publisherType} (optional)</h5>
+        <input type="text" class="form-control" value="${website}" />
       </div>
     </div>
   `;
@@ -674,7 +678,8 @@ import Dataset from './dataset.js';
   function getAuthorDetailsFromAuthorAdditionElement(authorElement) {
     return {
       authorName: getValueFromInputSelector('.item-addition__name-field input', authorElement),
-      authorEmail: getValueFromInputSelector('.item-addition__email-field input', authorElement)
+      authorEmail: getValueFromInputSelector('.item-addition__email-field input', authorElement),
+      authorWebsite: getValueFromInputSelector('.item-addition__website-field input', authorElement)
     };
   }
 
@@ -935,6 +940,7 @@ import Dataset from './dataset.js';
     dataset.publisher.authors.forEach((author, index) => {
       metaData.append(`publisher_contacts-${index + 1}-name`, author.authorName);
       metaData.append(`publisher_contacts-${index + 1}-email`, author.authorEmail);
+      metaData.append(`publisher_contacts-${index + 1}-website`, author.authorWebsite);
     });
     dataset.referenceLinks.forEach((referenceLink, index) => {
       metaData.append(`links-${index + 1}-link`, referenceLink.link);
@@ -1195,7 +1201,8 @@ import Dataset from './dataset.js';
         generateAuthorField(
           data.publisher_type === 'individual' ? 'Author' : 'Organization',
           publisher.name,
-          publisher.email ? publisher.email : ''
+          publisher.email ? publisher.email : '',
+          publisher.website ? publisher.website : ''
         )
       );
     });

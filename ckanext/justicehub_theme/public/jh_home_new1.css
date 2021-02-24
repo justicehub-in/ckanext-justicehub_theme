@@ -1088,6 +1088,14 @@ footer h3 {
     height: 24px;
     width: auto;
   }
+
+  .item-addition {
+    flex-direction: column;
+  }
+
+  .item-addition > * {
+    width: 100% !important;
+  }
 }
 
 @media (max-width: 450px) {
@@ -1335,7 +1343,7 @@ footer h3 {
 .reset-input {
   position: absolute;
   padding: 4px;
-  top: 10px;
+  top: 5px;
   right: 0;
   width: 20px;
   height: 20px;
@@ -1408,7 +1416,7 @@ footer h3 {
 .item-addition {
   display: flex;
   flex-wrap: wrap;
-  max-width: 550px;
+  max-width: 700px;
   width: 100%;
   justify-content: space-between;
   margin-top: 30px;
@@ -1421,11 +1429,15 @@ footer h3 {
 }
 
 .item-addition__name-field {
-  width: 48%;
+  width: 32%;
 }
 
 .item-addition__email-field {
-  width: 48%;
+  width: 32%;
+}
+
+.item-addition__website-field {
+  width: 32%;
 }
 
 .date-of-publication-entry {
