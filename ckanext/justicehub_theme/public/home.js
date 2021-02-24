@@ -35,26 +35,6 @@
 
   contributors.forEach((contributor) => (contributorsRow.innerHTML += contributorTemplate(contributor)));
 
-  const mobileMenu = document.querySelector('.mobile-menu');
-  const closeNavButton = document.querySelector('.closebtn');
-
-  mobileMenu.addEventListener('click', openNav);
-  closeNavButton.addEventListener('click', closeNav);
-
-  function openNav() {
-    document.getElementById('side-nav').style.width = '280px';
-    document.getElementById('side-nav').style.marginLeft = '0';
-    document.getElementById('side-nav').style.paddingLeft = '25px';
-    document.body.style.backgroundColor = 'rgba(0,0,0,0.5)';
-    document.body.style.overflowY = 'hidden';
-  }
-  function closeNav() {
-    document.getElementById('side-nav').style.marginLeft = '-280px';
-    document.getElementById('side-nav').style.paddingLeft = '0';
-    document.body.style.backgroundColor = '';
-    document.body.style.overflowY = '';
-  }
-
   const switchToSignIn = document.querySelector('.click-to-login');
   const switchToSignUp = document.querySelector('.click-to-signup');
   const switchToForgot = document.querySelector('.click-to-forgot');
