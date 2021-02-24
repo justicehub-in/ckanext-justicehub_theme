@@ -461,22 +461,6 @@ li.dropdown:focus {
   height: 100%;
 }
 
-.dataset-video-container {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  padding-top: 56.25%;
-}
-
-.dataset-video-container iframe {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50%;
-  height: 50%;
-}
-
 /* review section */
 
 .review-section {
@@ -1178,7 +1162,17 @@ footer h3 {
   margin-right: auto;
   margin-left: auto;
   margin-top: 0;
-  margin-bottom: -4em;
+  margin-bottom: 2em;
+}
+
+.data-upload-header h2 a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.upload-video-container button {
+  margin: auto;
+  font-family: Roboto, "sans-serif";
 }
 
 .steps-row {
@@ -1188,7 +1182,7 @@ footer h3 {
   padding: 0;
   margin-left: auto;
   margin-right: auto;
-  margin-top: -4em;
+  margin-top: 2em;
 }
 
 .step-indicator {
@@ -1722,7 +1716,6 @@ footer h3 {
 
   .steps-row {
     width: 100%;
-    margin-top: 2em;
     flex-direction: column;
   }
 
