@@ -537,6 +537,12 @@ import Dataset from './dataset.js';
   proceedFromRelevancyButton.addEventListener('click', updateDatasetWithValuesFromRelevancySection);
 
   // sources of dataset section
+
+  const SOURCES = [
+    { name: 'National Crime Records Bureau', code: 'NCRB', link: 'https://ncrb.gov.in/en/crime-india' },
+    { name: 'District courts (eCourts India Services)', code: 'DC', link: 'https://districts.ecourts.gov.in' }
+  ];
+
   let referenceAdditionForm;
   const addMoreReferencesButton = document.querySelector('.add-more--references');
   function generateReferenceField(referenceId, title = '', link = '') {

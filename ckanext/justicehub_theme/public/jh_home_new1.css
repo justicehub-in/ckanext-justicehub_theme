@@ -1596,6 +1596,16 @@ footer h3 {
   border-radius: 4px;
 }
 
+#sourcesMultiInput_chosen li.search-choice {
+  background-color: #c4c4c4;
+  background-image: none !important;
+  margin-right: 8px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
 .tags-container > span .iconify {
   margin-left: 4px;
   position: relative;

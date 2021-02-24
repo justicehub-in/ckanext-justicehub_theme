@@ -14,6 +14,7 @@
     <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
     <link rel="stylesheet" href="/jh_home_new1.css" />
     <link rel="stylesheet" href="/bootstrap-multiselect.min.css" />
+    <link rel="stylesheet" href="/chosen.min.css" />
     <title>Data Upload Flow</title>
   </head>
   <body>
@@ -349,6 +350,16 @@
           <div class="tags-container" id="sourcesContainer">
             <input type="text" id="sourcesInput" />
           </div>
+
+          <div class="tags-container" id="sourcesMultiContainer">
+            <select id="sourcesMultiInput" multiple>
+              <option value="National Crime Records Bureau">National Crime Records Bureau (NCRB)</option>
+              <option value="District Courts (eCourts India Services)">District Courts (eCourts India Services)</option>
+              <option value="High Courts">High Courts</option>
+              <option value="Supreme Court">Supreme Court</option>
+              <option value="First Information Report">First Information Report</option>
+            </select>
+          </div>
         </div>
 
         <div class="data-upload-section__form__field data-upload-section__form__field--references">
@@ -460,10 +471,12 @@
       crossorigin="anonymous"
     ></script>
     <script src="/js/bootstrap-multiselect.min.js"></script>
+    <script src="/js/chosen.jquery.min.js"></script>
     <script>
       $('#multi-select-states').multiselect({
         buttonClass: 'multi-states-btn'
       });
+      $('#sourcesMultiInput').chosen({no_results_text: "No results match", width: "100%"});
     </script>
     <script type="module" src="/js/index.js"></script>
   </body>
