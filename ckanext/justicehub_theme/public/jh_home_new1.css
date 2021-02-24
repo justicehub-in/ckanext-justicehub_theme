@@ -1292,7 +1292,7 @@ footer h3 {
   display: inline-block;
 }
 
-.data-upload-section__form__field input {
+.data-upload-section__form__field input, #datasetDescriptionField {
   font-family: 'Montserrat', sans-serif;
   color: #000;
   font-weight: 500;

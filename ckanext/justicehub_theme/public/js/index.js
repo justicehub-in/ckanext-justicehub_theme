@@ -249,6 +249,7 @@ import Dataset from './dataset.js';
   function updateDatasetWithValuesFromFilesSection() {
     dataset.updateProperty('files', []);
     dataset.updateProperty('name', getValueFromInputSelector('#datasetNameField'));
+    dataset.updateProperty('description', getValueFromInputSelector('#datasetDescriptionField'));
 
     if (!!getValueFromInputSelector('#datasetNameField')) {
       document.querySelector(".step-indicator[data-value='1']").classList.add('done');
@@ -280,6 +281,8 @@ import Dataset from './dataset.js';
         }
       }
     });
+
+    console.log(dataset);
   }
 
   // const saveOnFilesSectionButton = document.getElementById('saveOnFilesSectionButton');
@@ -921,6 +924,7 @@ import Dataset from './dataset.js';
       metaData.append('pkg_name', datasetIdName);
     }
     metaData.append('title', dataset.name);
+    metaData.append('notes', dataset.description);
     metaData.append('license_id', dataset.license.licenseName);
     metaData.append('private', dataset.viewPermission === 'Anyone' ? false : true);
     metaData.append('publisher_type', dataset.publisher.type);
@@ -1163,6 +1167,7 @@ import Dataset from './dataset.js';
 
     // file section
     document.getElementById('datasetNameField').value = data.title;
+    document.getElementById('datasetDescriptionField').innerHTML = data.notes;
     receivedResources = data.resources;
     receivedResourcesIds = receivedResources.map((resource) => resource.id);
     receivedResources.forEach((resource) => {
@@ -1172,7 +1177,6 @@ import Dataset from './dataset.js';
       );
       const uploadBox = document.getElementById(resource.id).querySelector('.upload-box');
       updateFileInputBackground(uploadBox, resource.format.toLowerCase());
-      // WIP - fix upload box not getting icons
     });
 
     // ownership section
