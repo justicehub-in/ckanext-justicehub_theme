@@ -2,7 +2,7 @@
   // Code for adding contributors to the homepage
 
   const contributors = [
-    { name: `Indian Kanoon`, imagePath: '/assets/company_1.png' },
+    { name: `Indian Kanoon`, imagePath: '/assets/contributors/indiankanoon.png' },
     { name: `HAQ`, imagePath: '/assets/contributors/haq.png' },
     { name: `Project 39A`, imagePath: '/assets/contributors/P39A.png' },
     { name: `Vidhi`, imagePath: '/assets/contributors/vidhi.jpg' },
