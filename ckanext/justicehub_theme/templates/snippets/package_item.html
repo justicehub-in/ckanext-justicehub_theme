@@ -43,7 +43,8 @@
 
           {% block organization %}
           <div class="dataset-org">
-              <span>uploaded by {{ h.link_to(h.truncate(package.organization.title, truncate_title), h.url_for(controller='organization', action='read', id=package.organization.name)) }}</span>
+              <span>uploaded by {{package.creator_name}}</span>
+              {#<span>uploaded by {{package.creator_name}} {{ h.link_to(h.truncate(package.organization.title, truncate_title), h.url_for(controller='organization', action='read', id=package.organization.name)) }}</span> #}
               {# {{ h.link_to(h.truncate(package.organization.title, truncate_title), h.url_for(controller='organization', action='read', id=package.organization.name)) }} #}
 {#              {% if package.partner.signed_pledge %}
                 <img class="fa fa-certificate"
