@@ -9,6 +9,9 @@
           <img class="modal-logo" src="/assets/jh_logo_notext.png" />
           <h4>{{ title }}</h4>
           <p>{{ title_content }}</p>
+            {% if title_link is defined %}
+            <p>View <a href={{ title_link }}>Here</a></p>
+            {% endif %}
           <p class="error-message" id="error-{{ id }}">{{ error_message }}</p>
         </div>
       </div>
