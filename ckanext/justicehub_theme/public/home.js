@@ -1,22 +1,33 @@
 (function () {
-
   // Code for adding contributors to the homepage
 
   const contributors = [
-    { name: `AKP Legal`, imagePath: '/assets/company_1.png' },
-    { name: `Legal Check`, imagePath: '/assets/company_2.png' },
-    { name: `Marcelo D'Cruz`, imagePath: '/assets/person_1.png' },
-    { name: `Pavithra K`, imagePath: '/assets/person_2.png' }
+    { name: `Indian Kanoon`, imagePath: '/assets/company_1.png' },
+    { name: `HAQ`, imagePath: '/assets/contributors/haq.png' },
+    { name: `Project 39A`, imagePath: '/assets/contributors/P39A.png' },
+    { name: `Vidhi`, imagePath: '/assets/contributors/vidhi.jpg' },
+    { name: `IGIDR`, imagePath: '/assets/contributors/igidr.png' },
+    { name: `NIPFP`, imagePath: '/assets/contributors/nipfp.png' },
+    { name: `CLPR`, imagePath: '/assets/contributors/clpr.svg' },
+    { name: `IDFC`, imagePath: '/assets/contributors/idfc.svg' },
+    { name: `Tata Trusts`, imagePath: '/assets/contributors/tata.png' },
+    { name: `DevDataLab`, imagePath: '/assets/contributors/ddl.png' },
+    { name: `Studio Nilima`, imagePath: '/assets/contributors/studio-nilima.jpg' },
+    { name: `Internet Freedom Foundation`, imagePath: '/assets/contributors/iff.png' },
+    { name: `Madhav S Aney`, type: 'person', imagePath: '/assets/contributors/madhav.jpg' },
+    { name: `Manaswini Rao`, type: 'person', imagePath: '/assets/contributors/rao.jpg' },
+    { name: `Johannes Boehm`, type: 'person', imagePath: '/assets/contributors/boehm.jpg' },
+    { name: `Amrit Amirapu`, type: 'person', imagePath: '/assets/contributors/amirapu.JPG' }
   ];
 
   function contributorTemplate(contributor) {
     return `
-    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-      <div class="contributor-info">
-        <img src="${contributor.imagePath}" alt="${contributor.name}" />
+      <div class="contributor-info ${contributor.type ? contributor.type : ''}">
+        <div>
+          <img src="${contributor.imagePath}" alt="${contributor.name}" />
+        </div>
         <p>${contributor.name}</p>
       </div>
-    </div>
     `;
   }
 
@@ -87,8 +98,7 @@
   const passwordValidator = debounce(function () {
     if (!passwordRegex.test(this.value)) {
       this.style.boxShadow = 'rgb(255, 0, 0) 0px 0px 1.5px 1px';
-    }
-    else {
+    } else {
       this.style.boxShadow = 'none';
     }
   }, 500);
