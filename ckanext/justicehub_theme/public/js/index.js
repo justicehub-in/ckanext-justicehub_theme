@@ -443,36 +443,36 @@ import Dataset from './dataset.js';
     'December'
   ];
 
-  const INDIAN_STATES = [
-    'Andhra Pradesh',
-    'Arunachal Pradesh',
-    'Assam',
-    'Bihar',
-    'Chhattisgarh',
-    'Goa',
-    'Gujarat',
-    'Haryana',
-    'Himachal Pradesh',
-    'Jharkhand',
-    'Karnataka',
-    'Kerala',
-    'Madhya Pradesh',
-    'Maharashtra',
-    'Manipur',
-    'Meghalaya',
-    'Mizoram',
-    'Nagaland',
-    'Odisha',
-    'Punjab',
-    'Rajasthan',
-    'Sikkim',
-    'Tamil Nadu',
-    'Telangana',
-    'Tripura',
-    'Uttar Pradesh',
-    'Uttarakhand',
-    'West Bengal'
-  ];
+  // const INDIAN_STATES = [
+  //   'Andhra Pradesh',
+  //   'Arunachal Pradesh',
+  //   'Assam',
+  //   'Bihar',
+  //   'Chhattisgarh',
+  //   'Goa',
+  //   'Gujarat',
+  //   'Haryana',
+  //   'Himachal Pradesh',
+  //   'Jharkhand',
+  //   'Karnataka',
+  //   'Kerala',
+  //   'Madhya Pradesh',
+  //   'Maharashtra',
+  //   'Manipur',
+  //   'Meghalaya',
+  //   'Mizoram',
+  //   'Nagaland',
+  //   'Odisha',
+  //   'Punjab',
+  //   'Rajasthan',
+  //   'Sikkim',
+  //   'Tamil Nadu',
+  //   'Telangana',
+  //   'Tripura',
+  //   'Uttar Pradesh',
+  //   'Uttarakhand',
+  //   'West Bengal'
+  // ];
 
   let monthOptions = '<option value="">--</option>';
 
@@ -480,12 +480,12 @@ import Dataset from './dataset.js';
     monthOptions = monthOptions + `<option value="${month}">${month}</option>`;
   });
 
-  let stateOptions = '';
-  INDIAN_STATES.forEach((state) => {
-    stateOptions = stateOptions + `<option value="${state}">${state}</option>`;
-  });
+  // let stateOptions = '';
+  // INDIAN_STATES.forEach((state) => {
+  //   stateOptions = stateOptions + `<option value="${state}">${state}</option>`;
+  // });
 
-  statesMultiSelect.innerHTML = stateOptions;
+  // statesMultiSelect.innerHTML = stateOptions;
 
   const monthDropdowns = document.querySelectorAll('.months-select');
   monthDropdowns.forEach((dropdown) => {
@@ -798,7 +798,9 @@ import Dataset from './dataset.js';
   </tr>
   <tr>
     <td>Viewing Permissions:</td>
-    <td>${dataset.viewPermission ? dataset.viewPermission : `<span style="color:red;">No permission selected</span>`}</td>
+    <td>${
+      dataset.viewPermission ? dataset.viewPermission : `<span style="color:red;">No permission selected</span>`
+    }</td>
   </tr>
   <tr>
     <td>Primary Author(s): </td>
@@ -874,7 +876,9 @@ import Dataset from './dataset.js';
     document.querySelector('#dataRelevancyPreviewTable').innerHTML = generateDataRelevancyPreviewTableHTML(dataset);
     document.querySelector('#ownershipPreviewTable').innerHTML = generateOwnershipPreviewTableHTML(dataset);
     document.querySelector('#sourcePreviewTable').innerHTML = generateSourcePreviewTableHTML(dataset);
-    document.querySelector('#datasetNameOnPreviewModal').innerHTML = dataset.name ? dataset.name : '<span style="color: red;">No title entered</span>';
+    document.querySelector('#datasetNameOnPreviewModal').innerHTML = dataset.name
+      ? dataset.name
+      : '<span style="color: red;">No title entered</span>';
 
     console.log(dataset);
   });
@@ -1218,10 +1222,9 @@ import Dataset from './dataset.js';
       }
       regions.forEach((region) => {
         document.querySelector(`input[value="${region}"]`).checked = true;
+        document.querySelector(`button[title="${region}"]`).classList.add('active');
       });
     }
-
-    // regions WIP
 
     document.getElementById('fromYear').value = fromYear;
     document.getElementById('toYear').value = toYear;
