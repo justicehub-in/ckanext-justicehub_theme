@@ -943,11 +943,11 @@ import Dataset from './dataset.js';
   function postAllFilesSync(packageName, filesList) {
     if (filesList.length === 0) {
       if (window.global_state === 'draft') {
-        window.location = `/message/success?message= Datset saved as draft successfully&dataset=${packageName}`;
+        window.location = `/message/success?message= Dataset saved as draft successfully&dataset=${packageName}`;
       } else if (isEditMode()) {
-        window.location = `/message/success?message= Datset updated successfully&dataset=${packageName}`;
+        window.location = `/message/success?message= Dataset updated successfully&dataset=${packageName}`;
       } else {
-        window.location = `/message/success?message= Datset created successfully&dataset=${packageName}`;
+        window.location = `/message/success?message= Dataset created successfully&dataset=${packageName}`;
       }
       return;
     }
