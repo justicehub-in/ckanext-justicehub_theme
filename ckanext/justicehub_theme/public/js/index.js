@@ -1260,7 +1260,7 @@ import Dataset from './dataset.js';
       input.parentElement.removeChild(input);
     });
 
-    const referenceLinks = data.links ? data.link : [];
+    const referenceLinks = data.links ? data.links : [];
 
     referenceLinks.forEach((link) => {
       const referenceAdditionForm = document.querySelector('.data-upload-section__form__field--references');
