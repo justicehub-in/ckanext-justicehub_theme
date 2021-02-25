@@ -62,7 +62,8 @@
                 {% if owner['name'] %}
                 <div style="margin-bottom: 10px;">
                     {% if owner['website']%}
-                    <a href="{{owner['website']}}" target="_blank" rel="noreferrer noopener">{{ owner['name']}}</a>
+                    {% set web_link = owner['website'] if 'http' in owner['website'] else 'https://'+owner['website'] %}
+                    <a href="{{web_link}}" target="_blank" rel="noreferrer noopener">{{ owner['name']}}</a>
                     {% else %}
                     <p style="margin-bottom: 2px;">{{owner['name']}}</p>
                     {% endif %}
@@ -99,7 +100,8 @@
             {% set links = h.justicehub_theme_parse_json(pkg.links or '[]') %}
             <ol>
             {% for link in links %}
-                <li><a style="display: block;" href="{{ link['link'] }}" >{{ link['title'] }}</a></li>
+                {% set ref_link = link['link'] if 'http' in link['link']  else 'https://'+link['link'] %}
+                <li><a style="display: block;" href="{{ ref_link }}" >{{ link['title'] }}</a></li>
             {% endfor %}
             </ol>
             <!-- <p>{{ links }}</p> -->
