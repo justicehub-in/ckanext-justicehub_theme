@@ -131,17 +131,19 @@
                 {% endif %}
             </div>
             
-                {% set split_date = pkg.publication_date.split('/') %}
                 <p style="color: #898989; font-size: 14px; margin-top: 8px">{{ ('Uploaded: ')}} {{ h.time_ago_from_timestamp(pkg.metadata_created) }}; Last updated: {{ h.time_ago_from_timestamp(pkg.metadata_modified) }}
-                    {%- if pkg.publication_date| length > 3 -%}
-                    ; Date of Publication: 
-                    {% for item in split_date%}
-                        {%- if item|length > 0 and item != split_date[-1] -%}
-                        {{item}}{{('-')}}
-                        {%- elif item|length > 0 and item == split_date[-1] -%}
-                        {{item}}
-                        {%- endif -%}
-                    {% endfor %}
+                    {% if pkg['publication_date'] %}
+		            {% set split_date = pkg.publication_date.split('/') %}
+		            {%- if pkg.publication_date| length > 3 -%}
+		            ; Date of Publication: 
+		            {% for item in split_date%}
+		                {%- if item|length > 0 and item != split_date[-1] -%}
+		                {{item}}{{('-')}}
+		                {%- elif item|length > 0 and item == split_date[-1] -%}
+		                {{item}}
+		                {%- endif -%}
+		            {% endfor %}
+		            {% endif %}
                     {% endif %}
                 </p>
             <div class="relevancy-info">
