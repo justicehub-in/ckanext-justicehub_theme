@@ -1813,3 +1813,25 @@ footer h3 {
     width: 60%;
   }
 }
+
+.fab {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 2em;
+    bottom: 4em;
+    border-radius: 50%;
+    border: none;
+    width: 60px;
+    height: 60px;
+    z-index: 1;
+    box-shadow: 2px 3px 8px 2px rgba(0, 0, 0, 0.1);
+}
+
+.feedback-logo {
+    width: 30px;
+    height: 30px;
+}
+
+
