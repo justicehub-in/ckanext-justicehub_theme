@@ -929,7 +929,11 @@ import ErrorInfo from './errorInfo.js';
     return `
   <tr>
     <td>Licensing permissions:</td>
-    <td>${dataset.license.licenseDescription ? dataset.license.licenseDescription : `<span style="color:red;">No license selected</span>`}</td>
+    <td>${
+      dataset.license.licenseDescription
+        ? dataset.license.licenseDescription
+        : `<span style="color:red;">No license selected</span>`
+    }</td>
   </tr>
   <tr>
     <td>Viewing Permissions:</td>
@@ -942,7 +946,9 @@ import ErrorInfo from './errorInfo.js';
     <td>
     ${
       dataset.publisher.authors[0].authorName
-        ? dataset.publisher.authors.map((author) => ` <span>${author.authorName}</span>`)
+        ? dataset.publisher.authors.map(
+            (author) => ` <span>${author.authorName} - ${author.authorEmail} - ${author.authorWebsite}</span>`
+          )
         : `<span style="color:red;">No publishers entered</span>`
     }
     </td>
@@ -1011,9 +1017,10 @@ import ErrorInfo from './errorInfo.js';
     document.querySelector('#dataRelevancyPreviewTable').innerHTML = generateDataRelevancyPreviewTableHTML(dataset);
     document.querySelector('#ownershipPreviewTable').innerHTML = generateOwnershipPreviewTableHTML(dataset);
     document.querySelector('#sourcePreviewTable').innerHTML = generateSourcePreviewTableHTML(dataset);
-    document.querySelector('#datasetNameOnPreviewModal').innerHTML = dataset.name
-      ? dataset.name
-      : '<span style="color: red;">No title entered</span>';
+    const titleContainer = document.querySelector('#datasetNameOnPreviewModal');
+    titleContainer.innerHTML = dataset.name ? dataset.name : '<span style="color: red;">No title entered</span>';
+
+    titleContainer.insertAdjacentHTML('afterend', `<p style="margin-top: 12px;">${dataset.description}</p>`);
 
     console.log(dataset);
   });
