@@ -73,6 +73,10 @@
   width: 25%;
 }
 
+.overflowauto {
+  overflow: auto;
+}
+
 #field-order-by {
   border: none;
   color: var(--primary-color);

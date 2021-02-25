@@ -12,6 +12,14 @@ body {
   background-color: white;
 }
 
+a {
+  color: var(--primary-color);
+}
+
+a:hover {
+  color: var(--primary-color);
+}
+
 .btn-primary,
 .btn-primary:focus,
 .btn-primary:active:focus,
@@ -445,11 +453,11 @@ li.dropdown:focus {
 }
 
 #howToUploadVideoContainer .modal-dialog {
-  width: 90%;
+  width: 80%;
   margin: 0;
   padding: 0;
   position: absolute;
-  top: 40%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -482,7 +490,6 @@ li.dropdown:focus {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
 
 /* review section */
 
@@ -1300,7 +1307,9 @@ footer h3 {
   display: inline-block;
 }
 
-.data-upload-section__form__field input, #datasetDescriptionField {
+
+.data-upload-section__form__field input,
+#datasetDescriptionField {
   font-family: 'Montserrat', sans-serif;
   color: #000;
   font-weight: 500;
