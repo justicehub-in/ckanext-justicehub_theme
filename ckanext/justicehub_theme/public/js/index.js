@@ -346,18 +346,142 @@ import ErrorInfo from './errorInfo.js';
   });
 
   const LICENSES = [
-    { name: 'CC0 License', description: 'Can be freely shared, modified, and distributed by anyone' },
-    { name: 'CCBY License', description: 'Can be used freely by all but must credit the source' },
-    { name: 'Public Sharing Licence', description: 'Anyone share it but not edit the contents' },
-    { name: 'Copyrights Licence', description: 'Cannot be shared or modified' },
-    { name: 'Non-Commercial Licence', description: 'Can be used only for personal projects not seeking profit' }
+    {
+      domain_content: false,
+      domain_data: true,
+      domain_software: false,
+      family: '',
+      id: 'PDDL-1.0',
+      legacy_ids: ['ODC-PDDL-1.0'],
+      maintainer: '',
+      od_conformance: 'approved',
+      osd_conformance: 'not reviewed',
+      status: 'active',
+      title: 'Open Data Commons Public Domain Dedication and License (PDDL)',
+      url: 'https://opendatacommons.org/licenses/pddl/'
+    },
+    {
+      domain_content: false,
+      domain_data: true,
+      domain_software: false,
+      family: '',
+      id: 'ODbL-1.0',
+      maintainer: '',
+      od_conformance: 'approved',
+      osd_conformance: 'not reviewed',
+      status: 'active',
+      title: 'Open Data Commons Open Database License (ODBL)',
+      url: 'https://opendatacommons.org/licenses/odbl/'
+    },
+    {
+      domain_content: false,
+      domain_data: true,
+      domain_software: false,
+      family: '',
+      id: 'ODC-BY-1.0',
+      maintainer: 'Open Data Commons',
+      od_conformance: 'approved',
+      osd_conformance: 'not reviewed',
+      status: 'active',
+      title: 'Open Data Commons Attribution License (ODC-By)',
+      url: 'https://opendatacommons.org/licenses/by/'
+    },
+    {
+      domain_content: true,
+      domain_data: true,
+      domain_software: true,
+      family: '',
+      id: 'CC0-1.0',
+      maintainer: 'Creative Commons',
+      od_conformance: 'approved',
+      osd_conformance: 'not reviewed',
+      status: 'active',
+      title: 'CC0 1.0 Universal (CC0 1.0) Public Domain Dedication',
+      url: 'https://creativecommons.org/publicdomain/zero/1.0/'
+    },
+    {
+      domain_content: true,
+      domain_data: true,
+      domain_software: false,
+      family: '',
+      id: 'CC-BY-4.0',
+      maintainer: 'Creative Commons',
+      od_conformance: 'approved',
+      osd_conformance: 'not reviewed',
+      status: 'active',
+      title: 'Creative Commons Attribution 4.0 International (CC BY 4.0)',
+      url: 'https://creativecommons.org/licenses/by/4.0/'
+    },
+    {
+      domain_content: true,
+      domain_data: true,
+      domain_software: false,
+      family: '',
+      id: 'CC-BY-SA-4.0',
+      maintainer: 'Creative Commons',
+      od_conformance: 'approved',
+      osd_conformance: 'not reviewed',
+      status: 'active',
+      title: 'Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)',
+      url: 'https://creativecommons.org/licenses/by-sa/4.0/'
+    },
+    {
+      domain_content: true,
+      domain_data: true,
+      domain_software: false,
+      family: 'Creative Commons',
+      id: 'CC-BY-NC-4.0',
+      maintainer: 'Creative Commons',
+      od_conformance: 'rejected',
+      osd_conformance: 'not reviewed',
+      status: 'active',
+      title: 'Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)',
+      url: 'https://creativecommons.org/licenses/by-nc/4.0/'
+    },
+    {
+      domain_content: true,
+      domain_data: true,
+      domain_software: false,
+      family: '',
+      id: 'CC-BY-SA-4.0',
+      maintainer: 'Creative Commons',
+      od_conformance: 'approved',
+      osd_conformance: 'not reviewed',
+      status: 'active',
+      title: 'Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)',
+      url: 'https://creativecommons.org/licenses/by-nc-sa/4.0/'
+    },
+    {
+      domain_content: true,
+      domain_data: true,
+      domain_software: false,
+      family: '',
+      id: 'CC-BY-SA-4.0',
+      maintainer: 'Creative Commons',
+      od_conformance: 'approved',
+      osd_conformance: 'not reviewed',
+      status: 'active',
+      title: 'Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)',
+      url: 'https://creativecommons.org/licenses/by-nd/4.0/'
+    },
+    {
+      domain_content: true,
+      domain_data: true,
+      domain_software: false,
+      family: '',
+      id: 'CC-BY-SA-4.0',
+      maintainer: 'Creative Commons',
+      od_conformance: 'approved',
+      osd_conformance: 'not reviewed',
+      status: 'active',
+      title: 'Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)',
+      url: 'https://creativecommons.org/licenses/by-nc-nd/4.0/'
+    }
   ];
 
   function generateLicenseOptionHTML(license) {
     return `
-    <optgroup label="${license.description}">
-      <option value="${license.name}">${license.name}</option>
-    </optgroup>
+      <option value="${license.id}">${license.title}</option>
   `;
   }
 
@@ -374,7 +498,7 @@ import ErrorInfo from './errorInfo.js';
   function updateDatasetWithValuesFromOwnershipSection() {
     dataset.updateProperty('publisher', {});
     const selectedLicense = getValueFromInputSelector('#licenseSelect');
-    const licenseDescription = LICENSES.find((license) => license.name === selectedLicense).description;
+    const licenseDescription = LICENSES.find((license) => license.id === selectedLicense).title;
     dataset.updateProperty('license', {
       licenseName: selectedLicense,
       licenseDescription: licenseDescription
@@ -804,7 +928,7 @@ import ErrorInfo from './errorInfo.js';
     return `
   <tr>
     <td>Licensing permissions:</td>
-    <td>(${dataset.license.licenseName}) ${dataset.license.licenseDescription}</td>
+    <td>${dataset.license.licenseDescription}</td>
   </tr>
   <tr>
     <td>Viewing Permissions:</td>
