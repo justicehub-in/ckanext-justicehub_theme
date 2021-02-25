@@ -694,9 +694,9 @@ import ErrorInfo from './errorInfo.js';
   `;
   }
 
+  referenceAdditionForm = document.querySelector('.data-upload-section__form__field--references');
+  referenceAdditionForm.addEventListener('click', (event) => removeFileInput(event));
   addMoreReferencesButton.addEventListener('click', () => {
-    referenceAdditionForm = document.querySelector('.data-upload-section__form__field--references');
-    referenceAdditionForm.addEventListener('click', (event) => removeFileInput(event));
     referenceAdditionForm.insertAdjacentHTML('beforeend', generateReferenceField(Math.random()));
   });
 
