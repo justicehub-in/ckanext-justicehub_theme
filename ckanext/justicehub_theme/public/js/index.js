@@ -1,5 +1,6 @@
 import DataUploadSteps from './dataUploadSteps.js';
 import Dataset from './dataset.js';
+import ErrorInfo from './errorInfo.js';
 
 (function () {
   const fullURL = window.location.href;
@@ -9,6 +10,7 @@ import Dataset from './dataset.js';
 
   const dataUploadSteps = new DataUploadSteps();
   const dataset = new Dataset();
+  const errorInfo = new ErrorInfo();
 
   function isEditMode() {
     return splitURL.indexOf('edit') > 0;
@@ -955,7 +957,7 @@ import Dataset from './dataset.js';
   }
 
   function postAllFilesSync(packageName, filesList) {
-    if (filesList.length === 0) {
+    if (filesList.length === 0 && !errorInfo.error) {
       if (window.global_state === 'draft') {
         window.location = `/message/success?message= Dataset saved as draft successfully&dataset=${packageName}`;
       } else if (isEditMode()) {
@@ -979,7 +981,8 @@ import Dataset from './dataset.js';
       .then(() => {
         postAllFilesSync(packageName, filesList.slice(1));
       })
-      .catch(() => {
+      .catch((error) => {
+        errorInfo.updateErrorMessage(error.message);
         const failedFileSummary = document.getElementById(`${filesList[0].fileId}`);
         failedFileSummary.querySelector('file-error').style.display = 'block';
         failedFileSummary.querySelector('file-error').innerHTML = 'This file could not be uploaded';
@@ -1004,6 +1007,7 @@ import Dataset from './dataset.js';
       })
         .then(() => deleteAllResources(resourceList.slice(1)))
         .catch((error) => {
+          errorInfo.updateErrorMessage(error.message);
           deleteAllResources(resourceList.slice(1));
           console.log(error.message);
         });
@@ -1033,6 +1037,7 @@ import Dataset from './dataset.js';
       })
         .then(() => updateResources(resourcesList.slice(1)))
         .catch((error) => {
+          errorInfo.updateErrorMessage(error.message);
           console.log(error.message);
           updateResources(resourcesList.slice(1));
         });
@@ -1055,6 +1060,7 @@ import Dataset from './dataset.js';
 
   function postDatasetRequest(state = 'active') {
     window.global_state = state;
+    errorInfo.updateErrorMessage('');
 
     const modalBody = document.querySelector('#previewDatasetModal .modal-body');
     const existingErrorMessageElement = modalBody.querySelector('.dataset-fail');
@@ -1126,6 +1132,7 @@ import Dataset from './dataset.js';
         })
         .catch((error) => {
           console.log(error.message);
+          errorInfo.updateErrorMessage(error.message);
           modalBody.insertAdjacentHTML(
             'afterbegin',
             `<p class="dataset-fail" style="color:red;">${error.message} - Couldn't upload dataset. Please try again.</p>`
