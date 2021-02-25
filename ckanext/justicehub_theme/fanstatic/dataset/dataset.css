@@ -95,6 +95,10 @@
   margin: 0;
 }
 
+.dataset-main__header .dataset-description {
+  margin-top: 18px;
+}
+
 .dataset-file-info {
   padding: 28px;
   border-top: 0.75px solid #898989;

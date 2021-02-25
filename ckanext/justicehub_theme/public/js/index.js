@@ -249,6 +249,7 @@ import Dataset from './dataset.js';
   function updateDatasetWithValuesFromFilesSection() {
     dataset.updateProperty('files', []);
     dataset.updateProperty('name', getValueFromInputSelector('#datasetNameField'));
+    dataset.updateProperty('description', getValueFromInputSelector('#datasetDescriptionField'));
 
     if (!!getValueFromInputSelector('#datasetNameField')) {
       document.querySelector(".step-indicator[data-value='1']").classList.add('done');
@@ -280,6 +281,8 @@ import Dataset from './dataset.js';
         }
       }
     });
+
+    console.log(dataset);
   }
 
   // const saveOnFilesSectionButton = document.getElementById('saveOnFilesSectionButton');
@@ -313,7 +316,7 @@ import Dataset from './dataset.js';
   }
 
   const addMoreAuthorsButton = document.querySelector('.add-more--authors');
-  function generateAuthorField(publisherType, name = '', email = '') {
+  function generateAuthorField(publisherType, name = '', email = '', website = '') {
     return `
     <div class="item-addition item-addition--author item-addition--${
       publisherType === 'Author' ? 'individual' : 'organization'
@@ -326,6 +329,10 @@ import Dataset from './dataset.js';
       <div class="item-addition__email-field">
         <h5>Email of ${publisherType} (optional)</h5>
         <input type="email" class="form-control" value="${email}" />
+      </div>
+      <div class="item-addition__website-field">
+        <h5>Website of ${publisherType} (optional)</h5>
+        <input type="text" class="form-control" value="${website}" />
       </div>
     </div>
   `;
@@ -671,7 +678,8 @@ import Dataset from './dataset.js';
   function getAuthorDetailsFromAuthorAdditionElement(authorElement) {
     return {
       authorName: getValueFromInputSelector('.item-addition__name-field input', authorElement),
-      authorEmail: getValueFromInputSelector('.item-addition__email-field input', authorElement)
+      authorEmail: getValueFromInputSelector('.item-addition__email-field input', authorElement),
+      authorWebsite: getValueFromInputSelector('.item-addition__website-field input', authorElement)
     };
   }
 
@@ -921,6 +929,7 @@ import Dataset from './dataset.js';
       metaData.append('pkg_name', datasetIdName);
     }
     metaData.append('title', dataset.name);
+    metaData.append('notes', dataset.description);
     metaData.append('license_id', dataset.license.licenseName);
     metaData.append('private', dataset.viewPermission === 'Anyone' ? false : true);
     metaData.append('publisher_type', dataset.publisher.type);
@@ -931,6 +940,7 @@ import Dataset from './dataset.js';
     dataset.publisher.authors.forEach((author, index) => {
       metaData.append(`publisher_contacts-${index + 1}-name`, author.authorName);
       metaData.append(`publisher_contacts-${index + 1}-email`, author.authorEmail);
+      metaData.append(`publisher_contacts-${index + 1}-website`, author.authorWebsite);
     });
     dataset.referenceLinks.forEach((referenceLink, index) => {
       metaData.append(`links-${index + 1}-link`, referenceLink.link);
@@ -1163,6 +1173,7 @@ import Dataset from './dataset.js';
 
     // file section
     document.getElementById('datasetNameField').value = data.title;
+    document.getElementById('datasetDescriptionField').innerHTML = data.notes;
     receivedResources = data.resources;
     receivedResourcesIds = receivedResources.map((resource) => resource.id);
     receivedResources.forEach((resource) => {
@@ -1172,7 +1183,6 @@ import Dataset from './dataset.js';
       );
       const uploadBox = document.getElementById(resource.id).querySelector('.upload-box');
       updateFileInputBackground(uploadBox, resource.format.toLowerCase());
-      // WIP - fix upload box not getting icons
     });
 
     // ownership section
@@ -1191,7 +1201,8 @@ import Dataset from './dataset.js';
         generateAuthorField(
           data.publisher_type === 'individual' ? 'Author' : 'Organization',
           publisher.name,
-          publisher.email ? publisher.email : ''
+          publisher.email ? publisher.email : '',
+          publisher.website ? publisher.website : ''
         )
       );
     });
