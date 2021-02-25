@@ -87,12 +87,20 @@
 }
 
 .dataset-main__header .relevancy-info {
-  margin: 24px 0;
+  margin: 24px 0 18px 0;
 }
 
 .dataset-main__header .license-description {
   font-size: 12px;
   margin: 0;
+}
+
+.dataset-main__header .license-description a {
+  color: inherit;
+}
+
+.dataset-main__header .license-description a:hover {
+  text-decoration: none;
 }
 
 .dataset-main__header .dataset-description {

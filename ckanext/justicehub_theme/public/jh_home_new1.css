@@ -16,7 +16,7 @@ a {
   color: var(--primary-color);
 }
 
-a:hover {
+a:hover, a:visited, a:active {
   color: var(--primary-color);
 }
 
@@ -1828,10 +1828,6 @@ footer h3 {
     height: 60px;
     z-index: 1;
     box-shadow: 2px 3px 8px 2px rgba(0, 0, 0, 0.1);
-}
-
-.fab:hover {
-
 }
 
 .feedback-logo {
