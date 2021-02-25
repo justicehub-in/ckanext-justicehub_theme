@@ -115,20 +115,27 @@ def get_package_visits(pkg):
 
 def get_popular_groups():
 
-    
-    context = {'model': model}
+    context = {}
+    data_dict = {'order_by': 'packages',
+                'sort': 'package_count',
+		'all_fields': True,
+                'include_dataset_count': True}
+
+    return logic.get_action('group_list')(context, data_dict)
+
+    #context = {'model': model}
     
     #TODO: short the groups by number of datasets in it
-    q = model.Session.query(model.Group) \
-        .filter(model.Group.is_organization == False) \
-        .filter(model.Group.state == 'active') \
-        .limit(12)
+    #q = model.Session.query(model.Group) \
+    #    .filter(model.Group.is_organization == False) \
+    #    .filter(model.Group.state == 'active') \
+    #    .limit(12)
 
 
-    groups = q.all()
+    #groups = q.all()
 
-    group_list = model_dictize.group_list_dictize(groups, context)
-    return group_list
+    #group_list = model_dictize.group_list_dictize(groups, context)
+    #return group_list
 
 
 def pop_zip_resource(pkg):
