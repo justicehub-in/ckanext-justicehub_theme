@@ -498,7 +498,8 @@ import ErrorInfo from './errorInfo.js';
   function updateDatasetWithValuesFromOwnershipSection() {
     dataset.updateProperty('publisher', {});
     const selectedLicense = getValueFromInputSelector('#licenseSelect');
-    const licenseDescription = LICENSES.find((license) => license.id === selectedLicense).title;
+    const targetLicense = LICENSES.find((license) => license.id === selectedLicense);
+    const licenseDescription = targetLicense ? targetLicense.title : '';
     dataset.updateProperty('license', {
       licenseName: selectedLicense,
       licenseDescription: licenseDescription
@@ -928,7 +929,7 @@ import ErrorInfo from './errorInfo.js';
     return `
   <tr>
     <td>Licensing permissions:</td>
-    <td>${dataset.license.licenseDescription}</td>
+    <td>${dataset.license.licenseDescription ? dataset.license.licenseDescription : `<span style="color:red;">No license selected</span>`}</td>
   </tr>
   <tr>
     <td>Viewing Permissions:</td>
@@ -1041,7 +1042,8 @@ import ErrorInfo from './errorInfo.js';
       !dataset.sources.length ||
       !dataset.timePeriod.from.year ||
       !dataset.timePeriod.to.year ||
-      !dataset.language
+      !dataset.language ||
+      !dataset.license.licenseName
     );
   }
 
@@ -1378,7 +1380,7 @@ import ErrorInfo from './errorInfo.js';
     // relevancy section
     const [fromYear, fromMonth] = data.start_month.split('-');
     const [toYear, toMonth] = data.end_month.split('-');
-    const [pubDate, pubMonth, pubYear] = data.publication_date.split('/');
+    const [pubDate, pubMonth, pubYear] = data.publication_date ? data.publication_date.split('/') : ['', '', ''];
     const regions = data.region.split(',');
     console.log(regions);
 
