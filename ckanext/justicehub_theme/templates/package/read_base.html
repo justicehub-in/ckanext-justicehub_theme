@@ -61,7 +61,11 @@
             {% for owner in owners %}
                 {% if owner['name'] %}
                 <div style="margin-bottom: 10px;">
+                    {% if owner['website']%}
+                    <a href="{{owner['website']}}" target="_blank" rel="noreferrer noopener">{{pkg.creator_name}}</a>
+                    {% else %}
                     <p style="margin-bottom: 2px;">{{owner['name']}}</p>
+                    {% endif %}
                     {% if owner['email'] %}
                     <p style="color: #898989; font-size: 12px">{{owner['email']}}</p>
                     {% endif %}
@@ -121,23 +125,25 @@
     <div class="dataset-main">
         <div class="dataset-main__header">
             <div class="title-row">
-                <h1>{{h.dataset_display_name(pkg)}} <span>{{ ('Uploaded: ')}} {{ h.time_ago_from_timestamp(pkg.metadata_created) }}</span></h1>
+                <h1>{{h.dataset_display_name(pkg)}}</h1>
                 {% if h.check_access('package_update', {'id':pkg.id }) %}
                 <a class="btn btn-primary" style="text-transform: uppercase; font-family: Roboto;" href="/dataset/{{pkg.name}}/edit" >Edit dataset</a>
                 {% endif %}
             </div>
-            {% if pkg.publication_date| length > 3 %}
+            
                 {% set split_date = pkg.publication_date.split('/') %}
-                <p style="color: #898989; font-size: 14px; margin-top: 8px">Date of Publication: 
+                <p style="color: #898989; font-size: 14px; margin-top: 8px">{{ ('Uploaded: ')}} {{ h.time_ago_from_timestamp(pkg.metadata_created) }}; Last updated: {{ h.time_ago_from_timestamp(pkg.metadata_modified) }}
+                    {%- if pkg.publication_date| length > 3 -%}
+                    ; Date of Publication: 
                     {% for item in split_date%}
-                        {% if item|length > 0 and item != split_date[-1] %}
-                            {{item}}{{_('-')}}
-                        {% elif item|length > 0 and item == split_date[-1] %}
-                         {{item}}
-                        {% endif %}
+                        {%- if item|length > 0 and item != split_date[-1] -%}
+                        {{item}}{{('-')}}
+                        {%- elif item|length > 0 and item == split_date[-1] -%}
+                        {{item}}
+                        {%- endif -%}
                     {% endfor %}
+                    {% endif %}
                 </p>
-            {% endif %}
             <div class="relevancy-info">
                 <p><i class="fa fa-map-marker" aria-hidden="true"></i> 
                   {% if pkg['region'] %}
@@ -165,6 +171,7 @@
                 <p><i class="fa fa-language" aria-hidden="true"></i> {{ pkg.language }}</p>
             </div>
             <p class="license-description">{{ pkg.license_id }}</p>
+            <p class="dataset-description">{{ pkg.notes }}</p>
 
             {#<div>
 	       {% block package_resources %}
