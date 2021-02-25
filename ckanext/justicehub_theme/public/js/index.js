@@ -957,6 +957,8 @@ import ErrorInfo from './errorInfo.js';
   }
 
   function postAllFilesSync(packageName, filesList) {
+    console.log(errorInfo.error);
+    console.log(filesList);
     if (filesList.length === 0 && !errorInfo.error) {
       if (window.global_state === 'draft') {
         window.location = `/message/success?message= Dataset saved as draft successfully&dataset=${packageName}`;
@@ -964,6 +966,15 @@ import ErrorInfo from './errorInfo.js';
         window.location = `/message/success?message= Dataset updated successfully&dataset=${packageName}`;
       } else {
         window.location = `/message/success?message= Dataset created successfully&dataset=${packageName}`;
+      }
+      return;
+    }
+
+    if (filesList.length === 0 && errorInfo.error) {
+      submitDatasetButton.style.display = 'block';
+      const loader = document.querySelector('.loader');
+      if (loader) {
+        loader.style.display = 'none';
       }
       return;
     }
@@ -978,19 +989,18 @@ import ErrorInfo from './errorInfo.js';
       credentials: 'same-origin',
       body: filesData
     })
-      .then(() => {
+      .then((response) => {
+        console.log(response.ok);
+        if (!response.ok) {
+          errorInfo.updateErrorMessage(`Could not upload ${filesList[0].fileName}`);
+          const failedFileSummary = document.getElementById(`${filesList[0].fileId}`);
+          failedFileSummary.querySelector('file-error').style.display = 'block';
+          failedFileSummary.querySelector('file-error').innerHTML = 'This file could not be uploaded';
+        }
         postAllFilesSync(packageName, filesList.slice(1));
       })
       .catch((error) => {
         errorInfo.updateErrorMessage(error.message);
-        const failedFileSummary = document.getElementById(`${filesList[0].fileId}`);
-        failedFileSummary.querySelector('file-error').style.display = 'block';
-        failedFileSummary.querySelector('file-error').innerHTML = 'This file could not be uploaded';
-
-        submitDatasetButton.style.display = 'block';
-        if (loader) {
-          loader.style.display = 'none';
-        }
         postAllFilesSync(packageName, filesList.slice(1));
       });
   }
@@ -1005,10 +1015,14 @@ import ErrorInfo from './errorInfo.js';
       fetch(`${BASE_URL}/api/dataset/${packageName}/resource/${resourceToBeDeleted}/delete`, {
         method: 'POST'
       })
-        .then(() => deleteAllResources(resourceList.slice(1)))
+        .then((response) => {
+          if (!response.ok) {
+            errorInfo.updateErrorMessage(`Could not delete ${resourceToBeDeleted}`);
+          }
+          deleteAllResources(resourceList.slice(1));
+        })
         .catch((error) => {
           errorInfo.updateErrorMessage(error.message);
-          deleteAllResources(resourceList.slice(1));
           console.log(error.message);
         });
     }
@@ -1035,11 +1049,15 @@ import ErrorInfo from './errorInfo.js';
         credentials: 'same-origin',
         body: fileData
       })
-        .then(() => updateResources(resourcesList.slice(1)))
+        .then((response) => {
+          if (!response.ok) {
+            errorInfo.updateErrorMessage(`Could not update ${resource.fileName}`);
+          }
+          updateResources(resourcesList.slice(1));
+        })
         .catch((error) => {
           errorInfo.updateErrorMessage(error.message);
           console.log(error.message);
-          updateResources(resourcesList.slice(1));
         });
     }
   }
@@ -1047,15 +1065,7 @@ import ErrorInfo from './errorInfo.js';
   // function to update a single resource
 
   function updateAllResources(packageName = datasetIdName) {
-    // first - send request to delete resources (sync)
     deleteAllResources(resourcesByType.deleted, packageName);
-    // second - send request to update resources (sync)
-    // updateResources(resourcesByType.updated, packageName);
-    // // third - send request to add resources (sync)
-    // const filesList = resourcesByType.added.map((resourceId) =>
-    //   getFileDetailsFromFileUploadElement(document.getElementById(resourceId))
-    // );
-    // setTimeout(() => postAllFilesSync(packageName, filesList), 0);
   }
 
   function postDatasetRequest(state = 'active') {
@@ -1093,29 +1103,33 @@ import ErrorInfo from './errorInfo.js';
         credentials: 'same-origin',
         body: generateFormDataForPostingMetaData(state)
       })
-        .then((response) => response.json())
-        .then(() => {
+        .then((response) => {
+          if (!response.ok) {
+            errorInfo.updateErrorMessage('Could not edit dataset');
+            modalBody.insertAdjacentHTML(
+              'afterbegin',
+              `<p class="dataset-fail" style="color:red;">${error.message} - Couldn't update dataset. Please try again.</p>`
+            );
+
+            submitDatasetButton.style.display = 'block';
+
+            if (state == 'draft') {
+              saveAsDraftButtons.forEach((button) => {
+                button.addEventListener('click', () => {
+                  button.style.display = 'block';
+                });
+              });
+            }
+            const loader = document.querySelector('.loader');
+            if (loader) {
+              loader.style.display = 'none';
+            }
+            return;
+          }
           updateAllResources();
         })
         .catch((error) => {
           console.log(error.message);
-          modalBody.insertAdjacentHTML(
-            'afterbegin',
-            `<p class="dataset-fail" style="color:red;">${error.message} - Couldn't update dataset. Please try again.</p>`
-          );
-
-          submitDatasetButton.style.display = 'block';
-
-          if (state == 'draft') {
-            saveAsDraftButtons.forEach((button) => {
-              button.addEventListener('click', () => {
-                button.style.display = 'block';
-              });
-            });
-          }
-          if (loader) {
-            loader.style.display = 'none';
-          }
         });
     } else {
       fetch(`${BASE_URL}/api/dataset/new`, {
@@ -1125,6 +1139,28 @@ import ErrorInfo from './errorInfo.js';
       })
         .then((response) => response.json())
         .then((data) => {
+          if (!data.success) {
+            errorInfo.updateErrorMessage('Could not upload dataset');
+            modalBody.insertAdjacentHTML(
+              'afterbegin',
+              `<p class="dataset-fail" style="color:red;">${error.message} - Couldn't upload dataset. Please try again.</p>`
+            );
+
+            submitDatasetButton.style.display = 'block';
+
+            if (state == 'draft') {
+              saveAsDraftButtons.forEach((button) => {
+                button.addEventListener('click', () => {
+                  button.style.display = 'block';
+                });
+              });
+            }
+            const loader = document.querySelector('.loader');
+            if (loader) {
+              loader.style.display = 'none';
+            }
+            return;
+          }
           const filesList = resourcesByType.added.map((resourceId) =>
             getFileDetailsFromFileUploadElement(document.getElementById(resourceId))
           );
@@ -1147,10 +1183,11 @@ import ErrorInfo from './errorInfo.js';
               });
             });
           }
-
+          const loader = document.querySelector('.loader');
           if (loader) {
             loader.style.display = 'none';
           }
+          return;
         });
     }
   }
