@@ -498,7 +498,8 @@ import ErrorInfo from './errorInfo.js';
   function updateDatasetWithValuesFromOwnershipSection() {
     dataset.updateProperty('publisher', {});
     const selectedLicense = getValueFromInputSelector('#licenseSelect');
-    const licenseDescription = LICENSES.find((license) => license.id === selectedLicense).title;
+    const targetLicense = LICENSES.find((license) => license.id === selectedLicense);
+    const licenseDescription = targetLicense ? targetLicense.title : '';
     dataset.updateProperty('license', {
       licenseName: selectedLicense,
       licenseDescription: licenseDescription
@@ -549,6 +550,11 @@ import ErrorInfo from './errorInfo.js';
       }
     })
   );
+
+  const yearInputs = document.querySelectorAll('.year-input');
+  yearInputs.forEach((input) => {
+    input.setAttribute('max', new Date().getFullYear());
+  });
 
   const languageRadioOptions = document.querySelectorAll(`input[name="language-options"]`);
   languageRadioOptions.forEach((option) =>
@@ -928,7 +934,11 @@ import ErrorInfo from './errorInfo.js';
     return `
   <tr>
     <td>Licensing permissions:</td>
-    <td>${dataset.license.licenseDescription}</td>
+    <td>${
+      dataset.license.licenseDescription
+        ? dataset.license.licenseDescription
+        : `<span style="color:red;">No license selected</span>`
+    }</td>
   </tr>
   <tr>
     <td>Viewing Permissions:</td>
@@ -941,7 +951,9 @@ import ErrorInfo from './errorInfo.js';
     <td>
     ${
       dataset.publisher.authors[0].authorName
-        ? dataset.publisher.authors.map((author) => ` <span>${author.authorName}</span>`)
+        ? dataset.publisher.authors.map(
+            (author) => ` <span>${author.authorName} - ${author.authorEmail} - ${author.authorWebsite}</span>`
+          )
         : `<span style="color:red;">No publishers entered</span>`
     }
     </td>
@@ -1010,9 +1022,10 @@ import ErrorInfo from './errorInfo.js';
     document.querySelector('#dataRelevancyPreviewTable').innerHTML = generateDataRelevancyPreviewTableHTML(dataset);
     document.querySelector('#ownershipPreviewTable').innerHTML = generateOwnershipPreviewTableHTML(dataset);
     document.querySelector('#sourcePreviewTable').innerHTML = generateSourcePreviewTableHTML(dataset);
-    document.querySelector('#datasetNameOnPreviewModal').innerHTML = dataset.name
-      ? dataset.name
-      : '<span style="color: red;">No title entered</span>';
+    const titleContainer = document.querySelector('#datasetNameOnPreviewModal');
+    titleContainer.innerHTML = dataset.name ? dataset.name : '<span style="color: red;">No title entered</span>';
+
+    titleContainer.insertAdjacentHTML('afterend', `<p style="margin-top: 12px;">${dataset.description}</p>`);
 
     console.log(dataset);
   });
@@ -1041,7 +1054,8 @@ import ErrorInfo from './errorInfo.js';
       !dataset.sources.length ||
       !dataset.timePeriod.from.year ||
       !dataset.timePeriod.to.year ||
-      !dataset.language
+      !dataset.language ||
+      !dataset.license.licenseName
     );
   }
 
@@ -1378,7 +1392,7 @@ import ErrorInfo from './errorInfo.js';
     // relevancy section
     const [fromYear, fromMonth] = data.start_month.split('-');
     const [toYear, toMonth] = data.end_month.split('-');
-    const [pubDate, pubMonth, pubYear] = data.publication_date.split('/');
+    const [pubDate, pubMonth, pubYear] = data.publication_date ? data.publication_date.split('/') : ['', '', ''];
     const regions = data.region.split(',');
     console.log(regions);
 
