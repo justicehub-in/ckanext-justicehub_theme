@@ -16,7 +16,7 @@ a {
   color: var(--primary-color);
 }
 
-a:hover {
+a:hover, a:visited, a:active {
   color: var(--primary-color);
 }
 
@@ -1817,6 +1817,7 @@ footer h3 {
 .fab {
     position: fixed;
     display: flex;
+    background-color: white;
     justify-content: center;
     align-items: center;
     right: 2em;
