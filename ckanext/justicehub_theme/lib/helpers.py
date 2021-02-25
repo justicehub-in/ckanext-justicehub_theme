@@ -121,7 +121,9 @@ def get_popular_groups():
 		'all_fields': True,
                 'include_dataset_count': True}
 
-    return logic.get_action('group_list')(context, data_dict)
+    groups =  logic.get_action('group_list')(context, data_dict)
+    return groups[0:12]
+
 
     #context = {'model': model}
     
