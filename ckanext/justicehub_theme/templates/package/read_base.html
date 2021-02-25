@@ -130,19 +130,20 @@
                 <a class="btn btn-primary" style="text-transform: uppercase; font-family: Roboto;" href="/dataset/{{pkg.name}}/edit" >Edit dataset</a>
                 {% endif %}
             </div>
-            <p style="color: #898989; font-size: 15px; margin-top: 8px;">{{ ('Uploaded: ')}} {{ h.time_ago_from_timestamp(pkg.metadata_created) }}; Last updated: {{ h.time_ago_from_timestamp(pkg.metadata_modified) }}</p>
-            {% if pkg.publication_date| length > 3 %}
+            
                 {% set split_date = pkg.publication_date.split('/') %}
-                <p style="color: #898989; font-size: 14px; margin-top: 8px">Date of Publication: 
+                <p style="color: #898989; font-size: 14px; margin-top: 8px">{{ ('Uploaded: ')}} {{ h.time_ago_from_timestamp(pkg.metadata_created) }}; Last updated: {{ h.time_ago_from_timestamp(pkg.metadata_modified) }}
+                    {%- if pkg.publication_date| length > 3 -%}
+                    ; Date of Publication: 
                     {% for item in split_date%}
-                        {% if item|length > 0 and item != split_date[-1] %}
-                            {{item}}{{_('-')}}
-                        {% elif item|length > 0 and item == split_date[-1] %}
-                         {{item}}
-                        {% endif %}
+                        {%- if item|length > 0 and item != split_date[-1] -%}
+                        {{item}}{{('-')}}
+                        {%- elif item|length > 0 and item == split_date[-1] -%}
+                        {{item}}
+                        {%- endif -%}
                     {% endfor %}
+                    {% endif %}
                 </p>
-            {% endif %}
             <div class="relevancy-info">
                 <p><i class="fa fa-map-marker" aria-hidden="true"></i> 
                   {% if pkg['region'] %}
