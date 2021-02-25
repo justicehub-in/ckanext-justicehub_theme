@@ -551,6 +551,11 @@ import ErrorInfo from './errorInfo.js';
     })
   );
 
+  const yearInputs = document.querySelectorAll('.year-input');
+  yearInputs.forEach((input) => {
+    input.setAttribute('max', new Date().getFullYear());
+  });
+
   const languageRadioOptions = document.querySelectorAll(`input[name="language-options"]`);
   languageRadioOptions.forEach((option) =>
     option.addEventListener('click', (event) => {
