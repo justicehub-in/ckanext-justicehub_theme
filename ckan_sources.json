@@ -1,0 +1,172 @@
+[
+ {
+   "name": "National Crime Records Bureau ",
+   "code": "NCRB ",
+   "link": "https://ncrb.gov.in/en/crime-india"
+ },
+ {
+   "name": "District courts (eCourts India Services) ",
+   "code": "DC ",
+   "link": "https://districts.ecourts.gov.in/"
+ },
+ {
+   "name": "High Courts ",
+   "code": "HC ",
+   "link": "https://ecourts.gov.in/ecourts_home/static/highcourts.php"
+ },
+ {
+   "name": "Supreme Court ",
+   "code": "SC ",
+   "link": "https://supremecourtofindia.nic.in/"
+ },
+ {
+   "name": "First Information Report ",
+   "code": "FIR ",
+   "link": ""
+ },
+ {
+   "name": "Data on Police Organizations, Bureau of Police Research and Development (BPR&D) ",
+   "code": "BPRD ",
+   "link": "https://bprd.nic.in/content/62_1_DataonPoliceOrganizations.aspx"
+ },
+ {
+   "name": "Combined Finance and Revenue Accounts of the Union and State Governments in India, Comptroller and Auditor General of India ",
+   "code": "CAG, India ",
+   "link": "https://cag.gov.in/audit-reports"
+ },
+ {
+   "name": "Open Budgets India ",
+   "code": "OBI ",
+   "link": "openbudgetsindia.org/"
+ },
+ {
+   "name": "Primary Census Abstract, Census 2011 ",
+   "code": "Census, 2011 ",
+   "link": "https://censusindia.gov.in/2011-common/censusdata2011.html"
+ },
+ {
+   "name": "Prison Statistics India ",
+   "code": "PSI ",
+   "link": "https://ncrb.gov.in/en/prison-statistics-india"
+ },
+ {
+   "name": "Court News, Supreme Court of India ",
+   "code": "Court News, SC ",
+   "link": "https://supremecourtofindia.nic.in/"
+ },
+ {
+   "name": "Right to Information ",
+   "code": "RTI ",
+   "link": ""
+ },
+ {
+   "name": "Department of Justice (courthalls) ",
+   "code": "CourtHalls, DoJ ",
+   "link": "https://doj.gov.in/"
+ },
+ {
+   "name": "National Judicial Data Grid ",
+   "code": "NJDG ",
+   "link": "https://njdg.ecourts.gov.in/"
+ },
+ {
+   "name": "National Legal Services Authority ",
+   "code": "NALSA ",
+   "link": "https://nalsa.gov.in/statistics"
+ },
+ {
+   "name": "SCC Online ",
+   "code": "SCC ",
+   "link": "https://www.scconline.com/"
+ },
+ {
+   "name": "IndianKanoon ",
+   "code": "IndianKanoon ",
+   "link": "https://indiankanoon.org/"
+ },
+ {
+   "name": "Gazette of India ",
+   "code": "Gazette ",
+   "link": "http://egazette.nic.in/(S(l1hxo4md0ybkknii4dlynavg))/default.aspx?AcceptsCookies=yes"
+ },
+ {
+   "name": "Newspaper Reports ",
+   "code": "Media ",
+   "link": ""
+ },
+ {
+   "name": "International Organisations ",
+   "code": "IO ",
+   "link": ""
+ },
+ {
+   "name": "National Family Health Survey ",
+   "code": "NFHS ",
+   "link": "http://rchiips.org/nfhs/"
+ },
+ {
+   "name": "Ministry of Tribal Affairs ",
+   "code": "",
+   "link": "https://tribal.nic.in/"
+ },
+ {
+   "name": "Common Service Centres ",
+   "code": "CSC ",
+   "link": "https://www.csc.gov.in/"
+ },
+ {
+   "name": "National Informatics Centre ",
+   "code": "NIC ",
+   "link": "https://www.nic.in/"
+ },
+ {
+   "name": "Ministry of Housing and Urban Affairs ",
+   "code": "MoHU ",
+   "link": "https://www.mohua.gov.in/"
+ },
+ {
+   "name": "National Sample Survey Office ",
+   "code": "NSSO ",
+   "link": "http://www.mospi.gov.in/nsso"
+ },
+ {
+   "name": "Association for Democratic Reforms ",
+   "code": "ADR ",
+   "link": "http://myneta.info"
+ },
+ {
+   "name": "Twitter ",
+   "code": "Twitter ",
+   "link": "https://twitter.com/"
+ },
+ {
+   "name": "Household Survey ",
+   "code": "Survey ",
+   "link": ""
+ },
+ {
+   "name": "Organisations Reports ",
+   "code": "OR ",
+   "link": ""
+ },
+ {
+   "name": "National Human Rights Commission ",
+   "code": "NHRC ",
+   "link": "https://nhrc.nic.in/"
+ },
+ {
+   "name": "National Institutes of Health ",
+   "code": "NIH ",
+   "link": "https://www.ncbi.nlm.nih.gov/"
+ },
+ {
+   "name": "UN Office on Drugs & Crime Ministry of Women and Child Development (India) ",
+   "code": "UNDOC ",
+   "link": "https://www.unodc.org/pdf/india/publications/India%20Country%20Report.pdf"
+ },
+ {
+   "name": "Researve Bank of India ",
+   "code": "RBI ",
+   "link": "https://www.rbi.org.in/"
+ }
+]
