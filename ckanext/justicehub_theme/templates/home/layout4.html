@@ -225,6 +225,19 @@
       </section>
 
     </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script>
+      $('#howToUploadVideoContainer').on('hide.bs.modal', function() {
+        console.log('modal hide')
+        $('#howToUploadVideoContainer iframe').attr('src', '')
+      })
+
+      $("#howToUploadVideoContainer").on('show.bs.modal', function() {
+        console.log('modal open')
+        $("#howToUploadVideoContainer iframe").attr('src', 'https://www.youtube.com/embed/7wrBtB_coJc');
+      });
+    </script>
 
     <script src="/home.js"></script>
   </body>

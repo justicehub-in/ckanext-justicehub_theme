@@ -505,6 +505,14 @@
       $('#multi-select-states').multiselect({
         buttonClass: 'multi-states-btn'
       });
+
+      $('#howToUploadVideoContainer').on('hide.bs.modal', function() {
+        $('#howToUploadVideoContainer iframe').attr('src', '')
+      })
+
+      $("#howToUploadVideoContainer").on('show.bs.modal', function() {
+        $("#howToUploadVideoContainer iframe").attr('src', 'https://www.youtube.com/embed/uO5ttrFZyJw');
+      });
     </script>
     <script type="module" src="/js/index.js"></script>
   </body>
