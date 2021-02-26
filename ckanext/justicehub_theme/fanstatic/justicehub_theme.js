@@ -31,6 +31,14 @@ $(document).ready(function() {
 		$(this).prev().toggle();
 		return false;
 	});
+
+      $('#howToUploadVideoContainer').on('hide.bs.modal', function() {
+        $('#howToUploadVideoContainer iframe').attr('src', '')
+      });
+
+      $("#howToUploadVideoContainer").on('show.bs.modal', function() {
+        $("#howToUploadVideoContainer iframe").attr('src', 'https://www.youtube.com/embed/7wrBtB_coJc');
+      });
 });
 
 
