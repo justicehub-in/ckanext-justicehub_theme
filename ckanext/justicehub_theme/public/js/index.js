@@ -1024,8 +1024,8 @@ import ErrorInfo from './errorInfo.js';
     document.querySelector('#sourcePreviewTable').innerHTML = generateSourcePreviewTableHTML(dataset);
     const titleContainer = document.querySelector('#datasetNameOnPreviewModal');
     titleContainer.innerHTML = dataset.name ? dataset.name : '<span style="color: red;">No title entered</span>';
-
-    titleContainer.insertAdjacentHTML('afterend', `<p style="margin-top: 12px;">${dataset.description}</p>`);
+    const descContainer = document.querySelector('#datasetDescOnPreviewModal');
+    descContainer.innerHTML = dataset.description ? dataset.description : '';
 
     console.log(dataset);
   });
