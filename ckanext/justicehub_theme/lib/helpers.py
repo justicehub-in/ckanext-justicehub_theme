@@ -116,8 +116,7 @@ def get_package_visits(pkg):
 def get_popular_groups():
 
     context = {}
-    data_dict = {'order_by': 'packages',
-                'sort': 'package_count',
+    data_dict = {'sort': 'package_count desc',
 		'all_fields': True,
                 'include_dataset_count': True}
 

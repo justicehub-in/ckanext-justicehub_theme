@@ -16,7 +16,7 @@ a {
   color: var(--primary-color);
 }
 
-a:hover, a:visited, a:active {
+a:hover,  a:active {
   color: var(--primary-color);
 }
 
