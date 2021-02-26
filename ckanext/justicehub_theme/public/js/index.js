@@ -1171,7 +1171,7 @@ import ErrorInfo from './errorInfo.js';
       const filesList = resourcesByType.added.map((resourceId) =>
         getFileDetailsFromFileUploadElement(document.getElementById(resourceId))
       );
-      postAllFilesSync(datasetIdName, filesList);
+      postAllFilesSync(packageName, filesList);
     } else {
       const resource = getFileDetailsFromFileUploadElement(document.getElementById(resourcesList[0]));
 
@@ -1203,6 +1203,8 @@ import ErrorInfo from './errorInfo.js';
   // function to update a single resource
 
   function updateAllResources(packageName = datasetIdName) {
+    console.log(packageName)
+    console.log(datasetIdName)
     deleteAllResources(resourcesByType.deleted, packageName);
   }
 
@@ -1264,7 +1266,10 @@ import ErrorInfo from './errorInfo.js';
             }
             return;
           }
-          updateAllResources();
+          return response.json()
+        })
+        .then((data) => {
+		updateAllResources(data.pkg_name);
         })
         .catch((error) => {
           console.log(error.message);
