@@ -104,7 +104,7 @@
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeVideo()"><span aria-hidden="true">&times;</span></button>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                       <h4 class="modal-title">How to upload a dataset?</h4>
                     </div>
                     <div class="modal-body">
@@ -229,15 +229,20 @@
       </a>
 
     </main>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous"
+    ></script>
     <script>
+      $('#howToUploadVideoContainer').on('hide.bs.modal', function() {
+        $('#howToUploadVideoContainer iframe').attr('src', '')
+      })
 
-	function closeVideo() {
-	    console.log('modal hide');
-            $('#howToUploadVideoContainer iframe').attr('src', '');
-            $("#howToUploadVideoContainer iframe").attr('src', 'https://www.youtube.com/embed/7wrBtB_coJc');
-        };
-
+      $("#howToUploadVideoContainer").on('show.bs.modal', function() {
+        $("#howToUploadVideoContainer iframe").attr('src', 'https://www.youtube.com/embed/7wrBtB_coJc');
+      });
     </script>
 
     <script src="/home.js"></script>
