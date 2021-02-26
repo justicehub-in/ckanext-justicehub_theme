@@ -6,7 +6,7 @@
     { name: `HAQ`, imagePath: '/assets/contributors/haq.png' },
     { name: `Project 39A`, imagePath: '/assets/contributors/P39A.png' },
     { name: `Vidhi`, imagePath: '/assets/contributors/vidhi.jpg' },
-    { name: `IGIDR`, imagePath: '/assets/contributors/igidr.png' },
+    // { name: `IGIDR`, imagePath: '/assets/contributors/igidr.png' },
     { name: `NIPFP`, imagePath: '/assets/contributors/nipfp.png' },
     { name: `CLPR`, imagePath: '/assets/contributors/clpr.svg' },
     { name: `IDFC`, imagePath: '/assets/contributors/idfc.svg' },
@@ -26,14 +26,27 @@
         <div>
           <img src="${contributor.imagePath}" alt="${contributor.name}" />
         </div>
-        <p>${contributor.name}</p>
+        ${contributor.type === 'person' ? `<p>${contributor.name}</p>` : ``}
       </div>
     `;
   }
 
-  const contributorsRow = document.querySelector('.contributors-row');
+  const individualContributors = contributors.filter((contributor) => contributor.type === 'person');
 
-  contributors.forEach((contributor) => (contributorsRow.innerHTML += contributorTemplate(contributor)));
+  const orgContributors = contributors.filter((contributor) => !contributor.type);
+
+  const individualContributorsRow = document.querySelector('.contributors-row--individual');
+  const orgContributorsRow = document.querySelector('.contributors-row--org');
+
+  individualContributors.forEach(
+    (contributor) =>
+      (individualContributorsRow.innerHTML +=  contributorTemplate(contributor))
+  );
+
+  orgContributors.forEach(
+    (contributor) =>
+      (orgContributorsRow.innerHTML += contributorTemplate(contributor))
+  );
 
   const switchToSignIn = document.querySelector('.click-to-login');
   const switchToSignUp = document.querySelector('.click-to-signup');

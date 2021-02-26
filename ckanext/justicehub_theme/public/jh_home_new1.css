@@ -569,11 +569,14 @@ li.dropdown:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
-  align-self: end;
+  align-self: center;
 }
 
 .contributor-info div {
   height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .contributor-info img {
