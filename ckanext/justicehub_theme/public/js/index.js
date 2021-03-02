@@ -443,7 +443,7 @@ import ErrorInfo from './errorInfo.js';
       domain_data: true,
       domain_software: false,
       family: '',
-      id: 'CC-BY-SA-4.0',
+      id: 'CC-BY-NC-SA-4.0',
       maintainer: 'Creative Commons',
       od_conformance: 'approved',
       osd_conformance: 'not reviewed',
@@ -456,7 +456,7 @@ import ErrorInfo from './errorInfo.js';
       domain_data: true,
       domain_software: false,
       family: '',
-      id: 'CC-BY-SA-4.0',
+      id: 'CC-BY-ND-4.0',
       maintainer: 'Creative Commons',
       od_conformance: 'approved',
       osd_conformance: 'not reviewed',
@@ -469,7 +469,7 @@ import ErrorInfo from './errorInfo.js';
       domain_data: true,
       domain_software: false,
       family: '',
-      id: 'CC-BY-SA-4.0',
+      id: 'CC-BY-NC-ND-4.0',
       maintainer: 'Creative Commons',
       od_conformance: 'approved',
       osd_conformance: 'not reviewed',
@@ -1203,8 +1203,8 @@ import ErrorInfo from './errorInfo.js';
   // function to update a single resource
 
   function updateAllResources(packageName = datasetIdName) {
-    console.log(packageName)
-    console.log(datasetIdName)
+    console.log(packageName);
+    console.log(datasetIdName);
     deleteAllResources(resourcesByType.deleted, packageName);
   }
 
@@ -1266,10 +1266,10 @@ import ErrorInfo from './errorInfo.js';
             }
             return;
           }
-          return response.json()
+          return response.json();
         })
         .then((data) => {
-		updateAllResources(data.pkg_name);
+          updateAllResources(data.pkg_name);
         })
         .catch((error) => {
           console.log(error.message);
