@@ -6,7 +6,7 @@
     { name: `HAQ`, imagePath: '/assets/contributors/haq.png' },
     { name: `Project 39A`, imagePath: '/assets/contributors/P39A.png' },
     { name: `Vidhi`, imagePath: '/assets/contributors/vidhi.jpg' },
-    // { name: `IGIDR`, imagePath: '/assets/contributors/igidr.png' },
+    { name: `CHRI`, imagePath: '/assets/contributors/chri.png' },
     { name: `NIPFP`, imagePath: '/assets/contributors/nipfp.png' },
     { name: `CLPR`, imagePath: '/assets/contributors/clpr.svg' },
     { name: `IDFC`, imagePath: '/assets/contributors/idfc.svg' },
