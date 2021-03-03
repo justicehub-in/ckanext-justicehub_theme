@@ -367,6 +367,7 @@ li.dropdown:focus {
 .category-item p {
   margin-bottom: 0;
   margin-left: 12px;
+  min-height: 60px;
 }
 
 .category-item .icon-container {
