@@ -31,7 +31,7 @@ h.check_access('package_create') %} {% endif %}
           type="text"
           class="form-control"
           name="q"
-          value="{{ request.params.get('q') }}"
+          value={% if request.params.get('q') %} "{{ request.params.get('q') }}" {% else %} "" {% endif %}
           autocomplete="off"
         />
         {% block search_input_button %}
