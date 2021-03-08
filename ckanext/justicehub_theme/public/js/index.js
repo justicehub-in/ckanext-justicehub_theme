@@ -551,9 +551,47 @@ import ErrorInfo from './errorInfo.js';
     })
   );
 
-  const yearInputs = document.querySelectorAll('.year-input');
-  yearInputs.forEach((input) => {
-    input.setAttribute('max', new Date().getFullYear());
+  function generateYears(startYear) {
+    let years = [];
+    const currentYear = new Date().getFullYear();
+    let startingYear = startYear ? startYear : 1985;
+    while (startingYear <= currentYear) {
+      years.push(startingYear);
+      startingYear++;
+    }
+    return years;
+  }
+
+  function generateDates() {
+    let dates = [];
+    let startingDate = 1;
+    while (startingDate <= 31) {
+      dates.push(startingDate);
+      startingDate++;
+    }
+    return dates;
+  }
+
+  let yearOptions = '<option value="--">--</option>';
+  let dateOptions = '<option value="--">--</option>';
+
+  generateYears().forEach((year) => {
+    yearOptions += `<option value="${year}" >${year}</option>`;
+  });
+
+  generateDates().forEach((date) => {
+    dateOptions += `<option value="${date}" >${date}</option>`;
+  });
+
+  const yearDropdowns = document.querySelectorAll('.year-input');
+  const dateDropdowns = document.querySelectorAll('.date-input');
+
+  yearDropdowns.forEach((input) => {
+    input.innerHTML += yearOptions;
+  });
+
+  dateDropdowns.forEach((input) => {
+    input.innerHTML += dateOptions;
   });
 
   const languageRadioOptions = document.querySelectorAll(`input[name="language-options"]`);
@@ -643,9 +681,9 @@ import ErrorInfo from './errorInfo.js';
       region = [regionRadioValue];
     }
 
-    const dateOfPublication = getValueFromInputSelector('#pubDate input');
+    const dateOfPublication = getValueFromInputSelector('#pubDate select');
     const monthOfPublication = getValueFromInputSelector('#pubMonth select');
-    const yearOfPublication = getValueFromInputSelector('#pubYear input');
+    const yearOfPublication = getValueFromInputSelector('#pubYear select');
 
     const language =
       getRadioValue('language-options') === 'other'
