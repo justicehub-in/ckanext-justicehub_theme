@@ -31,9 +31,13 @@
             >Click here to watch the video guide.</a
           >
         </h2>
-        <a class="fab" href="https://docs.google.com/forms/d/e/1FAIpQLSdYejNNx5AtNqJGflzWMjD5pBGOqllQTkuXSR3-UYXd0bqtaA/viewform" target="_blank">
-		<img class="feedback-logo" src="/assets/feedback.png">
-	</a>
+        <a
+          class="fab"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSdYejNNx5AtNqJGflzWMjD5pBGOqllQTkuXSR3-UYXd0bqtaA/viewform"
+          target="_blank"
+        >
+          <img class="feedback-logo" src="/assets/feedback.png" />
+        </a>
         <div class="upload-video-container">
           <div
             class="modal fade"
@@ -51,7 +55,8 @@
                   <h4 class="modal-title">How to upload a dataset?</h4>
                 </div>
                 <div class="modal-body">
-                  <iframe class="responsive-ifram" src="https://www.youtube.com/embed/uO5ttrFZyJw" allowfullscreen> </iframe>
+                  <iframe class="responsive-ifram" src="https://www.youtube.com/embed/uO5ttrFZyJw" allowfullscreen>
+                  </iframe>
                 </div>
               </div>
             </div>
@@ -94,7 +99,10 @@
         </div>
         <div class="data-upload-section__form__field">
           <h3>Describe this dataset</h3>
-          <span>Dataset descriptions improve the searchbility of datasets on the Justice Hub as well as other search engines like Google, etc</span>
+          <span
+            >Dataset descriptions improve the searchbility of datasets on the Justice Hub as well as other search
+            engines like Google, etc</span
+          >
           <!-- <span>eg: Death Penalties in Karnataka from Years 2000-2010</span> -->
           <textarea class="form-control input--large" id="datasetDescriptionField" cols="25" rows="5"></textarea>
         </div>
@@ -443,11 +451,13 @@
               </button>
               <div class="modal-header-info">
                 <h3 id="datasetNameOnPreviewModal"></h3>
-                <p  id="datasetDescOnPreviewModal"><p>
-                <!-- <img class="modal-logo" src="/assets/jh_logo_notext.png" />
+                <p id="datasetDescOnPreviewModal"></p>
+                <p>
+                  <!-- <img class="modal-logo" src="/assets/jh_logo_notext.png" />
                         <h4>{{ title }}</h4>
                         <p>{{ title_content }}</p>
                         <p class="error-message" id="error-{{ id }}">{{ error_message }}</p> -->
+                </p>
               </div>
             </div>
             <div class="modal-body">
@@ -506,16 +516,23 @@
     ></script>
     <script src="/js/bootstrap-multiselect.min.js"></script>
     <script>
-      $('#multi-select-states').multiselect({
+      const multiSelectStatesElement = $('#multi-select-states');
+      multiSelectStatesElement.multiselect({
         buttonClass: 'multi-states-btn'
       });
 
-      $('#howToUploadVideoContainer').on('hide.bs.modal', function() {
-        $('#howToUploadVideoContainer iframe').attr('src', '')
-      })
+      function populateStates(statesArray) {
+        multiSelectStatesElement.multiselect('select', statesArray, {
+          buttonClass: 'multi-states-btn'
+        });
+      }
 
-      $("#howToUploadVideoContainer").on('show.bs.modal', function() {
-        $("#howToUploadVideoContainer iframe").attr('src', 'https://www.youtube.com/embed/uO5ttrFZyJw');
+      $('#howToUploadVideoContainer').on('hide.bs.modal', function () {
+        $('#howToUploadVideoContainer iframe').attr('src', '');
+      });
+
+      $('#howToUploadVideoContainer').on('show.bs.modal', function () {
+        $('#howToUploadVideoContainer iframe').attr('src', 'https://www.youtube.com/embed/uO5ttrFZyJw');
       });
     </script>
     <script type="module" src="/js/index.js"></script>
