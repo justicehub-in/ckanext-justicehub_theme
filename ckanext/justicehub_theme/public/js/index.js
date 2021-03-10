@@ -1007,8 +1007,6 @@ import ErrorInfo from './errorInfo.js';
         )
         .map((resource) => document.getElementById(resource.id));
 
-      console.log(untouchedFiles);
-
       if (untouchedFiles) {
         untouchedFiles.forEach((fileUploadElement) =>
           filesListPreviewSection.insertAdjacentHTML(
@@ -1399,7 +1397,6 @@ import ErrorInfo from './errorInfo.js';
     const [toYear, toMonth] = data.end_month.split('-');
     const [pubDate, pubMonth, pubYear] = data.publication_date ? data.publication_date.split('/') : ['', '', ''];
     const regions = data.region.split(',');
-    console.log(regions);
 
     if (regions[0] === 'All India') {
       const allIndiaInput = document.getElementById('allIndia');
@@ -1411,17 +1408,7 @@ import ErrorInfo from './errorInfo.js';
       const multiSelectToggle = document.querySelector('.multiselect.dropdown-toggle');
       nativeMultiSelect.style.display = 'inline-block';
       multiSelectToggle.style.display = 'inline-block';
-      const statesButton = document.querySelector('.multi-states-btn');
-      statesButton.setAttribute('title', regions.join(', '));
-      if (regions.length < 3) {
-        statesButton.querySelector('.multiselect-selected-text').innerHTML = regions.join(', ');
-      } else {
-        statesButton.querySelector('.multiselect-selected-text').innerHTML = `${regions.length} selected`;
-      }
-      regions.forEach((region) => {
-        document.querySelector(`input[value="${region}"]`).checked = true;
-        document.querySelector(`button[title="${region}"]`).classList.add('active');
-      });
+      populateStates(regions);
     }
 
     document.getElementById('fromYear').value = fromYear;
