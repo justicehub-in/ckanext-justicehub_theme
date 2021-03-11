@@ -38,7 +38,8 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
             'justicehub_theme_issue_vars': helpers.issues_vars,
             'justicehub_theme_is_org_admin': helpers.is_org_admin,
             'justicehub_theme_get_popular_groups': helpers.get_popular_groups,
-            'justicehub_theme_pop_zip_resource': helpers.pop_zip_resource
+            'justicehub_theme_pop_zip_resource': helpers.pop_zip_resource,
+	    'justicehub_theme_show_linked_user': helpers.show_linked_user
         }
 
     #IActions
@@ -130,6 +131,10 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         map.connect('jhdataset', '/dataset',
                     controller='ckanext.justicehub_theme.controllers.dataset:PackageNewController',
                     action='search')
+        map.connect('jhreaduser', '/user/show/{id}',
+                    controller='ckanext.justicehub_theme.controllers.dataset:UserNewController',
+                    action='read')
+
 
         return map
     
@@ -149,4 +154,6 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         map.connect('jhdataset', '/dataset',
                     controller='ckanext.justicehub_theme.controllers.dataset:PackageNewController',
                     action='search')
+
+
         return map

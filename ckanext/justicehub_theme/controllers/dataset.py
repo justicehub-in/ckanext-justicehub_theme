@@ -31,6 +31,43 @@ render = base.render
 abort = base.abort
 
 
+import logging
+
+from ckan.common import config
+from paste.deploy.converters import asbool
+from six import text_type
+
+import ckan.lib.base as base
+import ckan.model as model
+import ckan.lib.helpers as h
+import ckan.authz as authz
+import ckan.logic as logic
+import ckan.logic.schema as schema
+import ckan.lib.captcha as captcha
+import ckan.lib.mailer as mailer
+import ckan.lib.navl.dictization_functions as dictization_functions
+import ckan.lib.authenticator as authenticator
+import ckan.plugins as p
+
+from ckan.common import _, c, request, response
+
+log = logging.getLogger(__name__)
+
+
+abort = base.abort
+render = base.render
+
+check_access = logic.check_access
+get_action = logic.get_action
+NotFound = logic.NotFound
+NotAuthorized = logic.NotAuthorized
+ValidationError = logic.ValidationError
+UsernamePasswordError = logic.UsernamePasswordError
+
+DataError = dictization_functions.DataError
+unflatten = dictization_functions.unflatten
+
+
 def _encode_params(params):
     return [(k, v.encode('utf-8') if isinstance(v, string_types) else str(v))
             for k, v in params]
@@ -311,3 +348,116 @@ class PackageNewController(base.BaseController):
 
         return render(self._search_template(package_type),
                       extra_vars={'dataset_type': package_type})
+
+def set_repoze_user(user_id):
+    '''Set the repoze.who cookie to match a given user_id'''
+    if 'repoze.who.plugins' in request.environ:
+        rememberer = request.environ['repoze.who.plugins']['friendlyform']
+        identity = {'repoze.who.userid': user_id}
+        response.headerlist += rememberer.remember(request.environ,
+                                                   identity)
+
+class UserNewController(base.BaseController):
+    def __before__(self, action, **env):
+        base.BaseController.__before__(self, action, **env)
+        try:
+            context = {'model': model, 'user': c.user,
+                       'auth_user_obj': c.userobj}
+            check_access('site_read', context)
+        except NotAuthorized:
+            if c.action not in ('login', 'request_reset', 'perform_reset',):
+                abort(403, _('Not authorized to see this page'))
+
+    # hooks for subclasses
+    new_user_form = 'user/new_user_form.html'
+    edit_user_form = 'user/edit_user_form.html'
+
+    def _new_form_to_db_schema(self):
+        return schema.user_new_form_schema()
+
+    def _db_to_new_form_schema(self):
+        '''This is an interface to manipulate data from the database
+        into a format suitable for the form (optional)'''
+
+    def _edit_form_to_db_schema(self):
+        return schema.user_edit_form_schema()
+
+    def _db_to_edit_form_schema(self):
+        '''This is an interface to manipulate data from the database
+        into a format suitable for the form (optional)'''
+
+    def _setup_template_variables(self, context, data_dict):
+        c.is_sysadmin = authz.is_sysadmin(c.user)
+        try:
+            user_dict = get_action('user_show')(context, data_dict)
+        except NotFound:
+            h.flash_error(_('Not authorized to see this page'))
+            h.redirect_to(controller='user', action='login')
+        except NotAuthorized:
+            abort(403, _('Not authorized to see this page'))
+
+        c.user_dict = user_dict
+        c.is_myself = user_dict['name'] == c.user
+        c.about_formatted = h.render_markdown(user_dict['about'])
+
+    # end hooks
+
+    def _get_repoze_handler(self, handler_name):
+        '''Returns the URL that repoze.who will respond to and perform a
+        login or logout.'''
+        return getattr(request.environ['repoze.who.plugins']['friendlyform'],
+                       handler_name)
+
+    def index(self):
+        page = h.get_page_number(request.params)
+        c.q = request.params.get('q', '')
+        c.order_by = request.params.get('order_by', 'name')
+
+        context = {'return_query': True, 'user': c.user,
+                   'auth_user_obj': c.userobj}
+
+        data_dict = {'q': c.q,
+                     'order_by': c.order_by}
+
+        limit = int(
+            request.params.get('limit', config.get('ckan.user_list_limit', 20))
+        )
+        try:
+            check_access('user_list', context, data_dict)
+        except NotAuthorized:
+            abort(403, _('Not authorized to see this page'))
+
+        users_list = get_action('user_list')(context, data_dict)
+
+        c.page = h.Page(
+            collection=users_list,
+            page=page,
+            url=h.pager_url,
+            item_count=users_list.count(),
+            items_per_page=limit
+        )
+        return render('user/list.html')
+
+    def read(self, id=None):
+        context = {'model': model, 'session': model.Session,
+                   'user': c.user, 'auth_user_obj': c.userobj,
+                   'for_view': True}
+        data_dict = {'id': id,
+                     'user_obj': c.userobj,
+                     'include_datasets': True,
+                     'include_num_followers': True}
+
+        self._setup_template_variables(context, data_dict)
+
+        # The legacy templates have the user's activity stream on the user
+        # profile page, new templates do not.
+        if asbool(config.get('ckan.legacy_templates', False)):
+            c.user_activity_stream = get_action('user_activity_list_html')(
+                context, {'id': c.user_dict['id']})
+        if not c.user:
+            url = '/login?came_from=' + request.url
+            h.redirect_to(url)
+
+        return render('user/read.html')
+
+ 

@@ -11,6 +11,9 @@ import ckan.lib.dictization.model_dictize as model_dictize
 import ckan.logic as logic
 import ckan.model as model
 from ckan.common import c
+from six import string_types, text_type
+from webhelpers.html import tags
+import ckan.lib.helpers as h
 
 cached_tables = {}
 
@@ -153,4 +156,31 @@ def pop_zip_resource(pkg):
             non_zip_resources.append(res)
     pkg['resources'] = non_zip_resources
     return zip_res
+
+
+
+def show_linked_user(user, maxlength=0, avatar=20):
+    if not isinstance(user, model.User):
+        user_name = text_type(user)
+        user = model.User.get(user_name)
+        if not user:
+            return user_name
+    if user:
+        name = user.name if model.User.VALID_NAME.match(user.name) else user.id
+        displayname = user.display_name
+
+        if maxlength and len(user.display_name) > maxlength:
+            displayname = displayname[:maxlength] + '...'
+
+        return tags.literal(u'{icon} {link}'.format(
+            icon=h.gravatar(
+                email_hash=user.email_hash,
+                size=avatar
+            ),
+            link=tags.link_to(
+                displayname,
+                ('/user/show/' + name)
+            )
+        ))
+
 
