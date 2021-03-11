@@ -551,9 +551,47 @@ import ErrorInfo from './errorInfo.js';
     })
   );
 
-  const yearInputs = document.querySelectorAll('.year-input');
-  yearInputs.forEach((input) => {
-    input.setAttribute('max', new Date().getFullYear());
+  function generateYears(startYear) {
+    let years = [];
+    const currentYear = new Date().getFullYear();
+    let startingYear = startYear ? startYear : 1985;
+    while (startingYear <= currentYear) {
+      years.push(startingYear);
+      startingYear++;
+    }
+    return years;
+  }
+
+  function generateDates() {
+    let dates = [];
+    let startingDate = 1;
+    while (startingDate <= 31) {
+      dates.push(startingDate);
+      startingDate++;
+    }
+    return dates;
+  }
+
+  let yearOptions = '<option value="--">--</option>';
+  let dateOptions = '<option value="--">--</option>';
+
+  generateYears().forEach((year) => {
+    yearOptions += `<option value="${year}" >${year}</option>`;
+  });
+
+  generateDates().forEach((date) => {
+    dateOptions += `<option value="${date}" >${date}</option>`;
+  });
+
+  const yearDropdowns = document.querySelectorAll('.year-input');
+  const dateDropdowns = document.querySelectorAll('.date-input');
+
+  yearDropdowns.forEach((input) => {
+    input.innerHTML += yearOptions;
+  });
+
+  dateDropdowns.forEach((input) => {
+    input.innerHTML += dateOptions;
   });
 
   const languageRadioOptions = document.querySelectorAll(`input[name="language-options"]`);
@@ -643,9 +681,9 @@ import ErrorInfo from './errorInfo.js';
       region = [regionRadioValue];
     }
 
-    const dateOfPublication = getValueFromInputSelector('#pubDate input');
+    const dateOfPublication = getValueFromInputSelector('#pubDate select');
     const monthOfPublication = getValueFromInputSelector('#pubMonth select');
-    const yearOfPublication = getValueFromInputSelector('#pubYear input');
+    const yearOfPublication = getValueFromInputSelector('#pubYear select');
 
     const language =
       getRadioValue('language-options') === 'other'
@@ -1006,8 +1044,6 @@ import ErrorInfo from './errorInfo.js';
           (resource) => resourcesByType.updated.indexOf(resource.id) < 0 && resourcesByType.deleted.indexOf(resource.id)
         )
         .map((resource) => document.getElementById(resource.id));
-
-      console.log(untouchedFiles);
 
       if (untouchedFiles) {
         untouchedFiles.forEach((fileUploadElement) =>
@@ -1399,7 +1435,6 @@ import ErrorInfo from './errorInfo.js';
     const [toYear, toMonth] = data.end_month.split('-');
     const [pubDate, pubMonth, pubYear] = data.publication_date ? data.publication_date.split('/') : ['', '', ''];
     const regions = data.region.split(',');
-    console.log(regions);
 
     if (regions[0] === 'All India') {
       const allIndiaInput = document.getElementById('allIndia');
@@ -1411,17 +1446,7 @@ import ErrorInfo from './errorInfo.js';
       const multiSelectToggle = document.querySelector('.multiselect.dropdown-toggle');
       nativeMultiSelect.style.display = 'inline-block';
       multiSelectToggle.style.display = 'inline-block';
-      const statesButton = document.querySelector('.multi-states-btn');
-      statesButton.setAttribute('title', regions.join(', '));
-      if (regions.length < 3) {
-        statesButton.querySelector('.multiselect-selected-text').innerHTML = regions.join(', ');
-      } else {
-        statesButton.querySelector('.multiselect-selected-text').innerHTML = `${regions.length} selected`;
-      }
-      regions.forEach((region) => {
-        document.querySelector(`input[value="${region}"]`).checked = true;
-        document.querySelector(`button[title="${region}"]`).classList.add('active');
-      });
+      populateStates(regions);
     }
 
     document.getElementById('fromYear').value = fromYear;
