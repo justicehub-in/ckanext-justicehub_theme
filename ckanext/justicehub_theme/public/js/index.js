@@ -855,8 +855,8 @@ import ErrorInfo from './errorInfo.js';
 
   function getTimePeriodDetailsFromSelector(timePeriodSelector) {
     return {
-      month: getValueFromInputSelector(`${timePeriodSelector} select`),
-      year: getValueFromInputSelector(`${timePeriodSelector} input`)
+      month: getValueFromInputSelector(`${timePeriodSelector}  .months-select`),
+      year: getValueFromInputSelector(`${timePeriodSelector}   .year-input`)
     };
   }
 
