@@ -271,11 +271,12 @@ class PackageNewController(base.BaseController):
             facets = OrderedDict()
 
             default_facet_titles = {
-                'organization': _('Organizations'),
+                'publisher_name': _('Data Contributors'),
                 'groups': _('Groups'),
                 'tags': _('Tags'),
                 'res_format': _('Formats'),
                 'license_id': _('Licenses'),
+		'region': _('Geography'),
             }
 
             for facet in h.facets():
