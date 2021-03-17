@@ -8,6 +8,12 @@ $(document).ready(function () {
     var username = $('#signup-username').val();
     var password = $('#signup-password').val();
 
+    if(!$("#signup-form")[0].checkValidity()) {
+        $("#signup-form")[0].reportValidity();
+        console.log('Form validation failed');
+        return false;
+    }
+
     if (password && email) {
       var url = '/user/register_email';
       var data = {
