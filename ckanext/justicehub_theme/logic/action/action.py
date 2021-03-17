@@ -236,8 +236,9 @@ def package_show(context, data_dict):
     package_dict['creator_name'] = user_dict.get('display_name')
     package_dict['creator_username'] = user_dict.get('name')
     package_dict['creator_email'] = user_dict.get('email')
-    publisher_contact = next((sub for sub in package_dict['extras'] if sub['key'] == 'publisher_contacts'), None)
-    package_dict['publisher_name'] =  json.loads(publisher_contact.get('value'))[0].get('name') if publisher_contact else ""
+    if (package_dict.get('extras')):
+    	publisher_contact = next((sub for sub in package_dict['extras'] if sub['key'] == 'publisher_contacts'), None)
+    	package_dict['publisher_name'] =  json.loads(publisher_contact.get('value'))[0].get('name') if publisher_contact else ""
     return package_dict
 
 
