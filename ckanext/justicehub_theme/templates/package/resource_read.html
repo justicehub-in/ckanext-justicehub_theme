@@ -39,7 +39,7 @@
                         <p style="margin-bottom: 2px;">{{owner['name']}}</p>
                         {% endif %}
                         {% if owner['email'] %}
-                        <p style="color: #898989; font-size: 12px">{{owner['email']}}</p>
+                        <a href="mailto:{{owner['email']}}" style="color: #898989; font-size: 15.5x;">{{owner['email']}}</a>
                         {% endif %}
                     </div>
                     {% else %}
