@@ -6,9 +6,14 @@ from dateutil.parser import parse as parse_dates
 from sqlalchemy import MetaData
 from sqlalchemy.sql import select
 
+import ckan.lib.dictization.model_dictize as model_dictize
+
 import ckan.logic as logic
 import ckan.model as model
 from ckan.common import c
+from six import string_types, text_type
+from webhelpers.html import tags
+import ckan.lib.helpers as h
 
 cached_tables = {}
 
@@ -108,3 +113,74 @@ def get_package_visits(pkg):
         total = res.running_total
         recent = res.recent_views
     return {'total' : total, 'recent': recent}
+
+
+
+def get_popular_groups():
+
+    context = {}
+    data_dict = {'sort': 'package_count desc',
+		'all_fields': True,
+                'include_dataset_count': True}
+
+    groups =  logic.get_action('group_list')(context, data_dict)
+    return groups[0:12]
+
+
+    #context = {'model': model}
+    
+    #TODO: short the groups by number of datasets in it
+    #q = model.Session.query(model.Group) \
+    #    .filter(model.Group.is_organization == False) \
+    #    .filter(model.Group.state == 'active') \
+    #    .limit(12)
+
+
+    #groups = q.all()
+
+    #group_list = model_dictize.group_list_dictize(groups, context)
+    #return group_list
+
+
+def pop_zip_resource(pkg):
+    '''Finds the zip resource in a package's resources, removes it from the
+    package and returns it. NB the package doesn't have the zip resource in it
+    any more.
+    '''
+    zip_res = None
+    non_zip_resources = []
+    for res in pkg.get('resources', []):
+        if res.get('downloadall_metadata_modified'):
+            zip_res = res
+        else:
+            non_zip_resources.append(res)
+    pkg['resources'] = non_zip_resources
+    return zip_res
+
+
+
+def show_linked_user(user, maxlength=0, avatar=20):
+    if not isinstance(user, model.User):
+        user_name = text_type(user)
+        user = model.User.get(user_name)
+        if not user:
+            return user_name
+    if user:
+        name = user.name if model.User.VALID_NAME.match(user.name) else user.id
+        displayname = user.display_name
+
+        if maxlength and len(user.display_name) > maxlength:
+            displayname = displayname[:maxlength] + '...'
+
+        return tags.literal(u'{icon} {link}'.format(
+            icon=h.gravatar(
+                email_hash=user.email_hash,
+                size=avatar
+            ),
+            link=tags.link_to(
+                displayname,
+                ('/user/show/' + name)
+            )
+        ))
+
+

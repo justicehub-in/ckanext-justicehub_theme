@@ -1,3 +1,243 @@
+{% set groups = h.justicehub_theme_get_popular_groups() %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JusticeHub</title>
+  </head>
+  <body>
+
+    <main>
+      <section class="hero-section">
+        <div class="hero-section__overlay">
+          <div class="custom-container">
+            <div class="row">
+              <div class="col-lg-5 col-md-6 col-sm-8 hero-section__content">
+                <h2>Legal & Justice Data</h2>
+                <p>An open source platform for data related to the Indian legal and justice system. Crowdsourced from a community of law
+  and data researchers, practitioners and enthusiasts.</p>
+                <div class="explore-row">
+                  <a href="/dataset" class="btn btn-primary col-lg-5 col-md-5 col-sm-5 col-xs-12">Explore Data</a>
+                  <a href="/upload" class="btn btn-primary-outline col-lg-5 col-md-5 col-sm-5 col-xs-12">Contribute Data</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="categories">
+          <h3>Explore Popular Categories</h3>
+          <div class="categories__row row">
+            {% for group in groups %}
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 category-item"  onclick="window.location='/dataset?groups={{group.name}}';">
+                <div class="icon-container">
+                  <img src="{{ group.image_display_url }}" alt="" />
+                </div>
+                <p>{{ group.display_name }}</p>
+              </div>
+            {% endfor %} 
+          </div>
+        </div>
+      </section>
+      <section class="datasets-section">
+        <div class="custom-container">
+          <div class="main-search">
+            <p>Search for datasets, reports, organizations, categories & more</p>
+            <form class="" method="get" action="{% url_for controller='package', action='search' %}">
+		    <div class="input-group">
+		      <input aria-label="{% block header_site_search_label %}{{ _('Search datasets') }}{% endblock %}" id="field-main-search" type="text" class="form-control" name="q" value="" autocomplete="off"/>
+		      <span class="input-group-btn">
+		        <button class="btn btn-primary" type="submit">
+		          <img src="/assets/icons/search.svg" style="height: 19.25px; width: auto" alt="" />
+		        </button>
+		      </span>
+		    </div>
+           </form>
+           <p><a href="https://docs.justicehub.in/dataset-search.html" target="_blank" style="font-size:16px;">Click here to read the guidelines for writing effective queries</a></p>
+          </div>
+          
+        </div>
+      </section>
+      <section class="review-section">
+        <div class="custom-container">
+          <!-- <h2>Highlights</h2> -->
+          <div class="review-section__content row">
+            <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-md-push-6 video-container">
+              <div style="width: 100%; height: 340px; background-color: #f65940"></div>
+            </div> -->
+            <div class="highlights-info">
+              <p>
+                Keep abreast with the latest datasets, collaborative opportunities, stories and more!
+              </p>
+              <a href="https://dataforjustice.substack.com" target="_blank" rel="noreferrer noopener" class="btn btn-primary">Join us on Substack</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="quality-section">
+        <div class="custom-container">
+          <div class="quality-section__content row">
+            <div class="col-lg-4" style="text-align: center;">
+              <img alt="file formats" src="assets/dataset_image.svg" />
+            </div>
+            <div class="col-lg-6 col-lg-offset-1">
+              <h2>Datasets</h2>
+              <p>
+                A dataset is a collection of files grouped together to give a complete understanding of a specific topic.
+                They can contain different files, like reports, raw data in the form of csv or excel sheets, a data
+                dictionary (which describes the contents in the files) & more.
+              </p>
+              <p>
+                You can find datasets as well as stand-alone files on the platform. For more info on what truly makes a
+                dataset, click the links below.
+              </p>
+              <div class="row dataset-action-row">
+                <div class="col-lg-5 col-sm-6 col-xs-6">
+                  <a data-toggle="modal"
+                  style="cursor: pointer;" data-target="#howToUploadVideoContainer"><img style="margin-right: 8px;" src="/assets/icons/movie_icon.svg" /><span>Watch Video</span></a>
+                </div>
+                <div class="col-lg-5 col-sm-6 col-xs-6">
+                  <a href="https://docs.justicehub.in/"><img style="margin-right: 8px;" src="/assets/icons/book_icon.svg" /><span>Read more</span></a>
+                </div>
+              </div>
+              <div class="modal fade" id="howToUploadVideoContainer" tabindex="-1" role="dialog" aria-labelledby="how-to-upload">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">How to upload a dataset?</h4>
+                    </div>
+                    <div class="modal-body">
+                      <iframe class="responsive-item"                        src="https://www.youtube.com/embed/7wrBtB_coJc">
+                      </iframe>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="quality-section">
+        <div class="custom-container">
+          <div class="quality-section__content row">
+            <div class="col-lg-6 col-md-6 col-sm-12 video-container">
+              <div style="width: 100%; height: 340px; background-color: #f65940">
+                <iframe width="100%" height="100%"
+                src="https://www.youtube.com/embed/LZKBY3V2ppE">
+                </iframe>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+              <div id="carousel-testimonials" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                  <li data-target="#carousel-testimonials" data-slide-to="0" class="active"></li>
+                  <li data-target="#carousel-testimonials" data-slide-to="1"></li>
+                  <li data-target="#carousel-testimonials" data-slide-to="2"></li>
+                  <li data-target="#carousel-testimonials" data-slide-to="3"></li>
+                  <li data-target="#carousel-testimonials" data-slide-to="4"></li>
+                  <li data-target="#carousel-testimonials" data-slide-to="5"></li>
+                </ol>
+              
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                  <div class="item active">
+                    <p>“Data is power. Open data is public power. When government and researchers allow their data to be made public, it improves our understanding of the world and makes for better policy.”</p>
+                    <div>
+                      <h3>Nick Robinson</h3>
+                      <p>Legal Researcher</p>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <p>"The use of large data sets will, in the next few years, completely change the way government and civil society looks at the judicial system in India. It has the potential to completely transform our understanding of how the judiciary works and continuing our efforts to help bring about judicial reforms in India, Vidhi is thrilled to take the open data pledge."</p>
+                    <div>
+                      <h3>Alok Prasanna</h3>
+                      <p>Co-Founder, Vidhi</p>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <p>“Why do I believe that we should have open data? At the heart of the scientific process in any domain or on any question, is that there should be multiple, rival analyses based on the identical data. And the starting point for this is the public goods of high quality, standardised, accessible data.”</p>
+                    <div>
+                      <h3>Susan Thomas</h3>
+                      <p>Economist, Finance Research Group</p>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <p>"The potential of a platform like Jusitice Hub, is that it moves the conversation on very difficult questions in our society towards a more evidence based understanding. Many of the questions require moving away from intuition and passion and that kind of analysis. And we really need to see what is happening on the ground and unless we bring all of these things together, collaboratively, understanding all problems in all its complexity becomes difficult."</p>
+                    <div>
+                      <h3>Dr. Anup Surendranath</h3>
+                      <p>Executive Director, Project 39A</p>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <p>"We chose to share our data openly on the Justice Hub, as a matter of scientific research principle i.e. allow verification of the quantitative analysis. But the other motivation to do it was the availability of data itself for research. Original research in judicial studies is so low, that there is value in publishing it because somebody else might come and do some research on it that we hadn't thought of."</p>
+                    <div>
+                      <h3>Devendra Damle</h3>
+                      <p>Research fellow, NIPFP</p>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <p>“Sharing the data set on an open access platform fosters research. We want our data set to be used by as many people as possible and let a thousand ideas bloom with what can be done with this data and how it can feed into a meaningful feedback loop for policymakers, litigants and court administration.”</p>
+                    <div>
+                      <h3>Bharti Ali</h3>
+                      <p>Executive Director, HAQ: Centre for Child Rights</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-lg-6 col-md-6 moderators__content">
+              <h4>Our Moderators</h4>
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 moderator-duty">
+                  <img src="/assets/icons/proofread.svg" alt="proof read" />
+                  <span>proof read files and datasets</span>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 moderator-duty">
+                  <img src="/assets/icons/completeness.svg" alt="proof read" />
+                  <span>ensure data completeness</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 moderator-duty">
+                  <img src="/assets/icons/getintouch.svg" alt="proof read" />
+                  <span>get in touch with data contributors</span>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 moderator-duty">
+                  <img src="/assets/icons/authenticity.svg" alt="proof read" />
+                  <span>check the file authenticity</span>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </section>
+
+      <section class="contributors-section">
+        <div class="custom-container">
+          <h3>Top Data Contributors in the Community</h3>
+          <div class="contributors-row contributors-row--org"></div>
+          <div class="contributors-row contributors-row--individual"></div>
+          <p>Can’t find what you are looking for?</p>
+          <a href="/contact" class="btn btn-primary">Let us know!</a>
+        </div>
+      </section>
+
+      <a class="fab" href="https://docs.google.com/forms/d/e/1FAIpQLSdYejNNx5AtNqJGflzWMjD5pBGOqllQTkuXSR3-UYXd0bqtaA/viewform" target="_blank">
+	<img class="feedback-logo" src="/assets/feedback.png">
+      </a>
+
+    </main>
+
+    <script src="/home.js"></script>
+  </body>
+</html>
+
+
+{# 
 <div role="main">
     <div class="container">
         <div class="row">
@@ -5,6 +245,15 @@
                 {% snippet 'home/snippets/search.html' %}
             {% endblock %}
         </div>
+
+        <div style="height:100px;">
+        {% for group in groups %}
+          {% snippet "group/snippets/group_item.html", group=group, position=loop.index %}
+        {% endfor %}
+        </div>
+
+
+
         <i class="fa fa-circle primary-color landing-quotes-top"></i>
         <div class="row landing-desc">
             <div class="col col-xs-12 col-sm-6 col-sm-offset-1">
@@ -51,4 +300,6 @@
         <i class="fa fa-circle primary-color landing-quotes-bottom"></i>
     </div>
 </div>
+
+#}
 

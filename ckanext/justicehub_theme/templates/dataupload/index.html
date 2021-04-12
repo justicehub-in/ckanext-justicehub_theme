@@ -1,0 +1,540 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <link rel="stylesheet" href="/jh_home_new1.css" />
+    <link rel="stylesheet" href="/bootstrap-multiselect.min.css" />
+    <title>Data Upload Flow</title>
+  </head>
+  <body>
+    {% include "header.html" %}
+    <div class="data-upload-header">
+      <div class="custom-container">
+        <a href="/" class="exit-flow"
+          ><span class="iconify" data-icon="line-md:chevron-left" data-inline="false"></span>Exit</a
+        >
+        <h1>Upload Data</h1>
+        <h2>
+          Follow our simple 4 step process to ensure that others can understand the context and reliability of the
+          files.
+          <a role="button" data-toggle="modal" data-target="#howToUploadVideoContainer"
+            >Click here to watch the video guide.</a
+          >
+        </h2>
+        <a
+          class="fab"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSdYejNNx5AtNqJGflzWMjD5pBGOqllQTkuXSR3-UYXd0bqtaA/viewform"
+          target="_blank"
+        >
+          <img class="feedback-logo" src="/assets/feedback.png" />
+        </a>
+        <div class="upload-video-container">
+          <div
+            class="modal fade"
+            id="howToUploadVideoContainer"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="how-to-upload"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title">How to upload a dataset?</h4>
+                </div>
+                <div class="modal-body">
+                  <iframe class="responsive-ifram" src="https://www.youtube.com/embed/uO5ttrFZyJw" allowfullscreen>
+                  </iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul class="steps-row">
+          <li class="step-indicator active" data-value="1">
+            <div class="step-indicator__icon-container">
+              <span class="iconify" data-icon="ant-design:file-text-outlined" data-inline="false"></span>
+            </div>
+            <p>Add Files <span class="iconify" data-icon="mdi:check-circle" data-inline="false"></span></p>
+          </li>
+          <li class="step-indicator" data-value="2">
+            <div class="step-indicator__icon-container">
+              <span class="iconify" data-icon="jam:stamp-f" data-inline="false"></span>
+            </div>
+            <p>Ownership <span class="iconify" data-icon="mdi:check-circle" data-inline="false"></span></p>
+          </li>
+          <li class="step-indicator" data-value="3">
+            <div class="step-indicator__icon-container">
+              <span class="iconify" data-icon="mdi:calendar-today" data-inline="false"></span>
+            </div>
+            <p>Data Relevancy <span class="iconify" data-icon="mdi:check-circle" data-inline="false"></span></p>
+          </li>
+          <li class="step-indicator" data-value="4">
+            <div class="step-indicator__icon-container">
+              <span class="iconify" data-icon="carbon:data-class" data-inline="false"></span>
+            </div>
+            <p>Source of Data <span class="iconify" data-icon="mdi:check-circle" data-inline="false"></span></p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <section class="data-upload-section custom-container files-section">
+      <div class="data-upload-section__form">
+        <div class="data-upload-section__form__field">
+          <h3>What is this data about?</h3>
+          <span>eg: Death Penalties in Karnataka from Years 2000-2010</span>
+          <input type="text" class="form-control input--large" id="datasetNameField" />
+        </div>
+        <div class="data-upload-section__form__field">
+          <h3>Describe this dataset</h3>
+          <span
+            >Dataset descriptions improve the searchbility of datasets on the Justice Hub as well as other search
+            engines like Google, etc</span
+          >
+          <!-- <span>eg: Death Penalties in Karnataka from Years 2000-2010</span> -->
+          <textarea class="form-control input--large" id="datasetDescriptionField" cols="25" rows="5"></textarea>
+        </div>
+        <div class="data-upload-section__form__field data-upload-section__form__field--file">
+          <h3>Upload one or many related files</h3>
+          <span
+            >You can upload a single file or a collection of files on a single subject. We accept all file formats like
+            data (csv & xlsx), data dictionary, methodology or reports (pdf). Each file has to be under 100 MB. Please
+            get in touch with <a href="mailto:tech@justicehub.in">tech@justicehub.in</a> to upload files larger than
+            that.</span
+          >
+
+          <div class="file-upload" id="file-1">
+            <span class="iconify reset-input" data-icon="grommet-icons:power-reset" data-inline="false"></span>
+            <div class="file-upload__name">
+              <div class="upload-box">
+                <input type="file" class="datasetfile-input" />
+                <span class="iconify" data-icon="fe:upload" data-inline="false"></span>
+              </div>
+              <div class="name-field">
+                <h4>Name of the file <span>(Upload a file to edit the name)</span></h4>
+                <input type="text" class="form-control file-name" disabled />
+              </div>
+            </div>
+            <div class="file-upload__description">
+              <h4>Description</h4>
+              <textarea class="form-control file-description" cols="25" rows="5"></textarea>
+            </div>
+          </div>
+
+          <div class="file-upload" id="file-2">
+            <span class="iconify reset-input" data-icon="grommet-icons:power-reset" data-inline="false"></span>
+            <div class="file-upload__name">
+              <div class="upload-box">
+                <input type="file" class="datasetfile-input" />
+                <span class="iconify" data-icon="fe:upload" data-inline="false"></span>
+              </div>
+              <div class="name-field">
+                <h4>Name of the file <span>(Upload a file to edit the name)</span></h4>
+                <input type="text" class="form-control file-name" disabled />
+              </div>
+            </div>
+            <div class="file-upload__description">
+              <h4>Description</h4>
+              <textarea class="form-control file-description" cols="25" rows="5"></textarea>
+            </div>
+          </div>
+        </div>
+        <a role="button" class="add-more add-more--files btn-primary-text"
+          ><span class="iconify" data-icon="mdi:add" data-inline="false"></span> <span>Add more</span></a
+        >
+        <hr />
+        <div class="data-upload-section__footer">
+          <div></div>
+          <div class="data-upload-section__footer__right">
+            <button class="btn btn-primary-outline btn-mont draft-button" id="saveOnFilesSectionButton">
+              Save as Draft
+            </button>
+            <button class="next-button btn btn-primary btn-mont" id="proceedFromFilesButton">Proceed</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="data-upload-section custom-container ownership-section hide">
+      <div class="data-upload-section__form">
+        <div class="data-upload-section__form__field">
+          <h4>Select Licensing Permission</h4>
+          <select class="input--large" id="licenseSelect"></select>
+        </div>
+        <div class="data-upload-section__form__field">
+          <h4>Set Viewing Permissions</h4>
+          <div class="radio">
+            <label>
+              <input type="radio" name="view-permissions" id="anyoneRadio" value="Anyone" checked />
+              Anyone
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="view-permissions" id="onlyMeRadio" value="Only me" />
+              Only me
+            </label>
+          </div>
+        </div>
+        <div class="data-upload-section__form__field data-upload-section__form__field--authors">
+          <h4>Who is the Primary Publisher or Author of the file(s)?</h4>
+          <div class="radio">
+            <label>
+              <input type="radio" name="primary-publisher" id="individualRadio" value="individual" checked />
+              An Individual, I know the name
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="primary-publisher" id="organizationRadio" value="organization" />
+              An Organization
+            </label>
+          </div>
+
+          <div class="item-addition item-addition--author item-addition--individual">
+            <div class="item-addition__name-field">
+              <h5>Author's name</h5>
+              <input type="text" class="form-control" />
+            </div>
+            <div class="item-addition__email-field">
+              <h5>Email of Author (optional)</h5>
+              <input type="email" class="form-control" />
+            </div>
+            <div class="item-addition__website-field">
+              <h5>Website of Author (optional)</h5>
+              <input type="text" class="form-control" />
+            </div>
+          </div>
+        </div>
+        <a role="button" class="add-more add-more--authors btn-primary-text"
+          ><span class="iconify" data-icon="mdi:add" data-inline="false"></span> <span>Add more</span></a
+        >
+        <hr />
+        <div class="data-upload-section__footer">
+          <div>
+            <a role="button" class="previous-button btn-primary-text"
+              ><span class="iconify" data-icon="line-md:chevron-left" data-inline="false"></span>
+              <span>Previous</span></a
+            >
+          </div>
+          <div class="data-upload-section__footer__right">
+            <button class="btn btn-primary-outline btn-mont draft-button" id="saveOnOwnershipSectionButton">
+              Save as Draft
+            </button>
+            <button class="next-button btn btn-primary btn-mont" id="proceedFromOwnershipButton">Proceed</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="data-upload-section custom-container relevancy-section hide">
+      <div class="data-upload-section__form">
+        <div class="data-upload-section__form__field">
+          <h4>Which region does this data cover?</h4>
+          <div class="radio">
+            <label>
+              <input type="radio" name="region-options" id="allIndia" value="All India" checked />
+              All India
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="region-options" id="partialIndia" value="Partial India" />
+              Specific Indian State(s)
+            </label>
+            <select style="display: none" id="multi-select-states" multiple="multiple">
+              <option value="Andaman And Nicobar Islands">Andaman And Nicobar Islands</option>
+              <option value="Andhra Pradesh">Andhra Pradesh</option>
+              <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+              <option value="Assam">Assam</option>
+              <option value="Bihar">Bihar</option>
+              <option value="Chandigarh">Chandigarh</option>
+              <option value="Chhattisgarh">Chhattisgarh</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Goa">Goa</option>
+              <option value="Gujarat">Gujarat</option>
+              <option value="Haryana">Haryana</option>
+              <option value="Himachal Pradesh">Himachal Pradesh</option>
+              <option value="Jammu And Kashmir">Jammu And Kashmir</option>
+              <option value="Jharkhand">Jharkhand</option>
+              <option value="Karnataka">Karnataka</option>
+              <option value="Kerala">Kerala</option>
+              <option value="Ladakh">Ladakh</option>
+              <option value="Lakshadweep">Lakshadweep</option>
+              <option value="Madhya Pradesh">Madhya Pradesh</option>
+              <option value="Maharashtra">Maharashtra</option>
+              <option value="Manipur">Manipur</option>
+              <option value="Meghalaya">Meghalaya</option>
+              <option value="Mizoram">Mizoram</option>
+              <option value="Nagaland">Nagaland</option>
+              <option value="Odisha">Odisha</option>
+              <option value="Puducherry">Puducherry</option>
+              <option value="Punjab">Punjab</option>
+              <option value="Rajasthan">Rajasthan</option>
+              <option value="Sikkim">Sikkim</option>
+              <option value="Tamil Nadu">Tamil Nadu</option>
+              <option value="Telangana">Telangana</option>
+              <option value="The Dadra And Nagar Haveli And Daman And Diu">
+                The Dadra And Nagar Haveli And Daman And Diu
+              </option>
+              <option value="Tripura">Tripura</option>
+              <option value="Uttar Pradesh">Uttar Pradesh</option>
+              <option value="Uttarakhand">Uttarakhand</option>
+              <option value="West Bengal">West Bengal</option>
+            </select>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="region-options" id="otherCountries" value="Other countries" />
+              Other countries
+            </label>
+            <input type="text" style="display: none" id="otherCountriesInput" />
+          </div>
+        </div>
+
+        <div class="data-upload-section__form__field">
+          <h4>Date of Publication (optional)</h4>
+          <div class="date-of-publication-entry">
+            <div id="pubDate">
+              <h5>Date</h5>
+              <select class="date-input" id="pubDateInput"></select>
+            </div>
+            <div id="pubMonth">
+              <h5>Month</h5>
+              <select id="pubMonthInput" class="months-select"></select>
+            </div>
+            <div id="pubYear">
+              <h5>Year</h5>
+              <select class="year-input" id="pubYearInput"></select>
+            </div>
+          </div>
+        </div>
+
+        <div class="data-upload-section__form__field">
+          <h4>Which time period does this data cover?</h4>
+          <div class="time-period-entry">
+            <div class="period period--from">
+              <div class="period__month">
+                <h5>Month (optional)</h5>
+                <select id="fromMonth" class="months-select"></select>
+              </div>
+              <div class="period__year">
+                <h5>From year</h5>
+                <select class="year-input" id="fromYear"></select>
+              </div>
+            </div>
+            <div class="period period--to">
+              <div class="period__month">
+                <h5>Month (optional)</h5>
+                <select id="toMonth" class="months-select"></select>
+              </div>
+              <div class="period__year">
+                <h5>To year</h5>
+                <select class="year-input" id="toYear"></select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="data-upload-section__form__field">
+          <h4>Which language is the data in?</h4>
+          <div class="radio">
+            <label>
+              <input type="radio" name="language-options" id="english" value="English" checked />
+              English
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="language-options" id="hindi" value="Hindi" />
+              Hindi
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="language-options" id="other" value="other" />
+              Other
+            </label>
+            <input type="text" style="display: none; margin-left: 14px; font-size: 14px" id="otherLanguageInput" />
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="data-upload-section__footer">
+        <div>
+          <a role="button" class="previous-button btn-primary-text"
+            ><span class="iconify" data-icon="line-md:chevron-left" data-inline="false"></span> <span>Previous</span></a
+          >
+        </div>
+        <div class="data-upload-section__footer__right">
+          <button class="btn btn-primary-outline btn-mont draft-button" id="saveOnRelevancySectionButton">
+            Save as Draft
+          </button>
+          <button class="next-button btn btn-primary btn-mont" id="proceedFromRelevancyButton">Proceed</button>
+        </div>
+      </div>
+    </section>
+    <section class="data-upload-section custom-container source-section hide">
+      <div class="data-upload-section__form">
+        <div class="data-upload-section__form__field">
+          <h4>Enter keywords to help people find this data:</h4>
+          <span>Use comma(,) to separate keywords - each keyword should at least have 3 characters</span>
+          <div class="tags-container" id="keywordsContainer">
+            <input type="text" id="keywordsInput" />
+          </div>
+        </div>
+
+        <div class="data-upload-section__form__field">
+          <h4>Select the sources you got the data from:</h4>
+          <span>Use comma(,) to separate sources</span>
+          <div class="tags-container" id="sourcesContainer">
+            <input type="text" id="sourcesInput" />
+          </div>
+        </div>
+
+        <div class="data-upload-section__form__field data-upload-section__form__field--references">
+          <h4>Reference Links (optional):</h4>
+
+          <div class="item-addition item-addition--reference">
+            <div class="item-addition__link-field">
+              <h5>Paste Link</h5>
+              <input type="text" class="form-control" />
+            </div>
+            <div class="item-addition__title-field">
+              <h5>Give your link a title</h5>
+              <input type="text" class="form-control" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <a role="button" class="add-more add-more--references btn-primary-text"
+        ><span class="iconify" data-icon="mdi:add" data-inline="false"></span> <span>Add more</span></a
+      >
+      <hr />
+      <div class="data-upload-section__footer">
+        <div>
+          <a role="button" class="previous-button btn-primary-text"
+            ><span class="iconify" data-icon="line-md:chevron-left" data-inline="false"></span> <span>Previous</span></a
+          >
+        </div>
+        <div class="data-upload-section__footer__right">
+          <button class="btn btn-primary-outline btn-mont draft-button" id="saveOnSourcesSectionButton">
+            Save as Draft
+          </button>
+          <button
+            id="previewButton"
+            class="btn btn-primary btn-mont"
+            data-toggle="modal"
+            data-target="#previewDatasetModal"
+          >
+            Preview & Submit
+          </button>
+        </div>
+      </div>
+      <div class="modal fade" id="previewDatasetModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <div class="modal-header-info">
+                <h3 id="datasetNameOnPreviewModal"></h3>
+                <p id="datasetDescOnPreviewModal"></p>
+                <p>
+                  <!-- <img class="modal-logo" src="/assets/jh_logo_notext.png" />
+                        <h4>{{ title }}</h4>
+                        <p>{{ title_content }}</p>
+                        <p class="error-message" id="error-{{ id }}">{{ error_message }}</p> -->
+                </p>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="modal-body__data-section">
+                <div class="modal-body__data-section__header">
+                  <h3>Files</h3>
+                  <button class="btn-primary-text preview-edit" data-dismiss="modal" data-section="files-section">
+                    <span>Edit</span><span class="iconify" data-icon="feather:edit" data-inline="false"></span>
+                  </button>
+                </div>
+                <div id="filesListOnPreview"></div>
+              </div>
+              <div class="modal-body__data-section">
+                <div class="modal-body__data-section__header">
+                  <h3>Ownership</h3>
+                  <button class="btn-primary-text preview-edit" data-dismiss="modal" data-section="ownership-section">
+                    <span>Edit</span><span class="iconify" data-icon="feather:edit" data-inline="false"></span>
+                  </button>
+                </div>
+                <table id="ownershipPreviewTable"></table>
+              </div>
+              <div class="modal-body__data-section">
+                <div class="modal-body__data-section__header">
+                  <h3>Data Relevancy</h3>
+                  <button class="btn-primary-text preview-edit" data-dismiss="modal" data-section="relevancy-section">
+                    <span>Edit</span><span class="iconify" data-icon="feather:edit" data-inline="false"></span>
+                  </button>
+                </div>
+                <table id="dataRelevancyPreviewTable"></table>
+              </div>
+              <div class="modal-body__data-section">
+                <div class="modal-body__data-section__header">
+                  <h3>Source of Data</h3>
+                  <button class="btn-primary-text preview-edit" data-dismiss="modal" data-section="source-section">
+                    <span>Edit</span><span class="iconify" data-icon="feather:edit" data-inline="false"></span>
+                  </button>
+                </div>
+                <table id="sourcePreviewTable"></table>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn-primary-text" data-dismiss="modal"><span>Cancel</span></button>
+              <button class="next-button btn btn-primary btn-mont" id="submitDatasetButton">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {{ h.snippet('widget/auth/datasetSuccess.html', id="datasetUploadSuccessModal") }}
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/js/bootstrap-multiselect.min.js"></script>
+    <script>
+      const multiSelectStatesElement = $('#multi-select-states');
+      multiSelectStatesElement.multiselect({
+        buttonClass: 'multi-states-btn'
+      });
+
+      function populateStates(statesArray) {
+        multiSelectStatesElement.multiselect('select', statesArray, {
+          buttonClass: 'multi-states-btn'
+        });
+      }
+
+      $('#howToUploadVideoContainer').on('hide.bs.modal', function () {
+        $('#howToUploadVideoContainer iframe').attr('src', '');
+      });
+
+      $('#howToUploadVideoContainer').on('show.bs.modal', function () {
+        $('#howToUploadVideoContainer iframe').attr('src', 'https://www.youtube.com/embed/uO5ttrFZyJw');
+      });
+    </script>
+    <script type="module" src="/js/index.js"></script>
+  </body>
+</html>

@@ -1,15 +1,55 @@
 {% ckan_extends %}
-
 {% block about %}
-  <div class="row">
-      <div class="col col-xs-12 col-sm-8 col-sm-offset-2 text-center">
-        {% if g.site_about %}
-          {{ h.render_markdown(g.site_about) }}
-        {% else %}
-          <h1 class="page-heading">{{ _('About') }}</h1>
-          {% snippet 'home/snippets/about_text.html' %}
-        {% endif %}
-      {% endblock %}
-      </div>
+{% resource 'justicehub_theme/otherstyles/about.css' %}
+<div class="row">
+  <div class="about-block">
+    <h1>About Justice Hub</h1>
+    <p>Open data will enable everyone to see and solve justice problems using data.</p>
+
+    <p>
+      JusticeHub empowers communities for data-driven justice by making legal and justice data open, accessible and
+      actionable.
+    </p>
+
+    <p>
+      By becoming a shared and open resource for discovering and publishing justice data and related information,
+      JusticeHub aims to increase the access to and interoperability of data. JusticeHub aims to advance the open data
+      movement in India by investing in and increasing the capacity of a wide range of actors to use and work with open
+      data to serve justice.
+    </p>
   </div>
+  <div class="about-block">
+    <h1>Background</h1>
+    <p>Justice Hub was born out of the <a href="https://agami.in/d4j/" target="_blank" rel="noreferrer noopener">Agami Data for Justice Challenge</a> in June 2019. The Challenge sought to curate a collaborative entrepreneurial effort that increases and evolves the use of data. Inputs from a wide range of changemakers, led us to see the opportunity to collaborate on each other’s datasets.</p>
+
+    <p>
+      The Challenge invited applicants to create a data hub and create new datasets, and after a rigorous selection process <a href="https://civicdatalab.in" target="_blank">CivicDataLab</a> was selected as the winner to create the Justice Hub.
+    </p>
+  </div>
+  <div class="about-block">
+    <h1>Co-creators</h1>
+    <div class="logos-container">
+      <a href="https://civicdatalab.in/" target="_blank" rel="noreferrer noopener">
+        <img src="/assets/cdl_primary.png" alt="" /></a>
+      <a href="https://agami.in/" target="_blank" rel="noreferrer noopener">
+        <img src="/assets/agami_dark.png" alt="" />
+      </a>
+    </div>
+  </div>
+  <div class="about-block">
+    <h1>Team Members</h1>
+    <div class="team-members-container">
+      
+    </div>
+  </div>
+  <div class="about-block">
+    <h1>Advisors</h1>
+    <p><span>Bishaka Datta</span> - Point of View</p>
+    <p><span>Donald Lobo</span> - Chintu Gudiya Foundation | Tech4Dev</p>
+    <p><span>Madan Lokur</span> - Former Judge, Supreme Court of India and Judge, Supreme Court of Fiji</p>
+    <p><span>Rahul Matthan</span> - Partner, Trilegal</p>
+    <p><span>Samar Halarnkar</span> - Founder, Article 14</p>
+  </div>
+  {% resource 'justicehub_theme/otherstyles/about.js' %}
+  {% endblock %}
 </div>

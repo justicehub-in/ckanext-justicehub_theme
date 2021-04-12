@@ -1,0 +1,15 @@
+{% resource 'justicehub_theme/widget/popup/popup.css' %}
+{% resource 'justicehub_theme/widget/popup/popup.js' %}
+{% set title = "Dataset" %}
+{% set title_content = data.message %}
+{% set title_link = data.link %}
+{% extends "widget/popup/popup.html" %}
+
+
+{% block content %}
+<script>
+  if (window.location.href.indexOf("success") > -1)  {
+ 	window.history.pushState('', '', '/');
+  }
+</script>
+{% endblock %}

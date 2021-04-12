@@ -1,20 +1,49 @@
 {% ckan_extends %}
 
+{% block meta %}
+    {{ super() }}
+       
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Justice Hub">
+    <meta name="description" content="A collaborative community of organisations and individuals working towards creating, curating and maintaining resources (commons) to advance and promote data driven legal research.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://justicehub.in/">
+    <meta property="og:title" content="Justice Hub">
+    <meta property="og:description" content="A collaborative community of organisations and individuals working towards creating, curating and maintaining resources (commons) to advance and promote data driven legal research.">
+    <meta property="og:image" content="https://justicehub.in/assets/jh_logomark.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://justicehub.in/">
+    <meta property="twitter:title" content="Justice Hub">
+    <meta property="twitter:description" content="A collaborative community of organisations and individuals working towards creating, curating and maintaining resources (commons) to advance and promote data driven legal research.">
+    <meta property="twitter:image" content="https://justicehub.in/assets/jh_logomark.png">
+
+{% endblock %}
+
 {% block meta_viewport %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 {% endblock %}
 
 {% block styles %}
   {{ super() }}
-  <link rel="stylesheet" href="/justicehub_theme.css" />
-  <link rel="stylesheet" href="/common.css" />
+  {#<!-- <link rel="stylesheet" href="/common.css" /> --> 
   <link rel="stylesheet" href="/form.css" />
   <link rel="stylesheet" href="/search.css" />
   <link rel="stylesheet" href="/dataset.css" />
   <link rel="stylesheet" href="/partner.css"/>
   <link rel="stylesheet" href="/issues.css"/>
   <link rel="stylesheet" href="/resource.css"/>
+  <link rel="stylesheet" href="/justicehub_theme.css" /> #}
+
+
+  <link rel="stylesheet" href="/jh_home_new1.css"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"  />
+
 {% endblock %}
 
 {%- block scripts %}
@@ -22,3 +51,8 @@
   {% resource 'ckanext_issues/autocomplete-action-api.js' %}
   {% resource 'justicehub_theme/justicehub_theme.js' %}
 {% endblock -%}
+
+
+{#
+  
+#}

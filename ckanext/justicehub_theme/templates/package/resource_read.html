@@ -1,128 +1,120 @@
 {% ckan_extends %}
 
+{% block wrapper_class %}
+	no-nav dataset-page
+{% endblock %}
+
 {% block resource_inner %}
-    <div class="top-section">
+{% resource 'justicehub_theme/dataset/dataset.css' %}
+{% resource 'justicehub_theme/dataset/resource.css' %}
+    <div class="custom-container">
 
     {% block resource_content %}
 
-    <div class="row">
-        <div class="col col-sm-6 col-xs-12">
-        {% block resource_read_title %}
-            <h1>{{ h.resource_display_name(res) | truncate(50) }}</h1>
-        {% endblock %}
-
-        <div class="dataset-meta">
-            {{ _('Updated') }}
-            {{ h.time_ago_from_timestamp(res.last_modified) or h.time_ago_from_timestamp(res.created) or _('unknown') }}
+    <aside class="secondary col-sm-3 col-xs-12 sidebar">
+        <div class="module module-narrow module-shallow context-info dataset-sidebar-module">
+            <div class="header">
+                <h3>Uploaded by</h3>
+            </div>
+            <div class="body">
+                <a href="/user/show/{{pkg.creator_username}}" >{{pkg.creator_name}}</a>
+            </div>
+            <!-- <div class="footer">
+                
+            </div> -->
         </div>
-
-        <div class="dataset-meta">
-            <a href="{{ pkg.license_url }}">{{ pkg.license_title }}</a>
+        <div class="module module-narrow module-shallow context-info dataset-sidebar-module">
+            <div class="header">
+                <h3>Ownership</h3>
+            </div>
+            <div class="body">
+                {% set owners = h.justicehub_theme_parse_json(pkg.publisher_contacts or '[]') %}
+                {% for owner in owners %}
+                    {% if owner['name'] %}
+                    <div style="margin-bottom: 10px;">
+                        {% if owner['website']%}
+                        {% set web_link = owner['website'] if 'http' in owner['website'] else 'https://'+owner['website'] %}
+                        <a href="{{web_link}}" target="_blank" rel="noreferrer noopener">{{ owner['name']}}</a>
+                        {% else %}
+                        <p style="margin-bottom: 2px;">{{owner['name']}}</p>
+                        {% endif %}
+                        {% if owner['email'] %}
+                        <a href="mailto:{{owner['email']}}" style="color: #898989; font-size: 15.5x;">{{owner['email']}}</a>
+                        {% endif %}
+                    </div>
+                    {% else %}
+                    <p style="color: #898989; font-style: italic;">No owners added</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
-
-        <div class="prose notes resource-desc" property="rdfs:label">
-            {% if res.description %}
-              {{ h.render_markdown(res.description) }}
-            {% endif %}
-            {% if not res.description and c.package.notes %}
-              <h3>{{ _('From the dataset abstract') }}</h3>
-              <blockquote>
-                  {{ h.markdown_extract(h.get_translated(c.package, 'notes')) }}
-                  <p class="res-title">
-                  {% trans dataset=c.package.title, url=h.url_for(controller='package', action='read', id=c.package['name']) %}
-                  Source: <a href="{{ url }}">{{ dataset }}</a>
-                  {% endtrans %}
-                  </p>
-              </blockquote>
-            {% endif %}
+        <div class="module module-narrow module-shallow context-info dataset-sidebar-module">
+            <div class="header">
+                <h3>Data Source(s)</h3>
+            </div>
+            <div class="body">
+                {% if pkg['source'] %}
+                    {% set sources = pkg.source.split(',') %}
+                        <ol>
+                        {% for source in sources %}
+                            <li>{{ source }}</li>
+                        {% endfor %}
+                        </ol>
+                {% endif %}
+            </div>
         </div>
-
-        {% block resource_read_url %}
-            {% if res.url and h.is_url(res.url) %}
-              <p class="text-muted ellipsis res-title dataset-meta">
-                  <strong>{{ _('URL:') }}</strong><br>
-                  <a class="resource-url-analytics" href="{{ res.url }}" title="{{ res.url }}">{{ res.url | truncate(100) }}</a>
-              </p>
-            {% elif res.url %}
-              <p class="text-muted break-word res-title dataset-meta">
-                  <strong>{{ _('URL:') }}</strong><br>
-                  {{ res.url | truncate(100) }}
-              </p>
-            {% endif %}
-        {% endblock %}
-
-        {% if res.variable_measured %}
-        <div class="dataset-desc">
-            {{ _('Resource captures: ') }}
-            {{ res.variable_measured }}
+        <div class="module module-narrow module-shallow context-info dataset-sidebar-module">
+            <div class="header">
+                <h3>Reference Links</h3>
+            </div>
+            <div class="body">
+                {% set links = h.justicehub_theme_parse_json(pkg.links or '[]') %}
+                <ol>
+                {% for link in links %}
+                    {% set ref_link = link['link'] if 'http' in link['link']  else 'https://'+link['link'] %}
+                    <li><a style="display: block;" href="{{ ref_link }}" >{{ link['title'] }}</a></li>
+                {% endfor %}
+                </ol>
+                <!-- <p>{{ links }}</p> -->
+            </div>
         </div>
-        {% endif %}
+    </aside>
 
-        </div>
-
-    </div>
-    <div class="row">
-		<div class="res-actions col-sm-6 col-xs-12">
-		  {% block resource_actions %}
-		  <ul class="list-unstyled list-inline">
-		  {% block resource_actions_inner %}
-		    {% if h.check_access('package_update', {'id':pkg.id }) %}
-		        {% link_for _('EDIT'), controller='package', action='resource_edit', id=pkg.name, resource_id=res.id, class_='btn btn-default btn-action' %}
-		    {% endif %}
-
-		    {% if res.url and h.is_url(res.url) %}
-		      <li>
-		        <div class="btn-group">
-		        <a class="btn btn-primary btn-action resource-url-analytics resource-type-{{ res.resource_type }}" href="{{ res.url }}">
-		          {% if res.resource_type in ('listing', 'service') %}
-                      {{ _('VIEW') }}
-		          {% elif  res.resource_type == 'api' %}
-                      {{ _('API ENDPOINT') }}
-		          {% elif (not res.has_views or not res.can_be_previewed) and not res.url_type == 'upload' %}
-                      {{ _('Go to resource') }}
-		          {% else %}
-                      {{ _('DOWNLOAD') }}
-		          {% endif %}
-
-		        </a>
-                {%if res.datastore_active %}
-                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="{{ h.url_for(controller='ckanext.datastore.controller:DatastoreController', action='dump', resource_id=res.id, bom=True) }}"
-                                 target="_blank"><span>CSV</span></a>
-                             <a href="{{ h.url_for(controller='ckanext.datastore.controller:DatastoreController', action='dump', resource_id=res.id, format='tsv', bom=True) }}"
-                                 target="_blank"><span>TSV</span></a>
-                             <a href="{{ h.url_for(controller='ckanext.datastore.controller:DatastoreController', action='dump', resource_id=res.id, format='json') }}"
-                                 target="_blank"><span>JSON</span></a>
-                             <a href="{{ h.url_for(controller='ckanext.datastore.controller:DatastoreController', action='dump', resource_id=res.id, format='xml') }}"
-                                 target="_blank"><span>XML</span></a>
-                         </li>
-                     </ul>
-                {%endif%}
-
-		        {% block download_resource_button %}
+    <div class="primary col-sm-9 col-xs-12 dataset-primary">
+        {#{{ super() }}#}
+        <div class="dataset-main">
+            <div class="dataset-main__header">
+                <p style="font-size: 12px;"><a href="/dataset/{{pkg.name}}" style="font-family: Roboto; font-size: 12px; padding: 0 2px 0 0;" class="btn btn-primary-text">View all files</a> in "{{pkg.title}}"</p>
+                <h1>{{ h.resource_display_name(res) | truncate(50) }}</h1>
+                <p class="license-description">{{ ('Updated: ')}} {{h.time_ago_from_timestamp(res.last_modified) or _('unknown') }} | {{ res.format }}</p>
+                {% if res.format == 'CSV' or res.format == 'PDF' %}
+                {% block data_preview %}
+                    {% block resource_view %}
+                        {% block resource_view_content %}
+                        {{ super() }}
+                        {% endblock %}
+                    {% endblock %}
                 {% endblock %}
-		        </div>
-		      </li>
-		    {% endif %}
-		  {% endblock %}
-		  </ul>
-		  {% endblock %}
-		</div>
-        <div class="col col-sm-3 col-sm-offset-3 col-xs-12 res-social">
-            {% snippet "snippets/social.html" %}
+                {% else %}
+                <p style="font-style: italic; color: #898989; margin-left: 28px;">This file cannot be previewed. Please download it.</p>
+                {% endif %}
+                <p class="file-description">{{ res.description }}</p>
+
+                <div class="file-actions">
+                    <a href="mailto:info@justicehub.in" class="btn btn-primary-text"><i class="fa fa-flag-o" aria-hidden="true"></i>
+                         Report Issue</a>
+                    <a href="{{ res.url }}" class="resource-url-analytics btn btn-primary" target="_blank">
+                        {% if res.has_views or res.url_type == 'upload' %}
+                          <i class="fa fa-arrow-circle-o-down"></i>
+                          {{ _('Download') }}
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
     {% endblock %}
-
-    {% if res.format == 'CSV' %}
-        {% block data_preview %}
-        {{ super() }}
-        {% endblock %}
-    {% endif %}
+    </div>
 {% endblock %}
 
 {% block primary_content %}

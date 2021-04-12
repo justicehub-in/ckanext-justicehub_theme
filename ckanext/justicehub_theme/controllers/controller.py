@@ -11,6 +11,7 @@ import ckan.lib.plugins as plugins
 import ckan.logic as logic
 import ckan.model as model
 from ckan.common import c, request
+import ckan.lib.helpers as h
 
 clean_dict = logic.clean_dict
 parse_params = logic.parse_params
@@ -103,3 +104,10 @@ class SubscribeController(base.BaseController):
         tag_response = requests.request("POST", tag_url, headers=headers, data = json.dumps(payload))
 
         return response.text.encode('utf8')
+
+    def upload(self):
+        if c.user:
+            return plugins.toolkit.render('dataupload/index.html')
+        else:
+            #TO DO: change hardcoded value "/upload" to directly pick from requester url
+            h.redirect_to('/login?came_from=/upload')

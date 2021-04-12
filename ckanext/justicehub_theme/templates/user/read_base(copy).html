@@ -1,0 +1,34 @@
+{% ckan_extends %}
+
+{% block pre_primary %}
+<div class="col-xs-12 row" style="margin-top: 100px;">
+</div>
+{% endblock %}
+
+{% block content_action %}
+{% endblock %}
+
+{% block content_primary_nav %}
+  {{ h.build_nav_icon('user.read', _('DATASETS'), id=user.name) }}
+  {{ h.build_nav_icon('user.activity', _('ACTIVITY'), id=user.name) }}
+  {% if h.check_access('user_update', user) %}
+      <div class="content_action">
+        {% link_for _('EDIT'), named_route='user.edit', id=user.name, class_='btn btn-default' %}
+      </div>
+  {% endif %}
+{% endblock %}
+
+{% block user_image %}
+    <div class="image image-box">{{ h.linked_gravatar(user.email_hash, 190) }}</div>
+{% endblock %}
+{% block user_heading %}
+<div class="image-box" style="margin-left: -50px;">
+    <h1 class="heading">{{ user.display_name }}</h1>
+</div>
+{% endblock %}
+{% block user_about %}
+<div class="image-box" style="margin-left: -50px;">
+    {{ super() }}
+</div>
+<hr style="margin-left: -40px;">
+{% endblock %}

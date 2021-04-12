@@ -1,0 +1,34 @@
+{% resource 'justicehub_theme/widget/popup/popup.css' %}
+{% resource 'justicehub_theme/widget/popup/popup.js' %}
+{% set title = "Login" %}
+{% set title_content = "contribute data, join groups and do more by becoming a member" %}
+{% extends "widget/popup/popup.html" %}
+
+
+{% block content %}
+<!--TO DO: check why some pages are served by pylon and some by flask and move the condition inside the form tag -->
+{% if request.params %}
+ <form id="login-form" action="/login_generic?came_from={{ request.params.get('came_from') }}" method="post">
+{% elif request.args %}
+ <form id="login-form" action="/login_generic?came_from={{ request.args.get('came_from') }}" method="post">
+{% else %}
+ <form id="login-form" action="/login_generic" method="post">
+{% endif %}
+    <div class="input-group">
+        <label for="email">Email Address / Username</label>
+        <input type="text" name="login" id="email" />
+    </div>
+    <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" />
+        <a href="#" class="click-to-forgot" onclick="showModal('#forgotPasswordModal')"><span style="text-align: left; color: #338CCD">Forgot password?</span></a>
+    </div>
+    <span
+    >By continuing, you agree to our <a href="https://docs.google.com/document/d/1EvAQ8PQuNrapM8GK1z5g3YKfwe8-zywWDliE4fRvnPs/preview" target="_blank" rel="noopener noreferrer">Terms of Service</a> & <a href="https://docs.google.com/document/d/1YtCveTE6f2s429INuj4e8MyViCOex-eoxp5c3TRlEZc/preview" target="_blank" rel="noopener noreferrer">Privacy Policy</a></span
+    >
+    <button class="btn btn-primary" type="submit">Login</button>
+
+    <p>Not a member yet? <a href="#" class="click-to-signup" onclick="showModal('#signupModal')">Sign Up</a></p>
+
+</form>
+{% endblock %}

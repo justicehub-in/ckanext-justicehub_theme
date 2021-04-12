@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <style>
+      p {
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+  <p align="center">
+    <img style="max-width:400px; width:50%" src="{{ logo }}" />
+  </p>
+  <div>
+    <!-- TODO: Make this as base.html and move it elsewhere -->
+    Hello {{ name }}<br/><br/>
+    Thank you for registering an account on the Justice Hub.<br/><br/>
+    Please click on this <a href="{{ token }}">link</a> to validate your e-mail Id. Post this step, you will be able to contribute datasets on the <a href="https://justicehub.in/">Justice Hub</a><br/><br/>
+    For any queries, kindly reach out at <a href="mailto:info@justicehub.in">info@justicehub.in</a><br/><br/>
+    We look forward to collaborate with you.<br/><br/>
+    Regards,<br/>
+    The <a href="https://justicehub.in/about">JusticeHub</a> Team
+  </div>
+  </body>
+</html>

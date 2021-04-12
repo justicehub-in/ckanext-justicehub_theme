@@ -31,6 +31,14 @@ $(document).ready(function() {
 		$(this).prev().toggle();
 		return false;
 	});
+
+      $('#howToUploadVideoContainer').on('hide.bs.modal', function() {
+        $('#howToUploadVideoContainer iframe').attr('src', '')
+      });
+
+      $("#howToUploadVideoContainer").on('show.bs.modal', function() {
+        $("#howToUploadVideoContainer iframe").attr('src', 'https://www.youtube.com/embed/7wrBtB_coJc');
+      });
 });
 
 
@@ -73,7 +81,8 @@ ckan.module('justicehub_theme_tabs', function ($) {
 
         onTabClick: function () {
             // https://stackoverflow.com/a/9393768/3860168
-            window.location.hash = this.hash;
+             //window.location.hash = this.hash;
+              window.location = this;
         }
     };
 });

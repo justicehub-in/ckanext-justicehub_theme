@@ -1,0 +1,17 @@
+{% resource 'justicehub_theme/widget/popup/popup.css' %}
+{% resource 'justicehub_theme/widget/popup/popup.js' %}
+{% resource 'justicehub_theme/widget/auth/forgot.js' %}
+{% set title = "Forgot Password" %}
+{% set title_content = "Enter your email below and we will send you an email with a link to enter a new password." %}
+{% extends "widget/popup/popup.html" %}
+
+
+{% block content %}
+<form id="forgot-password-form">
+    <div class="input-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="forgot-password-user" name="email" id="email" />
+    </div>
+    <button type="button" class="btn btn-primary" onclick="forgotPasswordFormOnSubmit()">Continue</button>
+</form>
+{% endblock %}

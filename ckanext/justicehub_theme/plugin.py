@@ -36,14 +36,18 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
             'justicehub_theme_parse_json': helpers.parse_json,
             'justicehub_theme_get_assignee_user': helpers.get_assignee_user,
             'justicehub_theme_issue_vars': helpers.issues_vars,
-            'justicehub_theme_is_org_admin': helpers.is_org_admin
+            'justicehub_theme_is_org_admin': helpers.is_org_admin,
+            'justicehub_theme_get_popular_groups': helpers.get_popular_groups,
+            'justicehub_theme_pop_zip_resource': helpers.pop_zip_resource,
+	    'justicehub_theme_show_linked_user': helpers.show_linked_user
         }
 
     #IActions
     def get_actions(self):
-        return dict((name, function) for name, function
+        temp = dict((name, function) for name, function
                     in jh_action.__dict__.items()
                     if callable(function))
+        return temp
 
 
     # IPackageController
@@ -58,20 +62,21 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         u'''Extensions will receive a dictionary with the query parameters,
         and should return a modified (or not) version of it.
         '''
-        for resource_dict in package_dict['resources']:
-            resource_dict['downloads'] = helpers.get_resource_downloads(resource_dict)
+        #for resource_dict in package_dict['resources']:
+        #    resource_dict['downloads'] = helpers.get_resource_downloads(resource_dict)
 
         package_dict['tracking_summary'] = (
             model.TrackingSummary.get_for_package(package_dict['id']))
 
-        context = {'model': model, 'session': model.Session,
-                   'user': c.user, 'for_view': True,
-                   'auth_user_obj': c.userobj}
-        partner = toolkit.get_action('get_package_owner_details')(
-                context,
-                data_dict={'org_id': package_dict['owner_org']}
-        )
-        package_dict['partner'] = partner
+        # context = {'model': model, 'session': model.Session,
+        #            'user': c.user, 'for_view': True,
+        #            'auth_user_obj': c.userobj}
+        # print(package_dict)
+        # partner = toolkit.get_action('get_package_owner_details')(
+        #         context,
+        #         data_dict={'org_id': package_dict['owner_org']}
+        # )
+        # package_dict['partner'] = partner
         return package_dict
 
     def after_search(self, search_results, search_params):
@@ -99,11 +104,12 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         pass
 
     def after_show(self, context, pkg_dict):
-        partner = toolkit.get_action('get_package_owner_details')(
-                context,
-                data_dict={'org_id': pkg_dict['owner_org']}
-        )
-        pkg_dict['partner'] = partner
+        pass
+        # partner = toolkit.get_action('get_package_owner_details')(
+        #         context,
+        #         data_dict={'org_id': pkg_dict['owner_org']}
+        # )
+        # pkg_dict['partner'] = partner
 
     def before_index(self, pkg_dict):
         return pkg_dict
@@ -119,10 +125,23 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         map.connect('jhsubscribe', '/subscribe',
                     controller='ckanext.justicehub_theme.controllers:SubscribeController',
                     action='subscribe')
+        map.connect('jhupload', '/upload',
+                    controller='ckanext.justicehub_theme.controllers:SubscribeController',
+                    action='upload')
+        map.connect('jhdataset', '/dataset',
+                    controller='ckanext.justicehub_theme.controllers.dataset:PackageNewController',
+                    action='search')
+        map.connect('jhreaduser', '/user/show/{id}',
+                    controller='ckanext.justicehub_theme.controllers.dataset:UserNewController',
+                    action='read')
+
 
         return map
     
     def before_map(self, map):
+        map.connect('jhupload', '/upload',
+                    controller='ckanext.justicehub_theme.controllers:SubscribeController',
+                    action='upload')
         map.connect('jhorg_members', '/organization/members/{id}',
                     controller='ckanext.justicehub_theme.controllers:JHOrgController',
                     action='members')
@@ -132,4 +151,9 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         map.connect('jhsubscribe', '/subscribe',
                     controller='ckanext.justicehub_theme.controllers:SubscribeController',
                     action='subscribe')
+        map.connect('jhdataset', '/dataset',
+                    controller='ckanext.justicehub_theme.controllers.dataset:PackageNewController',
+                    action='search')
+
+
         return map

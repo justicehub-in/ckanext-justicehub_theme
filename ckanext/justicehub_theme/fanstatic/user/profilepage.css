@@ -1,0 +1,56 @@
+.custom-container-parent {
+  background-color: var(--primary-background-color);
+  min-height: 280px;
+}
+
+section.module-content {
+  padding-top: 64px !important;
+  padding-bottom: 64px !important;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.profile-header__info {
+  display: flex;
+  align-items: center;
+}
+
+.profile-header__info .image {
+  margin-right: 32px;
+}
+
+.profile-header__info h1 {
+  font-size: 24px !important;
+  font-weight: 500;
+}
+
+.image {
+  height: 125px;
+  width: 125px;
+  border-radius: 100%;
+}
+
+.dataset-list {
+  margin-top: 32px;
+}
+
+@media (max-width: 450px) {
+  .profile-header {
+    flex-direction: column;
+  }
+
+  .profile-header__info {
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .profile-header__info .image {
+    margin-right: 0;
+    margin-bottom: 12px;
+  }
+}

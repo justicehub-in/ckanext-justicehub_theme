@@ -1,0 +1,21 @@
+<div class="modal fade" id="{{ id }}" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content generic-modal-content">
+      <div class="modal-header generic-modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="modal-header-info">
+          <img class="modal-logo" src="/assets/jh_logo_notext.png" />
+          <h4>{{ title }}</h4>
+          <p>{{ title_content }}</p>
+            {% if title_link is defined %}
+            <p>View <a href={{ title_link }}>Here</a></p>
+            {% endif %}
+          <p class="error-message" id="error-{{ id }}">{{ error_message }}</p>
+        </div>
+      </div>
+      <div class="modal-body generic-modal-body">{% block content %} {% endblock %}</div>
+    </div>
+  </div>
+</div>

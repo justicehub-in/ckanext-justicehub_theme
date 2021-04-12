@@ -1,0 +1,6 @@
+.module-heading {
+  background-color: var(--primary-background-color);
+  color: white;
+  text-transform: capitalize;
+  font-size: 14px;
+}

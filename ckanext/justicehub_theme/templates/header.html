@@ -1,69 +1,196 @@
-{% ckan_extends %}
+{% block header_wrapper %} {% if data %} {% set step = data.current_step %} {% set error_message = data.message %} {% if
+step %}
+<div id="current_step" state="{{ step }}" style="display: none"></div>
+{% endif %} {% else %} {% set error_message = false %} {% endif %}
+<nav class="navbar navbar-default">
 
-{% block header_site_navigation %}
-    <nav class="section navigation">
-    <ul class="nav nav-pills">
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">About<b class="caret"></b></a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                <li>
-                    {% link_for _('The Hub'), named_route='home.about' %}
-                </li>
-            </ul>
-        </li>
-        {% block header_site_navigation_tabs %}
-            {{ h.build_nav_main( ('search', _('Datasets')), ('organizations_index', _('Data Contributors'))) }}
-        {% endblock %}
+  {{ h.snippet('widget/auth/signup.html', id="signupModal") }} {{ h.snippet('widget/auth/login.html', id="loginModal")
+  }} {{ h.snippet('widget/auth/forgot.html', id="forgotPasswordModal") }} {{ h.snippet('widget/auth/reset.html',
+  id="resetPasswordModal") }} {{ h.snippet('widget/auth/feedback.html', id="feedbackModal") }} {{
+  h.snippet('widget/auth/dataset_feedback.html', id="datasetFeedbackModal", data = data if data else '') }}
+  <div class="custom-container">
+    <div class="navbar-header">
+      <img class="mobile-menu" src="/assets/icons/menu.svg" />
+      <a class="navbar-brand" href="/">
+        <img class="navbar-logo" alt="Brand" src="/assets/jh_logo.png" />
+      </a>
 
-        <li>
-            <a href="https://justicehub.in/resources/" target="_blank">
-                {{ _('Resources') }}
+      {% if not c.userobj %}
+      <button class="mobile-login" data-toggle="modal" data-target="#signInModal" onclick="showModal('#signupModal');">
+        Join/Login
+      </button>
+      {% else %}
+
+      <li class="mobile-login dropdown">
+        {% set name = c.userobj.fullname if c.userobj.fullname else c.userobj.name %}
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ name }}<b class="caret"></b></a>
+        <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="drop1">
+          <li>
+            <a href="/user/show/{{c.userobj.name}}" title="{{ _('Dashboard') }}">
+              <span class="text">{{ _('Dashboard') }}</span>
             </a>
-        </li>
+          </li>
+          <li>
+            <a href="{{ h.url_for('/user/_logout') }}" title="{{ _('Log out') }}">
+              <span class="text">{{ _('Log out') }}</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      {% endif %}
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <!-- <li class="dropdown">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                role="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Data <span class="caret"></span
+              ></a>
+              <ul class="dropdown-menu">
+                <li><a href="/dataset">Explore Data</a></li>
+                <li><a href="/upload">Contribute Data</a></li>
+              </ul>
+            </li> -->
 
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Quick Links<b class="caret"></b></a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                <li>
-                    <a href="https://justicehub.in/covid-19/" target="_blank">
-                        {{ _('Covid-19') }}
-                    </a>
-                </li>
-                <li>
-                    <a href="https://github.com/justicehub-in" target="_blank">
-                        {{ _('Open Source') }}
-                    </a>
-                </li>
-            </ul>
-        </li>
+        {% if c.userobj.sysadmin %}
+        <li><a href="/group">Group</a></li>
+        {% endif %}
+
+        <!-- <li><a href="https://justicehub.in/resources/">Resources</a></li> -->
+        <!-- <li><a href="#">Blog</a></li> -->
+        <li><a href="/dataset">Explore Data</a></li>
+        <li><a href="/upload">Contribute Data</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
 
         {% if not c.userobj %}
-          {% block header_account_notlogged %}
-          <li>{% link_for _('Log in'), named_route='user.login' %}</li>
-          {% endblock %}
+        <li>
+          <button
+            type="button"
+            class="btn btn-primary navbar-btn"
+            data-toggle="modal"
+            onclick="showModal('#signupModal');"
+          >
+            Join/Login
+          </button>
+        </li>
 
         {% else %}
-          <li class="dropdown">
-            {% set name = c.userobj.fullname if c.userobj.fullname else c.userobj.name %}
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ name }}<b class="caret"></b></a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                <li>
-                    <a href="{{ h.url_for('/dashboard') }}" title="{{ _('Dashboard') }}">
-                        <span class="text">{{ _('Dashboard') }}</span>
-                    </a>
-                </li>
-                <li>
-                    {% block header_account_log_out_link %}
-                        <a href="{{ h.url_for('/user/_logout') }}" title="{{ _('Log out') }}">
-                            <span class="text">{{ _('Log out') }}</span>
-                        </a>
-                    {% endblock %}
-                </li>
-            </ul>
-          </li>
+        <li class="dropdown">
+          {% set name = c.userobj.fullname if c.userobj.fullname else c.userobj.name %}
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ name }}<b class="caret"></b></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+            <li>
+              <a href="/user/show/{{c.userobj.name}}" title="{{ _('Dashboard') }}">
+                <span class="text">{{ _('Dashboard') }}</span>
+              </a>
+            </li>
+            <li>
+              {% block header_account_log_out_link %}
+              <a href="{{ h.url_for('/user/_logout') }}" title="{{ _('Log out') }}">
+                <span class="text">{{ _('Log out') }}</span>
+              </a>
+              {% endblock %}
+            </li>
+          </ul>
+        </li>
         {% endif %}
-    </ul>
-    </nav>
-{% endblock %}
-{% block header_site_search %}
-{% endblock %}
+      </ul>
+    </div>
+
+    <div id="side-nav" class="side-nav">
+      <div class="side-nav__header">
+        <img class="side-nav__brand" src="/assets/jh_logo.png" alt="" />
+        <a href="javascript:void(0)" class="closebtn">&times;</a>
+      </div>
+
+      <a href="#" onclick="showModal('#signupModal');"><img src="/assets/icons/login.svg" alt="" /> Join / Login</a>
+      <a href="/"><img src="/assets/icons/home.svg" alt="" /> Home</a>
+      <a href="/dataset"><img src="/assets/icons/explore.svg" alt="" /> Explore Data</a>
+      <a href="/upload"><img src="/assets/icons/contribute.svg" alt="" /> Contribute Data</a>
+      <a href="https://docs.justicehub.in/"><img src="/assets/icons/resources.svg" alt="" />Resources</a>
+      <a href="/about"><img src="/assets/icons/about.svg" alt="" /> About</a>
+      <a href="/contact"><img src="/assets/icons/contact.svg" alt="" /> Contact</a>
+    </div>
+  </div>
+</nav>
+<script>
+  const mobileMenu = document.querySelector('.mobile-menu');
+  const closeNavButton = document.querySelector('.closebtn');
+
+  mobileMenu.addEventListener('click', openNav);
+  closeNavButton.addEventListener('click', closeNav);
+
+  function openNav() {
+    document.getElementById('side-nav').style.width = '280px';
+    document.getElementById('side-nav').style.marginLeft = '0';
+    document.getElementById('side-nav').style.paddingLeft = '25px';
+    document.body.style.backgroundColor = 'rgba(0,0,0,0.5)';
+    document.body.style.overflowY = 'hidden';
+  }
+  function closeNav() {
+    document.getElementById('side-nav').style.marginLeft = '-280px';
+    document.getElementById('side-nav').style.paddingLeft = '0';
+    document.body.style.backgroundColor = '';
+    document.body.style.overflowY = '';
+  }
+</script>
+{% endblock %} {# {% ckan_extends %} {% block header_site_navigation %}
+<nav class="section navigation">
+  <ul class="nav nav-pills">
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">About<b class="caret"></b></a>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+        <li>{% link_for _('The Hub'), named_route='home.about' %}</li>
+      </ul>
+    </li>
+    {% block header_site_navigation_tabs %} {% if c.userobj.sysadmin %} {{ h.build_nav_main( ('search', _('Datasets')),
+    ('organizations_index', _('Data Contributors')), ('group_index', _('Groups'))) }} {% else %} {{ h.build_nav_main(
+    ('search', _('Datasets')), ('organizations_index', _('Data Contributors'))) }} {% endif %} {% endblock %}
+
+    <li>
+      <a href="https://justicehub.in/resources/" target="_blank"> {{ _('Resources') }} </a>
+    </li>
+
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Quick Links<b class="caret"></b></a>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+        <li>
+          <a href="https://justicehub.in/covid-19/" target="_blank"> {{ _('Covid-19') }} </a>
+        </li>
+        <li>
+          <a href="https://github.com/justicehub-in" target="_blank"> {{ _('Open Source') }} </a>
+        </li>
+      </ul>
+    </li>
+
+    {% if not c.userobj %} {% block header_account_notlogged %}
+    <li>{% link_for _('Log in'), named_route='user.login' %}</li>
+    {% endblock %} {% else %}
+    <li class="dropdown">
+      {% set name = c.userobj.fullname if c.userobj.fullname else c.userobj.name %}
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ name }}<b class="caret"></b></a>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+        <li>
+          <a href="{{ h.url_for('/dashboard') }}" title="{{ _('Dashboard') }}">
+            <span class="text">{{ _('Dashboard') }}</span>
+          </a>
+        </li>
+        <li>
+          {% block header_account_log_out_link %}
+          <a href="{{ h.url_for('/user/_logout') }}" title="{{ _('Log out') }}">
+            <span class="text">{{ _('Log out') }}</span>
+          </a>
+          {% endblock %}
+        </li>
+      </ul>
+    </li>
+    {% endif %}
+  </ul> 
+</nav>
+{% endblock %} {% block header_site_search %} {% endblock %} #}
