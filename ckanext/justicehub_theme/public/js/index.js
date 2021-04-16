@@ -554,7 +554,7 @@ import ErrorInfo from './errorInfo.js';
   function generateYears(startYear) {
     let years = [];
     const currentYear = new Date().getFullYear();
-    let startingYear = startYear ? startYear : 1985;
+    let startingYear = startYear ? startYear : 1900;
     while (startingYear <= currentYear) {
       years.push(startingYear);
       startingYear++;
