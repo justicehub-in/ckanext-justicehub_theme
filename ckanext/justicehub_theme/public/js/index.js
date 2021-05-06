@@ -1227,7 +1227,7 @@ import ErrorInfo from './errorInfo.js';
           if (!response.ok) {
             errorInfo.updateErrorMessage(`Could not update ${resource.fileName}`);
           }
-          updateResources(resourcesList.slice(1));
+          updateResources(resourcesList.slice(1), packageName);
         })
         .catch((error) => {
           errorInfo.updateErrorMessage(error.message);
