@@ -1,6 +1,6 @@
 {% extends "page.html" %}
 
-{% set user = c.user_dict %}
+{% set user = c.user_dict or user_dict %}
 
 {% block subtitle %}{{ user.display_name }} - {{ _('Users') }}{% endblock %}
 
