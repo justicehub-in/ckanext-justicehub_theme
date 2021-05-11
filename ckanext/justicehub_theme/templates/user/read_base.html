@@ -41,13 +41,16 @@
                 {{ about_formatted }}
               {% else %}
                 <p class="empty">
-                  {% if is_myself %}
+                  {% if c.is_myself or is_myself %}
                     {% trans %}You have not provided a biography.{% endtrans %}
                   {% else %}
                     {% trans %}This user has no biography.{% endtrans %}
                   {% endif %}
                 </p>
               {% endif %}
+	      {% if c.is_myself or is_myself %}
+                 <p style="color: #898989; font-size: 14px;">{{ _('API Key') }} <span class="label label-default" title="{{ _('This means only you can see this') }}">{{ _('Private') }}</span> {{ user.apikey }}</p>
+	      {% endif %}
               {% endblock %}
               {% endblock %}
             </div>
