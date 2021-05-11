@@ -142,6 +142,9 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         map.connect('jhupload', '/upload',
                     controller='ckanext.justicehub_theme.controllers:SubscribeController',
                     action='upload')
+        map.connect('jhevents', '/events',
+                    controller='ckanext.justicehub_theme.controllers:SubscribeController',
+                    action='events')
         map.connect('jhorg_members', '/organization/members/{id}',
                     controller='ckanext.justicehub_theme.controllers:JHOrgController',
                     action='members')
