@@ -524,17 +524,23 @@ li.dropdown:focus {
 
 .review-section__content p {
   color: #524b4b;
-  margin-bottom: 32px;
-  font-size: 25px;
+  margin-bottom: 16px;
+  font-size: 22px;
   line-height: 34px;
   font-weight: 500;
 }
 
-.review-section__content a {
+.review-section__content .btn-primary {
+  margin-top: 40px;
+  font-size: 18px;
+  padding: 8px 20px;
+}
+
+/* .review-section__content a {
   color: white;
   padding: 8px 20px;
   font-size: 18px;
-}
+} */
 
 .moderator-duty {
   display: flex;
@@ -807,6 +813,7 @@ footer h3 {
 .makers-row a {
   display: block;
   margin-right: 32px;
+  margin-top: 10px;
 }
 
 .makers-row img {
@@ -1062,9 +1069,8 @@ footer h3 {
     font-size: 1em;
   }
 
-  .highlights-info {
-    margin-top: 32px;
-    text-align: center;
+  .highlights-info .btn-primary {
+    margin-top: 40px !important;
   }
 
   #carousel-testimonials {

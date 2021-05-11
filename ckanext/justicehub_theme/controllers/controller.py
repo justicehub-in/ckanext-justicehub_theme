@@ -111,3 +111,6 @@ class SubscribeController(base.BaseController):
         else:
             #TO DO: change hardcoded value "/upload" to directly pick from requester url
             h.redirect_to('/login?came_from=/upload')
+
+    def events(self):
+        return plugins.toolkit.render('events/index.html')
