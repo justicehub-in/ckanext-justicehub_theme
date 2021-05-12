@@ -48,6 +48,11 @@ body {
   line-height: 1.5em;
 }
 
+.event-block .banner {
+  width: 100%;
+  height: auto;
+}
+
 .event-details {
   font-size: 16px;
   color: #6c666f;
@@ -66,6 +71,10 @@ body {
 
 .event-block__section {
   margin-bottom: 64px;
+}
+
+.event-block__section h5 {
+  font-size: 18px;
 }
 
 .register-button {

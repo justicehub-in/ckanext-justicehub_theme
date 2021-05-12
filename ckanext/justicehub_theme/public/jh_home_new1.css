@@ -1069,6 +1069,13 @@ footer h3 {
     font-size: 1em;
   }
 
+  .highlights-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
   .highlights-info .btn-primary {
     margin-top: 40px !important;
   }
@@ -1866,9 +1873,7 @@ footer h3 {
   height: 30px;
 }
 
-.home-disp-image {   
+.home-disp-image {
   width: 100%;
   height: auto;
 }
-
-
