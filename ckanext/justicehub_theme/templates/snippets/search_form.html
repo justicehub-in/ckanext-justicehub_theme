@@ -20,7 +20,7 @@
             {% else %}
               {{_('DATA')}}
             {% endif %}
-            <span class="count">{{ _('[') }}{{ c.page.items | length  or count}}{{ _(']') }}</span>
+            <span class="count">{{ _('[') }}{{ count or c.page.items | length }}{{ _(']') }}</span>
         </span>
     </div>
 </div>
