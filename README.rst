@@ -3,6 +3,7 @@
    generated for you.
 
 .. image:: https://img.shields.io/badge/python-%202.7-44cc11.svg?style=flat-square
+    :target: https://www.python.org/download/releases/2.7/
     :alt: Supported Python versions
 
 .. image:: https://img.shields.io/badge/License-MIT-brightgreen.svg
