@@ -297,7 +297,7 @@ def package_search(context, data_dict):
         include_drafts = asbool(data_dict.pop('include_drafts', False))
         data_dict.setdefault('fq', '')
         if not include_private:
-            data_dict['fq'] = '({0}) AND {1}'.format(data_dict['fq'], 'capacity:public')   #'capacity:public +' + data_dict['fq']
+            data_dict['fq'] = '({0}) AND {1}'.format(data_dict['fq'], 'capacity:public') if data_dict['fq'] else 'capacity:public'   #'capacity:public +' + data_dict['fq']
         if include_drafts:
             data_dict['fq'] += ' +state:(active OR draft)'
 
@@ -315,6 +315,7 @@ def package_search(context, data_dict):
         state_query = ' +state:(draft OR pending-review OR under-review OR resubmission-required OR rejected OR active)'
         if data_dict['fq']:
             data_dict['fq'] = '({0}) AND {1}'.format(data_dict['fq'], state_query)
+            #data_dict['fq'] += state_query 
         else:
             data_dict['fq'] = state_query
         query.run(data_dict, permission_labels=labels)
