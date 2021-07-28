@@ -6,6 +6,9 @@ import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 from ckan.common import c
 
+from flask import Blueprint, make_response
+from ckanext.justicehub_theme.views.dataset import general
+
 
 class Justicehub_ThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
@@ -13,6 +16,7 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(plugins.IPackageController)
     plugins.implements(plugins.IActions)
+    plugins.implements(plugins.IBlueprint)
 
     # IConfigurer
 
@@ -114,6 +118,12 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
     def before_index(self, pkg_dict):
         return pkg_dict
 
+    # IBlueprint
+    def get_blueprint(self):
+        new_feeds = Blueprint(u'new_feeds', __name__, url_prefix=u'/feeds')
+        new_feeds.add_url_rule(u'/dataset.atom', methods=[u'GET'], view_func=general)
+        return new_feeds
+
     # IRoute
     def after_map(self, map):
         map.connect('jhorg_members', '/jhorg/members/{id}',
@@ -134,7 +144,6 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         map.connect('jhreaduser', '/user/show/{id}',
                     controller='ckanext.justicehub_theme.controllers.dataset:UserNewController',
                     action='read')
-
 
         return map
     
