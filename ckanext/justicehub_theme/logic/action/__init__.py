@@ -4,5 +4,6 @@ from action import (
     metadata_autocomplete,
     resource_metadata_autocomplete,
     package_search,
-    package_show
+    package_show, 
+    package_show as package_read
 )
