@@ -51,25 +51,77 @@
   </head>
   <body>
     {% include "header.html" %}
-    <div class="custom-container events-container">
+    {% resource 'justicehub_theme/otherstyles/about.css' %}
+    <div class="custom-container">
+      <div class="row event-block">
+        <h1>Summer of Data - 2021</h1>
+        <div class="event-block__section-links">
+          <a href="#about">About</a>
+          <a href="#datasets">Datasets</a>
+          <a href="#students">Students</a>
+          <a href="#sessions">Sessions</a>
+          <a href="#resources">Blogs and Resources</a>
+          <a href="#mentors">Mentors</a>
+        </div>
+        <div class="event-block__section" id="about">
+          <h4>About the Event</h4>
+          <p>Summer of Data is a national 5-week program focused on bringing more law students into the open justice data movement. In this first edition of the Summer of Data Program, law students will work under the mentorship of Prof. Rangin Pallav Tripathy of NLU Odisha and Civic Data Lab to create a dataset that profiles the backgrounds of High Court Judges from across India.</p>
+          <p>
+            Data (or the lack thereof) on judges, their backgrounds, tenure and professional trajectory can tell us a lot about the judicial system. It can reveal the diversity and transparency of the institution on a range of parameters. Equally it can unravel systemic factors that affect the composition and impact of the institution. 
+          </p>
+          <p>
+            Students will have 5 weeks (between May 31st-July 2nd, 2021) to create the dataset, meeting the deadlines agreed upon with their mentors. The entire program will be conducted online. 
+          </p>
+          <p>Students completing the program will share the datasets they create openly on Justice Hub for the world to use and receive due recognition as contributors. </p>
+        </div>
+        <div class="event-block__section" id="datasets">
+          <h4>Datasets created by students</h4>
+          <div class="datasets-container">
+
+          </div>
+        </div>
+        <div class="event-block__section" id="students">
+          <h4>Students</h4>
+          <div class="students-container">
+            
+          </div>
+        </div>
+        <div class="event-block__section" id="sessions">
+          <h4>Sessions</h4>
+          <div class="row">
+            <div class="session-item col-lg-4 col-xs-12">
+              <iframe width="100%" height="250px"
+                src="https://www.youtube.com/embed/tBWRmY_QFxw">
+                </iframe>
+            </div>
+            <div class="session-item col-lg-4 col-xs-12">
+              <iframe width="100%" height="250px"
+                src="https://www.youtube.com/embed/sVDG8dcu0Dg">
+                </iframe>
+            </div>
+            <div class="session-item col-lg-4 col-xs-12">
+              <iframe width="100%" height="250px"
+                src="https://www.youtube.com/embed/UBKucnFNsyM">
+                </iframe>
+            </div>
+          </div>
+        </div>
+        <div class="event-block__section" id="resources">
+          <h4>Blogs and Resources</h4>
+          <div class="resources-container"></div>
+        </div>
+        <div class="event-block__section" id="mentors">
+          <h4>Mentors</h4>
+          <div class="mentors-container row"></div>
+        </div>
+        {% resource 'justicehub_theme/otherstyles/event.js' %}
+      </div>
+    </div>
+    {# <div class="custom-container events-container">
       <div class="row">
         <div class="col-sm-8 col-xs-12">
           <div class="event-block">
             <img class="banner" src="/assets/events/eventsbanner.png" />
-            <!-- <div id="carousel-event-photos" class="carousel slide" data-ride="carousel">
-              <ol class="carousel-indicators">
-                <li data-target="#carousel-event-photos" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel-event-photos" data-slide-to="1"></li>
-              </ol>
-              <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                  <img src="/assets/events/3.png" />
-                </div>
-                <div class="item">
-                  <img src="/assets/events/4.png" />
-                </div>
-              </div>
-            </div> -->
           </div>
         </div>
         <div class="col-sm-4 col-xs-12">
@@ -167,23 +219,10 @@
                 </div>
               </div>
             </div>
-            <div class="event-block__section">
-              <h4>Provisions</h4>
-              <div class="provisions row">
-                <div class="provision col-sm-6 col-xs-12">
-                  <img src="/assets/icons/certificate.svg" />
-                  <p>Certificate of Participation</p>
-                </div>
-                <div class="provision col-sm-6 col-xs-12">
-                  <img src="/assets/icons/star.svg" />
-                  <p>Credits</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
-    </div>
+    </div> #}
     {% include "footer.html" %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script

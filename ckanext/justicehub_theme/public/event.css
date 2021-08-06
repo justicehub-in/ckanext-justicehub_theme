@@ -15,7 +15,27 @@ body {
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
   padding: 24px 20px;
-  margin: 15px 0;
+  margin: 10px 0;
+}
+
+.event-block__section-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 15px;
+  margin-top: 15px;
+}
+
+.event-block__section-links a {
+  margin: 4px 8px;
+}
+
+.event-block__section {
+  margin: 80px 0;
+}
+
+.event-block h1 {
+  text-align: center;
 }
 
 .event-block h3 {
@@ -26,6 +46,8 @@ body {
 
 .event-block h4 {
   font-size: 20px;
+  font-weight: 700;
+  text-align: center;
   margin-bottom: 18px;
 }
 
@@ -34,7 +56,6 @@ body {
 }
 
 .event-block p {
-  color: #898989;
   margin-bottom: 18px;
 }
 
@@ -69,10 +90,6 @@ body {
   margin-top: 16px;
 }
 
-.event-block__section {
-  margin-bottom: 64px;
-}
-
 .event-block__section h5 {
   font-size: 18px;
 }
@@ -89,14 +106,36 @@ body {
 
 .mentor {
   display: flex;
-  justify-content: space-between;
-  margin: 40px 0;
+  flex-direction: column;
+  margin: 24px auto;
+  cursor: pointer;
 }
 
-.mentor__image {
-  height: 104px;
-  width: 104px;
+.mentor__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.mentor__header img {
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
+  margin-right: 20px;
+}
+
+.mentor__header h5 {
+  font-size: 18px;
+}
+
+.mentor__header p {
+  color: #898989;
+  font-size: 16px;
+}
+
+.mentor__body {
+  font-size: 16px;
+  padding-right: 20px;
 }
 
 .mentor__details {
@@ -110,6 +149,29 @@ body {
 .mentor__details p {
   font-size: 16px;
   line-height: 1.5em;
+}
+
+.datasets-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 80%;
+  margin: 20px auto;
+}
+
+.student-dataset, .student-dataset:link, .student-dataset:active {
+  padding: 4px 12px;
+  border: 2px solid var(--primary-color);
+  border-radius: 20px;
+  margin-right: 8px;
+  margin-bottom: 12px;
+  text-decoration: none !important;
+}
+
+.resource-link {
+  display: block;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .provision {
@@ -128,14 +190,21 @@ body {
   margin: 0;
 }
 
+.session-item {
+  margin-bottom: 0;
+}
+
 #carousel-event-photos .carousel-inner .item {
   height: max-content;
+}
+
+.tooltip-inner {
+  font-size: 14px;
 }
 
 @media (max-width: 768px) {
   .mentor {
     flex-direction: column;
-    align-items: center;
   }
 
   .mentor__details {
@@ -149,5 +218,20 @@ body {
 
   .mentor__details p {
     font-size: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .event-block__section {
+    margin: 40px 0;
+  }
+
+  .session-item {
+    margin-bottom: 20px;
+  }
+
+  .session-item iframe {
+    height: 250px;
   }
 }
