@@ -38,31 +38,6 @@ const students = [
   { name: 'Ashna D', image: '/assets/students/ashna-d.JPEG' }
 ];
 
-const mentors = [
-  {
-    name: 'Prof. Rangin Pallav Tripathy',
-    org: 'NLU, Odisha',
-    image: '/assets/events/rangin.jpg',
-    description:
-      'Rangin has been teaching at National Law University Odisha since 2010 and works in the area of constitutional governance, civil liberties, criminal law and human rights. His current research focuses on the functioning of institutions within constitutional democracies and the way they affect realization of democratic rights. He was a Fulbright Post-Doctoral Research Scholar at Harvard Law School (2019-2020).'
-  },
-  {
-    name: 'Apoorv Anand',
-    org: 'CivicDataLab',
-    image: '/assets/team/apoorv.png',
-    description:
-      'Apoorv works with CivicDataLab and is part of the Justice Hub team where his role is to find collaboration opportunities that seek to bridge the gap between the demand and supply of key datasets. Currently, he is figuring out ways to build simple and robust data standards for curating open datasets that can aid in the research and analysis of key indicators around Law and Justice. '
-  },
-  {
-    name: 'Gaurav Godhwani',
-    org: 'CivicDataLab',
-    image: '/assets/team/gaurav.jpg',
-    description:
-      'Gaurav Godhwani is co-founder and director at CivicDataLab - a research lab harnessing data, tech, design and social science to strengthen the course of civic engagements in India. He works to leverage the open-source movement to enable citizens in engaging better with public reforms.He has been instrumental in starting initiatives like DataKind Bangalore & Open Budgets India. He is focused to grow open data and FOSS innovations in sectors like Public Finance, Law & Justice, Urban Planning and more. '
-  },
-  { name: 'Saurabh Karn', org: 'Agami', image: '/assets/team/saurabh.jpg', description: '' }
-];
-
 const datasets = [
   {
     name: 'Chattisgarh High Court',
@@ -79,6 +54,10 @@ const resources = [
   {
     name: 'My Introduction to the World of Data: Summer of Data by Justice Hub',
     url: 'https://medium.com/@banerjeeswati08b/my-introduction-to-the-world-of-data-summer-of-data-by-justice-hub-90351909a489'
+  },
+  {
+    name: 'Forum to discuss Summer of Data',
+    url: 'https://forum.justicehub.in/t/queries-around-accessing-the-summer-of-data-datasets/120'
   }
 ];
 
@@ -101,20 +80,6 @@ function studentTemplate(student) {
   `;
 }
 
-function mentorTemplate(mentor) {
-  return `
-    <div class="mentor col-md-3 col-sm-6 col-xs-12" data-toggle="tooltip" data-placement="bottom" title="${mentor.description}">
-      <div class="mentor__header">
-        <img src="${mentor.image}" alt="${mentor.name}" />
-        <div>
-          <h5>${mentor.name}</h5>
-          <p>${mentor.org}</p>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
 const studentsContainer = document.querySelector('.students-container');
 const mentorsContainer = document.querySelector('.mentors-container');
 const datasetsContainer = document.querySelector('.datasets-container');
@@ -123,6 +88,5 @@ const resourcesContainer = document.querySelector('.resources-container');
 students
   .sort((a, b) => (a.name > b.name ? 1 : -1))
   .forEach((student) => (studentsContainer.innerHTML += studentTemplate(student)));
-mentors.forEach((mentor) => (mentorsContainer.innerHTML += mentorTemplate(mentor)));
 datasets.forEach((dataset) => (datasetsContainer.innerHTML += urlTemplate(dataset, 'student-dataset')));
 resources.forEach((resource) => (resourcesContainer.innerHTML += urlTemplate(resource, 'resource-link')));
