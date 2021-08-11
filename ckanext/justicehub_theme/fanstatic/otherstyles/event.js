@@ -1,5 +1,5 @@
 const students = [
-  { name: 'Shaswata Kapat', image: '' },
+  { name: 'Shaswata Kapat', image: '/assets/students/shaswata-kapat.jpeg' },
   { name: 'Yash Prakash Yadav', image: '/assets/students/yash-prakash-yadav.JPG' },
   { name: 'Gokul Suresh Nair', image: '/assets/students/gokul-suresh-nair.jpg' },
   { name: 'Antara Balaji', image: '/assets/students/antara-balaji.jpg' },
