@@ -40,14 +40,9 @@ const students = [
 
 const datasets = [
   {
-    name: 'Chattisgarh High Court',
-    url: 'https://justicehub.in/dataset/dataset-on-judges-of-the-chhattisgarh-high-court'
-  },
-  {
-    name: 'Himachal Pradesh High Court',
-    url: 'https://justicehub.in/dataset/groups/dataset-on-judges-of-the-himachal-pradesh-high-court'
-  },
-  { name: 'Madras High Court', url: 'https://justicehub.in/dataset/dataset-on-judges-of-the-madras-high-court' }
+    name: 'Datasets from Summer of Data',
+    url: 'https://justicehub.in/dataset?groups=summer-of-data'
+  }
 ];
 
 const resources = [
