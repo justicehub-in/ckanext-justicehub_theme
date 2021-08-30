@@ -39,10 +39,20 @@ const students = [
 ];
 
 const datasets = [
-  {
-    name: 'Datasets from Summer of Data',
-    url: 'https://justicehub.in/dataset?groups=summer-of-data'
-  }
+  { name: 'Meghalaya High Court', url: 'https://justicehub.in/dataset/dataset-on-judges-of-the-meghalaya-high-court' },
+  { name: 'Karnataka High Court', url: 'https://justicehub.in/dataset/dataset-on-judges-of-the-karnataka-high-court' },
+  { name: 'Odisha High Court', url: 'https://justicehub.in/dataset/dataset-on-judges-of-the-odisha-high-court' },
+  { name: 'Punjab and Haryana High Court', url: 'https://justicehub.in/dataset/dataset-on-judges-of-the-punjab-and-haryana-high-court' },
+  { name: 'Gauhati High Court', url: 'https://justicehub.in/dataset/dataset-on-judges-of-the-gauhati-high-court' },
+  { name: 'Delhi High Court', url: 'https://justicehub.in/dataset/dataset-on-judges-of-the-delhi-high-court' },
+  { name: 'Rajasthan High Court', url: 'https://justicehub.in/dataset/dataset-on-judges-of-the-rajasthan-high-court' },
+  { name: 'Gujarat High Court', url: 'https://justicehub.in/dataset/dataset-on-judges-of-the-gujarat-high-court' },
+  { name: 'Telangana High Court', url: 'https://justicehub.in/dataset/dataset-on-judges-of-the-telangana-high-court' },
+  { name: 'Sikkim High Court', url: 'https://justicehub.in/dataset/dataset-on-judges-of-the-sikkim-high-court' },
+  { name: 'Uttarakhand High Court', url: 'https://justicehub.in/dataset/dataset-on-judges-of-the-uttarakhand-high-court' },
+  { name: 'Jharkhand High Court', url: 'https://justicehub.in/dataset/dataset-on-judges-of-the-jharkhand-high-court' },
+  { name: 'Tripura High Court', url: 'https://justicehub.in/dataset/dataset-on-judges-of-the-tripura-high-court' },
+  { name: 'Jammu and Kashmir and Ladakh High Court', url: 'https://justicehub.in/dataset/dataset-on-judges-of-the-jammu-and-kashmir-and-ladakh-high-court' }
 ];
 
 const resources = [
@@ -83,5 +93,5 @@ const resourcesContainer = document.querySelector('.resources-container');
 students
   .sort((a, b) => (a.name > b.name ? 1 : -1))
   .forEach((student) => (studentsContainer.innerHTML += studentTemplate(student)));
-datasets.forEach((dataset) => (datasetsContainer.innerHTML += urlTemplate(dataset, 'student-dataset')));
+datasets.sort((a, b) => (a.name > b.name ? 1 : -1)).forEach((dataset) => (datasetsContainer.innerHTML += urlTemplate(dataset, 'student-dataset')));
 resources.forEach((resource) => (resourcesContainer.innerHTML += urlTemplate(resource, 'resource-link')));
