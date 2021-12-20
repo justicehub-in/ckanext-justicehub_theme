@@ -61,7 +61,11 @@ const resources = [
     url: 'https://medium.com/@banerjeeswati08b/my-introduction-to-the-world-of-data-summer-of-data-by-justice-hub-90351909a489'
   },
   {
-    name: 'Forum to discuss Summer of Data',
+    name: 'Who is a Judge? Solving the Problem of Insufficiency of Judicial Data',
+    url: 'https://www.barandbench.com/apprentice-lawyer/who-is-a-judge-insufficiency-of-judicial-data'
+  },
+  {
+    name: 'Summer of Data - Discussion Forum',
     url: 'https://forum.justicehub.in/t/queries-around-accessing-the-summer-of-data-datasets/120'
   }
 ];
