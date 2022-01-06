@@ -1,6 +1,7 @@
 export default class Dataset {
   constructor() {
     this.name = '';
+    this.slug = '';
     this.description = '';
     this.files = [];
     this.license = {};

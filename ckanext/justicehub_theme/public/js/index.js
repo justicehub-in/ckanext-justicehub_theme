@@ -251,6 +251,7 @@ import ErrorInfo from './errorInfo.js';
   function updateDatasetWithValuesFromFilesSection() {
     dataset.updateProperty('files', []);
     dataset.updateProperty('name', getValueFromInputSelector('#datasetNameField'));
+    dataset.updateProperty('slug', getValueFromInputSelector('#datasetSlugField'));
     dataset.updateProperty('description', getValueFromInputSelector('#datasetDescriptionField'));
 
     if (!!getValueFromInputSelector('#datasetNameField')) {
@@ -1060,6 +1061,8 @@ import ErrorInfo from './errorInfo.js';
     document.querySelector('#sourcePreviewTable').innerHTML = generateSourcePreviewTableHTML(dataset);
     const titleContainer = document.querySelector('#datasetNameOnPreviewModal');
     titleContainer.innerHTML = dataset.name ? dataset.name : '<span style="color: red;">No title entered</span>';
+    const slugContainer = document.querySelector('#datasetSlugOnPreviewModal');
+    slugContainer.innerHTML = dataset.slug ? dataset.slug : '<span style="color: red;">No slug entered</span>';
     const descContainer = document.querySelector('#datasetDescOnPreviewModal');
     descContainer.innerHTML = dataset.description ? dataset.description : '';
 
@@ -1105,6 +1108,7 @@ import ErrorInfo from './errorInfo.js';
       metaData.append('pkg_name', datasetIdName);
     }
     metaData.append('title', dataset.name);
+    metaData.append('name', dataset.slug);
     metaData.append('notes', dataset.description);
     metaData.append('license_id', dataset.license.licenseName);
     metaData.append('private', dataset.viewPermission === 'Anyone' ? false : true);
@@ -1396,6 +1400,7 @@ import ErrorInfo from './errorInfo.js';
 
     // file section
     document.getElementById('datasetNameField').value = data.title;
+    document.getElementById('datasetSlugField').value = data.name;
     document.getElementById('datasetDescriptionField').innerHTML = data.notes;
     receivedResources = data.resources;
     receivedResourcesIds = receivedResources.map((resource) => resource.id);

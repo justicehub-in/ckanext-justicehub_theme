@@ -98,6 +98,11 @@
           <input type="text" class="form-control input--large" id="datasetNameField" />
         </div>
         <div class="data-upload-section__form__field">
+          <h3>Create a url for dataset (Optional)</h3>
+          <span>Url can only contain [a-z][0-9]['-','_']. All other characters will be removed from entered value.</span>
+          <input type="text" class="form-control input--large" id="datasetSlugField" />
+        </div>
+        <div class="data-upload-section__form__field">
           <h3>Describe this dataset</h3>
           <span
             >Dataset descriptions improve the searchbility of datasets on the Justice Hub as well as other search
@@ -451,6 +456,7 @@
               </button>
               <div class="modal-header-info">
                 <h3 id="datasetNameOnPreviewModal"></h3>
+                <h4 id="datasetSlugOnPreviewModal"></h4>
                 <p id="datasetDescOnPreviewModal"></p>
                 <p>
                   <!-- <img class="modal-logo" src="/assets/jh_logo_notext.png" />
