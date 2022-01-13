@@ -1877,3 +1877,44 @@ footer h3 {
   width: 100%;
   height: auto;
 }
+
+.sticky-section {
+  position: sticky;
+  bottom: 0;
+  background: #00ABB7;
+}
+
+
+.announce-container{
+  background: #00ABB7;
+  width: 100%;
+  height: 72px;
+  padding-top: 20px;
+  color: #FFFFFF;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1200px;
+}
+
+.announce-container a{
+  color: #FFFFFF;
+}
+
+.announce-action {
+  float: right;
+  border: 2px solid #FFF;
+  border-radius: 4px;
+  width: 83px;
+  height: 40px;
+  padding-left: 30px;
+  padding-top: 5px;
+  margin-top: -5px;
+}
+
+.announce-logo {
+  width: 20px;
+  margin-right: 14px;
+  padding-bottom: 7px;
+
+}
+

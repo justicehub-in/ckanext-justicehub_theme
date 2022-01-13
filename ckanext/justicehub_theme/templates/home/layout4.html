@@ -28,13 +28,21 @@
         <div class="categories">
           <h3>Explore Popular Categories</h3>
           <div class="categories__row row">
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 category-item"  onclick="window.location='/dataset?groups=budgets-for-justice';">
+                <div class="icon-container">
+                  <img src="https://justicehub.in/uploads/group/2022-01-12-055715.104399budget-1.svg" alt="" />
+                </div>
+                <p>Budgets for Justice</p>
+              </div>
             {% for group in groups %}
+              {% if group.display_name != "Budgets for Justice" %}
               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 category-item"  onclick="window.location='/dataset?groups={{group.name}}';">
                 <div class="icon-container">
                   <img src="{{ group.image_display_url }}" alt="" />
                 </div>
                 <p>{{ group.display_name }}</p>
               </div>
+              {% endif %}
             {% endfor %} 
           </div>
         </div>
@@ -233,6 +241,14 @@
           <a href="/contact" class="btn btn-primary">Let us know!</a>
         </div>
       </section>
+
+     <section class="sticky-section">
+       <div class="announce-container">
+         <img class="announce-logo" src="/assets/icons/announce.svg" alt="">
+         <span>Expore our newly launched platform <a target="_blank" href="https://budgets.justicehub.in"><b>Budget for Justice</b></a></span>
+         <span class="announce-action"><a target="_blank" href="https://budgets.justicehub.in"><b>Go</b></a></span>
+       </div>
+     </section>
 
       <a class="fab" href="https://docs.google.com/forms/d/e/1FAIpQLSdYejNNx5AtNqJGflzWMjD5pBGOqllQTkuXSR3-UYXd0bqtaA/viewform" target="_blank">
 	<img class="feedback-logo" src="/assets/feedback.png">
