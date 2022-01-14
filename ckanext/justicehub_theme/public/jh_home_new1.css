@@ -548,7 +548,7 @@ li.dropdown:focus {
     margin-bottom: 30px;
     position: absolute;
     text-align: center;
-    top: -8px;
+    top: -14px;
 }
 
 .new-b4j-cat {
@@ -565,13 +565,36 @@ li.dropdown:focus {
     margin-bottom: 30px;
     position: absolute;
     text-align: center;
-    top: -14px;
+    top: -16px;
+}
+
+.new-b4j-nav {
+    position: relative;
+}
+
+.new-b4j-nav::before {
+    content: "NEW";
+    background: red;
+    color: white;
+    font-size: 12px;
+    border-radius: 4px;
+    width: 40px;
+    margin-bottom: 30px;
+    position: absolute;
+    text-align: center;
+    top: -8px;
 }
 
 .review-section__content .btn-primary {
   margin-top: 10px;
   font-size: 18px;
   padding: 8px 20px;
+}
+
+.review-section__content img {
+  height: 316px;
+  width: 100%;
+  object-fit: contain;
 }
 
 @media (max-width: 768px) {
