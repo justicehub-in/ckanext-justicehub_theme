@@ -151,7 +151,7 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         map.connect('jhupload', '/upload',
                     controller='ckanext.justicehub_theme.controllers:SubscribeController',
                     action='upload')
-        map.connect('jhevents', '/events/summer-of-data-2021',
+        map.connect('jhevents', '/initiatives/summer-of-data-2021',
                     controller='ckanext.justicehub_theme.controllers:SubscribeController',
                     action='events')
         map.connect('jhorg_members', '/organization/members/{id}',
