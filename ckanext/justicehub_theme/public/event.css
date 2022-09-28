@@ -125,7 +125,7 @@ body {
 .mentor__header img {
   width: 150px;
   height: 100px;
-  /* border-radius: 50%; */
+  border-radius: 50%;
   margin-right: 20px;
 }
 
@@ -244,3 +244,15 @@ body {
 
 
 
+.partner-container {
+  display: flex;
+  gap: 16px;
+  justify-content: space-around;
+  align-items: center;
+
+}
+
+.partner-container img {
+  max-width: 150px;
+  object-fit: contain;
+}
