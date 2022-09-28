@@ -154,6 +154,9 @@ class Justicehub_ThemePlugin(plugins.SingletonPlugin):
         map.connect('jhevents', '/initiatives/summer-of-data-2021',
                     controller='ckanext.justicehub_theme.controllers:SubscribeController',
                     action='events')
+        map.connect('jheventskhoj', '/initiatives/khoj-india',
+                    controller='ckanext.justicehub_theme.controllers:SubscribeController',
+                    action='eventskhoj')
         map.connect('jhorg_members', '/organization/members/{id}',
                     controller='ckanext.justicehub_theme.controllers:JHOrgController',
                     action='members')

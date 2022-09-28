@@ -114,3 +114,9 @@ class SubscribeController(base.BaseController):
 
     def events(self):
         return plugins.toolkit.render('events/index.html')
+
+    def eventskhoj(self):
+        return plugins.toolkit.render('events/khoj.html')
+
+
+

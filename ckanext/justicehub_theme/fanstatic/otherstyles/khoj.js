@@ -47,17 +47,26 @@ const datasets = [
   { name: 'Code Repository', url: 'https://github.com/justicehub-in/know-your-high-court-judges' },
 ];
 
+
 const resources = [
   {
-    name: 'My Introduction to the World of Data: Summer of Data by Justice Hub',
-    url: 'https://medium.com/@banerjeeswati08b/my-introduction-to-the-world-of-data-summer-of-data-by-justice-hub-90351909a489'
+    name: "CJI Lalit Unveils 'KHOJ' Dataset At Ninth Convocation Of NLU Odisha",
+    url: 'https://www.livelaw.in/news-updates/khoj-dataset-cji-uu-lalit-nlu-odisha-ninth-convocation-209612'
   },
   {
-    name: 'Who is a Judge? Solving the Problem of Insufficiency of Judicial Data',
-    url: 'https://www.barandbench.com/apprentice-lawyer/who-is-a-judge-insufficiency-of-judicial-data'
+    name: "सीजेआई यूयू ललित ने एनएलयू ओडिशा के 9वें दीक्षांत समारोह में 'KHOJ' डेटासेट का अनावरण किया",
+    url: 'https://hindi.livelaw.in/category/news-updates/cji-lalit-unveils-khoj-dataset-at-ninth-convocation-of-nlu-odisha-209641'
   },
   {
-    name: 'Discussion Forum',
+    name: 'What private companies did India’s HC judges serve? KHOJ dataset is filling info gaps',
+    url: 'https://theprint.in/opinion/what-private-companies-did-indias-hc-judges-serve-khoj-dataset-is-filling-info-gaps/1133887/'
+  },
+  {
+    name: 'With a paradigm shift in access to data on Judges, the Supreme Court’s collegium may be on the cusp of transparency',
+    url: 'https://theleaflet.in/with-a-likely-paradigm-shift-in-access-to-data-on-judges-the-supreme-courts-collegium-may-be-on-the-cusp-of-transparency/'
+  },
+  {
+    name: "At 9th Convocation of NLU Odisha, CJI UU Lalit Unveils ‘KHOJ’ Dataset",
     url: 'https://forum.justicehub.in/t/queries-around-accessing-the-summer-of-data-datasets/120'
   }
 ];
@@ -88,9 +97,9 @@ const mentorsContainer = document.querySelector('.mentors-container');
 const datasetsContainer = document.querySelector('.datasets-container');
 const resourcesContainer = document.querySelector('.resources-container');
 
-students
-  .sort((a, b) => (a.name > b.name ? 1 : -1))
-  .forEach((student) => (studentsContainer.innerHTML += studentTemplate(student)));
+//students
+  //.sort((a, b) => (a.name > b.name ? 1 : -1))
+  //.forEach((student) => (studentsContainer.innerHTML += studentTemplate(student)));
 datasets.forEach((dataset) => (datasetsContainer.innerHTML += urlTemplate(dataset, 'student-dataset')));
 resources.forEach((resource) => (resourcesContainer.innerHTML += urlTemplate(resource, 'resource-link')));
 

@@ -1944,6 +1944,7 @@ footer h3 {
 .home-disp-image {
   width: 100%;
   height: auto;
+  object-fit:contain;
 }
 
 .sticky-section {

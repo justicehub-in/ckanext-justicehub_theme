@@ -124,6 +124,7 @@ def get_popular_groups():
                 'include_dataset_count': True}
 
     groups =  logic.get_action('group_list')(context, data_dict)
+    groups = [each for each in groups if each['display_name'] not in [u'Summer of Data']]
     return groups[0:12]
 
 
