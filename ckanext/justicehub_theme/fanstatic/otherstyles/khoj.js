@@ -67,7 +67,11 @@ const resources = [
   },
   {
     name: "At 9th Convocation of NLU Odisha, CJI UU Lalit Unveils ‘KHOJ’ Dataset",
-    url: 'https://forum.justicehub.in/t/queries-around-accessing-the-summer-of-data-datasets/120'
+    url: 'https://www.lawinsider.in/news/at-9th-convocation-of-nlu-odisha-cji-uu-lalit-unveils-khoj-dataset'
+  },
+  {
+    name: "Few Women, Many Lawyers: What A New Dataset On High Court Judges Reveals",
+    url: 'https://www.indiaspend.com/data-gaps/few-women-many-lawyers-what-a-new-dataset-on-high-court-judges-reveals-835627'
   }
 ];
 
