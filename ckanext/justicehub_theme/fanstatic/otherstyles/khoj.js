@@ -72,6 +72,10 @@ const resources = [
   {
     name: "Few Women, Many Lawyers: What A New Dataset On High Court Judges Reveals",
     url: 'https://www.indiaspend.com/data-gaps/few-women-many-lawyers-what-a-new-dataset-on-high-court-judges-reveals-835627'
+  },
+  {
+    name: "Who gets to be a High Court Chief Justice in India?",
+    url: 'https://scroll.in/article/1033443/who-gets-to-be-a-high-court-chief-justice-in-india'
   }
 ];
 
