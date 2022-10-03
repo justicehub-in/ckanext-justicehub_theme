@@ -7,7 +7,7 @@
     { name: `Project 39A`, imagePath: '/assets/contributors/P39A.png' },
     { name: `Vidhi`, imagePath: '/assets/contributors/vidhi.jpg' },
     { name: `CHRI`, imagePath: '/assets/contributors/chri.png' },
-    { name: `NIPFP`, imagePath: '/assets/contributors/nipfp.png' },
+    { name: `CPPLGG`, imagePath: '/assets/contributors/nlu.jpg' },
     { name: `CLPR`, imagePath: '/assets/contributors/clpr.svg' },
     { name: `IDFC`, imagePath: '/assets/contributors/idfc.svg' },
     { name: `Tata Trusts`, imagePath: '/assets/contributors/tata.png' },
@@ -16,7 +16,7 @@
     { name: `Internet Freedom Foundation`, imagePath: '/assets/contributors/iff.png' },
     { name: `Madhav S Aney`, type: 'person', imagePath: '/assets/contributors/madhav.jpg' },
     { name: `Manaswini Rao`, type: 'person', imagePath: '/assets/contributors/rao.jpg' },
-    { name: `Johannes Boehm`, type: 'person', imagePath: '/assets/contributors/boehm.jpg' },
+    { name: `Rangin Pallav Tripathy`, type: 'person', imagePath: '/assets/contributors/rangin.jpg' },
     { name: `Amrit Amirapu`, type: 'person', imagePath: '/assets/contributors/amirapu.JPG' }
   ];
 
