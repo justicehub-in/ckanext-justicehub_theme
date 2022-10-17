@@ -76,6 +76,10 @@ const resources = [
   {
     name: "Who gets to be a High Court Chief Justice in India?",
     url: 'https://scroll.in/article/1033443/who-gets-to-be-a-high-court-chief-justice-in-india'
+  },
+  {
+    name: "The Glass Ceiling in the High Courts",
+    url: 'https://www.epw.in/journal/2022/42/law-and-society/glass-ceiling-high-courts.html'
   }
 ];
 
