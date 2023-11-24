@@ -80,6 +80,10 @@ const resources = [
   {
     name: "The Glass Ceiling in the High Courts",
     url: 'https://www.epw.in/journal/2022/42/law-and-society/glass-ceiling-high-courts.html'
+  },
+  {
+    name: "Time To Raise The Bar In Indian Judiciary",
+    url: 'https://odishabytes.com/time-to-raise-the-bar-in-indian-judiciary/'
   }
 ];
 
